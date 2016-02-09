@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ public class Student extends JPAEntity<Integer>
     private String password;
 
     @NotEmpty( message = "NotEmpty.Student.email" )
+    @Email( message = "Email.Student.email" )
     @Column( name = "email", unique = true, nullable = false )
     private String email;
 
