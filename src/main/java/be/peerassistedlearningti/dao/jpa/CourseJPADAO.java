@@ -30,7 +30,7 @@ public class CourseJPADAO extends CRUDJPADAO<Integer, Course> implements CourseD
         EntityManager manager = createManager();
         try
         {
-            return manager.createQuery( "SELECT c FROM course c WHERE c.code = :code", Course.class )
+            return manager.createQuery( "SELECT c FROM Course c WHERE c.code = :code", Course.class )
                     .setParameter( "code", code )
                     .getSingleResult();
         } catch ( NoResultException e )
@@ -50,7 +50,7 @@ public class CourseJPADAO extends CRUDJPADAO<Integer, Course> implements CourseD
         EntityManager manager = createManager();
         try
         {
-            return manager.createQuery( "SELECT c FROM course c WHERE c.name = :name", Course.class )
+            return manager.createQuery( "SELECT c FROM Course c WHERE c.name = :name", Course.class )
                     .setParameter( "name", name )
                     .getSingleResult();
         } catch ( NoResultException e )
@@ -70,7 +70,7 @@ public class CourseJPADAO extends CRUDJPADAO<Integer, Course> implements CourseD
         EntityManager manager = createManager();
         try
         {
-            return manager.createQuery( "SELECT c FROM course c WHERE c.shortName = :shortName", Course.class )
+            return manager.createQuery( "SELECT c FROM Course c WHERE c.shortName = :shortName", Course.class )
                     .setParameter( "shortName", shortName )
                     .getSingleResult();
         } catch ( NoResultException e )
