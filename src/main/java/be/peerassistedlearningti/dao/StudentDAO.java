@@ -12,6 +12,12 @@ import be.peerassistedlearningti.model.Student;
 public interface StudentDAO extends CRUDDAO<Integer, Student>
 {
 
+    /**
+     * Gets a Student with the specified email
+     *
+     * @param email The email of the student
+     * @return The student with the specified email
+     */
     Student getByEmail( String email );
 
 }
