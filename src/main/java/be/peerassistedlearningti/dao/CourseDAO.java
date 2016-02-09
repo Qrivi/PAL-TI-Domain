@@ -12,4 +12,8 @@ import be.peerassistedlearningti.model.Course;
 public interface CourseDAO extends CRUDDAO<Integer, Course>
 {
 
+    Course getByCode( String code );
+    Course getByName( String name );
+    Course getByShortName( String shortName );
+
 }
