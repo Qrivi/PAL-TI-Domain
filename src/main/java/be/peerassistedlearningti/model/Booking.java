@@ -10,13 +10,13 @@ import javax.validation.constraints.NotNull;
 @Table(name = "booking")
 public class Booking extends JPAEntity{
     @Valid
-    @NotNull
+    @NotNull(message = "NotNull.Booking.lesson")
     @OneToOne
     @JoinColumn(name = "lesson_id", nullable = false)
     private Lesson lesson;
 
     @Valid
-    @NotNull
+    @NotNull(message = "NotNull.Booking.student")
     @OneToMany
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
