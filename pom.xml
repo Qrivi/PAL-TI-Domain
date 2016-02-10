@@ -11,6 +11,7 @@
     <properties>
         <mysql.version>5.1.6</mysql.version>
         <junit.version>4.11</junit.version>
+        <beanutils.version>1.9.2</beanutils.version>
         <dbunit.version>2.5.1</dbunit.version>
         <slf4j.version>1.7.13</slf4j.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
@@ -19,6 +20,12 @@
     </properties>
 
     <dependencies>
+        <!-- Commons beanutils -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${beanutils.version}</version>
+        </dependency>
         <!-- Mysql -->
         <dependency>
             <groupId>mysql</groupId>

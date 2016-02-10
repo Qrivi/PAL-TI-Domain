@@ -1,9 +1,6 @@
 package be.peerassistedlearningti.service;
 
-import be.peerassistedlearningti.model.Campus;
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Room;
-import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.*;
 
 import java.util.Collection;
 
@@ -68,6 +65,50 @@ public interface PALService
     Student getStudentByEmail( String email );
 
     /**
+     * Adds a tutor to the database
+     *
+     * @param tutor The tutor to be added to the database
+     */
+    void addTutor( Tutor tutor );
+
+    /**
+     * Removes the specified tutor from the database
+     *
+     * @param tutor The tutor to be removed from the database
+     */
+    void removeTutor( Tutor tutor );
+
+    /**
+     * Gets the tutor with the specified id
+     *
+     * @param id The id of the tutor
+     * @return The tutor with the specified id
+     */
+    Tutor getTutorById( int id );
+
+    /**
+     * Adds a lesson to the database
+     *
+     * @param lesson The lesson to be added to the database
+     */
+    void addLesson( Lesson lesson );
+
+    /**
+     * Removes the specified lesson from the database
+     *
+     * @param lesson The lesson to be removed from the database
+     */
+    void removeLesson( Lesson lesson );
+
+    /**
+     * Gets the lesson with the specified id
+     *
+     * @param id The id of the lesson
+     * @return The lesson with the specified id
+     */
+    Lesson getLessonById( int id );
+
+    /**
      * Adds a room to the database
      *
      * @param room The room to be added to the database
@@ -79,7 +120,7 @@ public interface PALService
      *
      * @param room The room to be removed from the database
      */
-    void removeStudent( Room room );
+    void removeRoom( Room room );
 
     /**
      * Gets the room with the specified id

@@ -2,14 +2,8 @@ package be.peerassistedlearningti.service;
 
 import be.peerassistedlearningti.common.dao.DAOException;
 import be.peerassistedlearningti.common.service.ServiceException;
-import be.peerassistedlearningti.dao.CourseDAO;
-import be.peerassistedlearningti.dao.RoomDAO;
-import be.peerassistedlearningti.dao.StudentDAO;
-import be.peerassistedlearningti.dao.TutorDAO;
-import be.peerassistedlearningti.model.Campus;
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Room;
-import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.dao.*;
+import be.peerassistedlearningti.model.*;
 
 import java.util.Collection;
 
@@ -26,6 +20,7 @@ public class PALServiceImpl implements PALService
      */
 
     private TutorDAO tutorDAO;
+    private LessonDAO lessonDAO;
     private CourseDAO courseDAO;
     private StudentDAO studentDAO;
     private RoomDAO roomDAO;
@@ -58,6 +53,16 @@ public class PALServiceImpl implements PALService
     public void setTutorDAO( TutorDAO tutorDAO )
     {
         this.tutorDAO = tutorDAO;
+    }
+
+    /**
+     * Sets the lesson dao for the service
+     *
+     * @param lessonDAO The lesson dao for the service
+     */
+    public void setLessonDAO( LessonDAO lessonDAO )
+    {
+        this.lessonDAO = lessonDAO;
     }
 
     /**
@@ -186,6 +191,104 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Adds a tutor to the database
+     *
+     * @param tutor The tutor to be added to the database
+     */
+    public void addTutor( Tutor tutor )
+    {
+        try
+        {
+            tutorDAO.add( tutor );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Removes the specified tutor from the database
+     *
+     * @param tutor The tutor to be removed from the database
+     */
+    public void removeTutor( Tutor tutor )
+    {
+        try
+        {
+            tutorDAO.remove( tutor );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets the tutor with the specified id
+     *
+     * @param id The id of the tutor
+     * @return The tutor with the specified id
+     */
+    public Tutor getTutorById( int id )
+    {
+        try
+        {
+            return tutorDAO.getById( id );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Adds a lesson to the database
+     *
+     * @param lesson The lesson to be added to the database
+     */
+    public void addLesson( Lesson lesson )
+    {
+        try
+        {
+            lessonDAO.add( lesson );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Removes the specified lesson from the database
+     *
+     * @param lesson The lesson to be removed from the database
+     */
+    public void removeLesson( Lesson lesson )
+    {
+        try
+        {
+            lessonDAO.remove( lesson );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets the lesson with the specified id
+     *
+     * @param id The id of the lesson
+     * @return The lesson with the specified id
+     */
+    public Lesson getLessonById( int id )
+    {
+        try
+        {
+            return lessonDAO.getById( id );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Adds a room to the database
      *
      * @param room The room to be added to the database
@@ -206,7 +309,7 @@ public class PALServiceImpl implements PALService
      *
      * @param room The room to be removed from the database
      */
-    public void removeStudent( Room room )
+    public void removeRoom( Room room )
     {
         try
         {
