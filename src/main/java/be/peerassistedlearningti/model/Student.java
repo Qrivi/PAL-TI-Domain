@@ -30,8 +30,8 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "password", nullable = false )
     private String password;
 
-    @NotEmpty
-    @Column(name = "salt", nullable = false)
+    @NotEmpty( message = "NotEmpty.Student.salt" )
+    @Column( name = "salt", nullable = false )
     private String salt;
 
     @NotEmpty( message = "NotEmpty.Student.email" )
@@ -59,9 +59,9 @@ public class Student extends JPAEntity<Integer>
     {
         this.email = email;
         this.name = name;
-        this.password = hashPassword(password);
         this.admin = admin;
-        this.salt =  new BigInteger(130, new SecureRandom()).toString(20);
+        this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        this.password = hashPassword( password );
     }
 
     /**
@@ -72,23 +72,23 @@ public class Student extends JPAEntity<Integer>
      */
     private String hashPassword( String plainTextPassword )
     {
-        if (plainTextPassword == null)
+        if ( plainTextPassword == null )
             return null;
 
         MessageDigest digest = null;
 
         try
         {
-            digest = MessageDigest.getInstance("SHA-512");
+            digest = MessageDigest.getInstance( "SHA-512" );
             digest.reset();
         } catch ( NoSuchAlgorithmException e ) { }
 
-        digest.update(plainTextPassword.getBytes());
+        digest.update( plainTextPassword.getBytes() );
 
-        if (salt != null)
-            digest.update(salt.getBytes());
+        if ( salt != null )
+            digest.update( salt.getBytes() );
 
-        return (new BigInteger(1, digest.digest()).toString(40));
+        return ( new BigInteger( 1, digest.digest() ).toString( 40 ) );
     }
 
     /**
@@ -99,7 +99,7 @@ public class Student extends JPAEntity<Integer>
      */
     public boolean isPasswordValid( String plainTextPassword )
     {
-        return hashPassword(plainTextPassword).equals(password);
+        return hashPassword( plainTextPassword ).equals( password );
     }
 
     /**
@@ -119,7 +119,9 @@ public class Student extends JPAEntity<Integer>
      */
     public void setPassword( String password )
     {
-        this.password = password;
+        if ( salt == null )
+            this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        this.password = hashPassword( password );
     }
 
     /**
