@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class RoomJPADAOTest extends TestCase
+public class RoomJPADAOTest
 {
 
     private static RoomJPADAO roomJPADAO;

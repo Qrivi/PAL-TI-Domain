@@ -61,7 +61,7 @@ public class Lesson extends JPAEntity<Integer>
     @Valid
     @NotNull( message = "NotNull.Lesson.backupRoom" )
     @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
-    @JoinColumn( name = "room_id" )
+    @JoinColumn( name = "backup_room_id" )
     private Room backupRoom;
 
     /**

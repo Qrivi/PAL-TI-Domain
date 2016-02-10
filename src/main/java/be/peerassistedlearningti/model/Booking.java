@@ -7,29 +7,25 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "booking")
-public class Booking extends JPAEntity<Integer>{
+@Table( name = "booking" )
+public class Booking extends JPAEntity<Integer>
+{
     @Valid
-    @NotNull(message = "NotNull.Booking.lesson")
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "lesson_id", nullable = false)
+    @NotNull( message = "NotNull.Booking.lesson" )
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "lesson_id", nullable = false )
     private Lesson lesson;
 
     @Valid
-    @NotNull(message = "NotNull.Booking.student")
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
-    @JoinColumn(name = "student_id", nullable = false)
+    @NotNull( message = "NotNull.Booking.student" )
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "student_id", nullable = false )
     private Student student;
-
-    @Valid
-    @OneToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
 
     /**
      * Default constructor for Booking
      */
-    public Booking(){}
+    public Booking() {}
 
     /**
      * Constructor for a Booking entity without review
@@ -37,21 +33,10 @@ public class Booking extends JPAEntity<Integer>{
      * @param lesson
      * @param student
      */
-    public Booking(Lesson lesson, Student student) {
+    public Booking( Lesson lesson, Student student )
+    {
         this.lesson = lesson;
         this.student = student;
-    }
-
-    /**
-     * Constructor for a Booking entity
-     *
-     * @param lesson
-     * @param student
-     * @param review
-     */
-    public Booking(Lesson lesson, Student student, Review review) {
-        this(lesson, student);
-        this.review = review;
     }
 
     /**
@@ -59,7 +44,8 @@ public class Booking extends JPAEntity<Integer>{
      *
      * @return Lesson
      */
-    public Lesson getLesson() {
+    public Lesson getLesson()
+    {
         return lesson;
     }
 
@@ -68,26 +54,18 @@ public class Booking extends JPAEntity<Integer>{
      *
      * @return student
      */
-    public Student getStudent() {
+    public Student getStudent()
+    {
         return student;
     }
-
-    /**
-     * Sets the review of the booking
-     *
-     * @return review
-     */
-    public Review getReview() {
-        return review;
-    }
-
 
     /**
      * Gets the lesson of the booking
      *
      * @param lesson
      */
-    public void setLesson(Lesson lesson) {
+    public void setLesson( Lesson lesson )
+    {
         this.lesson = lesson;
     }
 
@@ -96,16 +74,9 @@ public class Booking extends JPAEntity<Integer>{
      *
      * @param student
      */
-    public void setStudent(Student student) {
+    public void setStudent( Student student )
+    {
         this.student = student;
     }
 
-    /**
-     * Gets the review of the booking
-     *
-     * @param review
-     */
-    public void setReview(Review review) {
-        this.review = review;
-    }
 }
