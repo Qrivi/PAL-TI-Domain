@@ -3,10 +3,15 @@ package be.peerassistedlearningti.service;
 import be.peerassistedlearningti.common.dao.DAOException;
 import be.peerassistedlearningti.common.service.ServiceException;
 import be.peerassistedlearningti.dao.CourseDAO;
+import be.peerassistedlearningti.dao.RoomDAO;
 import be.peerassistedlearningti.dao.StudentDAO;
 import be.peerassistedlearningti.dao.TutorDAO;
+import be.peerassistedlearningti.model.Campus;
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.model.Student;
+
+import java.util.Collection;
 
 /**
  * Class used to access the backend functionalities
@@ -23,6 +28,7 @@ public class PALServiceImpl implements PALService
     private TutorDAO tutorDAO;
     private CourseDAO courseDAO;
     private StudentDAO studentDAO;
+    private RoomDAO roomDAO;
 
     /**
      * Sets the course dao for the service
@@ -52,6 +58,16 @@ public class PALServiceImpl implements PALService
     public void setTutorDAO( TutorDAO tutorDAO )
     {
         this.tutorDAO = tutorDAO;
+    }
+
+    /**
+     * Sets the room dao for the service
+     *
+     * @param roomDAO The room dao for the service
+     */
+    public void setRoomDAO( RoomDAO roomDAO )
+    {
+        this.roomDAO = roomDAO;
     }
 
     /**
@@ -163,6 +179,72 @@ public class PALServiceImpl implements PALService
         try
         {
             return studentDAO.getByEmail( email );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Adds a room to the database
+     *
+     * @param room The room to be added to the database
+     */
+    public void addRoom( Room room )
+    {
+        try
+        {
+            roomDAO.add( room );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Removes the specified room from the database
+     *
+     * @param room The room to be removed from the database
+     */
+    public void removeStudent( Room room )
+    {
+        try
+        {
+            roomDAO.remove( room );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets the room with the specified id
+     *
+     * @param id The id of the room
+     * @return The room with the specified id
+     */
+    public Room getRoomById( int id )
+    {
+        try
+        {
+            return roomDAO.getById( id );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets the rooms with the specified campus
+     *
+     * @param campus The campus of the room
+     * @return The rooms with the specified campus
+     */
+    public Collection<Room> getRoomsFromCampus( Campus campus )
+    {
+        try
+        {
+            return roomDAO.getFromCampus( campus );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
