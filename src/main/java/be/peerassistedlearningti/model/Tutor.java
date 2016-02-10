@@ -18,13 +18,13 @@ import java.util.Set;
 public class Tutor extends JPAEntity<Integer>{
 
     @Valid
-    @NotEmpty( message = "NotEmpty.Tutor.student" )
+    @NotNull( message = "NotNull.Tutor.student" )
     @OneToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="student_id")
     private Student student;
 
     @Valid
-    @NotNull( message = "NotEmpty.Tutor.course")
+    @NotNull( message = "NotNull.Tutor.course")
     @ManyToMany
     @JoinTable( name="tutor_course",
                 joinColumns={@JoinColumn(name="tutor_id", referencedColumnName="id")},
@@ -57,15 +57,7 @@ public class Tutor extends JPAEntity<Integer>{
         return student;
     }
 
-    /**
-     * Sets the student information of the tutor
-     *
-     * @param  student The student information
-     * @see Student
-     */
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+
 
     /**
      * Gets the courses that the tutor may tutor
@@ -76,6 +68,16 @@ public class Tutor extends JPAEntity<Integer>{
      */
     public Set<Course> getCourses() {
         return courses;
+    }
+
+    /**
+     * Sets the student information of the tutor
+     *
+     * @param  student The student information
+     * @see Student
+     */
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     /**
