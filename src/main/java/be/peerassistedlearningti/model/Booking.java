@@ -8,16 +8,16 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "booking")
-public class Booking extends JPAEntity{
+public class Booking extends JPAEntity<Integer>{
     @Valid
     @NotNull(message = "NotNull.Booking.lesson")
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lesson_id", nullable = false)
     private Lesson lesson;
 
     @Valid
     @NotNull(message = "NotNull.Booking.student")
-    @OneToMany
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 

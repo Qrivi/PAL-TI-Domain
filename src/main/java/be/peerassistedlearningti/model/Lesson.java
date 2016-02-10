@@ -158,7 +158,7 @@ public class Lesson extends JPAEntity<Integer>
      *
      * @param room
      */
-    public void setRoom( String room )
+    public void setRoom( Room room )
     {
         this.room = room;
     }
@@ -168,7 +168,7 @@ public class Lesson extends JPAEntity<Integer>
      *
      * @param backupRoom
      */
-    public void setBackupRoom( String backupRoom )
+    public void setBackupRoom( Room backupRoom )
     {
         this.backupRoom = backupRoom;
     }
