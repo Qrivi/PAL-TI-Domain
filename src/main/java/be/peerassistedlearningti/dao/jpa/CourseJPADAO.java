@@ -25,6 +25,12 @@ public class CourseJPADAO extends CRUDJPADAO<Integer, Course> implements CourseD
         super( Course.class );
     }
 
+    /**
+     * Gets a course with the specified code
+     *
+     * @param code The code of the course
+     * @return The course with the specified code
+     */
     public Course getByCode( String code )
     {
         EntityManager manager = createManager();
@@ -45,6 +51,12 @@ public class CourseJPADAO extends CRUDJPADAO<Integer, Course> implements CourseD
         }
     }
 
+    /**
+     * Gets a course with the specified name
+     *
+     * @param name The name of the course
+     * @return The course with the specified name
+     */
     public Course getByName( String name )
     {
         EntityManager manager = createManager();
@@ -65,6 +77,12 @@ public class CourseJPADAO extends CRUDJPADAO<Integer, Course> implements CourseD
         }
     }
 
+    /**
+     * Gets a course with the specified short name
+     *
+     * @param shortName The short name of the course
+     * @return The course with the specified short name
+     */
     public Course getByShortName( String shortName )
     {
         EntityManager manager = createManager();
