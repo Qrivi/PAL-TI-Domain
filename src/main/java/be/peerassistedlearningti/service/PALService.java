@@ -1,7 +1,11 @@
 package be.peerassistedlearningti.service;
 
+import be.peerassistedlearningti.model.Campus;
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.model.Student;
+
+import java.util.Collection;
 
 /**
  * Interface used to determine the backend functionalities
@@ -62,5 +66,35 @@ public interface PALService
      * @return The student with the specified email
      */
     Student getStudentByEmail( String email );
+
+    /**
+     * Adds a room to the database
+     *
+     * @param room The room to be added to the database
+     */
+    void addRoom( Room room );
+
+    /**
+     * Removes the specified room from the database
+     *
+     * @param room The room to be removed from the database
+     */
+    void removeStudent( Room room );
+
+    /**
+     * Gets the room with the specified id
+     *
+     * @param id The id of the room
+     * @return The room with the specified id
+     */
+    Room getRoomById( int id );
+
+    /**
+     * Gets the rooms with the specified campus
+     *
+     * @param campus The campus of the room
+     * @return The rooms with the specified campus
+     */
+    Collection<Room> getRoomsFromCampus( Campus campus );
 
 }
