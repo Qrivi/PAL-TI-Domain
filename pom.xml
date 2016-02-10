@@ -11,6 +11,7 @@
     <properties>
         <mysql.version>5.1.6</mysql.version>
         <junit.version>4.11</junit.version>
+        <dbunit.version>2.5.1</dbunit.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
         <hibernate-entitymanager.version>4.3.1.Final</hibernate-entitymanager.version>
         <hibernate-validation.version>5.1.3.Final</hibernate-validation.version>
@@ -28,6 +29,14 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <optional>true</optional>
+            <scope>test</scope>
+            <version>${dbunit.version}</version>
         </dependency>
         <!-- Hibernate -->
         <dependency>
