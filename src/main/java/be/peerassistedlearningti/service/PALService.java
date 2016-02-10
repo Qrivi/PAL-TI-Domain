@@ -87,6 +87,28 @@ public interface PALService
     Tutor getTutorById( int id );
 
     /**
+     * Adds a lesson to the database
+     *
+     * @param lesson The lesson to be added to the database
+     */
+    void addLesson( Lesson lesson );
+
+    /**
+     * Removes the specified lesson from the database
+     *
+     * @param lesson The lesson to be removed from the database
+     */
+    void removeLesson( Lesson lesson );
+
+    /**
+     * Gets the lesson with the specified id
+     *
+     * @param id The id of the lesson
+     * @return The lesson with the specified id
+     */
+    Lesson getLessonById( int id );
+
+    /**
      * Adds a room to the database
      *
      * @param room The room to be added to the database
