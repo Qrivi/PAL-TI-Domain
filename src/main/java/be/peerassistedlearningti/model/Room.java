@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class Room extends JPAEntity<Integer>
 {
 
-    @NotEmpty( message = "NotEmpty.Room.room" )
+    @NotEmpty( message = "NotEmpty.Room.name" )
     @Column( name = "name", nullable = false )
     private String name;
 

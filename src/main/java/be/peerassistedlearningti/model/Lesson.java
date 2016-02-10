@@ -49,7 +49,6 @@ public class Lesson extends JPAEntity<Integer>
     private Tutor tutor;
 
     @Valid
-    @NotNull( message = "NotNull.Lesson.bookings" )
     @OneToMany( mappedBy = "lesson", fetch = FetchType.LAZY )
     private Set<Booking> bookings;
 
@@ -71,7 +70,7 @@ public class Lesson extends JPAEntity<Integer>
     public Lesson() {}
 
     /**
-     * Constructor for a Lesson entity
+     * Constructor for Lesson
      *
      * @param date            The date of the lesson
      * @param duration        The duration of the lesson
