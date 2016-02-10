@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <tutor
+        id="1"
+        student_id="1" />
+    <course
+        id="1"
+        code="MBI22a/M"
+        name="COMMUNICATIE IN HET FRANS 3"
+        short_name="Frans 3"
+        />
+    <student
+        id="1"
+        name="Jan"
+        email="Jan@mail.com"
+        admin="false"
+        salt="57jej64d18e3d10adgb0i62cb58ib6"
+        password="151808227535908137874180544710699204437788309330424516434908306449923530731414677247206579295760000557402688929034569530
+4915061331970477182705993120487445 "/>
+    <student
+            id="2"
+            name="Lies"
+            email="Lies@mail.com"
+            admin="false"
+            salt="57jej64d18e3d10adgb0i62cb58ib6"
+            password="151808227535908137874180544710699204437788309330424516434908306449923530731414677247206579295760000557402688929034569530
+4915061331970477182705993120487445 "/>
+    <tutor_course
+        tutor_id="1"
+        course_id="1"/>
+
+</dataset>
