@@ -35,7 +35,7 @@ public class StudentJPADAO extends CRUDJPADAO<Integer, Student> implements Stude
         EntityManager manager = createManager();
         try
         {
-            return manager.createQuery( "SELECT s FROM student s WHERE s.email LIKE :studentEmail", Student.class )
+            return manager.createQuery( "SELECT s FROM Student s WHERE s.email LIKE :studentEmail", Student.class )
                     .setParameter( "studentEmail", email )
                     .getSingleResult();
         } catch ( NoResultException e )

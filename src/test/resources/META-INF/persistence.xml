@@ -8,11 +8,10 @@
         <properties>
             <!-- HIBERNATE PROPERTIES -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://185.3.210.249:3306/PAL?autoReconnectForPools=true"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://185.3.210.249:3306/PAL-TEST?autoReconnectForPools=true"/>
             <property name="hibernate.connection.username" value="PAL-TI"/>
             <property name="hibernate.connection.password" value="DjKdwfrmquJ9SL55"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
     </persistence-unit>
 </persistence>
