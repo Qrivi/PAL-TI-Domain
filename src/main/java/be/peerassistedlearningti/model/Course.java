@@ -5,7 +5,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Class used to specify a Course
@@ -29,6 +33,9 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
+    @ManyToMany(mappedBy = "courses")
+    private Set<Tutor> tutors;
+
     /**
      * Default constructor for Course
      */
@@ -40,12 +47,14 @@ public class Course extends JPAEntity<Integer>
      * @param code      The code of the course
      * @param name      The full name of the course
      * @param shortName The short name of the course
+     * @param tutors    The set of available tutors of the course
      */
-    public Course( String code, String name, String shortName )
+    public Course( String code, String name, String shortName, Set<Tutor> tutors )
     {
         this.code = code;
         this.name = name;
         this.shortName = shortName;
+        this.tutors = tutors;
     }
 
     /**
@@ -100,6 +109,22 @@ public class Course extends JPAEntity<Integer>
     public String getShortName()
     {
         return shortName;
+    }
+
+    /**
+     * Gets the available tutors for a course
+     * @return The set with available tutors or null if non
+     */
+    public Set<Tutor> getTutors() {
+        return tutors;
+    }
+
+    /**
+     * Sets the available tutors for a course
+     * @param tutors The set with available tutors or null if non
+     */
+    public void setTutors(Set<Tutor> tutors) {
+        this.tutors = tutors;
     }
 
     /**

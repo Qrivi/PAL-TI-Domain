@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -12,16 +13,18 @@ import java.util.Set;
  *
  * @see JPAEntity
  */
+@Entity
+@Table(name="tutor")
 public class Tutor extends JPAEntity<Integer>{
 
     @Valid
     @NotEmpty( message = "NotEmpty.Tutor.student" )
-    @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="student_tutor")
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="student_id")
     private Student student;
 
     @Valid
-    @NotEmpty( message = "NotEmpty.Tutor.course")
+    @NotNull( message = "NotEmpty.Tutor.course")
     @ManyToMany
     @JoinTable( name="tutor_course",
                 joinColumns={@JoinColumn(name="tutor_id", referencedColumnName="id")},
