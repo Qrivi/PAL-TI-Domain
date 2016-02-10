@@ -15,42 +15,44 @@ import java.util.Set;
  * @see JPAEntity
  */
 @Entity
-@Table(name="tutor")
-public class Tutor extends JPAEntity<Integer>{
+@Table( name = "tutor" )
+public class Tutor extends JPAEntity<Integer>
+{
 
     @Valid
     @NotNull( message = "NotNull.Tutor.student" )
-    @OneToOne(fetch= FetchType.EAGER , cascade = {CascadeType.REFRESH, CascadeType.MERGE} )
-    @JoinColumn(name="student_id")
+    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinColumn( name = "student_id" )
     private Student student;
 
     @Valid
-    @NotNull( message = "NotNull.Tutor.course")
-    @ManyToMany (fetch= FetchType.EAGER , cascade = {CascadeType.REFRESH, CascadeType.MERGE} )
-    @JoinTable( name="tutor_course",
-                joinColumns={@JoinColumn(name="tutor_id", referencedColumnName="id")},
-                inverseJoinColumns={@JoinColumn(name="course_id", referencedColumnName="id")})
+    @NotNull( message = "NotNull.Tutor.course" )
+    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinTable( name = "tutor_course",
+            joinColumns = { @JoinColumn( name = "tutor_id", referencedColumnName = "id" ) },
+            inverseJoinColumns = { @JoinColumn( name = "course_id", referencedColumnName = "id" ) } )
     private Set<Course> courses;
 
     @Valid
-    @NotNull(message = "NotNull.Tutor.lessons")
-    @OneToMany(mappedBy="tutor", fetch= FetchType.EAGER , cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE} )
+    @NotNull( message = "NotNull.Tutor.lessons" )
+    @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Lesson> lessons;
 
     /**
      * Default empty constructor for JPA Entities
      */
-    public Tutor(){}
+    public Tutor() {}
 
     /**
      * Constructor for a tutor entity
      *
-     * @param student   The student information of the tutor
-     * @param courses   The set of courses the tutor may tutor
+     * @param student The student information of the tutor
+     * @param courses The set of courses the tutor may tutor
      */
-    public Tutor(Student student, Set<Course> courses){
-        this.student=student;
-        this.courses=courses;
+    public Tutor( Student student, Set<Course> courses )
+    {
+        this.student = student;
+        this.courses = courses;
     }
 
     /**
@@ -59,11 +61,10 @@ public class Tutor extends JPAEntity<Integer>{
      * @return The student object
      * @see Student
      */
-    public Student getStudent() {
+    public Student getStudent()
+    {
         return student;
     }
-
-
 
     /**
      * Gets the courses that the tutor may tutor
@@ -72,7 +73,8 @@ public class Tutor extends JPAEntity<Integer>{
      * @see Course
      * @see Set
      */
-    public Set<Course> getCourses() {
+    public Set<Course> getCourses()
+    {
         return courses;
     }
 
@@ -83,19 +85,21 @@ public class Tutor extends JPAEntity<Integer>{
      * @see Lesson
      * @see Set
      */
-    public Set<Lesson> getLessons() {
+    public Set<Lesson> getLessons()
+    {
         return lessons;
     }
 
     /**
      * Sets the student information of the tutor
      *
-     * @param  student The student information
+     * @param student The student information
      * @see Student
      */
 
 
-    public void setStudent(Student student) {
+    public void setStudent( Student student )
+    {
         this.student = student;
     }
 
@@ -106,7 +110,8 @@ public class Tutor extends JPAEntity<Integer>{
      * @see Course
      * @see Set
      */
-    public void setCourses(Set<Course> courses) {
+    public void setCourses( Set<Course> courses )
+    {
         this.courses = courses;
     }
 
@@ -117,7 +122,8 @@ public class Tutor extends JPAEntity<Integer>{
      * @see Lesson
      * @see Set
      */
-    public void setLessons(Set<Lesson> lessons) {
+    public void setLessons( Set<Lesson> lessons )
+    {
         this.lessons = lessons;
     }
 }

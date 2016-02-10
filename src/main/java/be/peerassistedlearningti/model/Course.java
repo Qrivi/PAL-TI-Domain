@@ -3,12 +3,7 @@ package be.peerassistedlearningti.model;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -33,7 +28,7 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Tutor> tutors;
 
     /**
@@ -47,14 +42,12 @@ public class Course extends JPAEntity<Integer>
      * @param code      The code of the course
      * @param name      The full name of the course
      * @param shortName The short name of the course
-     * @param tutors    The set of available tutors of the course
      */
-    public Course( String code, String name, String shortName, Set<Tutor> tutors )
+    public Course( String code, String name, String shortName )
     {
         this.code = code;
         this.name = name;
         this.shortName = shortName;
-        this.tutors = tutors;
     }
 
     /**
@@ -113,18 +106,12 @@ public class Course extends JPAEntity<Integer>
 
     /**
      * Gets the available tutors for a course
+     *
      * @return The set with available tutors or null if non
      */
-    public Set<Tutor> getTutors() {
+    public Set<Tutor> getTutors()
+    {
         return tutors;
-    }
-
-    /**
-     * Sets the available tutors for a course
-     * @param tutors The set with available tutors or null if non
-     */
-    public void setTutors(Set<Tutor> tutors) {
-        this.tutors = tutors;
     }
 
     /**

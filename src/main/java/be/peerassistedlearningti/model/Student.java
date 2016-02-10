@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -40,7 +41,8 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "admin" )
     private boolean admin;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "student", cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
+    @Valid
+    @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Tutor tutor;
 
     /**
@@ -183,6 +185,16 @@ public class Student extends JPAEntity<Integer>
     public boolean isAdmin()
     {
         return admin;
+    }
+
+    /**
+     * Gets the tutor object of the student
+     *
+     * @return The tutor object of the student, if he isn't a tutor null is returned
+     */
+    public Tutor getTutor()
+    {
+        return tutor;
     }
 
 }
