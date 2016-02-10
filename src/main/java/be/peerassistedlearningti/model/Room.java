@@ -12,11 +12,11 @@ public class Room extends JPAEntity<Integer>
 {
 
     @NotEmpty( message = "NotEmpty.Room.room" )
-    @Column( name = "room", nullable = false )
+    @Column( name = "name", nullable = false )
     private String name;
 
     @NotEmpty( message = "NotEmpty.Room.campus" )
-    @Column( name = "room", nullable = false )
+    @Column( name = "campus", nullable = false )
     private String campus;
 
     @Enumerated( EnumType.STRING )
