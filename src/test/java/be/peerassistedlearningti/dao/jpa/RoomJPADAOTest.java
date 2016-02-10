@@ -1,5 +1,6 @@
 package be.peerassistedlearningti.dao.jpa;
 
+import be.peerassistedlearningti.model.Campus;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.model.RoomType;
@@ -36,7 +37,7 @@ public class RoomJPADAOTest extends TestCase
     @Test
     public void test1Add()
     {
-        Room r = new Room( "2.25", "Proximus", RoomType.COMPUTER );
+        Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         r = roomJPADAO.add( r );
 
@@ -48,7 +49,7 @@ public class RoomJPADAOTest extends TestCase
     @Test
     public void test2GetById()
     {
-        Room r1 = new Room( "2.25", "Proximus", RoomType.COMPUTER );
+        Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         r1 = roomJPADAO.add( r1 );
 
@@ -63,7 +64,7 @@ public class RoomJPADAOTest extends TestCase
     @Test
     public void test3Update()
     {
-        Room r1 = new Room( "2.25", "Proximus", RoomType.COMPUTER );
+        Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         r1 = roomJPADAO.add( r1 );
 
@@ -81,7 +82,7 @@ public class RoomJPADAOTest extends TestCase
     @Test
     public void test4Remove()
     {
-        Room r = new Room( "2.25", "Proximus", RoomType.COMPUTER );
+        Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         r = roomJPADAO.add( r );
 
@@ -95,8 +96,8 @@ public class RoomJPADAOTest extends TestCase
     @Test
     public void test5GetAll()
     {
-        Room r1 = new Room( "2.25", "Proximus", RoomType.COMPUTER );
-        Room r2 = new Room( "2.26", "Proximus", RoomType.PLAIN );
+        Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
+        Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
 
         roomJPADAO.add( r1 );
         roomJPADAO.add( r2 );
@@ -113,8 +114,8 @@ public class RoomJPADAOTest extends TestCase
     @Test
     public void test6GetLast()
     {
-        Room r1 = new Room( "2.25", "Proximus", RoomType.COMPUTER );
-        Room r2 = new Room( "2.26", "Proximus", RoomType.PLAIN );
+        Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
+        Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
 
         roomJPADAO.add( r1 );
         roomJPADAO.add( r2 );
@@ -123,6 +124,24 @@ public class RoomJPADAOTest extends TestCase
 
         assertNotNull( r3 );
         assertEquals( r2, r3 );
+
+        roomJPADAO.remove( r1 );
+        roomJPADAO.remove( r2 );
+    }
+
+    @Test
+    public void test7GetFromCampus()
+    {
+        Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
+        Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.COMPUTER );
+
+        r1 = roomJPADAO.add( r1 );
+        r2 = roomJPADAO.add( r2 );
+
+        Collection<Room> list = roomJPADAO.getFromCampus( Campus.PROXIMUS );
+
+        assertNotNull( list );
+        assertEquals( 2, list.size() );
 
         roomJPADAO.remove( r1 );
         roomJPADAO.remove( r2 );

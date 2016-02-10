@@ -15,13 +15,14 @@ public class Room extends JPAEntity<Integer>
     @Column( name = "name", nullable = false )
     private String name;
 
-    @NotEmpty( message = "NotEmpty.Room.campus" )
+    @Enumerated( EnumType.STRING )
+    @NotNull( message = "NotNull.Room.campus" )
     @Column( name = "campus", nullable = false )
-    private String campus;
+    private Campus campus;
 
     @Enumerated( EnumType.STRING )
     @NotNull( message = "NotNull.Room.type" )
-    @Column( name = "type" )
+    @Column( name = "type", nullable = false )
     private RoomType type;
 
     /**
@@ -36,7 +37,7 @@ public class Room extends JPAEntity<Integer>
      * @param campus The campus of a room
      * @param type   The type of the room
      */
-    public Room( String name, String campus, RoomType type )
+    public Room( String name, Campus campus, RoomType type )
     {
         this.name = name;
         this.campus = campus;
@@ -58,7 +59,7 @@ public class Room extends JPAEntity<Integer>
      *
      * @param campus The new campus of the room
      */
-    public void setCampus( String campus )
+    public void setCampus( Campus campus )
     {
         this.campus = campus;
     }
@@ -84,7 +85,7 @@ public class Room extends JPAEntity<Integer>
     /**
      * @return The campus of the room
      */
-    public String getCampus()
+    public Campus getCampus()
     {
         return campus;
     }
