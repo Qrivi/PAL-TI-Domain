@@ -52,6 +52,9 @@ public class Lesson extends JPAEntity<Integer>{
     @Column(name = "backup_room")
     private String backupRoom;
 
+    /**
+     * Default constructor for Lesson
+     */
     public Lesson(){}
 
     /**
