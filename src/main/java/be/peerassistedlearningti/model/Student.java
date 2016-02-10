@@ -4,9 +4,7 @@ import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -41,6 +39,9 @@ public class Student extends JPAEntity<Integer>
 
     @Column( name = "admin" )
     private boolean admin;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "student", cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
+    private Tutor tutor;
 
     /**
      * Default empty constructor for JPA Entities

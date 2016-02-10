@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -19,17 +20,22 @@ public class Tutor extends JPAEntity<Integer>{
 
     @Valid
     @NotNull( message = "NotNull.Tutor.student" )
-    @OneToOne(fetch= FetchType.LAZY)
+    @OneToOne(fetch= FetchType.EAGER , cascade = {CascadeType.REFRESH, CascadeType.MERGE} )
     @JoinColumn(name="student_id")
     private Student student;
 
     @Valid
     @NotNull( message = "NotNull.Tutor.course")
-    @ManyToMany
+    @ManyToMany (fetch= FetchType.EAGER , cascade = {CascadeType.REFRESH, CascadeType.MERGE} )
     @JoinTable( name="tutor_course",
                 joinColumns={@JoinColumn(name="tutor_id", referencedColumnName="id")},
                 inverseJoinColumns={@JoinColumn(name="course_id", referencedColumnName="id")})
     private Set<Course> courses;
+
+    @Valid
+    @NotNull(message = "NotNull.Tutor.lessons")
+    @OneToMany(mappedBy="tutor", fetch= FetchType.EAGER , cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE} )
+    private Set<Lesson> lessons;
 
     /**
      * Default empty constructor for JPA Entities
