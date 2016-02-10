@@ -7,6 +7,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 /**
  * Class used to specify a Student
@@ -25,6 +29,10 @@ public class Student extends JPAEntity<Integer>
     @NotEmpty( message = "NotEmpty.Student.password" )
     @Column( name = "password", nullable = false )
     private String password;
+
+    @NotEmpty
+    @Column(name = "salt", nullable = false)
+    private String salt;
 
     @NotEmpty( message = "NotEmpty.Student.email" )
     @Email( message = "Email.Student.email" )
@@ -51,8 +59,47 @@ public class Student extends JPAEntity<Integer>
     {
         this.email = email;
         this.name = name;
-        this.password = password;
+        this.password = hashPassword(password);
         this.admin = admin;
+        this.salt =  new BigInteger(130, new SecureRandom()).toString(20);
+    }
+
+    /**
+     * Hashes the plaintext password
+     *
+     * @param plainTextPassword The password that will be hashed
+     * @return The password in hashed form.
+     */
+    private String hashPassword( String plainTextPassword )
+    {
+        if (plainTextPassword == null)
+            return null;
+
+        MessageDigest digest = null;
+
+        try
+        {
+            digest = MessageDigest.getInstance("SHA-512");
+            digest.reset();
+        } catch ( NoSuchAlgorithmException e ) { }
+
+        digest.update(plainTextPassword.getBytes());
+
+        if (salt != null)
+            digest.update(salt.getBytes());
+
+        return (new BigInteger(1, digest.digest()).toString(40));
+    }
+
+    /**
+     * Check if the given password is valid
+     *
+     * @param plainTextPassword The plaintext password
+     * @return True if the plaintext password matches the saved password
+     */
+    public boolean isPasswordValid( String plainTextPassword )
+    {
+        return hashPassword(plainTextPassword).equals(password);
     }
 
     /**
