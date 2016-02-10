@@ -77,11 +77,24 @@ public class Tutor extends JPAEntity<Integer>{
     }
 
     /**
+     * Gets the set of lessons of the tutor
+     *
+     * @return The set of lessons
+     * @see Lesson
+     * @see Set
+     */
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
+    /**
      * Sets the student information of the tutor
      *
      * @param  student The student information
      * @see Student
      */
+
+
     public void setStudent(Student student) {
         this.student = student;
     }
@@ -97,4 +110,14 @@ public class Tutor extends JPAEntity<Integer>{
         this.courses = courses;
     }
 
+    /**
+     * Sets the set of lessons of the tutor
+     *
+     * @param lessons The set of lessons
+     * @see Lesson
+     * @see Set
+     */
+    public void setLessons(Set<Lesson> lessons) {
+        this.lessons = lessons;
+    }
 }
