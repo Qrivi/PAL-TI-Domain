@@ -29,11 +29,11 @@ public class Lesson {
     private int maxParticipants;
 
     @Valid
-    @NotNull(message = NotNull.Lesson.tutor)
+    @NotNull(message = "NotNull.Lesson.tutor")
     private Tutor tutor;
 
     @Valid
-    @NotNull(message = NotNull.Lesson.bookings)
+    @NotNull(message = "NotNull.Lesson.bookings")
     @OneToMany(fetch=FetchType.LAZY)
     @JoinColumn(name = "booking_id")
     private Set<Booking> bookings;
