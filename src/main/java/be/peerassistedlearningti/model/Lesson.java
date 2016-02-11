@@ -94,6 +94,23 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * Adds a booking to a lesson
+     *
+     * @param booking The booking to be added
+     * @return true if this set did not already contain the specified course
+     */
+    public boolean addBooking(Booking booking){
+        return bookings.add(booking);
+    }
+
+    /**
+     * Removes a booking from a lesson
+     *
+     * @param booking The booking to be removed
+     * @return true if this set contained the specified course
+     */
+    public boolean removeBooking(Booking booking){ return bookings.remove(booking);}
+    /**
      * Sets the date and time of the lesson
      *
      * @param date
@@ -223,6 +240,11 @@ public class Lesson extends JPAEntity<Integer>
         return tutor;
     }
 
+    /**
+     * Gets the set of bookings
+     *
+     * @return The set of bookings
+     */
     public Set<Booking> getBookings()
     {
         return bookings;
