@@ -48,7 +48,7 @@ public class RoomJPADAOTest extends JPADAOTest
     {
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
-        r = roomJPADAO.add( r );
+        roomJPADAO.add( r );
 
         assertNotNull( r.getId() );
     }
@@ -58,7 +58,7 @@ public class RoomJPADAOTest extends JPADAOTest
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
-        r1 = roomJPADAO.add( r1 );
+        roomJPADAO.add( r1 );
 
         Room r2 = roomJPADAO.getById( r1.getId() );
 
@@ -71,11 +71,11 @@ public class RoomJPADAOTest extends JPADAOTest
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
-        r1 = roomJPADAO.add( r1 );
+        roomJPADAO.add( r1 );
 
         r1.setName( "2.26" );
 
-        r1 = roomJPADAO.update( r1 );
+        roomJPADAO.update( r1 );
 
         Room c2 = roomJPADAO.getById( r1.getId() );
 
@@ -87,8 +87,7 @@ public class RoomJPADAOTest extends JPADAOTest
     {
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
-        r = roomJPADAO.add( r );
-
+        roomJPADAO.add( r );
         roomJPADAO.remove( r );
 
         r = roomJPADAO.getById( r.getId() );

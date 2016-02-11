@@ -11,13 +11,13 @@ import javax.validation.constraints.NotNull;
 public class Booking extends JPAEntity<Integer>
 {
     @Valid
-    @NotNull( message = "NotNull.Booking.lesson" )
+    @NotNull( message = "{NotNull.Booking.lesson}" )
     @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "lesson_id", nullable = false )
     private Lesson lesson;
 
     @Valid
-    @NotNull( message = "NotNull.Booking.student" )
+    @NotNull( message = "{NotNull.Booking.student}" )
     @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "student_id", nullable = false )
     private Student student;
@@ -30,8 +30,8 @@ public class Booking extends JPAEntity<Integer>
     /**
      * Constructor for a Booking entity without review
      *
-     * @param lesson
-     * @param student
+     * @param lesson  The lesson of the booking
+     * @param student The student of the booking
      */
     public Booking( Lesson lesson, Student student )
     {
@@ -42,27 +42,7 @@ public class Booking extends JPAEntity<Integer>
     /**
      * Sets the lesson of the booking
      *
-     * @return Lesson
-     */
-    public Lesson getLesson()
-    {
-        return lesson;
-    }
-
-    /**
-     * Sets the student of the booking
-     *
-     * @return student
-     */
-    public Student getStudent()
-    {
-        return student;
-    }
-
-    /**
-     * Gets the lesson of the booking
-     *
-     * @param lesson
+     * @param lesson The lesson of the booking
      */
     public void setLesson( Lesson lesson )
     {
@@ -70,13 +50,29 @@ public class Booking extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the student of the booking
+     * Sets the student of the booking
      *
-     * @param student
+     * @param student The student of the booking
      */
     public void setStudent( Student student )
     {
         this.student = student;
+    }
+
+    /**
+     * @return The lesson of the booking
+     */
+    public Lesson getLesson()
+    {
+        return lesson;
+    }
+
+    /**
+     * @return The student of the booking
+     */
+    public Student getStudent()
+    {
+        return student;
     }
 
 }

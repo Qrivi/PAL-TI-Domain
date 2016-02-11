@@ -11,17 +11,17 @@ import javax.validation.constraints.NotNull;
 public class Room extends JPAEntity<Integer>
 {
 
-    @NotEmpty( message = "NotEmpty.Room.name" )
+    @NotEmpty( message = "{NotEmpty.Room.name}" )
     @Column( name = "name", nullable = false )
     private String name;
 
     @Enumerated( EnumType.STRING )
-    @NotNull( message = "NotNull.Room.campus" )
+    @NotNull( message = "{NotNull.Room.campus}" )
     @Column( name = "campus", nullable = false )
     private Campus campus;
 
     @Enumerated( EnumType.STRING )
-    @NotNull( message = "NotNull.Room.type" )
+    @NotNull( message = "{NotNull.Room.type}" )
     @Column( name = "type", nullable = false )
     private RoomType type;
 

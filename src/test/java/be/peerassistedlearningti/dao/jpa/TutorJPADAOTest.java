@@ -109,7 +109,6 @@ public class TutorJPADAOTest extends JPADAOTest
         Tutor t = new Tutor( s1, courses );
 
         tutorJPADAO.add( t );
-
         tutorJPADAO.remove( t );
 
         assertNull( tutorJPADAO.getById( t.getId() ) );

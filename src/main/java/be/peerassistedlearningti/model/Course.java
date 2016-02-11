@@ -16,15 +16,15 @@ import java.util.Set;
 public class Course extends JPAEntity<Integer>
 {
 
-    @NotEmpty( message = "NotEmpty.Course.code" )
+    @NotEmpty( message = "{NotEmpty.Course.code}" )
     @Column( name = "code", unique = true, nullable = false )
     private String code;
 
-    @NotEmpty( message = "NotEmpty.Course.name" )
+    @NotEmpty( message = "{NotEmpty.Course.name}" )
     @Column( name = "name", unique = true, nullable = false )
     private String name;
 
-    @NotEmpty( message = "NotEmpty.Course.shortName" )
+    @NotEmpty( message = "{NotEmpty.Course.shortName}" )
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 

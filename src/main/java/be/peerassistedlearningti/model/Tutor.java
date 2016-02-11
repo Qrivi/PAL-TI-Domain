@@ -20,13 +20,13 @@ public class Tutor extends JPAEntity<Integer>
 {
 
     @Valid
-    @NotNull( message = "NotNull.Tutor.student" )
+    @NotNull( message = "{NotNull.Tutor.student}" )
     @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "student_id" )
     private Student student;
 
     @Valid
-    @NotNull( message = "NotNull.Tutor.course" )
+    @NotNull( message = "{NotNull.Tutor.course}" )
     @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinTable( name = "tutor_course",
             joinColumns = { @JoinColumn( name = "tutor_id", referencedColumnName = "id" ) },
@@ -34,12 +34,12 @@ public class Tutor extends JPAEntity<Integer>
     private Set<Course> courses;
 
     @Valid
-    @NotNull( message = "NotNull.Tutor.lessons" )
+    @NotNull( message = "{NotNull.Tutor.lessons}" )
     @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Lesson> lessons;
 
     /**
-     * Default empty constructor for JPA Entities
+     * Default empty constructor for a tutor entity
      */
     public Tutor() {}
 
@@ -60,10 +60,10 @@ public class Tutor extends JPAEntity<Integer>
      *
      * @param course The given course to be added to the set
      * @return true if this set did not already contain the specified course
-     *
      */
-    public boolean addCourse(Course course ){
-        return courses.add(course);
+    public boolean addCourse( Course course )
+    {
+        return courses.add( course );
     }
 
     /**
@@ -71,20 +71,21 @@ public class Tutor extends JPAEntity<Integer>
      *
      * @param course The given course to be removed
      * @return true if this set contained the specified course
-     *
      */
-    public boolean removeCourse(Course course){
-        return courses.remove(course);
+    public boolean removeCourse( Course course )
+    {
+        return courses.remove( course );
     }
+
     /**
      * Adds a given lesson to a tutor
      *
      * @param lesson The given lesson to be added
      * @return true if this set did not already contain the specified lesson
-     *
      */
-    public boolean addLesson(Lesson lesson ){
-        return lessons.add(lesson);
+    public boolean addLesson( Lesson lesson )
+    {
+        return lessons.add( lesson );
     }
 
     /**
@@ -92,10 +93,10 @@ public class Tutor extends JPAEntity<Integer>
      *
      * @param lesson The given lesson to be removed
      * @return true if this set contained the specified lesson
-     *
      */
-    public boolean removeLesson(Lesson lesson){
-        return lessons.remove(lesson);
+    public boolean removeLesson( Lesson lesson )
+    {
+        return lessons.remove( lesson );
     }
 
 

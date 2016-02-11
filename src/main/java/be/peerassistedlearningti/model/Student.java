@@ -21,20 +21,20 @@ import java.security.SecureRandom;
 public class Student extends JPAEntity<Integer>
 {
 
-    @NotEmpty( message = "NotEmpty.Student.name" )
+    @NotEmpty( message = "{NotEmpty.Student.name}" )
     @Column( name = "name", nullable = false )
     private String name;
 
-    @NotEmpty( message = "NotEmpty.Student.password" )
+    @NotEmpty( message = "{NotEmpty.Student.password}" )
     @Column( name = "password", nullable = false )
     private String password;
 
-    @NotEmpty( message = "NotEmpty.Student.salt" )
+    @NotEmpty( message = "{NotEmpty.Student.salt}" )
     @Column( name = "salt", nullable = false )
     private String salt;
 
-    @NotEmpty( message = "NotEmpty.Student.email" )
-    @Email( message = "Email.Student.email" )
+    @NotEmpty( message = "{NotEmpty.Student.email}" )
+    @Email( message = "{Email.Student.email}" )
     @Column( name = "email", unique = true, nullable = false )
     private String email;
 

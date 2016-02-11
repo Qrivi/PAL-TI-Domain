@@ -45,7 +45,7 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c = courseJPADAO.add( c );
+        courseJPADAO.add( c );
 
         assertNotNull( c.getId() );
     }
@@ -55,11 +55,11 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c1 = courseJPADAO.add( c1 );
+        courseJPADAO.add( c1 );
 
         c1.setName( ".NET Programmeren in Visual Studio" );
 
-        c1 = courseJPADAO.update( c1 );
+        courseJPADAO.update( c1 );
 
         Course c2 = courseJPADAO.getById( c1.getId() );
 
@@ -71,11 +71,11 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c = courseJPADAO.add( c );
+        courseJPADAO.add( c );
 
         courseJPADAO.remove( c );
 
-        c = courseJPADAO.getById( c.getId() );
+        courseJPADAO.getById( c.getId() );
 
         assertNull( c );
     }
@@ -85,7 +85,7 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c1 = courseJPADAO.add( c1 );
+        courseJPADAO.add( c1 );
 
         Course c2 = courseJPADAO.getById( c1.getId() );
 
@@ -128,7 +128,7 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c1 = courseJPADAO.add( c1 );
+        courseJPADAO.add( c1 );
 
         Course c2 = courseJPADAO.getByCode( c1.getCode() );
 
@@ -141,7 +141,7 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c1 = courseJPADAO.add( c1 );
+        courseJPADAO.add( c1 );
 
         Course c2 = courseJPADAO.getByName( c1.getName() );
 
@@ -154,7 +154,7 @@ public class CourseJPADAOTest extends JPADAOTest
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
-        c1 = courseJPADAO.add( c1 );
+        courseJPADAO.add( c1 );
 
         Course c2 = courseJPADAO.getByShortName( c1.getShortName() );
 

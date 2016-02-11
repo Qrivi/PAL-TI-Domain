@@ -15,9 +15,7 @@ import static org.junit.Assert.assertNull;
 public class BookingJPADAOTest extends JPADAOTest
 {
     private Student s1, s2;
-    private Lesson l1, l2;
-    private Course c1, c2;
-    private Set<Course> courses;
+    private Lesson l1;
 
     private BookingJPADAO bookingJPADAO;
 
@@ -59,10 +57,10 @@ public class BookingJPADAOTest extends JPADAOTest
         s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", true );
         s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", true );
 
-        c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
-        c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3" );
 
-        courses = new HashSet<Course>();
+        Set<Course> courses = new HashSet<Course>();
         courses.add( c1 );
         courses.add( c2 );
 
@@ -72,7 +70,7 @@ public class BookingJPADAOTest extends JPADAOTest
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
 
         l1 = new Lesson( new Date(), 60000, c1, 25, t, r1, r2 );
-        l2 = new Lesson( new Date(), 60000, c2, 30, t, r2, r1 );
+        Lesson l2 = new Lesson( new Date(), 60000, c2, 30, t, r2, r1 );
 
         // Add students and lessons to the database
 
@@ -135,7 +133,6 @@ public class BookingJPADAOTest extends JPADAOTest
         Booking b = new Booking( l1, s1 );
 
         bookingJPADAO.add( b );
-
         bookingJPADAO.remove( b );
 
         assertNull( bookingJPADAO.getById( b.getId() ) );

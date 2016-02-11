@@ -44,7 +44,7 @@ public class StudentJPADAOTest extends JPADAOTest
     {
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
-        s = studentJPADAO.add( s );
+        studentJPADAO.add( s );
 
         assertNotNull( s.getId() );
     }
@@ -54,11 +54,11 @@ public class StudentJPADAOTest extends JPADAOTest
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
-        s1 = studentJPADAO.add( s1 );
+        studentJPADAO.add( s1 );
 
         s1.setName( "Cedric" );
 
-        s1 = studentJPADAO.update( s1 );
+        studentJPADAO.update( s1 );
 
         Student s2 = studentJPADAO.getById( s1.getId() );
 
@@ -70,11 +70,10 @@ public class StudentJPADAOTest extends JPADAOTest
     {
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
-        s = studentJPADAO.add( s );
-
+        studentJPADAO.add( s );
         studentJPADAO.remove( s );
 
-        s = studentJPADAO.getById( s.getId() );
+        studentJPADAO.getById( s.getId() );
 
         assertNull( s );
     }
@@ -84,7 +83,7 @@ public class StudentJPADAOTest extends JPADAOTest
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
-        s1 = studentJPADAO.add( s1 );
+        studentJPADAO.add( s1 );
 
         Student s2 = studentJPADAO.getById( s1.getId() );
 
@@ -127,7 +126,7 @@ public class StudentJPADAOTest extends JPADAOTest
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
-        s1 = studentJPADAO.add( s1 );
+        studentJPADAO.add( s1 );
 
         Student s2 = studentJPADAO.getByEmail( "davidopdebeeck@hotmail.com" );
 

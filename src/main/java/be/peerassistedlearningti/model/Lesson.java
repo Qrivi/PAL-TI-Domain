@@ -24,26 +24,26 @@ import java.util.StringTokenizer;
 public class Lesson extends JPAEntity<Integer>
 {
 
-    @NotNull( message = "NotNull.Lesson.date" )
+    @NotNull( message = "{NotNull.Lesson.date}" )
     @Column( name = "date", nullable = false )
     private Date date;
 
-    @Min( value = 1, message = "Min.Lesson.duration" )
+    @Min( value = 1, message = "{Min.Lesson.duration}" )
     @Column( name = "duration" )
     private long duration;
 
+    @Min( value = 1, message = "{Min.Lesson.maxParticipants}" )
     @Column( name = "max_participants", nullable = false )
-    @Min( value = 1, message = "Min.Lesson.maxParticipants" )
     private int maxParticipants;
 
     @Valid
-    @NotNull( message = "NotNull.Lesson.course" )
+    @NotNull( message = "{NotNull.Lesson.course}" )
     @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "course_id" )
     private Course course;
 
     @Valid
-    @NotNull( message = "NotNull.Lesson.tutor" )
+    @NotNull( message = "{NotNull.Lesson.tutor}" )
     @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "tutor_id" )
     private Tutor tutor;
@@ -53,7 +53,7 @@ public class Lesson extends JPAEntity<Integer>
     private Set<Booking> bookings;
 
     @Valid
-    @NotNull( message = "NotNull.Lesson.room" )
+    @NotNull( message = "{NotNull.Lesson.room}" )
     @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "room_id" )
     private Room room;
@@ -89,6 +89,28 @@ public class Lesson extends JPAEntity<Integer>
         this.tutor = tutor;
         this.room = room;
         this.backupRoom = backupRoom;
+    }
+
+    /**
+     * Adds a given booking to a lesson
+     *
+     * @param booking The given booking to be added
+     * @return true if this set did not already contain the specified booking
+     */
+    public boolean addBooking( Booking booking )
+    {
+        return bookings.add( booking );
+    }
+
+    /**
+     * Removes a given booking of a lesson
+     *
+     * @param booking The given booking to be removed
+     * @return true if this set contained the specified booking
+     */
+    public boolean removeBooking( Booking booking )
+    {
+        return bookings.remove( booking );
     }
 
     /**
