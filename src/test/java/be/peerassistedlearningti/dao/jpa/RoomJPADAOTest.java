@@ -43,7 +43,7 @@ public class RoomJPADAOTest extends JPADAOTest
         roomJPADAO.setEntityManagerFactory( factory );
     }
 
-    @Test
+    @Override
     public void testAdd()
     {
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
@@ -53,7 +53,7 @@ public class RoomJPADAOTest extends JPADAOTest
         assertNotNull( r.getId() );
     }
 
-    @Test
+    @Override
     public void testGetById()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
@@ -66,7 +66,7 @@ public class RoomJPADAOTest extends JPADAOTest
         assertEquals( r1, r2 );
     }
 
-    @Test
+    @Override
     public void testUpdate()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
@@ -82,7 +82,7 @@ public class RoomJPADAOTest extends JPADAOTest
         assertEquals( c2.getName(), "2.26" );
     }
 
-    @Test
+    @Override
     public void testRemove()
     {
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
@@ -96,7 +96,7 @@ public class RoomJPADAOTest extends JPADAOTest
         assertNull( r );
     }
 
-    @Test
+    @Override
     public void testGetAll()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
@@ -111,7 +111,7 @@ public class RoomJPADAOTest extends JPADAOTest
         assertEquals( 2, list.size() );
     }
 
-    @Test
+    @Override
     public void testGetLast()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );

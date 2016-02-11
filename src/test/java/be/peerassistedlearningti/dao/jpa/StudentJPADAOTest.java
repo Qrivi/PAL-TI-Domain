@@ -39,7 +39,7 @@ public class StudentJPADAOTest extends JPADAOTest
         studentJPADAO.setEntityManagerFactory( factory );
     }
 
-    @Test
+    @Override
     public void testAdd()
     {
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
@@ -49,7 +49,7 @@ public class StudentJPADAOTest extends JPADAOTest
         assertNotNull( s.getId() );
     }
 
-    @Test
+    @Override
     public void testUpdate()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
@@ -65,7 +65,7 @@ public class StudentJPADAOTest extends JPADAOTest
         assertEquals( s2.getName(), "Cedric" );
     }
 
-    @Test
+    @Override
     public void testRemove()
     {
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
@@ -79,7 +79,7 @@ public class StudentJPADAOTest extends JPADAOTest
         assertNull( s );
     }
 
-    @Test
+    @Override
     public void testGetById()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
@@ -92,7 +92,7 @@ public class StudentJPADAOTest extends JPADAOTest
         assertEquals( s1, s2 );
     }
 
-    @Test
+    @Override
     public void testGetAll()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
@@ -107,7 +107,7 @@ public class StudentJPADAOTest extends JPADAOTest
         assertEquals( 2, list.size() );
     }
 
-    @Test
+    @Override
     public void testGetLast()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );

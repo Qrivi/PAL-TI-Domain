@@ -40,7 +40,7 @@ public class CourseJPADAOTest extends JPADAOTest
         courseJPADAO.setEntityManagerFactory( factory );
     }
 
-    @Test
+    @Override
     public void testAdd()
     {
         Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
@@ -50,7 +50,7 @@ public class CourseJPADAOTest extends JPADAOTest
         assertNotNull( c.getId() );
     }
 
-    @Test
+    @Override
     public void testUpdate()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
@@ -66,7 +66,7 @@ public class CourseJPADAOTest extends JPADAOTest
         assertEquals( c2.getName(), ".NET Programmeren in Visual Studio" );
     }
 
-    @Test
+    @Override
     public void testRemove()
     {
         Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
@@ -80,7 +80,7 @@ public class CourseJPADAOTest extends JPADAOTest
         assertNull( c );
     }
 
-    @Test
+    @Override
     public void testGetById()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
@@ -93,7 +93,7 @@ public class CourseJPADAOTest extends JPADAOTest
         assertEquals( c1, c2 );
     }
 
-    @Test
+    @Override
     public void testGetAll()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
@@ -108,7 +108,7 @@ public class CourseJPADAOTest extends JPADAOTest
         assertEquals( 2, list.size() );
     }
 
-    @Test
+    @Override
     public void testGetLast()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
