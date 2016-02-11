@@ -77,39 +77,20 @@ public class Lesson extends JPAEntity<Integer>
      * @param course          The course of the lesson
      * @param maxParticipants The max participants of the course
      * @param tutor           The tutor of the course
-     * @param bookings        The bookings for the lesson
      * @param room            The room for the lesson
      * @param backupRoom      The backup room for the lesson
      */
-    public Lesson( Date date, long duration, Course course, int maxParticipants, Tutor tutor, Set<Booking> bookings, Room room, Room backupRoom )
+    public Lesson( Date date, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
     {
         this.date = date;
         this.duration = duration;
         this.course = course;
         this.maxParticipants = maxParticipants;
         this.tutor = tutor;
-        this.bookings = bookings;
         this.room = room;
         this.backupRoom = backupRoom;
     }
 
-    /**
-     * Adds a booking to a lesson
-     *
-     * @param booking The booking to be added
-     * @return true if this set did not already contain the specified course
-     */
-    public boolean addBooking(Booking booking){
-        return bookings.add(booking);
-    }
-
-    /**
-     * Removes a booking from a lesson
-     *
-     * @param booking The booking to be removed
-     * @return true if this set contained the specified course
-     */
-    public boolean removeBooking(Booking booking){ return bookings.remove(booking);}
     /**
      * Sets the date and time of the lesson
      *
