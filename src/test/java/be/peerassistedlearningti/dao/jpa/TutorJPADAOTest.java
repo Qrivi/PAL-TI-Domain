@@ -63,21 +63,11 @@ public class TutorJPADAOTest extends JPADAOTest{
     }
 
     @Test
-    public void testAdd()throws Exception{
+    public void testAdd(){
         Tutor t = new Tutor(s1,courses);
         tutorJPADAO.add(t);
 
         assertNotNull(t.getId());
-    }
-    @Test
-    public void testGetById()
-    {
-        Tutor t1 = new Tutor(s1,courses);
-        tutorJPADAO.add(t1);
-        Tutor t2 = tutorJPADAO.getById(t1.getId());
-
-        assertNotNull( t1 );
-        assertEquals( t1, t2 );
     }
 
     @Test
@@ -100,6 +90,17 @@ public class TutorJPADAOTest extends JPADAOTest{
         tutorJPADAO.remove(t);
 
         assertNull(tutorJPADAO.getById(t.getId()));
+    }
+
+    @Test
+    public void testGetById()
+    {
+        Tutor t1 = new Tutor(s1,courses);
+        tutorJPADAO.add(t1);
+        Tutor t2 = tutorJPADAO.getById(t1.getId());
+
+        assertNotNull( t1 );
+        assertEquals( t1, t2 );
     }
 
     @Test
