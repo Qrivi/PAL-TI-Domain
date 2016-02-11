@@ -12,7 +12,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class BookingJPADAOTest extends JPADAOTest{
+public class BookingJPADAOTest extends JPADAOTest
+{
     private Student s1, s2;
     private Lesson l1, l2;
     private Course c1, c2;
@@ -23,8 +24,9 @@ public class BookingJPADAOTest extends JPADAOTest{
     /**
      * Constructor for BookingJPADAO
      */
-    public BookingJPADAOTest() {
-        super("PAL");
+    public BookingJPADAOTest()
+    {
+        super( "PAL" );
     }
 
     /**
@@ -49,6 +51,9 @@ public class BookingJPADAOTest extends JPADAOTest{
         RoomJPADAO roomJPADAO = new RoomJPADAO();
         roomJPADAO.setEntityManagerFactory( factory );
 
+        TutorJPADAO tutorJPADAO = new TutorJPADAO();
+        tutorJPADAO.setEntityManagerFactory( factory );
+
         // Make Student and Lesson objects
 
         s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", true );
@@ -66,8 +71,8 @@ public class BookingJPADAOTest extends JPADAOTest{
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
 
-        l1 = new Lesson( new Date(), 60000, c1, 25, t, r1, r2);
-        l2 = new Lesson( new Date(), 60000, c2, 30, t, r2, r1);
+        l1 = new Lesson( new Date(), 60000, c1, 25, t, r1, r2 );
+        l2 = new Lesson( new Date(), 60000, c2, 30, t, r2, r1 );
 
         // Add students and lessons to the database
 
@@ -77,11 +82,11 @@ public class BookingJPADAOTest extends JPADAOTest{
         assertNotNull( s1.getId() );
         assertNotNull( s2.getId() );
 
-        l1 = lessonJPADAO.add( l1 );
-        l2 = lessonJPADAO.add( l2 );
+        r1 = roomJPADAO.add( r1 );
+        r2 = roomJPADAO.add( r2 );
 
-        assertNotNull( l1.getId() );
-        assertNotNull( l2.getId() );
+        assertNotNull( r1.getId() );
+        assertNotNull( r2.getId() );
 
         c1 = courseJPADAO.add( c1 );
         c2 = courseJPADAO.add( c2 );
@@ -89,13 +94,21 @@ public class BookingJPADAOTest extends JPADAOTest{
         assertNotNull( c1.getId() );
         assertNotNull( c2.getId() );
 
-        r1 = roomJPADAO.add( r1 );
-        r2 = roomJPADAO.add( r2 );
+        t = tutorJPADAO.add( t );
+
+        assertNotNull( t.getId() );
+
+        l1 = lessonJPADAO.add( l1 );
+        l2 = lessonJPADAO.add( l2 );
+
+        assertNotNull( l1.getId() );
+        assertNotNull( l2.getId() );
     }
 
     @Override
-    public void testAdd() {
-        Booking b = new Booking(l1, s1);
+    public void testAdd()
+    {
+        Booking b = new Booking( l1, s1 );
 
         bookingJPADAO.add( b );
 
@@ -103,8 +116,9 @@ public class BookingJPADAOTest extends JPADAOTest{
     }
 
     @Override
-    public void testUpdate() {
-        Booking b1 = new Booking(l1, s1);
+    public void testUpdate()
+    {
+        Booking b1 = new Booking( l1, s1 );
 
         bookingJPADAO.add( b1 );
 
@@ -116,8 +130,9 @@ public class BookingJPADAOTest extends JPADAOTest{
     }
 
     @Override
-    public void testRemove() {
-        Booking b = new Booking(l1, s1 );
+    public void testRemove()
+    {
+        Booking b = new Booking( l1, s1 );
 
         bookingJPADAO.add( b );
 
@@ -127,8 +142,9 @@ public class BookingJPADAOTest extends JPADAOTest{
     }
 
     @Override
-    public void testGetById() {
-        Booking b1 = new Booking(l1, s1 );
+    public void testGetById()
+    {
+        Booking b1 = new Booking( l1, s1 );
 
         bookingJPADAO.add( b1 );
 
@@ -139,9 +155,10 @@ public class BookingJPADAOTest extends JPADAOTest{
     }
 
     @Override
-    public void testGetAll() {
-        Booking b1 = new Booking(l1, s1 );
-        Booking b2 = new Booking(l1, s2 );
+    public void testGetAll()
+    {
+        Booking b1 = new Booking( l1, s1 );
+        Booking b2 = new Booking( l1, s2 );
 
         bookingJPADAO.add( b1 );
         bookingJPADAO.add( b2 );
@@ -153,9 +170,10 @@ public class BookingJPADAOTest extends JPADAOTest{
     }
 
     @Override
-    public void testGetLast() {
-        Booking b1 = new Booking(l1, s1);
-        Booking b2 = new Booking(l1, s2);
+    public void testGetLast()
+    {
+        Booking b1 = new Booking( l1, s1 );
+        Booking b2 = new Booking( l1, s2 );
 
         bookingJPADAO.add( b1 );
         bookingJPADAO.add( b2 );

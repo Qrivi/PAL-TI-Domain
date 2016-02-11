@@ -12,13 +12,13 @@ public class Booking extends JPAEntity<Integer>
 {
     @Valid
     @NotNull( message = "NotNull.Booking.lesson" )
-    @ManyToOne( fetch = FetchType.EAGER )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "lesson_id", nullable = false )
     private Lesson lesson;
 
     @Valid
     @NotNull( message = "NotNull.Booking.student" )
-    @ManyToOne( fetch = FetchType.EAGER )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "student_id", nullable = false )
     private Student student;
 
