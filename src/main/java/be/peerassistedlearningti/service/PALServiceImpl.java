@@ -24,6 +24,7 @@ public class PALServiceImpl implements PALService
     private CourseDAO courseDAO;
     private StudentDAO studentDAO;
     private RoomDAO roomDAO;
+    private BookingDAO bookingDAO;
 
     /**
      * Sets the course dao for the service
@@ -73,6 +74,16 @@ public class PALServiceImpl implements PALService
     public void setRoomDAO( RoomDAO roomDAO )
     {
         this.roomDAO = roomDAO;
+    }
+
+    /**
+     * Sets the booking dao for the service
+     *
+     * @param bookingDAO The booking dao for the service
+     */
+    public void setBookingDAO( BookingDAO bookingDAO )
+    {
+        this.bookingDAO = bookingDAO;
     }
 
     /**
@@ -359,6 +370,23 @@ public class PALServiceImpl implements PALService
         try
         {
             return roomDAO.getFromCampus( campus );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets the booking with the specified id
+     *
+     * @param id The id of the booking
+     * @return The booking with the specified id
+     */
+    public Booking getBookingById( int id )
+    {
+        try
+        {
+            return bookingDAO.getById( id );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
