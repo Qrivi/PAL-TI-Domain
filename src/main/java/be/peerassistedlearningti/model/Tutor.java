@@ -58,8 +58,8 @@ public class Tutor extends JPAEntity<Integer>
     /**
      * Adds a given course to a tutor
      *
-     * @param course The given course to be added
-     * @return true if the course was added, false if the tutor already had the course
+     * @param course The given course to be added to the set
+     * @return true if this set did not already contain the specified course
      *
      */
     public boolean addCourse(Course course ){
@@ -70,12 +70,34 @@ public class Tutor extends JPAEntity<Integer>
      * Removes a given course of a tutor
      *
      * @param course The given course to be removed
-     * @return true if the course was removed, false if the tutor did not have the course
+     * @return true if this set contained the specified course
      *
      */
     public boolean removeCourse(Course course){
         return courses.remove(course);
     }
+    /**
+     * Adds a given lesson to a tutor
+     *
+     * @param lesson The given lesson to be added
+     * @return true if this set did not already contain the specified lesson
+     *
+     */
+    public boolean addLesson(Lesson lesson ){
+        return lessons.add(lesson);
+    }
+
+    /**
+     * Removes a given lesson of a tutor
+     *
+     * @param lesson The given lesson to be removed
+     * @return true if this set contained the specified lesson
+     *
+     */
+    public boolean removeLesson(Lesson lesson){
+        return lessons.remove(lesson);
+    }
+
 
     /**
      * Gets the student information of the tutor
