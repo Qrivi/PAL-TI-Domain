@@ -96,8 +96,7 @@ public class TutorJPADAOTest extends JPADAOTest
 
         assertNotNull( t1.getId() );
 
-        t1.getCourses()
-                .add( c2 );
+        t1.addCourse(c2);
 
         Tutor t2 = tutorJPADAO.update( t1 );
 
