@@ -77,7 +77,7 @@ public class TutorJPADAOTest extends JPADAOTest
         courses.add( c1 );
     }
 
-    @Test
+    @Override
     public void testAdd()
     {
         Tutor t = new Tutor( s1, courses );
@@ -87,7 +87,7 @@ public class TutorJPADAOTest extends JPADAOTest
         assertNotNull( t.getId() );
     }
 
-    @Test
+    @Override
     public void testUpdate()
     {
         Tutor t1 = new Tutor( s1, courses );
@@ -103,7 +103,7 @@ public class TutorJPADAOTest extends JPADAOTest
         assertEquals( t1, t2 );
     }
 
-    @Test
+    @Override
     public void testRemove()
     {
         Tutor t = new Tutor( s1, courses );
@@ -115,7 +115,7 @@ public class TutorJPADAOTest extends JPADAOTest
         assertNull( tutorJPADAO.getById( t.getId() ) );
     }
 
-    @Test
+    @Override
     public void testGetById()
     {
         Tutor t1 = new Tutor( s1, courses );
@@ -128,7 +128,7 @@ public class TutorJPADAOTest extends JPADAOTest
         assertEquals( t1, t2 );
     }
 
-    @Test
+    @Override
     public void testGetAll()
     {
         Tutor t1 = new Tutor( s1, courses );
@@ -143,7 +143,7 @@ public class TutorJPADAOTest extends JPADAOTest
         assertEquals( 2, list.size() );
     }
 
-    @Test
+    @Override
     public void testGetLast()
     {
         Tutor t1 = new Tutor( s1, courses );

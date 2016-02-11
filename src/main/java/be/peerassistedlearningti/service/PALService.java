@@ -145,4 +145,12 @@ public interface PALService
      */
     Collection<Room> getRoomsFromCampus( Campus campus );
 
+    /**
+     * Gets the booking with the specified id
+     *
+     * @param id The id of the booking
+     * @return The booking with the specified id
+     */
+    Booking getBookingById( int id );
+
 }

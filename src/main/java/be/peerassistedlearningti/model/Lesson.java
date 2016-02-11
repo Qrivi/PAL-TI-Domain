@@ -49,7 +49,7 @@ public class Lesson extends JPAEntity<Integer>
     private Tutor tutor;
 
     @Valid
-    @OneToMany( mappedBy = "lesson", fetch = FetchType.LAZY )
+    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, cascade = CascadeType.ALL )
     private Set<Booking> bookings;
 
     @Valid
@@ -77,18 +77,16 @@ public class Lesson extends JPAEntity<Integer>
      * @param course          The course of the lesson
      * @param maxParticipants The max participants of the course
      * @param tutor           The tutor of the course
-     * @param bookings        The bookings for the lesson
      * @param room            The room for the lesson
      * @param backupRoom      The backup room for the lesson
      */
-    public Lesson( Date date, long duration, Course course, int maxParticipants, Tutor tutor, Set<Booking> bookings, Room room, Room backupRoom )
+    public Lesson( Date date, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
     {
         this.date = date;
         this.duration = duration;
         this.course = course;
         this.maxParticipants = maxParticipants;
         this.tutor = tutor;
-        this.bookings = bookings;
         this.room = room;
         this.backupRoom = backupRoom;
     }
@@ -223,6 +221,11 @@ public class Lesson extends JPAEntity<Integer>
         return tutor;
     }
 
+    /**
+     * Gets the set of bookings
+     *
+     * @return The set of bookings
+     */
     public Set<Booking> getBookings()
     {
         return bookings;
