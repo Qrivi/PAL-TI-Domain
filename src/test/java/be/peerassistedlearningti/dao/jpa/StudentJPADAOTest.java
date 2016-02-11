@@ -1,9 +1,7 @@
 package be.peerassistedlearningti.dao.jpa;
 
 import be.peerassistedlearningti.model.Student;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import javax.persistence.EntityManagerFactory;
@@ -15,16 +13,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class StudentJPADAOTest
+public class StudentJPADAOTest extends JPADAOTest
 {
 
-    private static StudentJPADAO studentJPADAO;
+    private StudentJPADAO studentJPADAO;
 
-    @BeforeClass
-    public static void beforeClass()
+    public StudentJPADAOTest()
     {
-        // Get the entity manager factory from persistence.xml
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory( "PAL" );
+        super( "PAL" );
+    }
+
+    @Before
+    public void before()
+    {
+        super.before();
         // Assign the factory to the dao
         studentJPADAO = new StudentJPADAO();
         studentJPADAO.setEntityManagerFactory( factory );
@@ -38,8 +40,6 @@ public class StudentJPADAOTest
         s = studentJPADAO.add( s );
 
         assertNotNull( s.getId() );
-
-        studentJPADAO.remove( s );
     }
 
     @Test
@@ -53,8 +53,6 @@ public class StudentJPADAOTest
 
         assertNotNull( s2 );
         assertEquals( s1, s2 );
-
-        studentJPADAO.remove( s1 );
     }
 
     @Test
@@ -71,8 +69,6 @@ public class StudentJPADAOTest
         Student s2 = studentJPADAO.getById( s1.getId() );
 
         assertEquals( s2.getName(), "Cedric" );
-
-        studentJPADAO.remove( s1 );
     }
 
     @Test
@@ -102,9 +98,6 @@ public class StudentJPADAOTest
 
         assertNotNull( list );
         assertEquals( 2, list.size() );
-
-        studentJPADAO.remove( s1 );
-        studentJPADAO.remove( s2 );
     }
 
     @Test
@@ -120,9 +113,6 @@ public class StudentJPADAOTest
 
         assertNotNull( s3 );
         assertEquals( s2, s3 );
-
-        studentJPADAO.remove( s1 );
-        studentJPADAO.remove( s2 );
     }
 
     @Test
@@ -136,8 +126,6 @@ public class StudentJPADAOTest
 
         assertNotNull( s2 );
         assertEquals( s1, s2 );
-
-        studentJPADAO.remove( s1 );
     }
 
 }
