@@ -13,28 +13,35 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+/**
+ * Class used to test CourseJPADAO
+ */
 public class CourseJPADAOTest extends JPADAOTest
 {
 
     private static CourseJPADAO courseJPADAO;
 
+    /**
+     * Constructor for CourseJPADAOTest
+     */
     public CourseJPADAOTest()
     {
         super( "PAL" );
     }
 
+    /**
+     * Assign the factory to the dao
+     */
     @Before
     public void before()
     {
         super.before();
-        // Assign the factory to the dao
         courseJPADAO = new CourseJPADAO();
         courseJPADAO.setEntityManagerFactory( factory );
     }
 
     @Test
-    public void test1Add()
+    public void testAdd()
     {
         Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
@@ -44,20 +51,7 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test2GetById()
-    {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
-
-        c1 = courseJPADAO.add( c1 );
-
-        Course c2 = courseJPADAO.getById( c1.getId() );
-
-        assertNotNull( c2 );
-        assertEquals( c1, c2 );
-    }
-
-    @Test
-    public void test3Update()
+    public void testUpdate()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
@@ -73,7 +67,7 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test4Remove()
+    public void testRemove()
     {
         Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
@@ -87,7 +81,20 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test5GetAll()
+    public void testGetById()
+    {
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+
+        c1 = courseJPADAO.add( c1 );
+
+        Course c2 = courseJPADAO.getById( c1.getId() );
+
+        assertNotNull( c2 );
+        assertEquals( c1, c2 );
+    }
+
+    @Test
+    public void testGetAll()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
         Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D" );
@@ -102,7 +109,7 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test6GetLast()
+    public void testGetLast()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
         Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D" );
@@ -117,7 +124,7 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test7GetByCode()
+    public void testGetByCode()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
@@ -130,7 +137,7 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test8GetByName()
+    public void testGetByName()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 
@@ -143,7 +150,7 @@ public class CourseJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test9GetByShortName()
+    public void testGetByShortName()
     {
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
 

@@ -12,28 +12,35 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+/**
+ * Class used to test StudentJPADAO
+ */
 public class StudentJPADAOTest extends JPADAOTest
 {
 
     private StudentJPADAO studentJPADAO;
 
+    /**
+     * Constructor for StudentJPADAOTest
+     */
     public StudentJPADAOTest()
     {
         super( "PAL" );
     }
 
+    /**
+     * Assign the factory to the dao
+     */
     @Before
     public void before()
     {
         super.before();
-        // Assign the factory to the dao
         studentJPADAO = new StudentJPADAO();
         studentJPADAO.setEntityManagerFactory( factory );
     }
 
     @Test
-    public void test1Add()
+    public void testAdd()
     {
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
@@ -43,20 +50,7 @@ public class StudentJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test2GetById()
-    {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
-
-        s1 = studentJPADAO.add( s1 );
-
-        Student s2 = studentJPADAO.getById( s1.getId() );
-
-        assertNotNull( s2 );
-        assertEquals( s1, s2 );
-    }
-
-    @Test
-    public void test3Update()
+    public void testUpdate()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
@@ -72,7 +66,7 @@ public class StudentJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test4Remove()
+    public void testRemove()
     {
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
@@ -86,7 +80,20 @@ public class StudentJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test5GetAll()
+    public void testGetById()
+    {
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
+
+        s1 = studentJPADAO.add( s1 );
+
+        Student s2 = studentJPADAO.getById( s1.getId() );
+
+        assertNotNull( s2 );
+        assertEquals( s1, s2 );
+    }
+
+    @Test
+    public void testGetAll()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
         Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", true );
@@ -101,7 +108,7 @@ public class StudentJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test6GetLast()
+    public void testGetLast()
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
         Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", true );
@@ -116,7 +123,7 @@ public class StudentJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test7GetByEmail() throws Exception
+    public void testGetByEmail() throws Exception
     {
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
 
