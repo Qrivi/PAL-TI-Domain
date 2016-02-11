@@ -5,9 +5,7 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.model.RoomType;
 import junit.framework.TestCase;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 import javax.persistence.EntityManagerFactory;
@@ -19,16 +17,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class RoomJPADAOTest
+public class RoomJPADAOTest extends JPADAOTest
 {
 
-    private static RoomJPADAO roomJPADAO;
+    private RoomJPADAO roomJPADAO;
 
-    @BeforeClass
-    public static void beforeClass()
+    public RoomJPADAOTest()
     {
-        // Get the entity manager factory from persistence.xml
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory( "PAL" );
+        super( "PAL" );
+    }
+
+    @Before
+    public void before()
+    {
+        super.before();
         // Assign the factory to the dao
         roomJPADAO = new RoomJPADAO();
         roomJPADAO.setEntityManagerFactory( factory );
@@ -42,8 +44,6 @@ public class RoomJPADAOTest
         r = roomJPADAO.add( r );
 
         assertNotNull( r.getId() );
-
-        roomJPADAO.remove( r );
     }
 
     @Test
@@ -57,8 +57,6 @@ public class RoomJPADAOTest
 
         assertNotNull( r2 );
         assertEquals( r1, r2 );
-
-        roomJPADAO.remove( r1 );
     }
 
     @Test
@@ -75,8 +73,6 @@ public class RoomJPADAOTest
         Room c2 = roomJPADAO.getById( r1.getId() );
 
         assertEquals( c2.getName(), "2.26" );
-
-        roomJPADAO.remove( r1 );
     }
 
     @Test
@@ -106,9 +102,6 @@ public class RoomJPADAOTest
 
         assertNotNull( list );
         assertEquals( 2, list.size() );
-
-        roomJPADAO.remove( r1 );
-        roomJPADAO.remove( r2 );
     }
 
     @Test
@@ -124,9 +117,6 @@ public class RoomJPADAOTest
 
         assertNotNull( r3 );
         assertEquals( r2, r3 );
-
-        roomJPADAO.remove( r1 );
-        roomJPADAO.remove( r2 );
     }
 
     @Test
@@ -135,15 +125,12 @@ public class RoomJPADAOTest
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.COMPUTER );
 
-        r1 = roomJPADAO.add( r1 );
-        r2 = roomJPADAO.add( r2 );
+        roomJPADAO.add( r1 );
+        roomJPADAO.add( r2 );
 
         Collection<Room> list = roomJPADAO.getFromCampus( Campus.PROXIMUS );
 
         assertNotNull( list );
         assertEquals( 2, list.size() );
-
-        roomJPADAO.remove( r1 );
-        roomJPADAO.remove( r2 );
     }
 }

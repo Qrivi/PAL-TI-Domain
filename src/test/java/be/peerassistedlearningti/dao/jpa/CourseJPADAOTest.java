@@ -14,16 +14,20 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 @FixMethodOrder( MethodSorters.NAME_ASCENDING )
-public class CourseJPADAOTest
+public class CourseJPADAOTest extends JPADAOTest
 {
 
     private static CourseJPADAO courseJPADAO;
 
-    @BeforeClass
-    public static void beforeClass()
+    public CourseJPADAOTest()
     {
-        // Get the entity manager factory from persistence.xml
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory( "PAL" );
+        super( "PAL" );
+    }
+
+    @Before
+    public void before()
+    {
+        super.before();
         // Assign the factory to the dao
         courseJPADAO = new CourseJPADAO();
         courseJPADAO.setEntityManagerFactory( factory );
@@ -37,8 +41,6 @@ public class CourseJPADAOTest
         c = courseJPADAO.add( c );
 
         assertNotNull( c.getId() );
-
-        courseJPADAO.remove( c );
     }
 
     @Test
@@ -52,8 +54,6 @@ public class CourseJPADAOTest
 
         assertNotNull( c2 );
         assertEquals( c1, c2 );
-
-        courseJPADAO.remove( c1 );
     }
 
     @Test
@@ -70,8 +70,6 @@ public class CourseJPADAOTest
         Course c2 = courseJPADAO.getById( c1.getId() );
 
         assertEquals( c2.getName(), ".NET Programmeren in Visual Studio" );
-
-        courseJPADAO.remove( c1 );
     }
 
     @Test
@@ -101,9 +99,6 @@ public class CourseJPADAOTest
 
         assertNotNull( list );
         assertEquals( 2, list.size() );
-
-        courseJPADAO.remove( c1 );
-        courseJPADAO.remove( c2 );
     }
 
     @Test
@@ -119,9 +114,6 @@ public class CourseJPADAOTest
 
         assertNotNull( c3 );
         assertEquals( c2, c3 );
-
-        courseJPADAO.remove( c1 );
-        courseJPADAO.remove( c2 );
     }
 
     @Test
@@ -135,8 +127,6 @@ public class CourseJPADAOTest
 
         assertNotNull( c2 );
         assertEquals( c1, c2 );
-
-        courseJPADAO.remove( c1 );
     }
 
     @Test
@@ -150,8 +140,6 @@ public class CourseJPADAOTest
 
         assertNotNull( c2 );
         assertEquals( c1, c2 );
-
-        courseJPADAO.remove( c1 );
     }
 
     @Test
@@ -165,8 +153,6 @@ public class CourseJPADAOTest
 
         assertNotNull( c2 );
         assertEquals( c1, c2 );
-
-        courseJPADAO.remove( c1 );
     }
 
 }
