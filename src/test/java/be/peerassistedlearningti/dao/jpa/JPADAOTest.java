@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.dao.jpa;
 
 import org.junit.After;
+import org.junit.Test;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -44,31 +45,37 @@ public abstract class JPADAOTest
     /**
      * Test the add functionality of the DAO
      */
+    @Test
     public abstract void testAdd();
 
     /**
      * Test the update functionality of the DAO
      */
+    @Test
     public abstract void testUpdate();
 
     /**
      * Test the remove functionality of the DAO
      */
+    @Test
     public abstract void testRemove();
 
     /**
      * Test the get by id functionality of the DAO
      */
+    @Test
     public abstract void testGetById();
 
     /**
      * Test the get all functionality of the DAO
      */
+    @Test
     public abstract void testGetAll();
 
     /**
      * Test the get last functionality of the DAO
      */
+    @Test
     public abstract void testGetLast();
 
 }
