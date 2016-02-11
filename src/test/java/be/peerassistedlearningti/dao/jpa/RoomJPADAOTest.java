@@ -16,28 +16,35 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-@FixMethodOrder( MethodSorters.NAME_ASCENDING )
+/**
+ * Class used to test RoomJPADAO
+ */
 public class RoomJPADAOTest extends JPADAOTest
 {
 
     private RoomJPADAO roomJPADAO;
 
+    /**
+     * Constructor for RoomJPADAOTest
+     */
     public RoomJPADAOTest()
     {
         super( "PAL" );
     }
 
+    /**
+     * Assign the factory to the dao
+     */
     @Before
     public void before()
     {
         super.before();
-        // Assign the factory to the dao
         roomJPADAO = new RoomJPADAO();
         roomJPADAO.setEntityManagerFactory( factory );
     }
 
     @Test
-    public void test1Add()
+    public void testAdd()
     {
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
@@ -47,7 +54,7 @@ public class RoomJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test2GetById()
+    public void testGetById()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
@@ -60,7 +67,7 @@ public class RoomJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test3Update()
+    public void testUpdate()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
@@ -76,7 +83,7 @@ public class RoomJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test4Remove()
+    public void testRemove()
     {
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
@@ -90,7 +97,7 @@ public class RoomJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test5GetAll()
+    public void testGetAll()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
@@ -105,7 +112,7 @@ public class RoomJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test6GetLast()
+    public void testGetLast()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
@@ -120,7 +127,7 @@ public class RoomJPADAOTest extends JPADAOTest
     }
 
     @Test
-    public void test7GetFromCampus()
+    public void testGetFromCampus()
     {
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.COMPUTER );
