@@ -39,21 +39,6 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- DBUnit -->
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <optional>true</optional>
-            <scope>test</scope>
-            <version>${dbunit.version}</version>
-        </dependency>
-        <!-- SLF4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>test</scope>
-        </dependency>
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>

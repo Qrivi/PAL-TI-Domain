@@ -4,109 +4,134 @@ package be.peerassistedlearningti.dao.jpa;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
-import org.dbunit.Assertion;
-import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseConfig;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
-import org.dbunit.dataset.datatype.DefaultDataTypeFactory;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.ext.mysql.MySqlDataTypeFactory;
-import org.dbunit.ext.postgresql.PostgresqlDataTypeFactory;
-import org.dbunit.operation.DatabaseOperation;
-import org.hibernate.internal.SessionImpl;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.sql.SQLException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-
+@FixMethodOrder( MethodSorters.NAME_ASCENDING )
 public class TutorJPADAOTest {
-    protected static EntityManagerFactory entityManagerFactory;
-    protected static EntityManager entityManager;
-    protected static IDatabaseConnection connection;
-    protected static IDataSet cleanDataset;
-    protected static TutorJPADAO tutorJPADAO;
-    protected static StudentJPADAO studentJPADAO;
-    protected static CourseJPADAO courseJPADAO;
+
+
+    private static EntityManagerFactory entityManagerFactory;
+    private static EntityManager entityManager;
+    private static TutorJPADAO tutorJPADAO;
+    private static Student s1, s2;
+    private static Course c1,c2;
+    private Set<Course> courses;
 
     @BeforeClass
-    public static void init() throws MalformedURLException, DatabaseUnitException, FileNotFoundException {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory( "PAL" );
-        entityManager = entityManagerFactory.createEntityManager();
-        connection = new DatabaseConnection(((SessionImpl) (entityManager.getDelegate())).connection());
-        connection.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
-        FlatXmlDataSetBuilder flatXmlDataSetBuilder = new FlatXmlDataSetBuilder();
-        flatXmlDataSetBuilder.setColumnSensing(true);
-        cleanDataset = flatXmlDataSetBuilder.build(new FileInputStream("src/test/resources/database_images/DatabaseImage.xml"));
+    public static void init(){
 
-        //FIXME kan maar 1 connectie met db tergelijk openen.
+        entityManagerFactory = Persistence.createEntityManagerFactory( "PAL" );
+        entityManager = entityManagerFactory.createEntityManager();
+
         tutorJPADAO = new TutorJPADAO();
         tutorJPADAO.setEntityManagerFactory(entityManagerFactory);
-        studentJPADAO = new StudentJPADAO();
+        StudentJPADAO studentJPADAO = new StudentJPADAO();
         studentJPADAO.setEntityManagerFactory(entityManagerFactory);
-        courseJPADAO = new CourseJPADAO();
+        CourseJPADAO courseJPADAO = new CourseJPADAO();
         courseJPADAO.setEntityManagerFactory(entityManagerFactory);
-    }
 
-    @Before
-    public void setup() throws DatabaseUnitException, SQLException {
-        DatabaseOperation.CLEAN_INSERT.execute(connection,cleanDataset);
-    }
+        //populate db
+        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", true );
+        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com",true);
+        s2 = studentJPADAO.add(s2);
+        s1 = studentJPADAO.add(s1);
+        assertNotNull(s1.getId());
+        assertNotNull(s2.getId());
 
-    @AfterClass
-    public static void breakdown() throws SQLException {
-        connection.close();
-        entityManager.close();
-        entityManagerFactory.close();
+        c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        c2 = new Course( "MBI81x", ".Communicatie in het Frans Deel 3", "Frans 3" );
+        c1 = courseJPADAO.add(c1);
+        c2 = courseJPADAO.add(c2);
+        assertNotNull(c1.getId());
+        assertNotNull(c2.getId());
+        Set<Course> courses = new HashSet<Course>();
+        courses.add(c1);
     }
 
     @Test
-    public void testAddTutor()throws Exception{
+    public void test1Add()throws Exception{
+        Tutor t = new Tutor(s1,courses);
+        tutorJPADAO.add(t);
+        assertNotNull(t.getId());
+        tutorJPADAO.remove(t);
+    }
+    @Test
+    public void test2GetById()
+    {
+        Tutor t1 = new Tutor(s1,courses);
+        tutorJPADAO.add(t1);
+        Tutor t2 = tutorJPADAO.getById(t1.getId());
+        assertNotNull( t1 );
+        assertEquals( t1, t2 );
+
+        tutorJPADAO.remove( t1 );
+    }
+
+    @Test
+    public void test3Update()
+    {
+        Tutor t1 = new Tutor(s1,courses);
+        tutorJPADAO.add(t1);
+        assertNotNull( t1.getId() );
+        t1.getCourses().add(c2);
+        Tutor t2 = tutorJPADAO.update(t1);
+        assertEquals(t1,t2);
+
+        tutorJPADAO.remove(t1);
+    }
+
+    @Test
+    public void test4Remove()
+    {
+        Tutor t = new Tutor(s1,courses);
+        t = tutorJPADAO.add(t);
+        tutorJPADAO.remove(t);
+
+        assertNull(tutorJPADAO.getById(t.getId()));
+    }
+
+    @Test
+    public void test5GetAll()
+    {
+        Tutor t1 = new Tutor(s1,courses);
+        Tutor t2 = new Tutor(s2,courses);
+        t1 = tutorJPADAO.add(t1);
+        t2 = tutorJPADAO.add(t2);
+
+        Collection<Tutor> list = tutorJPADAO.getAll();
+
+        assertNotNull( list );
+        assertEquals( 2, list.size() );
+    }
+
+    @Test
+    public void test6GetLast()
+    {
+        Tutor t1 = new Tutor(s1,courses);
+        Tutor t2 = new Tutor(s2,courses);
+        t1 = tutorJPADAO.add(t1);
+        t2 = tutorJPADAO.add(t2);
 
 
-        Student s = new Student( "Koen", "paswoord", "koen1992@hotmail.com", true );
-        System.out.println("Student:"+s.getName());
-        s = studentJPADAO.add( s );
-        System.out.println("Student:"+s.getName());
-        s = studentJPADAO.getLast();
-        System.out.println("Student:"+s.getName());
+        Tutor t3 = tutorJPADAO.getLast();
 
-        Student student = studentJPADAO.getById(2);
-        assertNotNull(student);
-
-        Course course = courseJPADAO.getById(1);
-        assertNotNull(course);
-
-        Set<Course> courses = new HashSet<Course>();
-        courses.add(course);
-
-        Tutor newTutor = new Tutor(student,courses);
-        tutorJPADAO.add(newTutor);
-
-        //get expected result
-        IDataSet expectedDataset = new FlatXmlDataSetBuilder().build(new File("src/test/resources/database_images/expected_results/tutor/addTutorResultImage.xml"));
-        ITable expectedTutorTable = expectedDataset.getTable("table");
-        //get actual result
-        IDataSet actualDataset = connection.createDataSet();
-        ITable actualTutorTable = actualDataset.getTable("tutor");
-
-        Assertion.assertEquals(expectedTutorTable,actualTutorTable);
+        assertNotNull( t3 );
+        assertEquals( t2, t3 );
     }
 
 }
