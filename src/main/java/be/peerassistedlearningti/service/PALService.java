@@ -35,6 +35,13 @@ public interface PALService
     Course getCourseById( int id );
 
     /**
+     * Gets all the courses
+     *
+     * @return A collection containing all the courses
+     */
+    Collection<Course> getAllCourses();
+
+    /**
      * Adds a student to the database
      *
      * @param student The student to be added to the database
