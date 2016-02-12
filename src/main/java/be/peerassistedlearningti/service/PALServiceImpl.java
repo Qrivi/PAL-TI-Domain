@@ -87,6 +87,7 @@ public class PALServiceImpl implements PALService
         this.bookingDAO = bookingDAO;
     }
 
+// Course =================================================
     /**
      * Adds a course to the database
      *
@@ -147,6 +148,7 @@ public class PALServiceImpl implements PALService
         }
     }
 
+// Student =================================================
     /**
      * Adds a student to the database
      *
@@ -213,6 +215,7 @@ public class PALServiceImpl implements PALService
         }
     }
 
+// Tutor =================================================
     /**
      * Adds a tutor to the database
      *
@@ -262,6 +265,7 @@ public class PALServiceImpl implements PALService
         }
     }
 
+// Lesson =================================================
     /**
      * Adds a lesson to the database
      *
@@ -311,6 +315,7 @@ public class PALServiceImpl implements PALService
         }
     }
 
+// Booking =================================================
     /**
      * Gets the booking with the specified id
      *
@@ -328,6 +333,7 @@ public class PALServiceImpl implements PALService
         }
     }
 
+// Room =================================================
     /**
      * Adds a room to the database
      *
@@ -395,6 +401,30 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * @return A collection containing all the room types
+     */
+    public Collection<RoomType> getRoomTypes()
+    {
+        try
+        {
+            return Arrays.asList( RoomType.values() );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets all the rooms
+     *
+     * @return A collection containing all the rooms
+     */
+    public Collection<Room> getAllRooms() {
+        return roomDAO.getAll();
+    }
+
+// Campus =================================================
+    /**
      * @return A collection containing all the campuses
      */
     public Collection<Campus> getCampuses()
@@ -408,18 +438,5 @@ public class PALServiceImpl implements PALService
         }
     }
 
-    /**
-     * @return A collection containing all the room types
-     */
-    public Collection<RoomType> getRoomTypes()
-    {
-        try
-        {
-            return Arrays.asList( RoomType.values() );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
-    }
 
 }
