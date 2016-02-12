@@ -10,4 +10,13 @@ public enum RoomType
     CHEMISTRY,
     PLAIN;
 
+    public static RoomType getByValue(String type){
+        for(RoomType t :values()){
+            if(t.toString().equalsIgnoreCase(type)){
+                return t;
+            }
+        }
+        return null;
+    }
+
 }

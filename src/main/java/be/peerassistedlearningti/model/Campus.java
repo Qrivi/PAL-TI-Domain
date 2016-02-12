@@ -8,4 +8,12 @@ public enum Campus
 
     PROXIMUS;
 
+    public static Campus getByValue(String campus){
+        for(Campus c :values()){
+            if(c.toString().equalsIgnoreCase(campus)){
+                return c;
+            }
+        }
+        return null;
+    }
 }
