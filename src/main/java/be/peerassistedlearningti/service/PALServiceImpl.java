@@ -215,6 +215,17 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    public Collection<Student> getAllStudents()
+    {
+        try
+        {
+            return studentDAO.getAll();
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
 // Tutor =================================================
     /**
      * Adds a tutor to the database

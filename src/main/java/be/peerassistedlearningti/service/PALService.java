@@ -72,6 +72,13 @@ public interface PALService
      */
     Student getStudentByEmail( String email );
 
+    /**
+     * Gets all the students
+     *
+     * @return A collection containing all the students
+     */
+    Collection<Student> getAllStudents();
+
 // Tutor ===================================================
     /**
      * Adds a tutor to the database
