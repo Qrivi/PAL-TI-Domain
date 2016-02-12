@@ -244,7 +244,6 @@ public class PALServiceImpl implements PALService
     // region Tutor
     //================================================================================
 
-// Tutor =================================================
     /**
      * Adds a tutor to the database
      *
