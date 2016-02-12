@@ -78,8 +78,8 @@ public class LessonJPADAOTest extends JPADAOTest
 
         // Lesson creation
 
-        l1 = new Lesson( new Date(), 120L, c1, 25, t1, r1, r2 );
-        l2 = new Lesson( new Date(), 15L, c1, 5, t1, r1, r2 );
+        l1 = new Lesson( new Date(), "Test lesson", 120L, c1, 25, t1, r1, r2 );
+        l2 = new Lesson( new Date(), "Test lesson", 15L, c1, 5, t1, r1, r2 );
     }
 
     @Override

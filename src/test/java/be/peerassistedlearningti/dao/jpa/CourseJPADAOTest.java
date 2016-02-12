@@ -75,7 +75,7 @@ public class CourseJPADAOTest extends JPADAOTest
 
         courseJPADAO.remove( c );
 
-        courseJPADAO.getById( c.getId() );
+        c = courseJPADAO.getById( c.getId() );
 
         assertNull( c );
     }

@@ -116,6 +116,14 @@ public interface PALService
     Lesson getLessonById( int id );
 
     /**
+     * Gets the booking with the specified id
+     *
+     * @param id The id of the booking
+     * @return The booking with the specified id
+     */
+    Booking getBookingById( int id );
+
+    /**
      * Adds a room to the database
      *
      * @param room The room to be added to the database
@@ -146,11 +154,13 @@ public interface PALService
     Collection<Room> getRoomsFromCampus( Campus campus );
 
     /**
-     * Gets the booking with the specified id
-     *
-     * @param id The id of the booking
-     * @return The booking with the specified id
+     * @return A collection containing all the campuses
      */
-    Booking getBookingById( int id );
+    Collection<Campus> getCampuses();
+
+    /**
+     * @return A collection containing all the room types
+     */
+    Collection<RoomType> getRoomTypes();
 
 }

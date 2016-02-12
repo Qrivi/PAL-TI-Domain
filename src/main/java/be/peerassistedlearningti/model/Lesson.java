@@ -28,6 +28,10 @@ public class Lesson extends JPAEntity<Integer>
     @Column( name = "date", nullable = false )
     private Date date;
 
+    @NotNull( message = "{NotNull.Lesson.name}" )
+    @Column( name = "name", nullable = false )
+    private String name;
+
     @Min( value = 1, message = "{Min.Lesson.duration}" )
     @Column( name = "duration" )
     private long duration;
@@ -73,16 +77,18 @@ public class Lesson extends JPAEntity<Integer>
      * Constructor for Lesson
      *
      * @param date            The date of the lesson
+     * @param name            The name of the lesson
      * @param duration        The duration of the lesson
      * @param course          The course of the lesson
-     * @param maxParticipants The max participants of the course
+     * @param maxParticipants The maximum number of participants of the course
      * @param tutor           The tutor of the course
      * @param room            The room for the lesson
      * @param backupRoom      The backup room for the lesson
      */
-    public Lesson( Date date, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
+    public Lesson( Date date, String name, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
     {
         this.date = date;
+        this.name = name;
         this.duration = duration;
         this.course = course;
         this.maxParticipants = maxParticipants;
@@ -116,7 +122,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the date and time of the lesson
      *
-     * @param date
+     * @param date The date of the lesson
      */
     public void setDate( Date date )
     {
@@ -124,9 +130,19 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the name of the lesson
+     *
+     * @param name The name of the lesson
+     */
+    public void setName( String name )
+    {
+        this.name = name;
+    }
+
+    /**
      * Sets the duration of the lesson
      *
-     * @param duration
+     * @param duration The duration of the lesson
      */
     public void setDuration( long duration )
     {
@@ -136,7 +152,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the course of the lesson
      *
-     * @param course
+     * @param course The course of the lesson
      */
     public void setCourse( Course course )
     {
@@ -146,7 +162,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the maximum number of participants of the lesson
      *
-     * @param maxParticipants
+     * @param maxParticipants The maximum number of participants of the lesson
      */
     public void setMaxParticipants( int maxParticipants )
     {
@@ -156,7 +172,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the tutor of the lesson
      *
-     * @param tutor
+     * @param tutor The tutor of the lesson
      */
     public void setTutor( Tutor tutor )
     {
@@ -166,7 +182,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the bookings of the lesson
      *
-     * @param bookings
+     * @param bookings The bookings of the lesson
      */
     public void setBookings( Set<Booking> bookings )
     {
@@ -186,7 +202,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the backup room (when the room is occupied) of the lesson
      *
-     * @param backupRoom
+     * @param backupRoom The backup room of the lesson
      */
     public void setBackupRoom( Room backupRoom )
     {
@@ -194,9 +210,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the date and time of the lesson
-     *
-     * @return Date
+     * @return The date and time of the lesson
      */
     public Date getDate()
     {
@@ -204,9 +218,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the duration of the lesson
-     *
-     * @return duration
+     * @return The duration of the lesson
      */
     public long getDuration()
     {
@@ -214,9 +226,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the course of the lesson
-     *
-     * @return Course
+     * @return The course of the lesson
      */
     public Course getCourse()
     {
@@ -224,9 +234,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the maximum number of participants of the lesson
-     *
-     * @return maximum number of participants
+     * @return The maximum number of participants of the lesson
      */
     public int getMaxParticipants()
     {
@@ -234,9 +242,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the tutor and time of the lesson
-     *
-     * @return Tutor
+     * @return The tutor and time of the lesson
      */
     public Tutor getTutor()
     {
@@ -244,8 +250,6 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the set of bookings
-     *
      * @return The set of bookings
      */
     public Set<Booking> getBookings()
@@ -254,9 +258,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the room of the lesson
-     *
-     * @return room
+     * @return The room of the lesson
      */
     public Room getRoom()
     {
@@ -264,9 +266,7 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the backup room (when the room is occupied) of the lesson
-     *
-     * @return backupRoom
+     * @return The backup room of the lesson
      */
     public Room getBackupRoom()
     {

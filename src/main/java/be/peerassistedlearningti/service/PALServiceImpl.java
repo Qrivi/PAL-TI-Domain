@@ -312,6 +312,23 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the booking with the specified id
+     *
+     * @param id The id of the booking
+     * @return The booking with the specified id
+     */
+    public Booking getBookingById( int id )
+    {
+        try
+        {
+            return bookingDAO.getById( id );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Adds a room to the database
      *
      * @param room The room to be added to the database
@@ -377,30 +394,32 @@ public class PALServiceImpl implements PALService
         }
     }
 
-    public Collection<Campus> getCampuses ()
-    {
-        return Arrays.asList(Campus.values());
-    }
-
-    public Collection<RoomType> getRoomTypes ()
-    {
-        return Arrays.asList(RoomType.values());
-    }
-
     /**
-     * Gets the booking with the specified id
-     *
-     * @param id The id of the booking
-     * @return The booking with the specified id
+     * @return A collection containing all the campuses
      */
-    public Booking getBookingById( int id )
+    public Collection<Campus> getCampuses()
     {
         try
         {
-            return bookingDAO.getById( id );
+            return Arrays.asList( Campus.values() );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
         }
     }
+
+    /**
+     * @return A collection containing all the room types
+     */
+    public Collection<RoomType> getRoomTypes()
+    {
+        try
+        {
+            return Arrays.asList( RoomType.values() );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
 }

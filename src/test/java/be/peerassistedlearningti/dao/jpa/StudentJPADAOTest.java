@@ -73,7 +73,7 @@ public class StudentJPADAOTest extends JPADAOTest
         studentJPADAO.add( s );
         studentJPADAO.remove( s );
 
-        studentJPADAO.getById( s.getId() );
+        s = studentJPADAO.getById( s.getId() );
 
         assertNull( s );
     }
