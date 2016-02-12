@@ -11,7 +11,7 @@ import java.util.Collection;
  */
 public interface PALService
 {
-
+// Course =================================================
     /**
      * Adds a course to the database
      *
@@ -41,6 +41,7 @@ public interface PALService
      */
     Collection<Course> getAllCourses();
 
+// Student =================================================
     /**
      * Adds a student to the database
      *
@@ -71,6 +72,7 @@ public interface PALService
      */
     Student getStudentByEmail( String email );
 
+// Tutor ===================================================
     /**
      * Adds a tutor to the database
      *
@@ -93,6 +95,7 @@ public interface PALService
      */
     Tutor getTutorById( int id );
 
+// Lesson ==================================================
     /**
      * Adds a lesson to the database
      *
@@ -115,6 +118,7 @@ public interface PALService
      */
     Lesson getLessonById( int id );
 
+// Booking ==================================================
     /**
      * Gets the booking with the specified id
      *
@@ -123,6 +127,7 @@ public interface PALService
      */
     Booking getBookingById( int id );
 
+// Room ==================================================
     /**
      * Adds a room to the database
      *
@@ -154,13 +159,22 @@ public interface PALService
     Collection<Room> getRoomsFromCampus( Campus campus );
 
     /**
+     * @return A collection containing all the room types
+     */
+    Collection<RoomType> getRoomTypes();
+
+    /**
+     * Gets all the rooms
+     *
+     * @return A collection containing all the rooms
+     */
+    Collection<Room> getAllRooms();
+
+// Campus ==================================================
+    /**
      * @return A collection containing all the campuses
      */
     Collection<Campus> getCampuses();
 
-    /**
-     * @return A collection containing all the room types
-     */
-    Collection<RoomType> getRoomTypes();
 
 }
