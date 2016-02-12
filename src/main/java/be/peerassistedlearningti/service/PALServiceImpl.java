@@ -451,13 +451,35 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the room type with the specified type
+     *
+     * @param type The string type of the room type
+     * @return The room type object
+     */
+    public RoomType getRoomTypeByType(String type){
+        try
+        {
+            return RoomType.getByValue(type);
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Gets all the rooms
      *
      * @return A collection containing all the rooms
      */
     public Collection<Room> getAllRooms()
     {
-        return roomDAO.getAll();
+        try
+        {
+            return roomDAO.getAll();
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
     }
 
     //================================================================================
@@ -476,6 +498,22 @@ public class PALServiceImpl implements PALService
         try
         {
             return Arrays.asList( Campus.values() );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets the campus with the specified name
+     *
+     * @param name The string name of the campus
+     * @return The Campus object
+     */
+    public Campus getCampusByName(String name){
+        try
+        {
+            return Campus.getByValue(name);
         } catch ( DAOException e )
         {
             throw new ServiceException( e );

@@ -203,6 +203,14 @@ public interface PALService
     Collection<RoomType> getRoomTypes();
 
     /**
+     * Gets the room type with the specified type
+     *
+     * @param type The string type of the room type
+     * @return The room type object
+     */
+    RoomType getRoomTypeByType(String type);
+
+    /**
      * Gets all the rooms
      *
      * @return A collection containing all the rooms
@@ -221,6 +229,15 @@ public interface PALService
      * @return A collection containing all the campuses
      */
     Collection<Campus> getCampuses();
+
+    /**
+     * Gets the campus with the specified name
+     *
+     * @param name The string name of the campus
+     * @return The Campus object
+     */
+    Campus getCampusByName(String name);
+
 
     //================================================================================
     // endregion
