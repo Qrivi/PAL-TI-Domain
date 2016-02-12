@@ -5,6 +5,7 @@ import be.peerassistedlearningti.common.service.ServiceException;
 import be.peerassistedlearningti.dao.*;
 import be.peerassistedlearningti.model.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -374,6 +375,16 @@ public class PALServiceImpl implements PALService
         {
             throw new ServiceException( e );
         }
+    }
+
+    public Collection<Campus> getCampuses ()
+    {
+        return Arrays.asList(Campus.values());
+    }
+
+    public Collection<RoomType> getRoomTypes ()
+    {
+        return Arrays.asList(RoomType.values());
     }
 
     /**
