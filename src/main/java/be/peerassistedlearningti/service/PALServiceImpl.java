@@ -87,7 +87,10 @@ public class PALServiceImpl implements PALService
         this.bookingDAO = bookingDAO;
     }
 
-// Course =================================================
+    //================================================================================
+    // region Course
+    //================================================================================
+
     /**
      * Adds a course to the database
      *
@@ -148,7 +151,14 @@ public class PALServiceImpl implements PALService
         }
     }
 
-// Student =================================================
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Student
+    //================================================================================
+
     /**
      * Adds a student to the database
      *
@@ -226,6 +236,14 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Tutor
+    //================================================================================
+
 // Tutor =================================================
     /**
      * Adds a tutor to the database
@@ -275,8 +293,14 @@ public class PALServiceImpl implements PALService
             throw new ServiceException( e );
         }
     }
+    //================================================================================
+    // endregion
+    //================================================================================
 
-// Lesson =================================================
+    //================================================================================
+    // region Lesson
+    //================================================================================
+
     /**
      * Adds a lesson to the database
      *
@@ -326,7 +350,14 @@ public class PALServiceImpl implements PALService
         }
     }
 
-// Booking =================================================
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Booking
+    //================================================================================
+
     /**
      * Gets the booking with the specified id
      *
@@ -343,8 +374,14 @@ public class PALServiceImpl implements PALService
             throw new ServiceException( e );
         }
     }
+    //================================================================================
+    // endregion
+    //================================================================================
 
-// Room =================================================
+    //================================================================================
+    // region Room
+    //================================================================================
+
     /**
      * Adds a room to the database
      *
@@ -426,15 +463,45 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the room type with the specified type
+     *
+     * @param type The string type of the room type
+     * @return The room type object
+     */
+    public RoomType getRoomTypeByType(String type){
+        try
+        {
+            return RoomType.getByValue(type);
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Gets all the rooms
      *
      * @return A collection containing all the rooms
      */
-    public Collection<Room> getAllRooms() {
-        return roomDAO.getAll();
+    public Collection<Room> getAllRooms()
+    {
+        try
+        {
+            return roomDAO.getAll();
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
     }
 
-// Campus =================================================
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Campus
+    //================================================================================
+
     /**
      * @return A collection containing all the campuses
      */
@@ -449,5 +516,23 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    /**
+     * Gets the campus with the specified name
+     *
+     * @param name The string name of the campus
+     * @return The Campus object
+     */
+    public Campus getCampusByName(String name){
+        try
+        {
+            return Campus.getByValue(name);
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
 
+    //================================================================================
+    // endregion
+    //================================================================================
 }
