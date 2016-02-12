@@ -28,9 +28,13 @@ public class Lesson extends JPAEntity<Integer>
     @Column( name = "date", nullable = false )
     private Date date;
 
-    @NotNull( message = "{NotNull.Lesson.name}" )
+    @NotEmpty( message = "{NotEmpty.Lesson.name}" )
     @Column( name = "name", nullable = false )
     private String name;
+
+    @NotEmpty( message = "{NotEmpty.Lesson.description}" )
+    @Column( name = "description", nullable = false )
+    private String description;
 
     @Min( value = 1, message = "{Min.Lesson.duration}" )
     @Column( name = "duration" )
@@ -78,6 +82,7 @@ public class Lesson extends JPAEntity<Integer>
      *
      * @param date            The date of the lesson
      * @param name            The name of the lesson
+     * @param description     The description of the lesson
      * @param duration        The duration of the lesson
      * @param course          The course of the lesson
      * @param maxParticipants The maximum number of participants of the course
@@ -85,10 +90,11 @@ public class Lesson extends JPAEntity<Integer>
      * @param room            The room for the lesson
      * @param backupRoom      The backup room for the lesson
      */
-    public Lesson( Date date, String name, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
+    public Lesson( Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
     {
         this.date = date;
         this.name = name;
+        this.description = description;
         this.duration = duration;
         this.course = course;
         this.maxParticipants = maxParticipants;
@@ -137,6 +143,16 @@ public class Lesson extends JPAEntity<Integer>
     public void setName( String name )
     {
         this.name = name;
+    }
+
+    /**
+     * Sets the description of the lesson
+     *
+     * @param description The description of the lesson
+     */
+    public void setDescription( String description )
+    {
+        this.description = description;
     }
 
     /**
@@ -215,6 +231,22 @@ public class Lesson extends JPAEntity<Integer>
     public Date getDate()
     {
         return date;
+    }
+
+    /**
+     * @return The name of the lesson
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return The description of the lesson
+     */
+    public String getDescription()
+    {
+        return description;
     }
 
     /**

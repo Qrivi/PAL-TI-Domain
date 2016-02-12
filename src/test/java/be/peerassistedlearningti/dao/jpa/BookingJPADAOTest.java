@@ -69,8 +69,8 @@ public class BookingJPADAOTest extends JPADAOTest
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
 
-        l1 = new Lesson( new Date(), "Test lesson", 60000, c1, 25, t, r1, r2 );
-        Lesson l2 = new Lesson( new Date(), "Test lesson", 60000, c2, 30, t, r2, r1 );
+        l1 = new Lesson( new Date(), "Test lesson", "Test description", 60000, c1, 25, t, r1, r2 );
+        Lesson l2 = new Lesson( new Date(), "Test lesson", "Test description", 60000, c2, 30, t, r2, r1 );
 
         // Add students and lessons to the database
 
