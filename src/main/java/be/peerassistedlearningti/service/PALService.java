@@ -157,6 +157,13 @@ public interface PALService
      */
     Lesson getLessonById( int id );
 
+    /**
+     * Gets all the lessons
+     *
+     * @return A collection containing all the lessons
+     */
+    public Collection<Lesson> getAllLessons();
+
     //================================================================================
     // endregion
     //================================================================================
@@ -172,6 +179,27 @@ public interface PALService
      * @return The booking with the specified id
      */
     Booking getBookingById( int id );
+
+    /**
+     * Adds a booking to the database
+     *
+     * @param booking The booking to be added to the database
+     */
+    public void addBooking( Booking booking );
+
+    /**
+     * Removes the specified booking from the database
+     *
+     * @param booking The booking to be removed from the database
+     */
+    public void removeBooking( Booking booking );
+
+    /**
+    * Gets all the bookings
+    *
+            * @return A collection containing all the bookings
+    */
+    public Collection<Booking> getAllBookings();
 
     //================================================================================
     // endregion

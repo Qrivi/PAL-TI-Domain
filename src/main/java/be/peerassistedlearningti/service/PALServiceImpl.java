@@ -140,6 +140,11 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    /**
+     * Gets all the courses
+     *
+     * @return A collection containing all the courses
+     */
     public Collection<Course> getAllCourses()
     {
         try
@@ -241,6 +246,11 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    /**
+     * Gets all the students
+     *
+     * @return A collection containing all the students
+     */
     public Collection<Student> getAllStudents()
     {
         try
@@ -365,6 +375,22 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    /**
+     * Gets all the lessons
+     *
+     * @return A collection containing all the lessons
+     */
+    public Collection<Lesson> getAllLessons()
+    {
+        try
+        {
+            return lessonDAO.getAll();
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
     //================================================================================
     // endregion
     //================================================================================
@@ -389,6 +415,55 @@ public class PALServiceImpl implements PALService
             throw new ServiceException( e );
         }
     }
+
+    /**
+     * Adds a booking to the database
+     *
+     * @param booking The booking to be added to the database
+     */
+    public void addBooking( Booking booking )
+    {
+        try
+        {
+            bookingDAO.add( booking );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Removes the specified booking from the database
+     *
+     * @param booking The booking to be removed from the database
+     */
+    public void removeBooking( Booking booking )
+    {
+        try
+        {
+            bookingDAO.remove( booking );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets all the bookings
+     *
+     * @return A collection containing all the bookings
+     */
+    public Collection<Booking> getAllBookings()
+    {
+        try
+        {
+            return bookingDAO.getAll();
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
     //================================================================================
     // endregion
     //================================================================================
