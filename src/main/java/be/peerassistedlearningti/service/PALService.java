@@ -61,6 +61,13 @@ public interface PALService
     void addStudent( Student student );
 
     /**
+     * Updates a student in the database
+     *
+     * @param student The student to be updated in the database
+     */
+    void updateStudent( Student student );
+
+    /**
      * Removes the specified student from the database
      *
      * @param student The student to be removed from the database
@@ -215,7 +222,7 @@ public interface PALService
      * @param type The string type of the room type
      * @return The room type object
      */
-    RoomType getRoomTypeByType(String type);
+    RoomType getRoomTypeByType( String type );
 
     /**
      * Gets all the rooms
@@ -243,7 +250,7 @@ public interface PALService
      * @param name The string name of the campus
      * @return The Campus object
      */
-    Campus getCampusByName(String name);
+    Campus getCampusByName( String name );
 
 
     //================================================================================

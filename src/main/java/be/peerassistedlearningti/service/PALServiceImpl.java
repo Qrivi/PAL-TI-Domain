@@ -176,6 +176,22 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a student in the database
+     *
+     * @param student The student to be updated in the database
+     */
+    public void updateStudent( Student student )
+    {
+        try
+        {
+            studentDAO.update( student );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Removes the specified student from the database
      *
      * @param student The student to be removed from the database
@@ -467,10 +483,11 @@ public class PALServiceImpl implements PALService
      * @param type The string type of the room type
      * @return The room type object
      */
-    public RoomType getRoomTypeByType(String type){
+    public RoomType getRoomTypeByType( String type )
+    {
         try
         {
-            return RoomType.getByValue(type);
+            return RoomType.getByValue( type );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
@@ -521,10 +538,11 @@ public class PALServiceImpl implements PALService
      * @param name The string name of the campus
      * @return The Campus object
      */
-    public Campus getCampusByName(String name){
+    public Campus getCampusByName( String name )
+    {
         try
         {
-            return Campus.getByValue(name);
+            return Campus.getByValue( name );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
