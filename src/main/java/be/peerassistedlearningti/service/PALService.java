@@ -143,6 +143,13 @@ public interface PALService
     void addLesson( Lesson lesson );
 
     /**
+     * Updates a lesson in the database
+     *
+     * @param lesson The lesson to be updated in the database
+     */
+    void updateLesson( Lesson lesson );
+
+    /**
      * Removes the specified lesson from the database
      *
      * @param lesson The lesson to be removed from the database
@@ -195,10 +202,10 @@ public interface PALService
     public void removeBooking( Booking booking );
 
     /**
-    * Gets all the bookings
-    *
-            * @return A collection containing all the bookings
-    */
+     * Gets all the bookings
+     *
+     * @return A collection containing all the bookings
+     */
     public Collection<Booking> getAllBookings();
 
     //================================================================================

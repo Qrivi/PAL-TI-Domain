@@ -141,6 +141,6 @@ public class Course extends JPAEntity<Integer>
     @Override
     public int hashCode()
     {
-        return code.hashCode();
+        return ( code != null ? code.hashCode() : 0 );
     }
 }

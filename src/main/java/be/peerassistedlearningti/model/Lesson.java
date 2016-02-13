@@ -57,7 +57,7 @@ public class Lesson extends JPAEntity<Integer>
     private Tutor tutor;
 
     @Valid
-    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true )
     private Set<Booking> bookings;
 
     @Valid

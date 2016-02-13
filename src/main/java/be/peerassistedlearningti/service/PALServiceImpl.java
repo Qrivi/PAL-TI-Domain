@@ -343,6 +343,22 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a lesson in the database
+     *
+     * @param lesson The lesson to be updated in the database
+     */
+    public void updateLesson( Lesson lesson )
+    {
+        try
+        {
+            lessonDAO.update( lesson );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Removes the specified lesson from the database
      *
      * @param lesson The lesson to be removed from the database
