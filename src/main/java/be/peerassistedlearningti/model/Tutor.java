@@ -34,7 +34,6 @@ public class Tutor extends JPAEntity<Integer>
     private Set<Course> courses;
 
     @Valid
-    @NotNull( message = "{NotNull.Tutor.lessons}" )
     @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Lesson> lessons;
 
