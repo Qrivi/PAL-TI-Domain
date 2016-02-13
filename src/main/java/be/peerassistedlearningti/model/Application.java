@@ -13,56 +13,59 @@ import java.util.Date;
  *
  * @see JPAEntity
  */
-
 @Entity
 @Table( name = "application" )
-public class Application extends JPAEntity<Integer> {
+public class Application extends JPAEntity<Integer>
+{
     @Valid
-    @NotNull(message = "{NotNull.Application.student}")
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
-    @JoinColumn(name= "student_id")
+    @NotNull( message = "{NotNull.Application.student}" )
+    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinColumn( name = "student_id" )
     private Student student;
 
     @Valid
-    @NotNull(message = "{NotNull.Application.course}")
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
-    @JoinColumn(name = "course_id")
+    @NotNull( message = "{NotNull.Application.course}" )
+    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinColumn( name = "course_id" )
     private Course course;
 
-    @NotEmpty(message = "{NotEmpty.Application.screenshotURL}")
-    @Column(name = "screenshot_url", nullable = false)
+    @NotEmpty( message = "{NotEmpty.Application.screenshotURL}" )
+    @Column( name = "screenshot_url", nullable = false )
     private String screenshotURL;
 
-    @Column(name = "pending")
-    private boolean pending;
+    @Enumerated( EnumType.STRING )
+    @NotNull( message = "{NotNull.Application.state}" )
+    @Column( name = "state", nullable = false )
+    private ApplicationState state;
 
-    @NotNull(message = "{NotNull.Application.beginDate}")
-    @Column(name = "begin_date", nullable = false)
+    @NotNull( message = "{NotNull.Application.beginDate}" )
+    @Column( name = "begin_date", nullable = false )
     private Date beginDate;
 
-    @Column(name = "end_date", nullable = true)
+    @Column( name = "end_date", nullable = true )
     private Date endDate;
 
     /**
      * Default constructor
      */
-    public Application(){}
+    public Application() {}
 
     /**
      * All-parameter constructor for Application
      *
-     * @param student
-     * @param course
-     * @param screenshotURL
-     * @param pending
-     * @param beginDate
-     * @param endDate
+     * @param student       The student of the application
+     * @param course        The course of the application
+     * @param screenshotURL The screenshot url of the application
+     * @param state         The state of the application
+     * @param beginDate     The begin date of the application
+     * @param endDate       The end date of the application
      */
-    public Application(Student student, Course course, String screenshotURL, boolean pending, Date beginDate, Date endDate) {
+    public Application( Student student, Course course, String screenshotURL, ApplicationState state, Date beginDate, Date endDate )
+    {
         this.student = student;
         this.course = course;
         this.screenshotURL = screenshotURL;
-        this.pending = pending;
+        this.state = state;
         this.beginDate = beginDate;
         this.endDate = endDate;
     }
@@ -70,141 +73,142 @@ public class Application extends JPAEntity<Integer> {
     /**
      * Constructor for a pending Application
      *
-     * @param student
-     * @param course
-     * @param screenshotURL
+     * @param student       The student of the application
+     * @param course        The course of the application
+     * @param screenshotURL The screenshot url of the application
      */
-    public Application(Student student, Course course, String screenshotURL) {
+    public Application( Student student, Course course, String screenshotURL )
+    {
         this.student = student;
         this.course = course;
         this.screenshotURL = screenshotURL;
         this.beginDate = new Date();
-        this.pending = true;
+        this.state = ApplicationState.PENDING;
     }
 
     /**
-     * Accepts the application from the current date
+     * Accepts the application
      */
-    public void accept() {
-        this.pending = false;
-        this.beginDate = new Date();
+    public void accept()
+    {
+        this.state = ApplicationState.ACCEPTED;
+        this.endDate = new Date();
     }
 
     /**
-     * Accepts the application from the current date to the specified end date
-     *
-     * @param endDate
+     * Declines the application
      */
-    public void accept(Date endDate){
-        accept();
-        setEndDate(endDate);
+    public void decline()
+    {
+        this.state = ApplicationState.DECLINED;
+        this.endDate = new Date();
     }
 
     /**
-     * Gets the student of the application
-     *
-     * @return student
+     * @return The student of the application
      */
-    public Student getStudent() {
+    public Student getStudent()
+    {
         return student;
     }
 
     /**
-     * Gets the course of the application
-     *
-     * @return course
+     * @return The course of the application
      */
-    public Course getCourse() {
+    public Course getCourse()
+    {
         return course;
     }
 
     /**
-     * Gets the screenshot URL of the application
-     *
-     * @return screenshotURL
+     * @return The screenshot URL of the application
      */
-    public String getScreenshotURL() {
+    public String getScreenshotURL()
+    {
         return screenshotURL;
     }
 
     /**
-     * Gets if the application is pending
-     *
-     * @return pending
+     * @return The state of the application
      */
-    public boolean isPending() {
-        return pending;
+    public ApplicationState getState()
+    {
+        return state;
     }
 
     /**
-     * Gets the begin date of the application
-     *
-     * @return begin date
+     * @return The begin date of the application
      */
-    public Date getBeginDate() {
+    public Date getBeginDate()
+    {
         return beginDate;
     }
 
     /**
-     * Gets the end date of the application
-     *
-     * @return end date
+     * @return The end date of the application
      */
-    public Date getEndDate() {
+    public Date getEndDate()
+    {
         return endDate;
     }
 
     /**
      * Sets the student of the application
      *
-     * @param student
+     * @param student The student of the application
      */
-    public void setStudent(Student student) {
+    public void setStudent( Student student )
+    {
         this.student = student;
     }
 
     /**
      * Sets the course of the application
      *
-     * @param course
+     * @param course The course of the application
      */
-    public void setCourse(Course course) {
+    public void setCourse( Course course )
+    {
         this.course = course;
     }
 
     /**
      * Sets the screenshot URL of the application
      *
-     * @param screenshotURL
+     * @param screenshotURL The screenshot URL of the application
      */
-    public void setScreenshotURL(String screenshotURL) {
+    public void setScreenshotURL( String screenshotURL )
+    {
         this.screenshotURL = screenshotURL;
     }
 
     /**
-     * Sets if the application is pending
+     * Sets the state of the application
      *
-     * @param pending
+     * @param state The state of the application
      */
-    public void setPending(boolean pending) {
-        this.pending = pending;
+    public void setState( ApplicationState state )
+    {
+        this.state = state;
     }
 
     /**
      * Sets the begin date of the application
      *
-     * @param beginDate
+     * @param beginDate The begin date of the application
      */
-    public void setBeginDate(Date beginDate) {
+    public void setBeginDate( Date beginDate )
+    {
         this.beginDate = beginDate;
     }
 
     /**
      * Sets the end date of the application
      *
-     * @param endDate
+     * @param endDate The end date of the application
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate( Date endDate )
+    {
         this.endDate = endDate;
     }
 }

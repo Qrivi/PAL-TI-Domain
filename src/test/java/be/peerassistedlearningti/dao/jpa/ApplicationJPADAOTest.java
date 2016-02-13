@@ -2,6 +2,7 @@ package be.peerassistedlearningti.dao.jpa;
 
 import be.peerassistedlearningti.model.*;
 import org.junit.Before;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -53,8 +54,8 @@ public class ApplicationJPADAOTest extends JPADAOTest
 
         //Application creation
 
-        a1 = new Application(s1, c1, "URL");
-        a2 = new Application(s1, c1, "URL", true, new Date(), new Date());
+        a1 = new Application( s1, c1, "URL" );
+        a2 = new Application( s1, c1, "URL", ApplicationState.PENDING, new Date(), new Date() );
     }
 
     @Override
@@ -71,7 +72,7 @@ public class ApplicationJPADAOTest extends JPADAOTest
 
         assertNotNull( a1.getId() );
 
-        a1.setPending( true );
+        a1.decline();
         Application a1Updated = applicationJPADAO.update( a1 );
 
         assertEquals( a1, a1Updated );
