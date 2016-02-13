@@ -1,10 +1,10 @@
 package be.peerassistedlearningti.model;
 
-import be.peerassistedlearningti.common.model.identifiable.Identifiable;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -17,13 +17,15 @@ import java.util.Date;
 @Entity
 @Table( name = "application" )
 public class Application extends JPAEntity<Integer> {
+    @Valid
     @NotNull(message = "{NotNull.Application.student}")
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
     @JoinColumn(name= "student_id")
     private Student student;
 
+    @Valid
     @NotNull(message = "{NotNull.Application.course}")
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
     @JoinColumn(name = "course_id")
     private Course course;
 
@@ -42,7 +44,12 @@ public class Application extends JPAEntity<Integer> {
     private Date endDate;
 
     /**
-     * Default onstructor for Application
+     * Default constructor
+     */
+    public Application(){}
+
+    /**
+     * All-parameter constructor for Application
      *
      * @param student
      * @param course
@@ -71,6 +78,7 @@ public class Application extends JPAEntity<Integer> {
         this.student = student;
         this.course = course;
         this.screenshotURL = screenshotURL;
+        this.beginDate = new Date();
         this.pending = true;
     }
 

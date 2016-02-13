@@ -45,14 +45,13 @@ public class ApplicationJPADAOTest extends JPADAOTest
         c1 = courseJPADAO.add( c1 );
         assertNotNull( c1 );
 
-        Set<Application> applications = new HashSet<Application>();
-        applications.add( a1 );
-
         // Make Student object and add to database
 
         Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", true );
         s1 = studentJPADAO.add( s1 );
         assertNotNull( s1.getId() );
+
+        //Application creation
 
         a1 = new Application(s1, c1, "URL");
         a2 = new Application(s1, c1, "URL", true, new Date(), new Date());
