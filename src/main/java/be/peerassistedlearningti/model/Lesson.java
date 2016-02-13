@@ -23,7 +23,6 @@ import java.util.StringTokenizer;
 @Table( name = "lesson" )
 public class Lesson extends JPAEntity<Integer>
 {
-
     @NotNull( message = "{NotNull.Lesson.date}" )
     @Column( name = "date", nullable = false )
     private Date date;

@@ -1,7 +1,11 @@
 package be.peerassistedlearningti.model;
 
+import be.peerassistedlearningti.common.model.identifiable.Identifiable;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -9,12 +13,32 @@ import java.util.Date;
  *
  * @see JPAEntity
  */
-public class Application {
+
+@Entity
+@Table( name = "application" )
+public class Application extends JPAEntity<Integer> {
+    @NotNull(message = "{NotNull.Application.student}")
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
+    @JoinColumn(name= "student_id")
     private Student student;
+
+    @NotNull(message = "{NotNull.Application.course}")
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH , CascadeType.MERGE })
+    @JoinColumn(name = "course_id")
     private Course course;
+
+    @NotEmpty(message = "{NotEmpty.Application.screenshotURL}")
+    @Column(name = "screenshot_url", nullable = false)
     private String screenshotURL;
+
+    @Column(name = "pending")
     private boolean pending;
+
+    @NotNull(message = "{NotNull.Application.beginDate}")
+    @Column(name = "begin_date", nullable = false)
     private Date beginDate;
+
+    @Column(name = "end_date", nullable = true)
     private Date endDate;
 
     /**
