@@ -26,6 +26,7 @@ public class PALServiceImpl implements PALService
     private StudentDAO studentDAO;
     private RoomDAO roomDAO;
     private BookingDAO bookingDAO;
+    private ApplicationDAO applicationDAO;
 
     /**
      * Sets the course dao for the service
@@ -85,6 +86,16 @@ public class PALServiceImpl implements PALService
     public void setBookingDAO( BookingDAO bookingDAO )
     {
         this.bookingDAO = bookingDAO;
+    }
+
+    /**
+     * Sets the application dao for the service
+     *
+     * @param applicationDAO The application dao for the service
+     */
+    public void setApplicationDAO( ApplicationDAO applicationDAO )
+    {
+        this.applicationDAO = applicationDAO;
     }
 
     //================================================================================
@@ -634,6 +645,79 @@ public class PALServiceImpl implements PALService
         try
         {
             return Campus.getByValue( name );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Application
+    //================================================================================
+
+    /**
+     * Gets the application with the specified id
+     *
+     * @param id The id of the application
+     * @return The application with the specified id
+     */
+    public Application getApplicationById( int id )
+    {
+        try
+        {
+            return applicationDAO.getById( id );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Adds a application to the database
+     *
+     * @param application The application to be added to the database
+     */
+    public void addApplication( Application application )
+    {
+        try
+        {
+            applicationDAO.add( application );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Removes the specified application from the database
+     *
+     * @param application The application to be removed from the database
+     */
+    public void removeApplication( Application application )
+    {
+        try
+        {
+            applicationDAO.remove( application );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets all the applications
+     *
+     * @return A collection containing all the applications
+     */
+    public Collection<Application> getAllApplications()
+    {
+        try
+        {
+            return applicationDAO.getAll();
         } catch ( DAOException e )
         {
             throw new ServiceException( e );

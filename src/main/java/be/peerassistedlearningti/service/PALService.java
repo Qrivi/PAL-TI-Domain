@@ -291,4 +291,41 @@ public interface PALService
     //================================================================================
     // endregion
     //================================================================================
+
+    //================================================================================
+    // region Application
+    //================================================================================
+
+    /**
+     * Gets the application with the specified id
+     *
+     * @param id The id of the application
+     * @return The application with the specified id
+     */
+    Application getApplicationById( int id );
+
+    /**
+     * Adds a application to the database
+     *
+     * @param application The application to be added to the database
+     */
+    public void addApplication( Application application );
+
+    /**
+     * Removes the specified application from the database
+     *
+     * @param application The application to be removed from the database
+     */
+    public void removeApplication( Application application );
+
+    /**
+     * Gets all the applications
+     *
+     * @return A collection containing all the applications
+     */
+    public Collection<Application> getAllApplications();
+
+    //================================================================================
+    // endregion
+    //================================================================================
 }
