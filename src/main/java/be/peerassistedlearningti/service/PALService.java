@@ -309,21 +309,35 @@ public interface PALService
      *
      * @param application The application to be added to the database
      */
-    public void addApplication( Application application );
+    void addApplication( Application application );
+
+    /**
+     * Updates a application to the database
+     *
+     * @param application The application to be updated in the database
+     */
+    void updateApplication( Application application );
 
     /**
      * Removes the specified application from the database
      *
      * @param application The application to be removed from the database
      */
-    public void removeApplication( Application application );
+    void removeApplication( Application application );
 
     /**
      * Gets all the applications
      *
      * @return A collection containing all the applications
      */
-    public Collection<Application> getAllApplications();
+    Collection<Application> getAllApplications();
+
+    /**
+     * Gets all the pending applications
+     *
+     * @return A collection containing all the pending applications
+     */
+    Collection<Application> getAllPendingApplications();
 
     //================================================================================
     // endregion

@@ -693,6 +693,22 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a application to the database
+     *
+     * @param application The application to be updated in the database
+     */
+    public void updateApplication( Application application )
+    {
+        try
+        {
+            applicationDAO.update( application );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
      * Removes the specified application from the database
      *
      * @param application The application to be removed from the database
@@ -718,6 +734,22 @@ public class PALServiceImpl implements PALService
         try
         {
             return applicationDAO.getAll();
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets all the pending applications
+     *
+     * @return A collection containing all the pending applications
+     */
+    public Collection<Application> getAllPendingApplications()
+    {
+        try
+        {
+            return applicationDAO.getAll( ApplicationState.PENDING );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
