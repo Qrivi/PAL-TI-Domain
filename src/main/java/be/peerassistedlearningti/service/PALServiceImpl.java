@@ -205,7 +205,7 @@ public class PALServiceImpl implements PALService
     {
         try
         {
-            studentDAO.add( student );
+            studentDAO.remove( student );
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
