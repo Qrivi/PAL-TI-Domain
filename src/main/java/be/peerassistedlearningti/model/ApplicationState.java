@@ -7,8 +7,8 @@ public enum ApplicationState
 {
 
     PENDING,
-    ACCEPTED,
-    DECLINED;
+    APPROVED,
+    REJECTED;
 
     public static ApplicationState getByValue( String state )
     {

@@ -89,18 +89,18 @@ public class Application extends JPAEntity<Integer>
     /**
      * Accepts the application
      */
-    public void accept()
+    public void approve()
     {
-        this.state = ApplicationState.ACCEPTED;
+        this.state = ApplicationState.APPROVED;
         this.endDate = new Date();
     }
 
     /**
      * Declines the application
      */
-    public void decline()
+    public void reject()
     {
-        this.state = ApplicationState.DECLINED;
+        this.state = ApplicationState.REJECTED;
         this.endDate = new Date();
     }
 
