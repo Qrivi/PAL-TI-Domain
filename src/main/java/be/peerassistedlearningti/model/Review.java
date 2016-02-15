@@ -68,7 +68,7 @@ public class Review extends JPAEntity<Integer>{
     /**
      * Default constructor for Review
      */
-    public void Review(){}
+    public Review(){}
 
     /**
      *  Constructor for Review
@@ -81,7 +81,7 @@ public class Review extends JPAEntity<Integer>{
      * @param engagementScore   The score regarding the lesson's engagement
      * @param atmosphereScore   The score regarding the lesson's atmosphere
      */
-    public void Review(String text, Student student,Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore){
+    public Review(String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore){
         this.text = text;
         this.student=student;
         this.date = new Date();
@@ -103,7 +103,7 @@ public class Review extends JPAEntity<Integer>{
      * @param atmosphereScore   The score regarding the lesson's atmosphere
      * @param date              The date of the review
      */
-    public void Review(String text, Student student,Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, Date date){
+    public Review(String text, Student student,Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, Date date){
         this.text = text;
         this.student=student;
         this.date = new Date();
