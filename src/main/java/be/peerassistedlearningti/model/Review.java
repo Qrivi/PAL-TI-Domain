@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Entity
 @Table( name = "review")
-public class Review extends JPAEntity{
+public class Review extends JPAEntity<Integer>{
 
     @NotEmpty ( message = "{NotEmpty.Review.text}")
     @Column ( name = "text", nullable = false)
