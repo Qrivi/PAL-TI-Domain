@@ -54,8 +54,8 @@ public class ApplicationJPADAOTest extends JPADAOTest
 
         //Application creation
 
-        a1 = new Application( s1, c1, "URL" );
-        a2 = new Application( s1, c1, "URL", ApplicationState.PENDING, new Date(), new Date() );
+        a1 = new Application( s1, c1, new byte[ 2 ] );
+        a2 = new Application( s1, c1, new byte[ 2 ], ApplicationState.PENDING, new Date(), new Date() );
     }
 
     @Override

@@ -29,9 +29,10 @@ public class Application extends JPAEntity<Integer>
     @JoinColumn( name = "course_id" )
     private Course course;
 
-    @NotEmpty( message = "{NotEmpty.Application.screenshotURL}" )
-    @Column( name = "screenshot_url", nullable = false )
-    private String screenshotURL;
+    @Lob
+    @NotEmpty( message = "{NotEmpty.Application.screenshot}" )
+    @Column( name = "screenshot", nullable = false )
+    private byte[] screenshot;
 
     @Enumerated( EnumType.STRING )
     @NotNull( message = "{NotNull.Application.state}" )
@@ -53,18 +54,18 @@ public class Application extends JPAEntity<Integer>
     /**
      * All-parameter constructor for Application
      *
-     * @param student       The student of the application
-     * @param course        The course of the application
-     * @param screenshotURL The screenshot url of the application
-     * @param state         The state of the application
-     * @param beginDate     The begin date of the application
-     * @param endDate       The end date of the application
+     * @param student    The student of the application
+     * @param course     The course of the application
+     * @param screenshot The screenshot of the application
+     * @param state      The state of the application
+     * @param beginDate  The begin date of the application
+     * @param endDate    The end date of the application
      */
-    public Application( Student student, Course course, String screenshotURL, ApplicationState state, Date beginDate, Date endDate )
+    public Application( Student student, Course course, byte[] screenshot, ApplicationState state, Date beginDate, Date endDate )
     {
         this.student = student;
         this.course = course;
-        this.screenshotURL = screenshotURL;
+        this.screenshot = screenshot;
         this.state = state;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -73,15 +74,15 @@ public class Application extends JPAEntity<Integer>
     /**
      * Constructor for a pending Application
      *
-     * @param student       The student of the application
-     * @param course        The course of the application
-     * @param screenshotURL The screenshot url of the application
+     * @param student    The student of the application
+     * @param course     The course of the application
+     * @param screenshot The screenshot of the application
      */
-    public Application( Student student, Course course, String screenshotURL )
+    public Application( Student student, Course course, byte[] screenshot )
     {
         this.student = student;
         this.course = course;
-        this.screenshotURL = screenshotURL;
+        this.screenshot = screenshot;
         this.beginDate = new Date();
         this.state = ApplicationState.PENDING;
     }
@@ -102,54 +103,6 @@ public class Application extends JPAEntity<Integer>
     {
         this.state = ApplicationState.REJECTED;
         this.endDate = new Date();
-    }
-
-    /**
-     * @return The student of the application
-     */
-    public Student getStudent()
-    {
-        return student;
-    }
-
-    /**
-     * @return The course of the application
-     */
-    public Course getCourse()
-    {
-        return course;
-    }
-
-    /**
-     * @return The screenshot URL of the application
-     */
-    public String getScreenshotURL()
-    {
-        return screenshotURL;
-    }
-
-    /**
-     * @return The state of the application
-     */
-    public ApplicationState getState()
-    {
-        return state;
-    }
-
-    /**
-     * @return The begin date of the application
-     */
-    public Date getBeginDate()
-    {
-        return beginDate;
-    }
-
-    /**
-     * @return The end date of the application
-     */
-    public Date getEndDate()
-    {
-        return endDate;
     }
 
     /**
@@ -175,11 +128,11 @@ public class Application extends JPAEntity<Integer>
     /**
      * Sets the screenshot URL of the application
      *
-     * @param screenshotURL The screenshot URL of the application
+     * @param screenshot The screenshot of the application
      */
-    public void setScreenshotURL( String screenshotURL )
+    public void setScreenshot( byte[] screenshot )
     {
-        this.screenshotURL = screenshotURL;
+        this.screenshot = screenshot;
     }
 
     /**
@@ -210,5 +163,53 @@ public class Application extends JPAEntity<Integer>
     public void setEndDate( Date endDate )
     {
         this.endDate = endDate;
+    }
+
+    /**
+     * @return The student of the application
+     */
+    public Student getStudent()
+    {
+        return student;
+    }
+
+    /**
+     * @return The course of the application
+     */
+    public Course getCourse()
+    {
+        return course;
+    }
+
+    /**
+     * @return The screenshot of the application
+     */
+    public byte[] getScreenshot()
+    {
+        return screenshot;
+    }
+
+    /**
+     * @return The state of the application
+     */
+    public ApplicationState getState()
+    {
+        return state;
+    }
+
+    /**
+     * @return The begin date of the application
+     */
+    public Date getBeginDate()
+    {
+        return beginDate;
+    }
+
+    /**
+     * @return The end date of the application
+     */
+    public Date getEndDate()
+    {
+        return endDate;
     }
 }
