@@ -54,8 +54,8 @@ public class BookingJPADAOTest extends JPADAOTest
 
         // Make Student and Lesson objects
 
-        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", true );
-        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", true );
+        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", UserType.ADMIN );
+        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", UserType.ADMIN );
 
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
         Course c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3" );

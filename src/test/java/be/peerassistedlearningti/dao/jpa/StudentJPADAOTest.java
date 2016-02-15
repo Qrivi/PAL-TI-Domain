@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.dao.jpa;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.UserType;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
@@ -42,7 +43,7 @@ public class StudentJPADAOTest extends JPADAOTest
     @Override
     public void testAdd()
     {
-        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s );
 
@@ -52,7 +53,7 @@ public class StudentJPADAOTest extends JPADAOTest
     @Override
     public void testUpdate()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s1 );
 
@@ -68,7 +69,7 @@ public class StudentJPADAOTest extends JPADAOTest
     @Override
     public void testRemove()
     {
-        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s );
         studentJPADAO.remove( s );
@@ -81,7 +82,7 @@ public class StudentJPADAOTest extends JPADAOTest
     @Override
     public void testGetById()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s1 );
 
@@ -94,8 +95,8 @@ public class StudentJPADAOTest extends JPADAOTest
     @Override
     public void testGetAll()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
-        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", true );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s1 );
         studentJPADAO.add( s2 );
@@ -109,8 +110,8 @@ public class StudentJPADAOTest extends JPADAOTest
     @Override
     public void testGetLast()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
-        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", true );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s1 );
         studentJPADAO.add( s2 );
@@ -124,7 +125,7 @@ public class StudentJPADAOTest extends JPADAOTest
     @Test
     public void testGetByEmail() throws Exception
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", true );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
 
         studentJPADAO.add( s1 );
 

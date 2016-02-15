@@ -72,7 +72,7 @@ public class ApplicationJPADAOTest extends JPADAOTest
 
         assertNotNull( a1.getId() );
 
-        a1.decline();
+        a1.reject();
         Application a1Updated = applicationJPADAO.update( a1 );
 
         assertEquals( a1, a1Updated );

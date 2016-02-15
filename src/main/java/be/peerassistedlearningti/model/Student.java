@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,8 +39,10 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "email", unique = true, nullable = false )
     private String email;
 
-    @Column( name = "admin" )
-    private boolean admin;
+    @Enumerated( EnumType.STRING )
+    @NotNull( message = "{NotNull.Student.type}" )
+    @Column( name = "type", nullable = false )
+    private UserType type;
 
     @Valid
     @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
@@ -56,13 +59,13 @@ public class Student extends JPAEntity<Integer>
      * @param name     The name of the student
      * @param password The password of the student
      * @param email    The email of the student
-     * @param admin    The admin value of the student
+     * @param type     The user type of the student
      */
-    public Student( String name, String password, String email, boolean admin )
+    public Student( String name, String password, String email, UserType type )
     {
         this.email = email;
         this.name = name;
-        this.admin = admin;
+        this.type = type;
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
         this.password = hashPassword( password );
     }
@@ -138,19 +141,19 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the admin value of the student
+     * Sets the user type of the student
      *
-     * @param admin The admin value of the student
+     * @param type The user type of the student
      */
-    public void setAdmin( boolean admin )
+    public void setType( UserType type )
     {
-        this.admin = admin;
+        this.type = type;
     }
 
     /**
      * Gets the name of the Student
      *
-     * @return The name
+     * @return The name of the student
      */
     public String getName()
     {
@@ -158,9 +161,7 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the password of the Student
-     *
-     * @return The password
+     * @return The password of the student
      */
     public String getPassword()
     {
@@ -168,9 +169,7 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the email of the student
-     *
-     * @return The email
+     * @return The email of the student
      */
     public String getEmail()
     {
@@ -178,18 +177,14 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the admin value of the student
-     *
-     * @return If the student is an admin
+     * @return The user type of the student
      */
-    public boolean isAdmin()
+    public UserType getType()
     {
-        return admin;
+        return type;
     }
 
     /**
-     * Gets the tutor object of the student
-     *
      * @return The tutor object of the student, if he isn't a tutor null is returned
      */
     public Tutor getTutor()

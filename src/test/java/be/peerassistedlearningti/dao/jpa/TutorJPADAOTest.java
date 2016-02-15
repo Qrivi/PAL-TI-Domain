@@ -3,6 +3,7 @@ package be.peerassistedlearningti.dao.jpa;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
+import be.peerassistedlearningti.model.UserType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,8 +54,8 @@ public class TutorJPADAOTest extends JPADAOTest
 
         // Make Student and Course objects
 
-        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", true );
-        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", true );
+        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", UserType.ADMIN );
+        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", UserType.ADMIN );
 
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
         c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3" );
@@ -96,7 +97,7 @@ public class TutorJPADAOTest extends JPADAOTest
 
         assertNotNull( t1.getId() );
 
-        t1.addCourse(c2);
+        t1.addCourse( c2 );
 
         Tutor t2 = tutorJPADAO.update( t1 );
 

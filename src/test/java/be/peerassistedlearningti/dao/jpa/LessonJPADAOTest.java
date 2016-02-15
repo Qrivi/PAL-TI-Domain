@@ -57,7 +57,7 @@ public class LessonJPADAOTest extends JPADAOTest
 
         // Make Student object and add to database
 
-        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", true );
+        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", UserType.ADMIN );
         s1 = studentJPADAO.add( s1 );
         assertNotNull( s1.getId() );
 
