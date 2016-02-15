@@ -1,12 +1,28 @@
 package be.peerassistedlearningti.dao.jpa;
 
+import org.junit.Before;
+
 /**
  * Class used to test ReviewJPADAO
  */
 public class ReviewJPADAOTest extends JPADAOTest {
 
-
+    private static ReviewJPADAO reviewJPADAO;
+    /**
+     * Constructor for ReviewJPADAOTest
+     */
     public ReviewJPADAOTest(){super("PAL");}
+
+    /**
+     * Assign the factory to the dao
+     */
+    @Before
+    public void before(){
+        super.before();
+        reviewJPADAO = new ReviewJPADAO();
+        reviewJPADAO.setEntityManagerFactory(factory);
+    }
+
     @Override
     public void testAdd() {
 
