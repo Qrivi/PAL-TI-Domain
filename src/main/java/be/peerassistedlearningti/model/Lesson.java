@@ -45,7 +45,7 @@ public class Lesson extends JPAEntity<Integer>
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.course}" )
-    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "course_id" )
     private Course course;
 
@@ -61,13 +61,13 @@ public class Lesson extends JPAEntity<Integer>
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.room}" )
-    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "room_id" )
     private Room room;
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.backupRoom}" )
-    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "backup_room_id" )
     private Room backupRoom;
 
