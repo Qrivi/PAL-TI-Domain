@@ -342,4 +342,41 @@ public interface PALService
     //================================================================================
     // endregion
     //================================================================================
+
+    //================================================================================
+    // region Review
+    //================================================================================
+
+    /**
+     * Gets the review with the specified id
+     *
+     * @param id The id of the review
+     * @return The review with the specified id
+     */
+    Review getReviewById( int id );
+
+    /**
+     * Adds a review to the database
+     *
+     * @param review The review to be added to the database
+     */
+    public void addReview( Review review );
+
+    /**
+     * Removes the specified review from the database
+     *
+     * @param review The review to be removed from the database
+     */
+    public void removeReview( Review review );
+
+    /**
+     * Gets all the reviews
+     *
+     * @return A collection containing all the reviews
+     */
+    public Collection<Review> getAllReviews();
+
+    //================================================================================
+    // endregion
+    //================================================================================
 }

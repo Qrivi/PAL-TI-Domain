@@ -27,6 +27,7 @@ public class PALServiceImpl implements PALService
     private RoomDAO roomDAO;
     private BookingDAO bookingDAO;
     private ApplicationDAO applicationDAO;
+    private ReviewDAO reviewDAO;
 
     /**
      * Sets the course dao for the service
@@ -96,6 +97,16 @@ public class PALServiceImpl implements PALService
     public void setApplicationDAO( ApplicationDAO applicationDAO )
     {
         this.applicationDAO = applicationDAO;
+    }
+
+    /**
+     * Sets the review dao for the service
+     *
+     * @param reviewDAO The application dao for the service
+     */
+    public void setReviewDAO( ReviewDAO reviewDAO )
+    {
+        this.reviewDAO = reviewDAO;
     }
 
     //================================================================================
@@ -750,6 +761,79 @@ public class PALServiceImpl implements PALService
         try
         {
             return applicationDAO.getAll( ApplicationState.PENDING );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Review
+    //================================================================================
+
+    /**
+     * Gets the review with the specified id
+     *
+     * @param id The id of the review
+     * @return The review with the specified id
+     */
+    public Review getReviewById( int id )
+    {
+        try
+        {
+            return reviewDAO.getById( id );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Adds a review to the database
+     *
+     * @param review The review to be added to the database
+     */
+    public void addReview( Review review )
+    {
+        try
+        {
+            reviewDAO.add( review );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Removes the specified review from the database
+     *
+     * @param review The review to be removed from the database
+     */
+    public void removeReview( Review review )
+    {
+        try
+        {
+            reviewDAO.remove( review );
+        } catch ( DAOException e )
+        {
+            throw new ServiceException( e );
+        }
+    }
+
+    /**
+     * Gets all the reviews
+     *
+     * @return A collection containing all the reviews
+     */
+    public Collection<Review> getAllReviews()
+    {
+        try
+        {
+            return reviewDAO.getAll();
         } catch ( DAOException e )
         {
             throw new ServiceException( e );
