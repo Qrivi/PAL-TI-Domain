@@ -102,7 +102,7 @@ public class ReviewJPADAOTest extends JPADAOTest
     @Override
     public void testAdd()
     {
-        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5 );
+        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5, false);
         reviewJPADAO.add( review );
         assertNotNull( review.getId() );
     }
@@ -110,7 +110,7 @@ public class ReviewJPADAOTest extends JPADAOTest
     @Override
     public void testUpdate()
     {
-        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5 );
+        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5, false);
         reviewJPADAO.add( review );
         assertNotNull( review.getId() );
         review.setAtmosphereScore( 10 );
@@ -121,7 +121,7 @@ public class ReviewJPADAOTest extends JPADAOTest
     @Override
     public void testRemove()
     {
-        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5 );
+        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5, false);
         reviewJPADAO.add( review );
         assertNotNull( review.getId() );
         reviewJPADAO.remove( review );
@@ -131,7 +131,7 @@ public class ReviewJPADAOTest extends JPADAOTest
     @Override
     public void testGetById()
     {
-        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5 );
+        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 5, 5, 5, false);
         reviewJPADAO.add( review );
         assertNotNull( review.getId() );
         assertEquals( review, reviewJPADAO.getById( review.getId() ) );
@@ -140,8 +140,8 @@ public class ReviewJPADAOTest extends JPADAOTest
     @Override
     public void testGetAll()
     {
-        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 7, 6, 4 );
-        Review review1 = new Review( NORMAL_TEXT, student1, lesson, 5, 4, 8, 6 );
+        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 7, 6, 4, false);
+        Review review1 = new Review( NORMAL_TEXT, student1, lesson, 5, 4, 8, 6, true);
         reviewJPADAO.add( review );
         reviewJPADAO.add( review1 );
         assertNotNull( review.getId() );
@@ -156,8 +156,8 @@ public class ReviewJPADAOTest extends JPADAOTest
     @Override
     public void testGetLast()
     {
-        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 7, 6, 4 );
-        Review review1 = new Review( NORMAL_TEXT, student1, lesson, 5, 4, 8, 6 );
+        Review review = new Review( NORMAL_TEXT, student, lesson, 5, 7, 6, 4, true);
+        Review review1 = new Review( NORMAL_TEXT, student1, lesson, 5, 4, 8, 6, false);
 
         reviewJPADAO.add( review );
         reviewJPADAO.add( review1 );
