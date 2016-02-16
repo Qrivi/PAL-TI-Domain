@@ -7,10 +7,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class used to specify a Student
@@ -48,6 +52,17 @@ public class Student extends JPAEntity<Integer>
     @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Tutor tutor;
 
+    @Column(name="reset_token", unique = true)
+    private String resetToken;
+
+    @Column(name = "reset_salt")
+    private String resetSalt;
+
+    @Column(name="reset_expiration")
+    private Date  resetTokenExpiration;
+
+    private static final String PASSWORD_HASH_ALGORITHM = "SHA-512";
+
     /**
      * Default empty constructor for JPA Entities
      */
@@ -67,7 +82,7 @@ public class Student extends JPAEntity<Integer>
         this.name = name;
         this.type = type;
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        this.password = hashPassword( password );
+        this.password = createHash( password, salt);
     }
 
     /**
@@ -76,7 +91,7 @@ public class Student extends JPAEntity<Integer>
      * @param plainTextPassword The password that will be hashed
      * @return The password in hashed form.
      */
-    private String hashPassword( String plainTextPassword )
+    private String createHash(String plainTextPassword, String salt )
     {
         if ( plainTextPassword == null )
             return null;
@@ -96,7 +111,6 @@ public class Student extends JPAEntity<Integer>
 
         return ( new BigInteger( 1, digest.digest() ).toString( 40 ) );
     }
-
     /**
      * Check if the given password is valid
      *
@@ -105,7 +119,37 @@ public class Student extends JPAEntity<Integer>
      */
     public boolean isPasswordValid( String plainTextPassword )
     {
-        return hashPassword( plainTextPassword ).equals( password );
+        return createHash( plainTextPassword, salt).equals( password );
+    }
+
+    /**
+     * Sets the resetTokenExpiration to 1 day in the future and creates a reset token.
+     *
+     * @throws UnsupportedEncodingException
+     */
+    public void issuePasswordReset() throws UnsupportedEncodingException {
+        resetTokenExpiration = new Date(new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ));
+        resetSalt =  new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        String plainTextToken = email+new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        plainTextToken = Base64.getUrlEncoder().encodeToString(plainTextToken.getBytes("utf-8"));
+        //TODO:: send the mail
+
+        resetToken = createHash(plainTextToken,resetSalt);
+    }
+
+    /**
+     * Check if the given reset token is valid and did not pass expiration
+     *
+     * @param plainTextToken The  plaintext reset token to verify
+     * @return True if the plaintext token was correct and did not pass expiration
+     */
+    public boolean validatePasswordReset(String plainTextToken){
+        if(resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
+                resetToken!=null && plainTextToken!=null){
+            return createHash(plainTextToken,resetSalt).equals(resetToken);
+        }
+        //Evt. loggen van valse pogingen
+        return false;
     }
 
     /**
@@ -127,7 +171,7 @@ public class Student extends JPAEntity<Integer>
     {
         if ( salt == null )
             this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        this.password = hashPassword( password );
+        this.password = createHash( password,salt);
     }
 
     /**
@@ -190,6 +234,15 @@ public class Student extends JPAEntity<Integer>
     public Tutor getTutor()
     {
         return tutor;
+    }
+
+    /**
+     * Gets the reset token of the student used to reset the password
+     *
+     * @return The reset token
+     */
+    public String getResetToken() {
+        return resetToken;
     }
 
 }
