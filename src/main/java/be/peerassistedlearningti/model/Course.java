@@ -4,6 +4,7 @@ import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Set;
 
 /**
@@ -31,6 +32,14 @@ public class Course extends JPAEntity<Integer>
     @ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Tutor> tutors;
 
+    @NotEmpty(message = "{NotEmpty.Course.curriculum}")
+    @Column(name = "curriculum", nullable = false)
+    private String curriculum;
+
+    @Min(value = 1, message = "{Min.Course.year}")
+    @Column(name = "year", nullable = false)
+    private int year;
+
     /**
      * Default constructor for Course
      */
@@ -43,11 +52,13 @@ public class Course extends JPAEntity<Integer>
      * @param name      The full name of the course
      * @param shortName The short name of the course
      */
-    public Course( String code, String name, String shortName )
+    public Course( String code, String name, String shortName, String curriculum, int year)
     {
         this.code = code;
         this.name = name;
         this.shortName = shortName;
+        this.curriculum = curriculum;
+        this.year = year;
     }
 
     /**
@@ -81,6 +92,24 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the curriculum of the course
+     *
+     * @param curriculum The new curriculum of the course
+     */
+    public void setCurriculum(String curriculum) {
+        this.curriculum = curriculum;
+    }
+
+    /**
+     * Sets the year of the course
+     *
+     * @param year The new year of the course
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    /**
      * @return The code of the course
      */
     public String getCode()
@@ -107,11 +136,25 @@ public class Course extends JPAEntity<Integer>
     /**
      * Gets the available tutors for a course
      *
-     * @return The set with available tutors or null if non
+     * @return The set with available tutors or null if none
      */
     public Set<Tutor> getTutors()
     {
         return tutors;
+    }
+
+    /**
+     * @return The curriculum of the course
+     */
+    public String getCurriculum() {
+        return curriculum;
+    }
+
+    /**
+     * @return The year of the course
+     */
+    public int getYear() {
+        return year;
     }
 
     /**
