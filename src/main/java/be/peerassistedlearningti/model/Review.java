@@ -66,13 +66,16 @@ public class Review extends JPAEntity<Integer>
     @Column( name = "atmosphere_score" )
     private int atmosphereScore;
 
+    @Column(name = "anonymous")
+    private boolean anonymous;
+
     /**
      * Default constructor for Review
      */
     public Review() {}
 
     /**
-     * Constructor for Review
+     * Constructor for Review without date
      *
      * @param text            The text of the review
      * @param student         The student of the review
@@ -81,10 +84,11 @@ public class Review extends JPAEntity<Integer>
      * @param tutorScore      The score regarding the lesson's tutor
      * @param engagementScore The score regarding the lesson's engagement
      * @param atmosphereScore The score regarding the lesson's atmosphere
+     * @param anonymous       Indicates if the name may be shown
      */
-    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore )
+    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous)
     {
-        this( text, student, lesson, contentScore, tutorScore, engagementScore, atmosphereScore, new Date() );
+        this( text, student, lesson, contentScore, tutorScore, engagementScore, atmosphereScore,anonymous , new Date() );
     }
 
     /**
@@ -98,8 +102,9 @@ public class Review extends JPAEntity<Integer>
      * @param engagementScore The score regarding the lesson's engagement
      * @param atmosphereScore The score regarding the lesson's atmosphere
      * @param date            The date of the review
+     * @param anonymous       Indicates if the name may be shown
      */
-    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, Date date )
+    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous, Date date )
     {
         this.text = text;
         this.student = student;
@@ -108,6 +113,7 @@ public class Review extends JPAEntity<Integer>
         this.tutorScore = tutorScore;
         this.engagementScore = engagementScore;
         this.atmosphereScore = atmosphereScore;
+        this.anonymous = anonymous;
         this.date = date;
     }
 
@@ -193,6 +199,15 @@ public class Review extends JPAEntity<Integer>
     }
 
     /**
+     * Sets if the review is anonymous
+     *
+     * @param anonymous
+     */
+    public void setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
+    }
+
+    /**
      * Gets the text of the review
      *
      * @return The text of the review
@@ -273,5 +288,15 @@ public class Review extends JPAEntity<Integer>
     public int getAtmosphereScore()
     {
         return atmosphereScore;
+    }
+
+
+    /**
+     * Gets if the review is anonymous
+     *
+     * @return The anonymous boolean of review
+     */
+    public boolean isAnonymous() {
+        return anonymous;
     }
 }
