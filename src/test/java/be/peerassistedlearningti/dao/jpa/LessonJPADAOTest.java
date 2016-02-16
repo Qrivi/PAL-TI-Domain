@@ -48,7 +48,7 @@ public class LessonJPADAOTest extends JPADAOTest
 
         // Make Course object and add to database
 
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
         c1 = courseJPADAO.add( c1 );
         assertNotNull( c1 );
 

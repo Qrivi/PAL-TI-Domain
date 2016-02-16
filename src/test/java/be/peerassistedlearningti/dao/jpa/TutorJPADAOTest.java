@@ -57,8 +57,8 @@ public class TutorJPADAOTest extends JPADAOTest
         s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", UserType.ADMIN );
         s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", UserType.ADMIN );
 
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
-        c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3", "TI", 3 );
 
         // Add students and courses to the database
 

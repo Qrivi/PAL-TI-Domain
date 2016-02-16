@@ -72,7 +72,7 @@ public class ReviewJPADAOTest extends JPADAOTest
         assertNotNull( smartStudent.getId() );
 
         // Make course object and add to database & Set
-        Course course = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course course = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
         course = courseJPADAO.add( course );
         assertNotNull( course );
 

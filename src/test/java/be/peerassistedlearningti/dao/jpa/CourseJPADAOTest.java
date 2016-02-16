@@ -43,7 +43,7 @@ public class CourseJPADAOTest extends JPADAOTest
     @Override
     public void testAdd()
     {
-        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c );
 
@@ -53,23 +53,23 @@ public class CourseJPADAOTest extends JPADAOTest
     @Override
     public void testUpdate()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c1 );
 
-        c1.setName( ".NET Programmeren in Visual Studio" );
+        c1.setName( ".NET Programmeren in Visual Studio");
 
         courseJPADAO.update( c1 );
 
         Course c2 = courseJPADAO.getById( c1.getId() );
 
-        assertEquals( c2.getName(), ".NET Programmeren in Visual Studio" );
+        assertEquals( c2.getName(), ".NET Programmeren in Visual Studio");
     }
 
     @Override
     public void testRemove()
     {
-        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c );
 
@@ -83,7 +83,7 @@ public class CourseJPADAOTest extends JPADAOTest
     @Override
     public void testGetById()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c1 );
 
@@ -96,8 +96,8 @@ public class CourseJPADAOTest extends JPADAOTest
     @Override
     public void testGetAll()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
-        Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D", "TI", 3 );
 
         courseJPADAO.add( c1 );
         courseJPADAO.add( c2 );
@@ -111,8 +111,8 @@ public class CourseJPADAOTest extends JPADAOTest
     @Override
     public void testGetLast()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
-        Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D", "TI", 3 );
 
         courseJPADAO.add( c1 );
         courseJPADAO.add( c2 );
@@ -126,7 +126,7 @@ public class CourseJPADAOTest extends JPADAOTest
     @Test
     public void testGetByCode()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c1 );
 
@@ -139,7 +139,7 @@ public class CourseJPADAOTest extends JPADAOTest
     @Test
     public void testGetByName()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c1 );
 
@@ -152,7 +152,7 @@ public class CourseJPADAOTest extends JPADAOTest
     @Test
     public void testGetByShortName()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET" );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
 
         courseJPADAO.add( c1 );
 
