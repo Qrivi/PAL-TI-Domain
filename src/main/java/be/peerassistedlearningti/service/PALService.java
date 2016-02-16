@@ -376,6 +376,20 @@ public interface PALService
      */
     public Collection<Review> getAllReviews();
 
+    /**
+     * Gets reviews filtered by tutor
+     *
+     * @return A collection containing the reviews for that tutor
+     */
+    public Collection<Review> getReviews(Tutor tutor);
+
+    /**
+     * Gets reviews filtered by lesson
+     *
+     * @return A collection containing the reviews of that lesson
+     */
+    public Collection<Review> getReviews(Lesson lesson);
+
     //================================================================================
     // endregion
     //================================================================================
