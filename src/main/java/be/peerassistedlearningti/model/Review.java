@@ -40,6 +40,7 @@ public class Review extends JPAEntity<Integer>
 
     @NotNull( message = "{NotNull.Review.date}" )
     @Column( name = "date" )
+    @Temporal( TemporalType.TIMESTAMP )
     private Date date;
 
     @NotNull( message = "{NotNull.Review.contentScore}" )
@@ -66,7 +67,7 @@ public class Review extends JPAEntity<Integer>
     @Column( name = "atmosphere_score" )
     private int atmosphereScore;
 
-    @Column(name = "anonymous")
+    @Column( name = "anonymous" )
     private boolean anonymous;
 
     /**
@@ -86,9 +87,9 @@ public class Review extends JPAEntity<Integer>
      * @param atmosphereScore The score regarding the lesson's atmosphere
      * @param anonymous       Indicates if the name may be shown
      */
-    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous)
+    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous )
     {
-        this( text, student, lesson, contentScore, tutorScore, engagementScore, atmosphereScore,anonymous , new Date() );
+        this( text, student, lesson, contentScore, tutorScore, engagementScore, atmosphereScore, anonymous, new Date() );
     }
 
     /**
@@ -203,7 +204,8 @@ public class Review extends JPAEntity<Integer>
      *
      * @param anonymous
      */
-    public void setAnonymous(boolean anonymous) {
+    public void setAnonymous( boolean anonymous )
+    {
         this.anonymous = anonymous;
     }
 
@@ -296,7 +298,8 @@ public class Review extends JPAEntity<Integer>
      *
      * @return The anonymous boolean of review
      */
-    public boolean isAnonymous() {
+    public boolean isAnonymous()
+    {
         return anonymous;
     }
 }

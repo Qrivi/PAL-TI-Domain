@@ -24,6 +24,7 @@ import java.util.StringTokenizer;
 public class Lesson extends JPAEntity<Integer>
 {
     @NotNull( message = "{NotNull.Lesson.date}" )
+    @Temporal( TemporalType.TIMESTAMP )
     @Column( name = "date", nullable = false )
     private Date date;
 

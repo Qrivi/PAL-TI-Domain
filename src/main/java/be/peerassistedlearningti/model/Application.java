@@ -40,9 +40,11 @@ public class Application extends JPAEntity<Integer>
     private ApplicationState state;
 
     @NotNull( message = "{NotNull.Application.beginDate}" )
+    @Temporal( TemporalType.TIMESTAMP )
     @Column( name = "begin_date", nullable = false )
     private Date beginDate;
 
+    @Temporal( TemporalType.TIMESTAMP )
     @Column( name = "end_date", nullable = true )
     private Date endDate;
 
