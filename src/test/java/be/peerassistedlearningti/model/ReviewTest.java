@@ -19,7 +19,7 @@ public class ReviewTest extends ValidationTest
     @Test
     public void testTextTooShort()
     {
-        Review r = new Review( SHORT_TEXT, new Student(), new Lesson(), 5, 5, 5, 5 );
+        Review r = new Review( SHORT_TEXT, new Student(), new Lesson(), 5, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "text" );
 
@@ -32,7 +32,7 @@ public class ReviewTest extends ValidationTest
     @Test
     public void testTextTooLong()
     {
-        Review r = new Review( LONG_TEXT, new Student(), new Lesson(), 5, 5, 5, 5 );
+        Review r = new Review( LONG_TEXT, new Student(), new Lesson(), 5, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "text" );
 
@@ -45,7 +45,7 @@ public class ReviewTest extends ValidationTest
     @Test
     public void testScoreTooLow()
     {
-        Review r = new Review( NORMAL_TEXT, new Student(), new Lesson(), 0, 5, 5, 5 );
+        Review r = new Review( NORMAL_TEXT, new Student(), new Lesson(), 0, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "contentScore" );
 
@@ -58,7 +58,7 @@ public class ReviewTest extends ValidationTest
     @Test
     public void testScoreTooHigh()
     {
-        Review r = new Review( NORMAL_TEXT, new Student(), new Lesson(), 5, 5, 5, 11 );
+        Review r = new Review( NORMAL_TEXT, new Student(), new Lesson(), 5, 5, 5, 11, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "atmosphereScore" );
 
