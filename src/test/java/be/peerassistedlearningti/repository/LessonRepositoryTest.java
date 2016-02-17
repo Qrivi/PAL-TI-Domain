@@ -1,7 +1,6 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.config.ApplicationConfig;
-import be.peerassistedlearningti.dao.jpa.*;
 import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.util.Utils;
 import org.junit.Before;
@@ -18,9 +17,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )

@@ -1,9 +1,6 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.config.ApplicationConfig;
-import be.peerassistedlearningti.dao.jpa.ApplicationJPADAO;
-import be.peerassistedlearningti.dao.jpa.CourseJPADAO;
-import be.peerassistedlearningti.dao.jpa.StudentJPADAO;
 import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.util.Utils;
 import org.junit.Before;
@@ -18,9 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
