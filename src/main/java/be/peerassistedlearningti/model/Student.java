@@ -124,25 +124,30 @@ public class Student extends JPAEntity<Integer>
     /**
      * Sets the resetTokenExpiration to 1 hour in the future and creates a reset token.
      *
-     * @return The plaintext token
+     * @return The plaintext token, or null if the last reset issue was made in less than 1 hour from this one
      */
-    public String issuePasswordReset()
-    {
-        resetTokenExpiration = new Date( new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ) );
-        resetSalt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+    public String issuePasswordReset() {
+        //max 1 reset request an hour
+        if(resetTokenExpiration!=null &&
+                resetTokenExpiration.getTime() + TimeUnit.HOURS.toMillis( 1 ) - new Date().getTime() < 0){
+            return null;
+        }
+        resetTokenExpiration = new Date(new Date().getTime() + TimeUnit.HOURS.toMillis(1));
+        resetSalt = new BigInteger(130, new SecureRandom()).toString(20);
 
-        String plainTextToken = email + new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        String plainTextToken = email + new BigInteger(130, new SecureRandom()).toString(20);
 
-        try
-        {
+        try {
             plainTextToken = Base64.getUrlEncoder()
-                    .encodeToString( plainTextToken.getBytes( "utf-8" ) );
-        } catch ( UnsupportedEncodingException e ) { }
+                    .encodeToString(plainTextToken.getBytes("utf-8"));
+        } catch (UnsupportedEncodingException e) {
+        }
 
-        resetToken = createHash( plainTextToken, resetSalt );
+        resetToken = createHash(plainTextToken, resetSalt);
 
         return plainTextToken;
     }
+
 
     /**
      * Check if the given reset token is valid and did not pass expiration
@@ -155,7 +160,9 @@ public class Student extends JPAEntity<Integer>
         if ( resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
                 resetToken != null && plainTextToken != null )
         {
-            return createHash( plainTextToken, resetSalt ).equals( resetToken );
+            boolean  valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
+            resetToken = null;
+            return  valid;
         }
         return false;
     }
