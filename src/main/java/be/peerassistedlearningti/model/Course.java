@@ -32,16 +32,16 @@ public class Course extends JPAEntity<Integer>
     @ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Tutor> tutors;
 
-    @NotEmpty(message = "{NotEmpty.Course.curriculum}")
-    @Column(name = "curriculum", nullable = false)
+    @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
+    @Column( name = "curriculum", nullable = false )
     private String curriculum;
 
-    @Min(value = 1, message = "{Min.Course.year}")
-    @Column(name = "year", nullable = false)
+    @Min( value = 1, message = "{Min.Course.year}" )
+    @Column( name = "year", nullable = false )
     private int year;
 
-    @ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
-    private Set<Student> subscribers;
+    /*@ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    private Set<Student> subscribers;*/
 
     /**
      * Default constructor for Course
@@ -55,7 +55,7 @@ public class Course extends JPAEntity<Integer>
      * @param name      The full name of the course
      * @param shortName The short name of the course
      */
-    public Course( String code, String name, String shortName, String curriculum, int year)
+    public Course( String code, String name, String shortName, String curriculum, int year )
     {
         this.code = code;
         this.name = name;
@@ -99,7 +99,8 @@ public class Course extends JPAEntity<Integer>
      *
      * @param curriculum The new curriculum of the course
      */
-    public void setCurriculum(String curriculum) {
+    public void setCurriculum( String curriculum )
+    {
         this.curriculum = curriculum;
     }
 
@@ -108,7 +109,8 @@ public class Course extends JPAEntity<Integer>
      *
      * @param year The new year of the course
      */
-    public void setYear(int year) {
+    public void setYear( int year )
+    {
         this.year = year;
     }
 
@@ -149,14 +151,16 @@ public class Course extends JPAEntity<Integer>
     /**
      * @return The curriculum of the course
      */
-    public String getCurriculum() {
+    public String getCurriculum()
+    {
         return curriculum;
     }
 
     /**
      * @return The year of the course
      */
-    public int getYear() {
+    public int getYear()
+    {
         return year;
     }
 
@@ -167,15 +171,18 @@ public class Course extends JPAEntity<Integer>
      */
     public Set<Student> getSubscribers()
     {
-        return subscribers;
+        return null; //subscribers;
     }
 
-    public void subscribe(Student student) {
-        subscribers.add(student);
+    // todo return boolean
+    public void subscribe( Student student )
+    {
+        //subscribers.add(student);
     }
 
-    public void unsubscribe(Student student) {
-        subscribers.remove(student);
+    public void unsubscribe( Student student )
+    {
+        // subscribers.remove(student);
     }
 
     /**
