@@ -84,28 +84,6 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( courseRepository.findAll() );
     }
 
-    /**
-     * Subscribes the student to the course
-     *
-     * @param student to be subscribed
-     */
-    public boolean subscribe(Course course, Student student){
-        return course.subscribe(student);
-    }
-
-    /**
-     * Unsubscribes the student from the course
-     *
-     * @param student to be unsubcribed
-     */
-    public boolean unsubscribe(Course course, Student student) {
-        return course.unsubscribe(student);
-    }
-
-    public boolean isSubscribed(Course course, Student student) {
-        return course.isSubscribed(student);
-    }
-
     //================================================================================
     // endregion
     //================================================================================

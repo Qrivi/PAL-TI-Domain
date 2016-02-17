@@ -45,22 +45,6 @@ public interface PALService
      */
     Collection<Course> getAllCourses();
 
-    /**
-     * Subscribes the student to the course
-     *
-     * @param student to be subscribed
-     */
-    boolean subscribe(Course course, Student student);
-
-    /**
-     * Unsubscribes the student from the course
-     *
-     * @param student to be unsubcribed
-     */
-    boolean unsubscribe(Course course, Student student);
-
-    boolean isSubscribed(Course course, Student student);
-
     //================================================================================
     // endregion
     //================================================================================
@@ -185,7 +169,7 @@ public interface PALService
      *
      * @return A collection containing all the lessons
      */
-    public Collection<Lesson> getAllLessons();
+    Collection<Lesson> getAllLessons();
 
     //================================================================================
     // endregion
@@ -208,21 +192,21 @@ public interface PALService
      *
      * @param booking The booking to be added to the database
      */
-    public void addBooking( Booking booking );
+    void addBooking( Booking booking );
 
     /**
      * Removes the specified booking from the database
      *
      * @param booking The booking to be removed from the database
      */
-    public void removeBooking( Booking booking );
+    void removeBooking( Booking booking );
 
     /**
      * Gets all the bookings
      *
      * @return A collection containing all the bookings
      */
-    public Collection<Booking> getAllBookings();
+    Collection<Booking> getAllBookings();
 
     //================================================================================
     // endregion
