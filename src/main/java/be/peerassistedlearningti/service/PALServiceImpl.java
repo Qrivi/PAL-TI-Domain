@@ -13,7 +13,7 @@ import java.util.Collection;
  *
  * @see PALService
  */
-public class PALServiceImpl implements PALService
+public class PALServiceImpl // implements PALService
 {
 
     /**

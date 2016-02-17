@@ -381,14 +381,14 @@ public interface PALService
      *
      * @return A collection containing the reviews for that tutor
      */
-    Collection<Review> getReviews(Tutor tutor);
+    Collection<Review> getReviews( Tutor tutor );
 
     /**
      * Gets reviews filtered by lesson
      *
      * @return A collection containing the reviews of that lesson
      */
-    Collection<Review> getReviews(Lesson lesson);
+    Collection<Review> getReviews( Lesson lesson );
 
     //================================================================================
     // endregion
