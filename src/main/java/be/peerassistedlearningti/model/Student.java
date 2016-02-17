@@ -125,16 +125,25 @@ public class Student extends JPAEntity<Integer>
     /**
      * Sets the resetTokenExpiration to 1 day in the future and creates a reset token.
      *
+     * @return True if the issue was valid
      * @throws UnsupportedEncodingException
      */
-    public void issuePasswordReset() throws UnsupportedEncodingException {
+    public boolean issuePasswordReset() throws UnsupportedEncodingException {
+        //max 1 reset request an hour
+        if(resetTokenExpiration!=null &&
+                resetTokenExpiration.getTime() + TimeUnit.HOURS.toMillis( 1 ) - new Date().getTime() < 0){
+            return false;
+        }
+        //set resetTokenExpiration to 1 hour in the future
         resetTokenExpiration = new Date(new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ));
-        resetSalt =  new BigInteger( 130, new SecureRandom() ).toString( 20 );
+
         String plainTextToken = email+new BigInteger( 130, new SecureRandom() ).toString( 20 );
         plainTextToken = Base64.getUrlEncoder().encodeToString(plainTextToken.getBytes("utf-8"));
         //TODO:: send the mail
 
+        resetSalt =  new BigInteger( 130, new SecureRandom() ).toString( 20 );
         resetToken = createHash(plainTextToken,resetSalt);
+        return true;
     }
 
     /**
@@ -144,7 +153,8 @@ public class Student extends JPAEntity<Integer>
      * @return True if the plaintext token was correct and did not pass expiration
      */
     public boolean validatePasswordReset(String plainTextToken){
-        if(resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
+        if(resetTokenExpiration!=null &&
+                resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
                 resetToken!=null && plainTextToken!=null){
             return createHash(plainTextToken,resetSalt).equals(resetToken);
         }
