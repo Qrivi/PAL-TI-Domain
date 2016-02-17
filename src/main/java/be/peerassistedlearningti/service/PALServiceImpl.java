@@ -54,6 +54,16 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a course from the database
+     *
+     * @param course The course to be updated to the database
+     */
+    public void updateCourse( Course course )
+    {
+        courseRepository.save( course );
+    }
+
+    /**
      * Removes the specified course from the database
      *
      * @param course The course to be removed from the database
