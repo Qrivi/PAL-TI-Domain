@@ -5,7 +5,6 @@ import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.model.UserType;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.util.Collection;
 import java.util.HashSet;
