@@ -40,8 +40,12 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "year", nullable = false )
     private int year;
 
-    /*@ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
-    private Set<Student> subscribers;*/
+    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @JoinTable(
+            name = "course_subscriber",
+            joinColumns = @JoinColumn( name = "course_id", referencedColumnName = "id" ),
+            inverseJoinColumns = @JoinColumn( name = "subscriber_id", referencedColumnName = "id" ) )
+    private Set<Student> subscribers;
 
     /**
      * Default constructor for Course
@@ -174,15 +178,26 @@ public class Course extends JPAEntity<Integer>
         return null; //subscribers;
     }
 
-    // todo return boolean
-    public void subscribe( Student student )
+    /**
+     * Add a student to the subscription list of the course
+     *
+     * @param student The student to add
+     * @return true if this set did not already contain the specified booking
+     */
+    public boolean subscribe( Student student )
     {
-        //subscribers.add(student);
+        return subscribers.add( student );
     }
 
-    public void unsubscribe( Student student )
+    /**
+     * Removes a student from the subscription list of the course
+     *
+     * @param student The student to remove
+     * @return true if this set contained the specified booking
+     */
+    public boolean unsubscribe( Student student )
     {
-        // subscribers.remove(student);
+        return subscribers.remove( student );
     }
 
     /**

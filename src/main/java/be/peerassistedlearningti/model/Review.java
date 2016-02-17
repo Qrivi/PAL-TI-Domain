@@ -33,7 +33,7 @@ public class Review extends JPAEntity<Integer>
     private Student student;
 
     @Valid
-    @NotNull( message = "{NotNull.Review.lesson" )
+    @NotNull( message = "{NotNull.Review.lesson}" )
     @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "lesson_id" )
     private Lesson lesson;
@@ -43,25 +43,21 @@ public class Review extends JPAEntity<Integer>
     @Temporal( TemporalType.TIMESTAMP )
     private Date date;
 
-    @NotNull( message = "{NotNull.Review.contentScore}" )
     @Min( value = 1, message = "{Min.Review.contentScore}" )
     @Max( value = 10, message = "{Max.Review.contentScore}" )
     @Column( name = "content_score" )
     private int contentScore;
 
-    @NotNull( message = "{NotNull.Review.tutorScore}" )
     @Min( value = 1, message = "{Min.Review.tutorScore}" )
     @Max( value = 10, message = "{Max.Review.tutorScore}" )
     @Column( name = "tutor_score" )
     private int tutorScore;
 
-    @NotNull( message = "{NotNull.Review.engagementScore}" )
     @Min( value = 1, message = "{Min.Review.engagementScore}" )
     @Max( value = 10, message = "{Max.Review.engagementScore}" )
     @Column( name = "engagement_score" )
     private int engagementScore;
 
-    @NotNull( message = "{NotNull.Review.atmosphereScore}" )
     @Min( value = 1, message = "{Min.Review.atmosphereScore}" )
     @Max( value = 10, message = "{Max.Review.atmosphereScore}" )
     @Column( name = "atmosphere_score" )

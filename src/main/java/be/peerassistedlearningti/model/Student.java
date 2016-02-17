@@ -14,6 +14,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -51,6 +52,9 @@ public class Student extends JPAEntity<Integer>
     @Valid
     @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Tutor tutor;
+
+    @ManyToMany( mappedBy = "subscribers", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    private Set<Course> subscriptions;
 
     @Column( name = "reset_token", unique = true )
     private String resetToken;
@@ -126,20 +130,21 @@ public class Student extends JPAEntity<Integer>
      *
      * @return The plaintext token
      */
-    public String issuePasswordReset() {
+    public String issuePasswordReset()
+    {
 
-        resetTokenExpiration = new Date(new Date().getTime() + TimeUnit.HOURS.toMillis(1));
-        resetSalt = new BigInteger(130, new SecureRandom()).toString(20);
+        resetTokenExpiration = new Date( new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ) );
+        resetSalt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
 
-        String plainTextToken = email + new BigInteger(130, new SecureRandom()).toString(20);
+        String plainTextToken = email + new BigInteger( 130, new SecureRandom() ).toString( 20 );
 
-        try {
+        try
+        {
             plainTextToken = Base64.getUrlEncoder()
-                    .encodeToString(plainTextToken.getBytes("utf-8"));
-        } catch (UnsupportedEncodingException e) {
-        }
+                    .encodeToString( plainTextToken.getBytes( "utf-8" ) );
+        } catch ( UnsupportedEncodingException e ) {}
 
-        resetToken = createHash(plainTextToken, resetSalt);
+        resetToken = createHash( plainTextToken, resetSalt );
 
         return plainTextToken;
     }
@@ -156,20 +161,11 @@ public class Student extends JPAEntity<Integer>
         if ( resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
                 resetToken != null && plainTextToken != null )
         {
-            boolean  valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
+            boolean valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
             resetToken = null;
-            return  valid;
+            return valid;
         }
         return false;
-    }
-
-    /**
-     * Gets the name of the Student
-     *
-     * @return The name of the student
-     */
-    public String getName() {
-        return name;
     }
 
     /**
@@ -183,11 +179,13 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The password of the student
+     * Sets the user type of the student
+     *
+     * @param type The user type of the student
      */
-    public String getPassword()
+    public void setType( UserType type )
     {
-        return password;
+        this.type = type;
     }
 
     /**
@@ -195,11 +193,37 @@ public class Student extends JPAEntity<Integer>
      *
      * @param password The password of the student
      */
-    public void setPassword(String password)
+    public void setPassword( String password )
     {
-        if (salt == null)
-            this.salt = new BigInteger(130, new SecureRandom()).toString(20);
-        this.password = createHash(password, salt);
+        if ( salt == null )
+            this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        this.password = createHash( password, salt );
+    }
+
+    /**
+     * Sets the email of the student
+     *
+     * @param email The email of the student
+     */
+    public void setEmail( String email )
+    {
+        this.email = email;
+    }
+
+    /**
+     * @return The name of the student
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return The password of the student
+     */
+    public String getPassword()
+    {
+        return password;
     }
 
     /**
@@ -211,31 +235,11 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the email of the student
-     *
-     * @param email The email of the student
-     */
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    /**
      * @return The user type of the student
      */
     public UserType getType()
     {
         return type;
-    }
-
-    /**
-     * Sets the user type of the student
-     *
-     * @param type The user type of the student
-     */
-    public void setType(UserType type)
-    {
-        this.type = type;
     }
 
     /**
@@ -247,9 +251,7 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the reset token of the student used to reset the password
-     *
-     * @return The reset token
+     * @return The reset token of the student used to reset the password
      */
     public String getResetToken()
     {
@@ -257,11 +259,18 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the expiration date of the reset token
-     *
-     * @return The ResetTokenExpiration
+     * @return The expiration date of the reset token
      */
-    public Date getResetTokenExpiration() {
+    public Date getResetTokenExpiration()
+    {
         return resetTokenExpiration;
+    }
+
+    /**
+     * @return The subscriptions from the student
+     */
+    public Set<Course> getSubscriptions()
+    {
+        return subscriptions;
     }
 }
