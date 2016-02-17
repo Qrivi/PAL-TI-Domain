@@ -201,6 +201,16 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
+     * Returns if the student is subscribed to the course
+     *
+     * @param student
+     * @return if the student is subscribed
+     */
+    public boolean isSubscribed(Student student) {
+        return subscribers.contains(student);
+    }
+
+    /**
      * Equals functionality for a course
      *
      * @param o The object to check if it is equal

@@ -50,14 +50,16 @@ public interface PALService
      *
      * @param student to be subscribed
      */
-    void subscribe(Course course, Student student);
+    boolean subscribe(Course course, Student student);
 
     /**
      * Unsubscribes the student from the course
      *
      * @param student to be unsubcribed
      */
-    void unsubscribe(Course course, Student student);
+    boolean unsubscribe(Course course, Student student);
+
+    boolean isSubscribed(Course course, Student student);
 
     //================================================================================
     // endregion

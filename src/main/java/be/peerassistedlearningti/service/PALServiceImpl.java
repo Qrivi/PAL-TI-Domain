@@ -89,8 +89,8 @@ public class PALServiceImpl implements PALService
      *
      * @param student to be subscribed
      */
-    public void subscribe(Course course, Student student) {
-        course.subscribe(student);
+    public boolean subscribe(Course course, Student student){
+        return course.subscribe(student);
     }
 
     /**
@@ -98,8 +98,12 @@ public class PALServiceImpl implements PALService
      *
      * @param student to be unsubcribed
      */
-    public void unsubscribe(Course course, Student student) {
-        course.unsubscribe(student);
+    public boolean unsubscribe(Course course, Student student) {
+        return course.unsubscribe(student);
+    }
+
+    public boolean isSubscribed(Course course, Student student) {
+        return course.isSubscribed(student);
     }
 
     //================================================================================
