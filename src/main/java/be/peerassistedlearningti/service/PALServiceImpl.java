@@ -1,113 +1,43 @@
 package be.peerassistedlearningti.service;
 
-import be.peerassistedlearningti.common.dao.DAOException;
-import be.peerassistedlearningti.common.service.ServiceException;
-import be.peerassistedlearningti.dao.*;
 import be.peerassistedlearningti.model.*;
+import be.peerassistedlearningti.repository.*;
+import be.peerassistedlearningti.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-/**
- * Class used to access the backend functionalities
- *
- * @see PALService
- */
-public class PALServiceImpl // implements PALService
+@Service
+@Transactional
+public class PALServiceImpl implements PALService
 {
 
-    /**
-     * Data access objects
-     */
+    @Autowired
+    CourseRepository courseRepository;
 
-    private TutorDAO tutorDAO;
-    private LessonDAO lessonDAO;
-    private CourseDAO courseDAO;
-    private StudentDAO studentDAO;
-    private RoomDAO roomDAO;
-    private BookingDAO bookingDAO;
-    private ApplicationDAO applicationDAO;
-    private ReviewDAO reviewDAO;
+    @Autowired
+    StudentRepository studentRepository;
 
-    /**
-     * Sets the course dao for the service
-     *
-     * @param courseDAO The course dao for the service
-     */
-    public void setCourseDAO( CourseDAO courseDAO )
-    {
-        this.courseDAO = courseDAO;
-    }
+    @Autowired
+    TutorRepository tutorRepository;
 
-    /**
-     * Sets the student dao for the service
-     *
-     * @param studentDAO The student dao for the service
-     */
-    public void setStudentDAO( StudentDAO studentDAO )
-    {
-        this.studentDAO = studentDAO;
-    }
+    @Autowired
+    RoomRepository roomRepository;
 
-    /**
-     * Sets the tutor dao for the service
-     *
-     * @param tutorDAO The tutor dao for the service
-     */
-    public void setTutorDAO( TutorDAO tutorDAO )
-    {
-        this.tutorDAO = tutorDAO;
-    }
+    @Autowired
+    ReviewRepository reviewRepository;
 
-    /**
-     * Sets the lesson dao for the service
-     *
-     * @param lessonDAO The lesson dao for the service
-     */
-    public void setLessonDAO( LessonDAO lessonDAO )
-    {
-        this.lessonDAO = lessonDAO;
-    }
+    @Autowired
+    LessonRepository lessonRepository;
 
-    /**
-     * Sets the room dao for the service
-     *
-     * @param roomDAO The room dao for the service
-     */
-    public void setRoomDAO( RoomDAO roomDAO )
-    {
-        this.roomDAO = roomDAO;
-    }
+    @Autowired
+    BookingRepository bookingRepository;
 
-    /**
-     * Sets the booking dao for the service
-     *
-     * @param bookingDAO The booking dao for the service
-     */
-    public void setBookingDAO( BookingDAO bookingDAO )
-    {
-        this.bookingDAO = bookingDAO;
-    }
-
-    /**
-     * Sets the application dao for the service
-     *
-     * @param applicationDAO The application dao for the service
-     */
-    public void setApplicationDAO( ApplicationDAO applicationDAO )
-    {
-        this.applicationDAO = applicationDAO;
-    }
-
-    /**
-     * Sets the review dao for the service
-     *
-     * @param reviewDAO The application dao for the service
-     */
-    public void setReviewDAO( ReviewDAO reviewDAO )
-    {
-        this.reviewDAO = reviewDAO;
-    }
+    @Autowired
+    ApplicationRepository applicationRepository;
 
     //================================================================================
     // region Course
@@ -120,13 +50,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addCourse( Course course )
     {
-        try
-        {
-            courseDAO.add( course );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        courseRepository.save( course );
     }
 
     /**
@@ -136,13 +60,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeCourse( Course course )
     {
-        try
-        {
-            courseDAO.remove( course );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        courseRepository.delete( course );
     }
 
     /**
@@ -153,13 +71,7 @@ public class PALServiceImpl // implements PALService
      */
     public Course getCourseById( int id )
     {
-        try
-        {
-            return courseDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return courseRepository.findOne( id );
     }
 
     /**
@@ -169,13 +81,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Course> getAllCourses()
     {
-        try
-        {
-            return courseDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( courseRepository.findAll() );
     }
 
     //================================================================================
@@ -193,13 +99,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addStudent( Student student )
     {
-        try
-        {
-            studentDAO.add( student );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        studentRepository.save( student );
     }
 
     /**
@@ -209,13 +109,7 @@ public class PALServiceImpl // implements PALService
      */
     public void updateStudent( Student student )
     {
-        try
-        {
-            studentDAO.update( student );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        studentRepository.save( student );
     }
 
     /**
@@ -225,13 +119,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeStudent( Student student )
     {
-        try
-        {
-            studentDAO.remove( student );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        studentRepository.delete( student );
     }
 
     /**
@@ -242,13 +130,7 @@ public class PALServiceImpl // implements PALService
      */
     public Student getStudentById( int id )
     {
-        try
-        {
-            return studentDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return studentRepository.findOne( id );
     }
 
     /**
@@ -259,13 +141,7 @@ public class PALServiceImpl // implements PALService
      */
     public Student getStudentByEmail( String email )
     {
-        try
-        {
-            return studentDAO.getByEmail( email );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return studentRepository.findByEmail( email );
     }
 
     /**
@@ -275,13 +151,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Student> getAllStudents()
     {
-        try
-        {
-            return studentDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( studentRepository.findAll() );
     }
 
     //================================================================================
@@ -299,13 +169,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addTutor( Tutor tutor )
     {
-        try
-        {
-            tutorDAO.add( tutor );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        tutorRepository.save( tutor );
     }
 
     /**
@@ -315,13 +179,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeTutor( Tutor tutor )
     {
-        try
-        {
-            tutorDAO.remove( tutor );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        tutorRepository.delete( tutor );
     }
 
     /**
@@ -332,14 +190,9 @@ public class PALServiceImpl // implements PALService
      */
     public Tutor getTutorById( int id )
     {
-        try
-        {
-            return tutorDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return tutorRepository.findOne( id );
     }
+
     //================================================================================
     // endregion
     //================================================================================
@@ -355,13 +208,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addLesson( Lesson lesson )
     {
-        try
-        {
-            lessonDAO.add( lesson );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        lessonRepository.save( lesson );
     }
 
     /**
@@ -371,13 +218,7 @@ public class PALServiceImpl // implements PALService
      */
     public void updateLesson( Lesson lesson )
     {
-        try
-        {
-            lessonDAO.update( lesson );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        lessonRepository.save( lesson );
     }
 
     /**
@@ -387,13 +228,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeLesson( Lesson lesson )
     {
-        try
-        {
-            lessonDAO.remove( lesson );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        lessonRepository.delete( lesson );
     }
 
     /**
@@ -404,13 +239,7 @@ public class PALServiceImpl // implements PALService
      */
     public Lesson getLessonById( int id )
     {
-        try
-        {
-            return lessonDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return lessonRepository.findOne( id );
     }
 
     /**
@@ -420,13 +249,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Lesson> getAllLessons()
     {
-        try
-        {
-            return lessonDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( lessonRepository.findAll() );
     }
 
     //================================================================================
@@ -445,13 +268,7 @@ public class PALServiceImpl // implements PALService
      */
     public Booking getBookingById( int id )
     {
-        try
-        {
-            return bookingDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return bookingRepository.findOne( id );
     }
 
     /**
@@ -461,13 +278,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addBooking( Booking booking )
     {
-        try
-        {
-            bookingDAO.add( booking );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        bookingRepository.save( booking );
     }
 
     /**
@@ -477,13 +288,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeBooking( Booking booking )
     {
-        try
-        {
-            bookingDAO.remove( booking );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        bookingRepository.delete( booking );
     }
 
     /**
@@ -493,13 +298,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Booking> getAllBookings()
     {
-        try
-        {
-            return bookingDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( bookingRepository.findAll() );
     }
 
     //================================================================================
@@ -517,13 +316,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addRoom( Room room )
     {
-        try
-        {
-            roomDAO.add( room );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        roomRepository.save( room );
     }
 
     /**
@@ -533,13 +326,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeRoom( Room room )
     {
-        try
-        {
-            roomDAO.remove( room );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        roomRepository.delete( room );
     }
 
     /**
@@ -550,13 +337,7 @@ public class PALServiceImpl // implements PALService
      */
     public Room getRoomById( int id )
     {
-        try
-        {
-            return roomDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return roomRepository.findOne( id );
     }
 
     /**
@@ -567,13 +348,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Room> getRoomsFromCampus( Campus campus )
     {
-        try
-        {
-            return roomDAO.getFromCampus( campus );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return roomRepository.findByCampus( campus );
     }
 
     /**
@@ -581,13 +356,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<RoomType> getRoomTypes()
     {
-        try
-        {
-            return Arrays.asList( RoomType.values() );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Arrays.asList( RoomType.values() );
     }
 
     /**
@@ -598,13 +367,7 @@ public class PALServiceImpl // implements PALService
      */
     public RoomType getRoomTypeByType( String type )
     {
-        try
-        {
-            return RoomType.getByValue( type );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return RoomType.getByValue( type );
     }
 
     /**
@@ -614,13 +377,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Room> getAllRooms()
     {
-        try
-        {
-            return roomDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( roomRepository.findAll() );
     }
 
     //================================================================================
@@ -636,13 +393,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Campus> getCampuses()
     {
-        try
-        {
-            return Arrays.asList( Campus.values() );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Arrays.asList( Campus.values() );
     }
 
     /**
@@ -653,13 +404,7 @@ public class PALServiceImpl // implements PALService
      */
     public Campus getCampusByName( String name )
     {
-        try
-        {
-            return Campus.getByValue( name );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Campus.getByValue( name );
     }
 
     //================================================================================
@@ -678,13 +423,7 @@ public class PALServiceImpl // implements PALService
      */
     public Application getApplicationById( int id )
     {
-        try
-        {
-            return applicationDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return applicationRepository.findOne( id );
     }
 
     /**
@@ -694,13 +433,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addApplication( Application application )
     {
-        try
-        {
-            applicationDAO.add( application );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        applicationRepository.save( application );
     }
 
     /**
@@ -710,13 +443,7 @@ public class PALServiceImpl // implements PALService
      */
     public void updateApplication( Application application )
     {
-        try
-        {
-            applicationDAO.update( application );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        applicationRepository.save( application );
     }
 
     /**
@@ -726,13 +453,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeApplication( Application application )
     {
-        try
-        {
-            applicationDAO.remove( application );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        applicationRepository.delete( application );
     }
 
     /**
@@ -742,13 +463,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Application> getAllApplications()
     {
-        try
-        {
-            return applicationDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( applicationRepository.findAll() );
     }
 
     /**
@@ -758,13 +473,7 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Application> getAllPendingApplications()
     {
-        try
-        {
-            return applicationDAO.getAll( ApplicationState.PENDING );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return applicationRepository.findAll( ApplicationState.PENDING );
     }
 
     //================================================================================
@@ -783,13 +492,7 @@ public class PALServiceImpl // implements PALService
      */
     public Review getReviewById( int id )
     {
-        try
-        {
-            return reviewDAO.getById( id );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return reviewRepository.findOne( id );
     }
 
     /**
@@ -799,13 +502,7 @@ public class PALServiceImpl // implements PALService
      */
     public void addReview( Review review )
     {
-        try
-        {
-            reviewDAO.add( review );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        reviewRepository.save( review );
     }
 
     /**
@@ -815,13 +512,7 @@ public class PALServiceImpl // implements PALService
      */
     public void removeReview( Review review )
     {
-        try
-        {
-            reviewDAO.remove( review );
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        reviewRepository.delete( review );
     }
 
     /**
@@ -831,23 +522,27 @@ public class PALServiceImpl // implements PALService
      */
     public Collection<Review> getAllReviews()
     {
-        try
-        {
-            return reviewDAO.getAll();
-        } catch ( DAOException e )
-        {
-            throw new ServiceException( e );
-        }
+        return Utils.makeCollection( reviewRepository.findAll() );
     }
 
+    /**
+     * Gets reviews filtered by tutor
+     *
+     * @return A collection containing the reviews for that tutor
+     */
     public Collection<Review> getReviews( Tutor tutor )
     {
-        return null;
+        return reviewRepository.findByTutor( tutor );
     }
 
+    /**
+     * Gets reviews filtered by lesson
+     *
+     * @return A collection containing the reviews of that lesson
+     */
     public Collection<Review> getReviews( Lesson lesson )
     {
-        return null;
+        return reviewRepository.findByLesson( lesson );
     }
 
     //================================================================================
