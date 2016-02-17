@@ -45,6 +45,20 @@ public interface PALService
      */
     Collection<Course> getAllCourses();
 
+    /**
+     * Subscribes the student to the course
+     *
+     * @param student to be subscribed
+     */
+    void subscribe(Course course, Student student);
+
+    /**
+     * Unsubscribes the student from the course
+     *
+     * @param student to be unsubcribed
+     */
+    void unsubscribe(Course course, Student student);
+
     //================================================================================
     // endregion
     //================================================================================
