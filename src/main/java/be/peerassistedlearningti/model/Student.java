@@ -164,6 +164,15 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Gets the name of the Student
+     *
+     * @return The name of the student
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Sets the name of the Student
      *
      * @param name The name of the Student
@@ -171,48 +180,6 @@ public class Student extends JPAEntity<Integer>
     public void setName( String name )
     {
         this.name = name;
-    }
-
-    /**
-     * Sets the password of the Student
-     *
-     * @param password The password of the student
-     */
-    public void setPassword( String password )
-    {
-        if ( salt == null )
-            this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        this.password = createHash( password, salt );
-    }
-
-    /**
-     * Sets the email of the student
-     *
-     * @param email The email of the student
-     */
-    public void setEmail( String email )
-    {
-        this.email = email;
-    }
-
-    /**
-     * Sets the user type of the student
-     *
-     * @param type The user type of the student
-     */
-    public void setType( UserType type )
-    {
-        this.type = type;
-    }
-
-    /**
-     * Gets the name of the Student
-     *
-     * @return The name of the student
-     */
-    public String getName()
-    {
-        return name;
     }
 
     /**
@@ -224,6 +191,18 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the password of the Student
+     *
+     * @param password The password of the student
+     */
+    public void setPassword(String password)
+    {
+        if (salt == null)
+            this.salt = new BigInteger(130, new SecureRandom()).toString(20);
+        this.password = createHash(password, salt);
+    }
+
+    /**
      * @return The email of the student
      */
     public String getEmail()
@@ -232,11 +211,31 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the email of the student
+     *
+     * @param email The email of the student
+     */
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    /**
      * @return The user type of the student
      */
     public UserType getType()
     {
         return type;
+    }
+
+    /**
+     * Sets the user type of the student
+     *
+     * @param type The user type of the student
+     */
+    public void setType(UserType type)
+    {
+        this.type = type;
     }
 
     /**
@@ -257,4 +256,12 @@ public class Student extends JPAEntity<Integer>
         return resetToken;
     }
 
+    /**
+     * Gets the expiration date of the reset token
+     *
+     * @return The ResetTokenExpiration
+     */
+    public Date getResetTokenExpiration() {
+        return resetTokenExpiration;
+    }
 }
