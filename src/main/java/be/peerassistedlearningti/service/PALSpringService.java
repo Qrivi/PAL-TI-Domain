@@ -1,16 +1,43 @@
 package be.peerassistedlearningti.service;
 
 import be.peerassistedlearningti.model.*;
+import be.peerassistedlearningti.repository.*;
+import be.peerassistedlearningti.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.Collection;
 
-/**
- * Interface used to determine the backend functionalities
- *
- * @see PALService
- */
-public interface PALService
+@Service
+@Transactional
+public class PALSpringService implements PALService
 {
+
+    @Autowired
+    CourseRepository courseRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    TutorRepository tutorRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
+
+    @Autowired
+    ReviewRepository reviewRepository;
+
+    @Autowired
+    LessonRepository lessonRepository;
+
+    @Autowired
+    BookingRepository bookingRepository;
+
+    @Autowired
+    ApplicationRepository applicationRepository;
 
     //================================================================================
     // region Course
@@ -21,14 +48,20 @@ public interface PALService
      *
      * @param course The course to be added to the database
      */
-    void addCourse( Course course );
+    public void addCourse( Course course )
+    {
+        courseRepository.save( course );
+    }
 
     /**
      * Removes the specified course from the database
      *
      * @param course The course to be removed from the database
      */
-    void removeCourse( Course course );
+    public void removeCourse( Course course )
+    {
+        courseRepository.delete( course );
+    }
 
     /**
      * Gets the course with the specified id
@@ -36,14 +69,20 @@ public interface PALService
      * @param id The id of the course
      * @return The course with the specified id
      */
-    Course getCourseById( int id );
+    public Course getCourseById( int id )
+    {
+        return courseRepository.findOne( id );
+    }
 
     /**
      * Gets all the courses
      *
      * @return A collection containing all the courses
      */
-    Collection<Course> getAllCourses();
+    public Collection<Course> getAllCourses()
+    {
+        return Utils.makeCollection( courseRepository.findAll() );
+    }
 
     //================================================================================
     // endregion
@@ -58,21 +97,30 @@ public interface PALService
      *
      * @param student The student to be added to the database
      */
-    void addStudent( Student student );
+    public void addStudent( Student student )
+    {
+        studentRepository.save( student );
+    }
 
     /**
      * Updates a student in the database
      *
      * @param student The student to be updated in the database
      */
-    void updateStudent( Student student );
+    public void updateStudent( Student student )
+    {
+        studentRepository.save( student );
+    }
 
     /**
      * Removes the specified student from the database
      *
      * @param student The student to be removed from the database
      */
-    void removeStudent( Student student );
+    public void removeStudent( Student student )
+    {
+        studentRepository.delete( student );
+    }
 
     /**
      * Gets the student with the specified id
@@ -80,7 +128,10 @@ public interface PALService
      * @param id The id of the student
      * @return The student with the specified id
      */
-    Student getStudentById( int id );
+    public Student getStudentById( int id )
+    {
+        return studentRepository.findOne( id );
+    }
 
     /**
      * Gets the student with the specified email
@@ -88,14 +139,20 @@ public interface PALService
      * @param email The email of the student
      * @return The student with the specified email
      */
-    Student getStudentByEmail( String email );
+    public Student getStudentByEmail( String email )
+    {
+        return studentRepository.findByEmail( email );
+    }
 
     /**
      * Gets all the students
      *
      * @return A collection containing all the students
      */
-    Collection<Student> getAllStudents();
+    public Collection<Student> getAllStudents()
+    {
+        return Utils.makeCollection( studentRepository.findAll() );
+    }
 
     //================================================================================
     // endregion
@@ -110,14 +167,20 @@ public interface PALService
      *
      * @param tutor The tutor to be added to the database
      */
-    void addTutor( Tutor tutor );
+    public void addTutor( Tutor tutor )
+    {
+        tutorRepository.save( tutor );
+    }
 
     /**
      * Removes the specified tutor from the database
      *
      * @param tutor The tutor to be removed from the database
      */
-    void removeTutor( Tutor tutor );
+    public void removeTutor( Tutor tutor )
+    {
+        tutorRepository.delete( tutor );
+    }
 
     /**
      * Gets the tutor with the specified id
@@ -125,7 +188,10 @@ public interface PALService
      * @param id The id of the tutor
      * @return The tutor with the specified id
      */
-    Tutor getTutorById( int id );
+    public Tutor getTutorById( int id )
+    {
+        return tutorRepository.findOne( id );
+    }
 
     //================================================================================
     // endregion
@@ -140,21 +206,30 @@ public interface PALService
      *
      * @param lesson The lesson to be added to the database
      */
-    void addLesson( Lesson lesson );
+    public void addLesson( Lesson lesson )
+    {
+        lessonRepository.save( lesson );
+    }
 
     /**
      * Updates a lesson in the database
      *
      * @param lesson The lesson to be updated in the database
      */
-    void updateLesson( Lesson lesson );
+    public void updateLesson( Lesson lesson )
+    {
+        lessonRepository.save( lesson );
+    }
 
     /**
      * Removes the specified lesson from the database
      *
      * @param lesson The lesson to be removed from the database
      */
-    void removeLesson( Lesson lesson );
+    public void removeLesson( Lesson lesson )
+    {
+        lessonRepository.delete( lesson );
+    }
 
     /**
      * Gets the lesson with the specified id
@@ -162,14 +237,20 @@ public interface PALService
      * @param id The id of the lesson
      * @return The lesson with the specified id
      */
-    Lesson getLessonById( int id );
+    public Lesson getLessonById( int id )
+    {
+        return lessonRepository.findOne( id );
+    }
 
     /**
      * Gets all the lessons
      *
      * @return A collection containing all the lessons
      */
-    public Collection<Lesson> getAllLessons();
+    public Collection<Lesson> getAllLessons()
+    {
+        return Utils.makeCollection( lessonRepository.findAll() );
+    }
 
     //================================================================================
     // endregion
@@ -185,28 +266,40 @@ public interface PALService
      * @param id The id of the booking
      * @return The booking with the specified id
      */
-    Booking getBookingById( int id );
+    public Booking getBookingById( int id )
+    {
+        return bookingRepository.findOne( id );
+    }
 
     /**
      * Adds a booking to the database
      *
      * @param booking The booking to be added to the database
      */
-    public void addBooking( Booking booking );
+    public void addBooking( Booking booking )
+    {
+        bookingRepository.save( booking );
+    }
 
     /**
      * Removes the specified booking from the database
      *
      * @param booking The booking to be removed from the database
      */
-    public void removeBooking( Booking booking );
+    public void removeBooking( Booking booking )
+    {
+        bookingRepository.delete( booking );
+    }
 
     /**
      * Gets all the bookings
      *
      * @return A collection containing all the bookings
      */
-    public Collection<Booking> getAllBookings();
+    public Collection<Booking> getAllBookings()
+    {
+        return Utils.makeCollection( bookingRepository.findAll() );
+    }
 
     //================================================================================
     // endregion
@@ -221,14 +314,20 @@ public interface PALService
      *
      * @param room The room to be added to the database
      */
-    void addRoom( Room room );
+    public void addRoom( Room room )
+    {
+        roomRepository.save( room );
+    }
 
     /**
      * Removes the specified room from the database
      *
      * @param room The room to be removed from the database
      */
-    void removeRoom( Room room );
+    public void removeRoom( Room room )
+    {
+        roomRepository.delete( room );
+    }
 
     /**
      * Gets the room with the specified id
@@ -236,7 +335,10 @@ public interface PALService
      * @param id The id of the room
      * @return The room with the specified id
      */
-    Room getRoomById( int id );
+    public Room getRoomById( int id )
+    {
+        return roomRepository.findOne( id );
+    }
 
     /**
      * Gets the rooms with the specified campus
@@ -244,12 +346,18 @@ public interface PALService
      * @param campus The campus of the room
      * @return The rooms with the specified campus
      */
-    Collection<Room> getRoomsFromCampus( Campus campus );
+    public Collection<Room> getRoomsFromCampus( Campus campus )
+    {
+        return roomRepository.findByCampus( campus );
+    }
 
     /**
      * @return A collection containing all the room types
      */
-    Collection<RoomType> getRoomTypes();
+    public Collection<RoomType> getRoomTypes()
+    {
+        return Arrays.asList( RoomType.values() );
+    }
 
     /**
      * Gets the room type with the specified type
@@ -257,14 +365,20 @@ public interface PALService
      * @param type The string type of the room type
      * @return The room type object
      */
-    RoomType getRoomTypeByType( String type );
+    public RoomType getRoomTypeByType( String type )
+    {
+        return RoomType.getByValue( type );
+    }
 
     /**
      * Gets all the rooms
      *
      * @return A collection containing all the rooms
      */
-    Collection<Room> getAllRooms();
+    public Collection<Room> getAllRooms()
+    {
+        return Utils.makeCollection( roomRepository.findAll() );
+    }
 
     //================================================================================
     // endregion
@@ -277,7 +391,10 @@ public interface PALService
     /**
      * @return A collection containing all the campuses
      */
-    Collection<Campus> getCampuses();
+    public Collection<Campus> getCampuses()
+    {
+        return Arrays.asList( Campus.values() );
+    }
 
     /**
      * Gets the campus with the specified name
@@ -285,8 +402,10 @@ public interface PALService
      * @param name The string name of the campus
      * @return The Campus object
      */
-    Campus getCampusByName( String name );
-
+    public Campus getCampusByName( String name )
+    {
+        return Campus.getByValue( name );
+    }
 
     //================================================================================
     // endregion
@@ -302,42 +421,60 @@ public interface PALService
      * @param id The id of the application
      * @return The application with the specified id
      */
-    Application getApplicationById( int id );
+    public Application getApplicationById( int id )
+    {
+        return applicationRepository.findOne( id );
+    }
 
     /**
      * Adds a application to the database
      *
      * @param application The application to be added to the database
      */
-    void addApplication( Application application );
+    public void addApplication( Application application )
+    {
+        applicationRepository.save( application );
+    }
 
     /**
      * Updates a application to the database
      *
      * @param application The application to be updated in the database
      */
-    void updateApplication( Application application );
+    public void updateApplication( Application application )
+    {
+        applicationRepository.save( application );
+    }
 
     /**
      * Removes the specified application from the database
      *
      * @param application The application to be removed from the database
      */
-    void removeApplication( Application application );
+    public void removeApplication( Application application )
+    {
+        applicationRepository.delete( application );
+    }
 
     /**
      * Gets all the applications
      *
      * @return A collection containing all the applications
      */
-    Collection<Application> getAllApplications();
+    public Collection<Application> getAllApplications()
+    {
+        return Utils.makeCollection( applicationRepository.findAll() );
+    }
 
     /**
      * Gets all the pending applications
      *
      * @return A collection containing all the pending applications
      */
-    Collection<Application> getAllPendingApplications();
+    public Collection<Application> getAllPendingApplications()
+    {
+        return applicationRepository.findAll( ApplicationState.PENDING );
+    }
 
     //================================================================================
     // endregion
@@ -353,42 +490,60 @@ public interface PALService
      * @param id The id of the review
      * @return The review with the specified id
      */
-    Review getReviewById( int id );
+    public Review getReviewById( int id )
+    {
+        return reviewRepository.findOne( id );
+    }
 
     /**
      * Adds a review to the database
      *
      * @param review The review to be added to the database
      */
-    void addReview( Review review );
+    public void addReview( Review review )
+    {
+        reviewRepository.save( review );
+    }
 
     /**
      * Removes the specified review from the database
      *
      * @param review The review to be removed from the database
      */
-    void removeReview( Review review );
+    public void removeReview( Review review )
+    {
+        reviewRepository.delete( review );
+    }
 
     /**
      * Gets all the reviews
      *
      * @return A collection containing all the reviews
      */
-    Collection<Review> getAllReviews();
+    public Collection<Review> getAllReviews()
+    {
+        return Utils.makeCollection( reviewRepository.findAll() );
+    }
 
     /**
      * Gets reviews filtered by tutor
      *
      * @return A collection containing the reviews for that tutor
      */
-    Collection<Review> getReviews(Tutor tutor);
+    public Collection<Review> getReviews( Tutor tutor )
+    {
+        return reviewRepository.findByTutor( tutor );
+    }
 
     /**
      * Gets reviews filtered by lesson
      *
      * @return A collection containing the reviews of that lesson
      */
-    Collection<Review> getReviews(Lesson lesson);
+    public Collection<Review> getReviews( Lesson lesson )
+    {
+        return reviewRepository.findByLesson( lesson );
+    }
 
     //================================================================================
     // endregion

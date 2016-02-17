@@ -840,6 +840,16 @@ public class PALServiceImpl implements PALService
         }
     }
 
+    public Collection<Review> getReviews( Tutor tutor )
+    {
+        return null;
+    }
+
+    public Collection<Review> getReviews( Lesson lesson )
+    {
+        return null;
+    }
+
     //================================================================================
     // endregion
     //================================================================================
