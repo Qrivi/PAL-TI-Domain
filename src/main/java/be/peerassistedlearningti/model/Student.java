@@ -52,14 +52,14 @@ public class Student extends JPAEntity<Integer>
     @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Tutor tutor;
 
-    @Column(name="reset_token", unique = true)
+    @Column( name = "reset_token", unique = true )
     private String resetToken;
 
-    @Column(name = "reset_salt")
+    @Column( name = "reset_salt" )
     private String resetSalt;
 
-    @Column(name="reset_expiration")
-    private Date  resetTokenExpiration;
+    @Column( name = "reset_expiration" )
+    private Date resetTokenExpiration;
 
     private static final String PASSWORD_HASH_ALGORITHM = "SHA-512";
 
@@ -82,7 +82,7 @@ public class Student extends JPAEntity<Integer>
         this.name = name;
         this.type = type;
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        this.password = createHash( password, salt);
+        this.password = createHash( password, salt );
     }
 
     /**
@@ -91,7 +91,7 @@ public class Student extends JPAEntity<Integer>
      * @param plainTextPassword The password that will be hashed
      * @return The password in hashed form.
      */
-    private String createHash(String plainTextPassword, String salt )
+    private String createHash( String plainTextPassword, String salt )
     {
         if ( plainTextPassword == null )
             return null;
@@ -111,6 +111,7 @@ public class Student extends JPAEntity<Integer>
 
         return ( new BigInteger( 1, digest.digest() ).toString( 40 ) );
     }
+
     /**
      * Check if the given password is valid
      *
@@ -119,22 +120,30 @@ public class Student extends JPAEntity<Integer>
      */
     public boolean isPasswordValid( String plainTextPassword )
     {
-        return createHash( plainTextPassword, salt).equals( password );
+        return createHash( plainTextPassword, salt ).equals( password );
     }
 
     /**
-     * Sets the resetTokenExpiration to 1 day in the future and creates a reset token.
+     * Sets the resetTokenExpiration to 1 hour in the future and creates a reset token.
      *
-     * @throws UnsupportedEncodingException
+     * @return The plaintext token
      */
-    public void issuePasswordReset() throws UnsupportedEncodingException {
-        resetTokenExpiration = new Date(new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ));
-        resetSalt =  new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        String plainTextToken = email+new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        plainTextToken = Base64.getUrlEncoder().encodeToString(plainTextToken.getBytes("utf-8"));
-        //TODO:: send the mail
+    public String issuePasswordReset()
+    {
+        resetTokenExpiration = new Date( new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ) );
+        resetSalt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
 
-        resetToken = createHash(plainTextToken,resetSalt);
+        String plainTextToken = email + new BigInteger( 130, new SecureRandom() ).toString( 20 );
+
+        try
+        {
+            plainTextToken = Base64.getUrlEncoder()
+                    .encodeToString( plainTextToken.getBytes( "utf-8" ) );
+        } catch ( UnsupportedEncodingException e ) { }
+
+        resetToken = createHash( plainTextToken, resetSalt );
+
+        return plainTextToken;
     }
 
     /**
@@ -143,12 +152,13 @@ public class Student extends JPAEntity<Integer>
      * @param plainTextToken The  plaintext reset token to verify
      * @return True if the plaintext token was correct and did not pass expiration
      */
-    public boolean validatePasswordReset(String plainTextToken){
-        if(resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
-                resetToken!=null && plainTextToken!=null){
-            return createHash(plainTextToken,resetSalt).equals(resetToken);
+    public boolean validatePasswordReset( String plainTextToken )
+    {
+        if ( resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
+                resetToken != null && plainTextToken != null )
+        {
+            return createHash( plainTextToken, resetSalt ).equals( resetToken );
         }
-        //Evt. loggen van valse pogingen
         return false;
     }
 
@@ -171,7 +181,7 @@ public class Student extends JPAEntity<Integer>
     {
         if ( salt == null )
             this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        this.password = createHash( password,salt);
+        this.password = createHash( password, salt );
     }
 
     /**
@@ -241,7 +251,8 @@ public class Student extends JPAEntity<Integer>
      *
      * @return The reset token
      */
-    public String getResetToken() {
+    public String getResetToken()
+    {
         return resetToken;
     }
 
