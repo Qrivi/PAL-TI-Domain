@@ -40,6 +40,9 @@ public class Course extends JPAEntity<Integer>
     @Column(name = "year", nullable = false)
     private int year;
 
+    @ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    private Set<Student> subscribers;
+
     /**
      * Default constructor for Course
      */
@@ -155,6 +158,24 @@ public class Course extends JPAEntity<Integer>
      */
     public int getYear() {
         return year;
+    }
+
+    /**
+     * Gets the available tutors for a course
+     *
+     * @return The set with available tutors or null if none
+     */
+    public Set<Student> getSubscribers()
+    {
+        return subscribers;
+    }
+
+    public void subscribe(Student student) {
+        subscribers.add(student);
+    }
+
+    public void unsubscribe(Student student) {
+        subscribers.remove(student);
     }
 
     /**
