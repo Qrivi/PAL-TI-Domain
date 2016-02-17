@@ -61,8 +61,6 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "reset_expiration" )
     private Date resetTokenExpiration;
 
-    private static final String PASSWORD_HASH_ALGORITHM = "SHA-512";
-
     /**
      * Default empty constructor for JPA Entities
      */
