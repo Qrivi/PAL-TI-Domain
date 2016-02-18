@@ -158,8 +158,8 @@ public class Student extends JPAEntity<Integer>
      */
     public boolean validatePasswordReset( String plainTextToken )
     {
-        if ( resetTokenExpiration.getTime() - new Date().getTime() > 0 &&
-                resetToken != null && plainTextToken != null )
+        if (resetToken != null && plainTextToken != null &&
+                resetTokenExpiration.getTime() - new Date().getTime() > 0)
         {
             boolean valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
             resetToken = valid ? null : resetToken;
