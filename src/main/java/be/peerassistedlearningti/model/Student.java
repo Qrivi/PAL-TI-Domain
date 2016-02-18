@@ -162,10 +162,17 @@ public class Student extends JPAEntity<Integer>
                 resetToken != null && plainTextToken != null )
         {
             boolean valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
-            resetToken = null;
+            resetToken = valid ? null : resetToken;
             return valid;
         }
         return false;
+    }
+
+    /**
+     * @return The name of the student
+     */
+    public String getName() {
+        return name;
     }
 
     /**
@@ -179,13 +186,11 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the user type of the student
-     *
-     * @param type The user type of the student
+     * @return The password of the student
      */
-    public void setType( UserType type )
+    public String getPassword()
     {
-        this.type = type;
+        return password;
     }
 
     /**
@@ -201,32 +206,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the email of the student
-     *
-     * @param email The email of the student
-     */
-    public void setEmail( String email )
-    {
-        this.email = email;
-    }
-
-    /**
-     * @return The name of the student
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @return The password of the student
-     */
-    public String getPassword()
-    {
-        return password;
-    }
-
-    /**
      * @return The email of the student
      */
     public String getEmail()
@@ -235,11 +214,31 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the email of the student
+     *
+     * @param email The email of the student
+     */
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    /**
      * @return The user type of the student
      */
     public UserType getType()
     {
         return type;
+    }
+
+    /**
+     * Sets the user type of the student
+     *
+     * @param type The user type of the student
+     */
+    public void setType(UserType type)
+    {
+        this.type = type;
     }
 
     /**
