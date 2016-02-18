@@ -104,6 +104,22 @@ public interface PALService
      */
     Collection<Student> getAllStudents();
 
+    /**
+     * Gets lessons filtered by course
+     *
+     * @param course to be filtered on
+     * @return the lessons of that course
+     */
+    public Collection<Lesson> getLessons(Course course);
+
+    /**
+     * Gets upcoming lessons filtered by course
+     *
+     * @param course to be filterd on
+     * @return the lessons in the future of that course
+     */
+    public Collection<Lesson> getUpcomingLessons(Course course);
+
     //================================================================================
     // endregion
     //================================================================================
@@ -386,6 +402,7 @@ public interface PALService
     /**
      * Gets reviews filtered by tutor
      *
+     * @param tutor to be filtered on
      * @return A collection containing the reviews for that tutor
      */
     Collection<Review> getReviews( Tutor tutor );
@@ -393,6 +410,7 @@ public interface PALService
     /**
      * Gets reviews filtered by lesson
      *
+     * @param lesson to be filterd on
      * @return A collection containing the reviews of that lesson
      */
     Collection<Review> getReviews( Lesson lesson );

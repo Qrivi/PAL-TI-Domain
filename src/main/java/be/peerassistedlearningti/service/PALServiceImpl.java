@@ -262,6 +262,26 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( lessonRepository.findAll() );
     }
 
+    /**
+     * Gets lessons filtered by course
+     *
+     * @param course to be filtered on
+     * @return the lessons of that course
+     */
+    public Collection<Lesson> getLessons(Course course) {
+        return lessonRepository.findByCourse(course);
+    }
+
+    /**
+     * Gets upcoming lessons filtered by course
+     *
+     * @param course to be filterd on
+     * @return the lessons in the future of that course
+     */
+    public Collection<Lesson> getUpcomingLessons(Course course){
+        return lessonRepository.findUpcomingByCourse(course);
+    }
+
     //================================================================================
     // endregion
     //================================================================================
@@ -538,6 +558,7 @@ public class PALServiceImpl implements PALService
     /**
      * Gets reviews filtered by tutor
      *
+     * @param tutor to be filtered on
      * @return A collection containing the reviews for that tutor
      */
     public Collection<Review> getReviews( Tutor tutor )
@@ -548,6 +569,7 @@ public class PALServiceImpl implements PALService
     /**
      * Gets reviews filtered by lesson
      *
+     * @param lesson to be filterd on
      * @return A collection containing the reviews of that lesson
      */
     public Collection<Review> getReviews( Lesson lesson )
