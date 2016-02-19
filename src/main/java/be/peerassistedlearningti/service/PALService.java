@@ -150,6 +150,14 @@ public interface PALService
      */
     Tutor getTutorById( int id );
 
+    /**
+     * Gets the tutor from a given student
+     *
+     * @param student
+     * @return the tutor that is that student
+     */
+    Tutor getTutor(Student student);
+
     //================================================================================
     // endregion
     //================================================================================
