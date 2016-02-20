@@ -110,7 +110,7 @@ public interface PALService
      * @param course to be filtered on
      * @return the lessons of that course
      */
-    public Collection<Lesson> getLessons(Course course);
+    Collection<Lesson> getLessons( Course course );
 
     /**
      * Gets upcoming lessons filtered by course
@@ -118,7 +118,7 @@ public interface PALService
      * @param course to be filterd on
      * @return the lessons in the future of that course
      */
-    public Collection<Lesson> getUpcomingLessons(Course course);
+    Collection<Lesson> getUpcomingLessons( Course course );
 
     //================================================================================
     // endregion
@@ -136,6 +136,13 @@ public interface PALService
     void addTutor( Tutor tutor );
 
     /**
+     * Updates a tutor from the database
+     *
+     * @param tutor The tutor to be updated to the database
+     */
+    void updateTutor( Tutor tutor );
+
+    /**
      * Removes the specified tutor from the database
      *
      * @param tutor The tutor to be removed from the database
@@ -149,14 +156,6 @@ public interface PALService
      * @return The tutor with the specified id
      */
     Tutor getTutorById( int id );
-
-    /**
-     * Gets the tutor from a given student
-     *
-     * @param student
-     * @return the tutor that is that student
-     */
-    Tutor getTutor(Student student);
 
     //================================================================================
     // endregion

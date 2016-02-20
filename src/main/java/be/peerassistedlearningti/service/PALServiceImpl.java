@@ -183,6 +183,16 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a tutor from the database
+     *
+     * @param tutor The tutor to be updated to the database
+     */
+    public void updateTutor( Tutor tutor )
+    {
+        tutorRepository.save( tutor );
+    }
+
+    /**
      * Removes the specified tutor from the database
      *
      * @param tutor The tutor to be removed from the database
@@ -201,16 +211,6 @@ public class PALServiceImpl implements PALService
     public Tutor getTutorById( int id )
     {
         return tutorRepository.findOne( id );
-    }
-
-    /**
-     * Gets the tutor from a given student
-     *
-     * @param student
-     * @return the tutor that is that student
-     */
-    public Tutor getTutor(Student student){
-        return tutorRepository.findByStudent(student);
     }
 
     //================================================================================
@@ -278,8 +278,9 @@ public class PALServiceImpl implements PALService
      * @param course to be filtered on
      * @return the lessons of that course
      */
-    public Collection<Lesson> getLessons(Course course) {
-        return lessonRepository.findByCourse(course);
+    public Collection<Lesson> getLessons( Course course )
+    {
+        return lessonRepository.findByCourse( course );
     }
 
     /**
@@ -288,8 +289,9 @@ public class PALServiceImpl implements PALService
      * @param course to be filterd on
      * @return the lessons in the future of that course
      */
-    public Collection<Lesson> getUpcomingLessons(Course course){
-        return lessonRepository.findUpcomingByCourse(course);
+    public Collection<Lesson> getUpcomingLessons( Course course )
+    {
+        return lessonRepository.findUpcomingByCourse( course );
     }
 
     //================================================================================
