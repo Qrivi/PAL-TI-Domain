@@ -169,13 +169,13 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the available tutors for a course
+     * Gets the subscriberd students for a course
      *
-     * @return The set with available tutors or null if none
+     * @return The set with student who subscribed to this course
      */
     public Set<Student> getSubscribers()
     {
-        return null; //subscribers;
+        return subscribers;
     }
 
     /**
