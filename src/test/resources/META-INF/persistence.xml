@@ -7,7 +7,6 @@
         <class>be.peerassistedlearningti.model.Course</class>
         <class>be.peerassistedlearningti.model.Tutor</class>
         <class>be.peerassistedlearningti.model.Lesson</class>
-        <class>be.peerassistedlearningti.model.Booking</class>
         <class>be.peerassistedlearningti.model.Room</class>
         <class>be.peerassistedlearningti.model.RoomType</class>
         <class>be.peerassistedlearningti.model.Campus</class>

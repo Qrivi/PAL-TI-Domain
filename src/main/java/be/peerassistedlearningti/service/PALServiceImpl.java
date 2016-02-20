@@ -34,9 +34,6 @@ public class PALServiceImpl implements PALService
     LessonRepository lessonRepository;
 
     @Autowired
-    BookingRepository bookingRepository;
-
-    @Autowired
     ApplicationRepository applicationRepository;
 
     //================================================================================
@@ -292,55 +289,6 @@ public class PALServiceImpl implements PALService
     public Collection<Lesson> getUpcomingLessons( Course course )
     {
         return lessonRepository.findUpcomingByCourse( course );
-    }
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Booking
-    //================================================================================
-
-    /**
-     * Gets the booking with the specified id
-     *
-     * @param id The id of the booking
-     * @return The booking with the specified id
-     */
-    public Booking getBookingById( int id )
-    {
-        return bookingRepository.findOne( id );
-    }
-
-    /**
-     * Adds a booking to the database
-     *
-     * @param booking The booking to be added to the database
-     */
-    public void addBooking( Booking booking )
-    {
-        bookingRepository.save( booking );
-    }
-
-    /**
-     * Removes the specified booking from the database
-     *
-     * @param booking The booking to be removed from the database
-     */
-    public void removeBooking( Booking booking )
-    {
-        bookingRepository.delete( booking );
-    }
-
-    /**
-     * Gets all the bookings
-     *
-     * @return A collection containing all the bookings
-     */
-    public Collection<Booking> getAllBookings()
-    {
-        return Utils.makeCollection( bookingRepository.findAll() );
     }
 
     //================================================================================

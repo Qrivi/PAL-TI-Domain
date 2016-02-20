@@ -206,43 +206,6 @@ public interface PALService
     //================================================================================
 
     //================================================================================
-    // region Booking
-    //================================================================================
-
-    /**
-     * Gets the booking with the specified id
-     *
-     * @param id The id of the booking
-     * @return The booking with the specified id
-     */
-    Booking getBookingById( int id );
-
-    /**
-     * Adds a booking to the database
-     *
-     * @param booking The booking to be added to the database
-     */
-    void addBooking( Booking booking );
-
-    /**
-     * Removes the specified booking from the database
-     *
-     * @param booking The booking to be removed from the database
-     */
-    void removeBooking( Booking booking );
-
-    /**
-     * Gets all the bookings
-     *
-     * @return A collection containing all the bookings
-     */
-    Collection<Booking> getAllBookings();
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
     // region Room
     //================================================================================
 

@@ -57,10 +57,6 @@ public class Lesson extends JPAEntity<Integer>
     private Tutor tutor;
 
     @Valid
-    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, cascade = { CascadeType.REMOVE } )
-    private Set<Booking> bookings;
-
-    @Valid
     @NotNull( message = "{NotNull.Lesson.room}" )
     @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "room_id" )
@@ -71,6 +67,13 @@ public class Lesson extends JPAEntity<Integer>
     @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "backup_room_id" )
     private Room backupRoom;
+
+    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinTable(
+            name = "lesson_booking",
+            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
+            inverseJoinColumns = @JoinColumn( name = "lesson_id", referencedColumnName = "id" ) )
+    private Set<Student> bookings;
 
     /**
      * Default constructor for Lesson
@@ -106,23 +109,23 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Adds a given booking to a lesson
      *
-     * @param booking The given booking to be added
-     * @return true if this set did not already contain the specified booking
+     * @param student The given student to add to the set of bookings for this lesson
+     * @return true if this lesson's bookings set did not already contain the specified student
      */
-    public boolean addBooking( Booking booking )
+    public boolean addBooking( Student student )
     {
-        return bookings.add( booking );
+        return bookings.add( student );
     }
 
     /**
      * Removes a given booking of a lesson
      *
-     * @param booking The given booking to be removed
-     * @return true if this set contained the specified booking
+     * @param student The given student to be removed from this lesson's set of bookings
+     * @return true if this lesson's bookings set contained the specified student
      */
-    public boolean removeBooking( Booking booking )
+    public boolean removeBooking( Student student )
     {
-        return bookings.remove( booking );
+        return bookings.remove( student );
     }
 
     /**
@@ -198,9 +201,9 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * Sets the bookings of the lesson
      *
-     * @param bookings The bookings of the lesson
+     * @param bookings The Set of students enrolled for the lesson
      */
-    public void setBookings( Set<Booking> bookings )
+    public void setBookings( Set<Student> bookings )
     {
         this.bookings = bookings;
     }
@@ -284,7 +287,7 @@ public class Lesson extends JPAEntity<Integer>
     /**
      * @return The set of bookings
      */
-    public Set<Booking> getBookings()
+    public Set<Student> getBookings()
     {
         return bookings;
     }
