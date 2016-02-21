@@ -217,6 +217,13 @@ public interface PALService
     void addRoom( Room room );
 
     /**
+     * Updates a room from the database
+     *
+     * @param room The room to be updated from the database
+     */
+    void updateRoom( Room room );
+
+    /**
      * Removes the specified room from the database
      *
      * @param room The room to be removed from the database

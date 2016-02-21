@@ -310,6 +310,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a room from the database
+     *
+     * @param room The room to be updated from the database
+     */
+    public void updateRoom( Room room )
+
+    {
+        roomRepository.save( room );
+    }
+
+    /**
      * Removes the specified room from the database
      *
      * @param room The room to be removed from the database
