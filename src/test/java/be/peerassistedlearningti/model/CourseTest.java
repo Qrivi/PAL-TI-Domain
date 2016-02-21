@@ -1,5 +1,7 @@
 package be.peerassistedlearningti.model;
 
+import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.service.PALServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -62,24 +64,14 @@ public class CourseTest extends ValidationTest
     }
 
     @Test
-    public void testYearIsTooLow()
-    {
-        Course c = new Course( "MX2506", ".NET Programmeren", ".NET", "Toegepaste Informatica", 0 );
+    public void testYearIsTooLow() {
+        Course c = new Course("MX2506", ".NET Programmeren", ".NET", "Toegepaste Informatica", 0);
 
-        Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty( c, "year" );
+        Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty(c, "year");
 
-        Assert.assertEquals( 1, constraintViolations.size() );
-        Assert.assertEquals( "The course year should be higher than zero!", constraintViolations.iterator()
+        Assert.assertEquals(1, constraintViolations.size());
+        Assert.assertEquals("The course year should be higher than zero!", constraintViolations.iterator()
                 .next()
-                .getMessage() );
-}
-
-    @Test
-    public void testSubscribe() {
-        Course c = new Course( "MX2506", ".NET Programmeren", ".NET", "Toegepaste Informatica", 3 );
-        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
-
-        c.subscribe(s);
-        Assert.assertTrue(c.isSubscribed(s));
+                .getMessage());
     }
 }

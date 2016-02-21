@@ -169,7 +169,7 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the subscriberd students for a course
+     * Gets the subscribed students for a course
      *
      * @return The set with student who subscribed to this course
      */
