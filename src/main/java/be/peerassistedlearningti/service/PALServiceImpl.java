@@ -82,6 +82,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the course with the specified code
+     *
+     * @param code The code of the course
+     * @return The course with the specified code
+     */
+    public Course getCourseByCode( String code )
+    {
+        return courseRepository.findByCode( code );
+    }
+
+    /**
      * Gets all the courses
      *
      * @return A collection containing all the courses

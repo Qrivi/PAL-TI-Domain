@@ -46,6 +46,14 @@ public interface PALService
     Course getCourseById( int id );
 
     /**
+     * Gets the course with the specified code
+     *
+     * @param code The code of the course
+     * @return The course with the specified code
+     */
+    Course getCourseByCode( String code );
+
+    /**
      * Gets all the courses
      *
      * @return A collection containing all the courses
