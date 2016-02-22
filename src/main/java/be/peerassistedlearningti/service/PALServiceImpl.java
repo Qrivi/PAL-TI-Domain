@@ -569,6 +569,15 @@ public class PALServiceImpl implements PALService
         return reviewRepository.findByLesson( lesson );
     }
 
+    /**
+     * Gets the reviews made by the given student
+     *
+     * @param student The given student
+     * @return A collection containing the reviews of that student
+     */
+    public Collection<Review> getReviewsForStudent(Student student) {
+        return reviewRepository.findByStudent(student);
+    }
     //================================================================================
     // endregion
     //================================================================================

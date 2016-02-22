@@ -2,6 +2,7 @@ package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Review;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -34,4 +35,7 @@ public interface ReviewRepository extends CrudRepository<Review, Integer>
      */
     @Query( "SELECT r FROM Review r WHERE r.lesson = :lesson" )
     Collection<Review> findByLesson( @Param( "lesson" ) Lesson lesson );
+
+    @Query("SELECT r FROM Review r WHERE r.student = :student")
+    Collection<Review> findByStudent(@Param("student") Student student);
 }
