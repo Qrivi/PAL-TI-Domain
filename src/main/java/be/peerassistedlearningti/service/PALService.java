@@ -113,6 +113,21 @@ public interface PALService
     Collection<Lesson> getLessons( Course course );
 
     /**
+     * Gets the past lessons for the student with given email
+     *
+     * @param email The given email
+     * @return The past lessons of the student
+     */
+    Collection<Lesson> getPastLessons(String email);
+
+    /**
+     * Gets the future lessons for the student with given email
+     *
+     * @param email The given email
+     * @return The future lessons of the student
+     */
+    Collection<Lesson> getFutureLessons(String email);
+    /**
      * Gets upcoming lessons filtered by course
      *
      * @param course to be filterd on
