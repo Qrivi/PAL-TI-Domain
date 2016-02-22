@@ -1,18 +1,15 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import be.peerassistedlearningti.util.TimelineObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import java.util.Date;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 /**
  * Class used to specify a Lesson
@@ -21,7 +18,7 @@ import java.util.StringTokenizer;
  */
 @Entity
 @Table( name = "lesson" )
-public class Lesson extends JPAEntity<Integer>
+public class Lesson extends JPAEntity<Integer> implements TimelineObject
 {
     @NotNull( message = "{NotNull.Lesson.date}" )
     @Temporal( TemporalType.TIMESTAMP )
@@ -129,6 +126,13 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * @return The date and time of the lesson
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
      * Sets the date and time of the lesson
      *
      * @param date The date of the lesson
@@ -136,104 +140,6 @@ public class Lesson extends JPAEntity<Integer>
     public void setDate( Date date )
     {
         this.date = date;
-    }
-
-    /**
-     * Sets the name of the lesson
-     *
-     * @param name The name of the lesson
-     */
-    public void setName( String name )
-    {
-        this.name = name;
-    }
-
-    /**
-     * Sets the description of the lesson
-     *
-     * @param description The description of the lesson
-     */
-    public void setDescription( String description )
-    {
-        this.description = description;
-    }
-
-    /**
-     * Sets the duration of the lesson
-     *
-     * @param duration The duration of the lesson
-     */
-    public void setDuration( long duration )
-    {
-        this.duration = duration;
-    }
-
-    /**
-     * Sets the course of the lesson
-     *
-     * @param course The course of the lesson
-     */
-    public void setCourse( Course course )
-    {
-        this.course = course;
-    }
-
-    /**
-     * Sets the maximum number of participants of the lesson
-     *
-     * @param maxParticipants The maximum number of participants of the lesson
-     */
-    public void setMaxParticipants( int maxParticipants )
-    {
-        this.maxParticipants = maxParticipants;
-    }
-
-    /**
-     * Sets the tutor of the lesson
-     *
-     * @param tutor The tutor of the lesson
-     */
-    public void setTutor( Tutor tutor )
-    {
-        this.tutor = tutor;
-    }
-
-    /**
-     * Sets the bookings of the lesson
-     *
-     * @param bookings The Set of students enrolled for the lesson
-     */
-    public void setBookings( Set<Student> bookings )
-    {
-        this.bookings = bookings;
-    }
-
-    /**
-     * Sets the room of the lesson
-     *
-     * @param room
-     */
-    public void setRoom( Room room )
-    {
-        this.room = room;
-    }
-
-    /**
-     * Sets the backup room (when the room is occupied) of the lesson
-     *
-     * @param backupRoom The backup room of the lesson
-     */
-    public void setBackupRoom( Room backupRoom )
-    {
-        this.backupRoom = backupRoom;
-    }
-
-    /**
-     * @return The date and time of the lesson
-     */
-    public Date getDate()
-    {
-        return date;
     }
 
     /**
@@ -245,11 +151,31 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the name of the lesson
+     *
+     * @param name The name of the lesson
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * @return The description of the lesson
      */
     public String getDescription()
     {
         return description;
+    }
+
+    /**
+     * Sets the description of the lesson
+     *
+     * @param description The description of the lesson
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     /**
@@ -261,11 +187,31 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the duration of the lesson
+     *
+     * @param duration The duration of the lesson
+     */
+    public void setDuration(long duration)
+    {
+        this.duration = duration;
+    }
+
+    /**
      * @return The course of the lesson
      */
     public Course getCourse()
     {
         return course;
+    }
+
+    /**
+     * Sets the course of the lesson
+     *
+     * @param course The course of the lesson
+     */
+    public void setCourse(Course course)
+    {
+        this.course = course;
     }
 
     /**
@@ -277,11 +223,31 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the maximum number of participants of the lesson
+     *
+     * @param maxParticipants The maximum number of participants of the lesson
+     */
+    public void setMaxParticipants(int maxParticipants)
+    {
+        this.maxParticipants = maxParticipants;
+    }
+
+    /**
      * @return The tutor and time of the lesson
      */
     public Tutor getTutor()
     {
         return tutor;
+    }
+
+    /**
+     * Sets the tutor of the lesson
+     *
+     * @param tutor The tutor of the lesson
+     */
+    public void setTutor(Tutor tutor)
+    {
+        this.tutor = tutor;
     }
 
     /**
@@ -293,11 +259,31 @@ public class Lesson extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the bookings of the lesson
+     *
+     * @param bookings The Set of students enrolled for the lesson
+     */
+    public void setBookings(Set<Student> bookings)
+    {
+        this.bookings = bookings;
+    }
+
+    /**
      * @return The room of the lesson
      */
     public Room getRoom()
     {
         return room;
+    }
+
+    /**
+     * Sets the room of the lesson
+     *
+     * @param room
+     */
+    public void setRoom(Room room)
+    {
+        this.room = room;
     }
 
     /**
@@ -308,4 +294,20 @@ public class Lesson extends JPAEntity<Integer>
         return backupRoom;
     }
 
+    /**
+     * Sets the backup room (when the room is occupied) of the lesson
+     *
+     * @param backupRoom The backup room of the lesson
+     */
+    public void setBackupRoom(Room backupRoom)
+    {
+        this.backupRoom = backupRoom;
+    }
+
+    /**
+     * @return The date to be used by the timeline
+     */
+    public Date getTimelineDate() {
+        return date;
+    }
 }

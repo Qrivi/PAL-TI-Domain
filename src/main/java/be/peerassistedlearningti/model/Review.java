@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import be.peerassistedlearningti.util.TimelineObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Entity
 @Table( name = "review" )
-public class Review extends JPAEntity<Integer>
+public class Review extends JPAEntity<Integer> implements TimelineObject
 {
 
     @NotEmpty( message = "{NotEmpty.Review.text}" )
@@ -115,6 +116,15 @@ public class Review extends JPAEntity<Integer>
     }
 
     /**
+     * Gets the text of the review
+     *
+     * @return The text of the review
+     */
+    public String getText() {
+        return text;
+    }
+
+    /**
      * Sets the text of the review
      *
      * @param text The text of the review
@@ -122,97 +132,6 @@ public class Review extends JPAEntity<Integer>
     public void setText( String text )
     {
         this.text = text;
-    }
-
-    /**
-     * Sets the student of the review
-     *
-     * @param student The student of the review
-     */
-    public void setStudent( Student student )
-    {
-        this.student = student;
-    }
-
-    /**
-     * Sets the lesson of review
-     *
-     * @param lesson The lesson of the review
-     */
-
-    public void setLesson( Lesson lesson )
-    {
-        this.lesson = lesson;
-    }
-
-    /**
-     * Sets the date of the review
-     *
-     * @param date The date of the review
-     */
-    public void setDate( Date date )
-    {
-        this.date = date;
-    }
-
-    /**
-     * Sets the  content score of the review
-     *
-     * @param contentScore The content score @min 1, @max 10
-     */
-    public void setContentScore( int contentScore )
-    {
-        this.contentScore = contentScore;
-    }
-
-    /**
-     * Sets the tutor score of the review
-     *
-     * @param tutorScore The tutor score @min 1, @max 10
-     */
-    public void setTutorScore( int tutorScore )
-    {
-        this.tutorScore = tutorScore;
-    }
-
-    /**
-     * Sets the engagement score of the review
-     *
-     * @param engagementScore The engagement score @min 1, @max 10
-     */
-    public void setEngagementScore( int engagementScore )
-    {
-        this.engagementScore = engagementScore;
-    }
-
-    /**
-     * Sets the atmosphere score of the review
-     *
-     * @param atmosphereScore The atmosphere score @min 1, @max 10
-     */
-    public void setAtmosphereScore( int atmosphereScore )
-    {
-        this.atmosphereScore = atmosphereScore;
-    }
-
-    /**
-     * Sets if the review is anonymous
-     *
-     * @param anonymous
-     */
-    public void setAnonymous( boolean anonymous )
-    {
-        this.anonymous = anonymous;
-    }
-
-    /**
-     * Gets the text of the review
-     *
-     * @return The text of the review
-     */
-    public String getText()
-    {
-        return text;
     }
 
     /**
@@ -227,6 +146,16 @@ public class Review extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the student of the review
+     *
+     * @param student The student of the review
+     */
+    public void setStudent(Student student)
+    {
+        this.student = student;
+    }
+
+    /**
      * Gets the lesson of the review
      *
      * @return The lesson of the review
@@ -235,6 +164,17 @@ public class Review extends JPAEntity<Integer>
     public Lesson getLesson()
     {
         return lesson;
+    }
+
+    /**
+     * Sets the lesson of review
+     *
+     * @param lesson The lesson of the review
+     */
+
+    public void setLesson(Lesson lesson)
+    {
+        this.lesson = lesson;
     }
 
     /**
@@ -249,6 +189,16 @@ public class Review extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the date of the review
+     *
+     * @param date The date of the review
+     */
+    public void setDate(Date date)
+    {
+        this.date = date;
+    }
+
+    /**
      * Gets the content score of the review
      *
      * @return The content score of the review
@@ -256,6 +206,16 @@ public class Review extends JPAEntity<Integer>
     public int getContentScore()
     {
         return contentScore;
+    }
+
+    /**
+     * Sets the  content score of the review
+     *
+     * @param contentScore The content score @min 1, @max 10
+     */
+    public void setContentScore(int contentScore)
+    {
+        this.contentScore = contentScore;
     }
 
     /**
@@ -269,6 +229,16 @@ public class Review extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the tutor score of the review
+     *
+     * @param tutorScore The tutor score @min 1, @max 10
+     */
+    public void setTutorScore(int tutorScore)
+    {
+        this.tutorScore = tutorScore;
+    }
+
+    /**
      * Gets the engagement score of the review
      *
      * @return The engagement score of the review
@@ -276,6 +246,16 @@ public class Review extends JPAEntity<Integer>
     public int getEngagementScore()
     {
         return engagementScore;
+    }
+
+    /**
+     * Sets the engagement score of the review
+     *
+     * @param engagementScore The engagement score @min 1, @max 10
+     */
+    public void setEngagementScore(int engagementScore)
+    {
+        this.engagementScore = engagementScore;
     }
 
     /**
@@ -288,6 +268,15 @@ public class Review extends JPAEntity<Integer>
         return atmosphereScore;
     }
 
+    /**
+     * Sets the atmosphere score of the review
+     *
+     * @param atmosphereScore The atmosphere score @min 1, @max 10
+     */
+    public void setAtmosphereScore(int atmosphereScore)
+    {
+        this.atmosphereScore = atmosphereScore;
+    }
 
     /**
      * Gets if the review is anonymous
@@ -297,5 +286,22 @@ public class Review extends JPAEntity<Integer>
     public boolean isAnonymous()
     {
         return anonymous;
+    }
+
+    /**
+     * Sets if the review is anonymous
+     *
+     * @param anonymous
+     */
+    public void setAnonymous(boolean anonymous)
+    {
+        this.anonymous = anonymous;
+    }
+
+    /**
+     * @return The date to be used by the timeline
+     */
+    public Date getTimelineDate() {
+        return date;
     }
 }
