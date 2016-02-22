@@ -34,4 +34,26 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      */
     @Query( "SELECT l FROM Lesson l WHERE l.course = :course and l.date > current_timestamp " )
     Collection<Lesson> findUpcomingByCourse( @Param( "course" ) Course course );
+
+    /**
+     * Gets the past lessons for a given student
+     *
+     * @param email The email of the student
+     * @return The list with the past lessons
+     */
+    @Query("SELECT l FROM lesson_booking lb \n" +
+            "  INNER JOIN student s on (lb.student_id = s.id AND s.email = :email)\n" +
+            "  INNER JOIN lesson l on (lb.lesson_id = l.id AND l.date < CURRENT_DATE())")
+    Collection<Lesson> findPastByStudent(@Param("email") String email);
+
+    /**
+     * Gets the future lessons for a given student
+     *
+     * @param email The email of the student
+     * @return The list with the future lessons
+     */
+    @Query("SELECT l FROM lesson_booking lb \n" +
+            "  INNER JOIN student s on (lb.student_id = s.id AND s.email = :email)\n" +
+            "  INNER JOIN lesson l on (lb.lesson_id = l.id AND l.date > CURRENT_DATE())")
+    Collection<Lesson> findUpcomingByStudent(@Param("email") String email);
 }

@@ -161,25 +161,6 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( studentRepository.findAll() );
     }
 
-    /**
-     * Gets the past lessons for the student with given email
-     *
-     * @param email The given email
-     * @return The past lessons of the student
-     */
-    public Collection<Lesson> getPastLessons(String email) {
-        return studentRepository.getPastLessonsForEmail(email);
-    }
-
-    /**
-     * Gets the future lessons for the student with given email
-     *
-     * @param email The given email
-     * @return The future lessons of the student
-     */
-    public Collection<Lesson> getFutureLessons(String email) {
-        return studentRepository.getFutureLessonsForEmail(email);
-    }
 
     //================================================================================
     // endregion
@@ -309,6 +290,26 @@ public class PALServiceImpl implements PALService
     public Collection<Lesson> getUpcomingLessons( Course course )
     {
         return lessonRepository.findUpcomingByCourse( course );
+    }
+
+    /**
+     * Gets the past lessons for the student with given email
+     *
+     * @param email The given email
+     * @return The past lessons of the student
+     */
+    public Collection<Lesson> getPastLessons(String email) {
+        return lessonRepository.findPastByStudent(email);
+    }
+
+    /**
+     * Gets the future lessons for the student with given email
+     *
+     * @param email The given email
+     * @return The future lessons of the student
+     */
+    public Collection<Lesson> getFutureLessons(String email) {
+        return lessonRepository.findUpcomingByStudent(email);
     }
 
     //================================================================================
