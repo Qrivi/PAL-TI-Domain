@@ -293,23 +293,25 @@ public class PALServiceImpl implements PALService
     }
 
     /**
-     * Gets the past lessons for the student with given email
+     * Gets the past lessons for the student
      *
-     * @param email The given email
+     * @param student The student to get the lessons from
      * @return The past lessons of the student
      */
-    public Collection<Lesson> getPastLessons(String email) {
-        return lessonRepository.findPastByStudent(email);
+    public Collection<Lesson> getPastLessons( Student student )
+    {
+        return lessonRepository.findPastByStudent( student );
     }
 
     /**
-     * Gets the future lessons for the student with given email
+     * Gets the future lessons for the student
      *
-     * @param email The given email
+     * @param student The student to get the lessons from
      * @return The future lessons of the student
      */
-    public Collection<Lesson> getFutureLessons(String email) {
-        return lessonRepository.findUpcomingByStudent(email);
+    public Collection<Lesson> getFutureLessons( Student student )
+    {
+        return lessonRepository.findUpcomingByStudent( student );
     }
 
     //================================================================================
@@ -575,8 +577,9 @@ public class PALServiceImpl implements PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    public Collection<Review> getReviewsForStudent(Student student) {
-        return reviewRepository.findByStudent(student);
+    public Collection<Review> getReviewsForStudent( Student student )
+    {
+        return reviewRepository.findByStudent( student );
     }
     //================================================================================
     // endregion

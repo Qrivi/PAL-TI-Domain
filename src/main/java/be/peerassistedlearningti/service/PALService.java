@@ -113,20 +113,21 @@ public interface PALService
     Collection<Lesson> getLessons( Course course );
 
     /**
-     * Gets the past lessons for the student with given email
+     * Gets the past lessons for the student
      *
-     * @param email The given email
+     * @param student The student to get the lessons from
      * @return The past lessons of the student
      */
-    Collection<Lesson> getPastLessons(String email);
+    Collection<Lesson> getPastLessons( Student student );
 
     /**
-     * Gets the future lessons for the student with given email
+     * Gets the future lessons for the student
      *
-     * @param email The given email
+     * @param student The student to get the lessons from
      * @return The future lessons of the student
      */
-    Collection<Lesson> getFutureLessons(String email);
+    Collection<Lesson> getFutureLessons( Student student );
+
     /**
      * Gets upcoming lessons filtered by course
      *
@@ -413,7 +414,7 @@ public interface PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    Collection<Review> getReviewsForStudent(Student student);
+    Collection<Review> getReviewsForStudent( Student student );
 
     //================================================================================
     // endregion
