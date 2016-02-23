@@ -68,8 +68,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinTable(
             name = "lesson_booking",
-            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
-            inverseJoinColumns = @JoinColumn( name = "lesson_id", referencedColumnName = "id" ) )
+            joinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     private Set<Student> bookings;
 
     /**
