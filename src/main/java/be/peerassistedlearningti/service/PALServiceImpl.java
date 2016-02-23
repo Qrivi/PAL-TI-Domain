@@ -316,14 +316,23 @@ public class PALServiceImpl implements PALService
     }
 
     /**
-     * Gets the future lessons for the student
+     * Gets upcoming lessons filtered by student
      *
      * @param student The student to get the lessons from
-     * @return The future lessons of the student
+     * @return the lessons in the future of that student
      */
-    public Collection<Lesson> getFutureLessons( Student student )
+    public Collection<Lesson> getUpcomingLessons(Student student)
     {
         return lessonRepository.findUpcomingByStudent( student );
+    }
+
+    /**
+     * Gets all the upcoming lessons
+     *
+     * @return A collection containing all the upcoming lessons
+     */
+    public Collection<Lesson> getUpcomingLessons() {
+        return lessonRepository.findUpcoming();
     }
 
     //================================================================================

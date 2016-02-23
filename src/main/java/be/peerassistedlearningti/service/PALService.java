@@ -129,12 +129,12 @@ public interface PALService
     Collection<Lesson> getPastLessons( Student student );
 
     /**
-     * Gets the future lessons for the student
+     * Gets upcoming lessons filtered by student
      *
      * @param student The student to get the lessons from
-     * @return The future lessons of the student
+     * @return the lessons in the future of that student
      */
-    Collection<Lesson> getFutureLessons( Student student );
+    Collection<Lesson> getUpcomingLessons(Student student);
 
     /**
      * Gets upcoming lessons filtered by course
@@ -143,6 +143,13 @@ public interface PALService
      * @return the lessons in the future of that course
      */
     Collection<Lesson> getUpcomingLessons( Course course );
+
+    /**
+     * Gets all the upcoming lessons
+     *
+     * @return A collection containing the upcoming lessons
+     */
+    Collection<Lesson> getUpcomingLessons();
 
     //================================================================================
     // endregion
