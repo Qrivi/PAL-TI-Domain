@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.model;
 
+import be.peerassistedlearningti.common.model.archivable.Archivable;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
-import be.peerassistedlearningti.util.TimelineObject;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "lesson" )
-public class Lesson extends JPAEntity<Integer> implements TimelineObject
+public class Lesson extends JPAEntity<Integer> implements Archivable
 {
     @NotNull( message = "{NotNull.Lesson.date}" )
     @Temporal( TemporalType.TIMESTAMP )
@@ -307,7 +307,7 @@ public class Lesson extends JPAEntity<Integer> implements TimelineObject
     /**
      * @return The date to be used by the timeline
      */
-    public Date getTimelineDate() {
+    public Date getArchiveDate() {
         return date;
     }
 }
