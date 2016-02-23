@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.model;
 
-import be.peerassistedlearningti.common.model.Archivable;
+import be.peerassistedlearningti.common.model.archivable.Archivable;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -120,7 +120,8 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The text of the review
      */
-    public String getText() {
+    public String getText()
+    {
         return text;
     }
 
@@ -150,7 +151,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param student The student of the review
      */
-    public void setStudent(Student student)
+    public void setStudent( Student student )
     {
         this.student = student;
     }
@@ -172,7 +173,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @param lesson The lesson of the review
      */
 
-    public void setLesson(Lesson lesson)
+    public void setLesson( Lesson lesson )
     {
         this.lesson = lesson;
     }
@@ -193,7 +194,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param date The date of the review
      */
-    public void setDate(Date date)
+    public void setDate( Date date )
     {
         this.date = date;
     }
@@ -213,7 +214,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param contentScore The content score @min 1, @max 10
      */
-    public void setContentScore(int contentScore)
+    public void setContentScore( int contentScore )
     {
         this.contentScore = contentScore;
     }
@@ -233,7 +234,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param tutorScore The tutor score @min 1, @max 10
      */
-    public void setTutorScore(int tutorScore)
+    public void setTutorScore( int tutorScore )
     {
         this.tutorScore = tutorScore;
     }
@@ -253,7 +254,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param engagementScore The engagement score @min 1, @max 10
      */
-    public void setEngagementScore(int engagementScore)
+    public void setEngagementScore( int engagementScore )
     {
         this.engagementScore = engagementScore;
     }
@@ -273,7 +274,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param atmosphereScore The atmosphere score @min 1, @max 10
      */
-    public void setAtmosphereScore(int atmosphereScore)
+    public void setAtmosphereScore( int atmosphereScore )
     {
         this.atmosphereScore = atmosphereScore;
     }
@@ -293,7 +294,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param anonymous
      */
-    public void setAnonymous(boolean anonymous)
+    public void setAnonymous( boolean anonymous )
     {
         this.anonymous = anonymous;
     }
@@ -301,7 +302,8 @@ public class Review extends JPAEntity<Integer> implements Archivable
     /**
      * @return The date to be used by the timeline
      */
-    public Date getArchiveDate() {
+    public Date getArchiveDate()
+    {
         return date;
     }
 }
