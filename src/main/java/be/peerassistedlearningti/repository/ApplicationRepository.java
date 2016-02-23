@@ -2,6 +2,7 @@ package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.model.ApplicationState;
+import be.peerassistedlearningti.model.Student;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,4 +27,14 @@ public interface ApplicationRepository extends CrudRepository<Application, Integ
      */
     @Query( "SELECT a FROM Application a WHERE a.state = :state" )
     Collection<Application> findAll( @Param( "state" ) ApplicationState state );
+
+    /**
+     * Gets all the applications with the specified student and state
+     *
+     * @param student The student of the application
+     * @param state   The state of the application
+     * @return All the applications with the specified state
+     */
+    @Query( "SELECT a FROM Application a WHERE a.student = :student AND a.state = :state" )
+    Collection<Application> findAll( @Param( "student" ) Student student, @Param( "state" ) ApplicationState state );
 }

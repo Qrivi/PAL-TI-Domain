@@ -526,6 +526,25 @@ public class PALServiceImpl implements PALService
             }};
     }
 
+    /**
+     * Gets all the pending applications from a student
+     *
+     * @param student The student to get the pending applications from
+     * @return A collection containing all the pending applications from a student
+     */
+    public Collection<Application> getAllPendingApplications( Student student )
+    {
+        return applicationRepository.findAll( student, ApplicationState.PENDING );
+    }
+
+    /**
+     * Gets all the approved applications from a student
+     *
+     * @param student The student to get the approved applications from
+     * @return A collection containing all the approved applications from a student
+     */
+    public Collection<Application> getAllApprovedApplications( Student student ) {return applicationRepository.findAll( student, ApplicationState.APPROVED );}
+
     //================================================================================
     // endregion
     //================================================================================

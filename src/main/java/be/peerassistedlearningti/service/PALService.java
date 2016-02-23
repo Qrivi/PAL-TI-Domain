@@ -370,6 +370,22 @@ public interface PALService
      */
     Collection<Application> getAllDoneApplications();
 
+    /**
+     * Gets all the pending applications from a student
+     *
+     * @param student The student to get the pending applications from
+     * @return A collection containing all the pending applications from a student
+     */
+    Collection<Application> getAllPendingApplications( Student student );
+
+    /**
+     * Gets all the approved applications from a student
+     *
+     * @param student The student to get the approved applications from
+     * @return A collection containing all the approved applications from a student
+     */
+    Collection<Application> getAllApprovedApplications( Student student );
+
     //================================================================================
     // endregion
     //================================================================================
