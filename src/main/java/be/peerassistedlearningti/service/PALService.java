@@ -363,6 +363,13 @@ public interface PALService
      */
     Collection<Application> getAllPendingApplications();
 
+    /**
+     * Gets all the done applications
+     *
+     * @return A collection containing all the done applications
+     */
+    Collection<Application> getAllDoneApplications();
+
     //================================================================================
     // endregion
     //================================================================================

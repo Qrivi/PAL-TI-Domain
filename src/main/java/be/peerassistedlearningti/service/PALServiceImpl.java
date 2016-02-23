@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -509,6 +510,20 @@ public class PALServiceImpl implements PALService
     public Collection<Application> getAllPendingApplications()
     {
         return applicationRepository.findAll( ApplicationState.PENDING );
+    }
+
+    /**
+     * Gets all the done applications
+     *
+     * @return A collection containing all the done applications
+     */
+    public Collection<Application> getAllDoneApplications()
+    {
+        return new ArrayList<Application>()
+        {{
+                addAll( applicationRepository.findAll( ApplicationState.APPROVED ) );
+                addAll( applicationRepository.findAll( ApplicationState.REJECTED ) );
+            }};
     }
 
     //================================================================================
