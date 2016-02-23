@@ -188,6 +188,13 @@ public interface PALService
      */
     Tutor getTutorById( int id );
 
+    /**
+     * Gets all the tutors
+     *
+     * @return A collection containing all the tutors
+     */
+    public Collection<Tutor> getAllTutors();
+
     //================================================================================
     // endregion
     //================================================================================
