@@ -173,7 +173,6 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( studentRepository.findAll() );
     }
 
-
     //================================================================================
     // endregion
     //================================================================================
@@ -221,6 +220,16 @@ public class PALServiceImpl implements PALService
     public Tutor getTutorById( int id )
     {
         return tutorRepository.findOne( id );
+    }
+
+    /**
+     * Gets all the tutors
+     *
+     * @return A collection containing all the tutors
+     */
+    public Collection<Tutor> getAllTutors()
+    {
+        return Utils.makeCollection( tutorRepository.findAll() );
     }
 
     //================================================================================
