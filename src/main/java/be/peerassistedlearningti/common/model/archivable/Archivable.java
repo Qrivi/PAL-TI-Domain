@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.common.model;
+package be.peerassistedlearningti.common.model.archivable;
 
 import java.util.Date;
 
