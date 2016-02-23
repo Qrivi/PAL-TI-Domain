@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.model;
 
-import be.peerassistedlearningti.common.model.archivable.Archivable;
+import be.peerassistedlearningti.common.model.Archivable;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.NotEmpty;
 
