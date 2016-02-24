@@ -99,8 +99,8 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @param tutorScore      The score regarding the lesson's tutor
      * @param engagementScore The score regarding the lesson's engagement
      * @param atmosphereScore The score regarding the lesson's atmosphere
-     * @param date            The date of the review
      * @param anonymous       Indicates if the name may be shown
+     * @param date            The date of the review
      */
     public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous, Date date )
     {
