@@ -58,10 +58,15 @@ public class Student extends JPAEntity<Integer>
     @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Tutor tutor;
 
-    @ManyToMany( mappedBy = "subscribers", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @Valid
+    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinTable(
+            name = "student_subscriptions",
+            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
+            inverseJoinColumns = @JoinColumn( name = "subscription_id", referencedColumnName = "id" ) )
     private Set<Course> subscriptions;
 
-    @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     private Set<Lesson> bookings;
 
     @Column( name = "reset_token", unique = true )
@@ -327,7 +332,8 @@ public class Student extends JPAEntity<Integer>
      *
      * @param subscriptions The Set containing the student's subscriptions
      */
-    public void setSubscriptions(Set<Course> subscriptions) {
+    public void setSubscriptions( Set<Course> subscriptions )
+    {
         this.subscriptions = subscriptions;
     }
 

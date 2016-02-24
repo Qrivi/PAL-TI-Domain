@@ -4,6 +4,7 @@ import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.Set;
 
@@ -29,7 +30,8 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "courses", cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
+    @Valid
+    @ManyToMany( fetch = FetchType.EAGER, mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Tutor> tutors;
 
     @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
@@ -40,11 +42,7 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "year", nullable = false )
     private int year;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE})
-    @JoinTable(
-            name = "course_subscriber",
-            joinColumns = @JoinColumn( name = "course_id", referencedColumnName = "id" ),
-            inverseJoinColumns = @JoinColumn( name = "subscriber_id", referencedColumnName = "id" ) )
+    @ManyToMany( mappedBy = "subscriptions", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     private Set<Student> subscribers;
 
     /**
@@ -71,7 +69,8 @@ public class Course extends JPAEntity<Integer>
     /**
      * @return The code of the course
      */
-    public String getCode() {
+    public String getCode()
+    {
         return code;
     }
 
@@ -98,7 +97,7 @@ public class Course extends JPAEntity<Integer>
      *
      * @param name The new full name of the course
      */
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }
@@ -116,7 +115,7 @@ public class Course extends JPAEntity<Integer>
      *
      * @param shortName The new short name of the course
      */
-    public void setShortName(String shortName)
+    public void setShortName( String shortName )
     {
         this.shortName = shortName;
     }
@@ -144,7 +143,7 @@ public class Course extends JPAEntity<Integer>
      *
      * @param curriculum The new curriculum of the course
      */
-    public void setCurriculum(String curriculum)
+    public void setCurriculum( String curriculum )
     {
         this.curriculum = curriculum;
     }
@@ -162,7 +161,7 @@ public class Course extends JPAEntity<Integer>
      *
      * @param year The new year of the course
      */
-    public void setYear(int year)
+    public void setYear( int year )
     {
         this.year = year;
     }
@@ -205,8 +204,9 @@ public class Course extends JPAEntity<Integer>
      * @param student
      * @return if the student is subscribed
      */
-    public boolean isSubscribed(Student student) {
-        return subscribers.contains(student);
+    public boolean isSubscribed( Student student )
+    {
+        return subscribers.contains( student );
     }
 
     /**
