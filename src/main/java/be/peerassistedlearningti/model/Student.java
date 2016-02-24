@@ -323,6 +323,15 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the subscription set of the student
+     *
+     * @param subscriptions The Set containing the student's subscriptions
+     */
+    public void setSubscriptions(Set<Course> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
+
+    /**
      * @return The current closed bookings of the student
      */
     public Set<Lesson> getClosedBookings()
