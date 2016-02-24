@@ -37,7 +37,7 @@ public class Student extends JPAEntity<Integer>
     private String password;
 
     @Lob
-    @Column( name = "screenshot", nullable = true )
+    @Column( name = "avatar", nullable = true )
     private byte[] avatar;
 
     @NotEmpty( message = "{NotEmpty.Student.salt}" )
