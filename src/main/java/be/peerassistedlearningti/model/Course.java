@@ -40,7 +40,7 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "year", nullable = false )
     private int year;
 
-    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     @JoinTable(
             name = "course_subscriber",
             joinColumns = @JoinColumn( name = "course_id", referencedColumnName = "id" ),
@@ -69,6 +69,13 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
+     * @return The code of the course
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
      * Sets the code of the course
      *
      * @param code The new code of the course
@@ -76,54 +83,6 @@ public class Course extends JPAEntity<Integer>
     public void setCode( String code )
     {
         this.code = code;
-    }
-
-    /**
-     * Sets the full name of the course
-     *
-     * @param name The new full name of the course
-     */
-    public void setName( String name )
-    {
-        this.name = name;
-    }
-
-    /**
-     * Sets the short name of the course
-     *
-     * @param shortName The new short name of the course
-     */
-    public void setShortName( String shortName )
-    {
-        this.shortName = shortName;
-    }
-
-    /**
-     * Sets the curriculum of the course
-     *
-     * @param curriculum The new curriculum of the course
-     */
-    public void setCurriculum( String curriculum )
-    {
-        this.curriculum = curriculum;
-    }
-
-    /**
-     * Sets the year of the course
-     *
-     * @param year The new year of the course
-     */
-    public void setYear( int year )
-    {
-        this.year = year;
-    }
-
-    /**
-     * @return The code of the course
-     */
-    public String getCode()
-    {
-        return code;
     }
 
     /**
@@ -135,11 +94,31 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the full name of the course
+     *
+     * @param name The new full name of the course
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * @return The short name of the course
      */
     public String getShortName()
     {
         return shortName;
+    }
+
+    /**
+     * Sets the short name of the course
+     *
+     * @param shortName The new short name of the course
+     */
+    public void setShortName(String shortName)
+    {
+        this.shortName = shortName;
     }
 
     /**
@@ -161,11 +140,31 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the curriculum of the course
+     *
+     * @param curriculum The new curriculum of the course
+     */
+    public void setCurriculum(String curriculum)
+    {
+        this.curriculum = curriculum;
+    }
+
+    /**
      * @return The year of the course
      */
     public int getYear()
     {
         return year;
+    }
+
+    /**
+     * Sets the year of the course
+     *
+     * @param year The new year of the course
+     */
+    public void setYear(int year)
+    {
+        this.year = year;
     }
 
     /**
