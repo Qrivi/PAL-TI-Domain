@@ -29,7 +29,7 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
-    @ManyToMany( mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "courses", cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.REMOVE})
     private Set<Tutor> tutors;
 
     @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
