@@ -61,7 +61,4 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      */
     @Query("SELECT l FROM Lesson l WHERE l.date > current_timestamp ")
     Collection<Lesson> findUpcoming();
-
-
-
 }

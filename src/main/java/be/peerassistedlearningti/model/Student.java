@@ -36,6 +36,10 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "password", nullable = false )
     private String password;
 
+    @Lob
+    @Column( name = "screenshot", nullable = true )
+    private byte[] avatar;
+
     @NotEmpty( message = "{NotEmpty.Student.salt}" )
     @Column( name = "salt", nullable = false )
     private String salt;
@@ -57,7 +61,7 @@ public class Student extends JPAEntity<Integer>
     @ManyToMany( mappedBy = "subscribers", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Course> subscriptions;
 
-    @ManyToMany (mappedBy = "bookings", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Set<Lesson> bookings;
 
     @Column( name = "reset_token", unique = true )
@@ -162,8 +166,8 @@ public class Student extends JPAEntity<Integer>
      */
     public boolean validatePasswordReset( String plainTextToken )
     {
-        if (resetToken != null && plainTextToken != null &&
-                resetTokenExpiration.getTime() - new Date().getTime() > 0)
+        if ( resetToken != null && plainTextToken != null &&
+                resetTokenExpiration.getTime() - new Date().getTime() > 0 )
         {
             boolean valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
             resetToken = valid ? null : resetToken;
@@ -178,8 +182,9 @@ public class Student extends JPAEntity<Integer>
      * @param lesson The given lesson to add to the set of bookings of this student
      * @return true if this student's bookings set did not already contain the specified lesson
      */
-    public boolean addBooking(Lesson lesson){
-        return bookings.add(lesson);
+    public boolean addBooking( Lesson lesson )
+    {
+        return bookings.add( lesson );
     }
 
     /**
@@ -188,14 +193,16 @@ public class Student extends JPAEntity<Integer>
      * @param lesson The given lesson to be removed from this student's set of bookings
      * @return true if this student's bookings set contained the specified lesson
      */
-    public boolean removeBooking(Lesson lesson){
-        return bookings.remove(lesson);
+    public boolean removeBooking( Lesson lesson )
+    {
+        return bookings.remove( lesson );
     }
 
     /**
      * @return The name of the student
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -207,6 +214,24 @@ public class Student extends JPAEntity<Integer>
     public void setName( String name )
     {
         this.name = name;
+    }
+
+    /**
+     * @return the avatar of the Student
+     */
+    public byte[] getAvatar()
+    {
+        return avatar;
+    }
+
+    /**
+     * Sets the avatar of the Student
+     *
+     * @param avatar The avatar of the Student
+     */
+    public void setAvatar( byte[] avatar )
+    {
+        this.avatar = avatar;
     }
 
     /**
@@ -242,7 +267,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param email The email of the student
      */
-    public void setEmail(String email)
+    public void setEmail( String email )
     {
         this.email = email;
     }
@@ -260,7 +285,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param type The user type of the student
      */
-    public void setType(UserType type)
+    public void setType( UserType type )
     {
         this.type = type;
     }
@@ -300,11 +325,15 @@ public class Student extends JPAEntity<Integer>
     /**
      * @return The current closed bookings of the student
      */
-    public Set<Lesson> getClosedBookings(){
+    public Set<Lesson> getClosedBookings()
+    {
         Set<Lesson> result = new HashSet<Lesson>();
-        for(Lesson lesson : bookings){
-            if (lesson.getDate().before(new Date())){
-                result.add(lesson);
+        for ( Lesson lesson : bookings )
+        {
+            if ( lesson.getDate()
+                    .before( new Date() ) )
+            {
+                result.add( lesson );
             }
         }
         return result;
@@ -313,11 +342,15 @@ public class Student extends JPAEntity<Integer>
     /**
      * @return The current open bookings of the student
      */
-    public Set<Lesson> getOpenBookings(){
+    public Set<Lesson> getOpenBookings()
+    {
         Set<Lesson> result = new HashSet<Lesson>();
-        for(Lesson lesson : bookings){
-            if (lesson.getDate().after(new Date())){
-                result.add(lesson);
+        for ( Lesson lesson : bookings )
+        {
+            if ( lesson.getDate()
+                    .after( new Date() ) )
+            {
+                result.add( lesson );
             }
         }
         return result;
@@ -326,7 +359,8 @@ public class Student extends JPAEntity<Integer>
     /**
      * @return The bookings of the student
      */
-    public Set<Lesson> getBookings(){
+    public Set<Lesson> getBookings()
+    {
         return bookings;
     }
 }

@@ -330,7 +330,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the lessons from
      * @return the lessons in the future of that student
      */
-    public Collection<Lesson> getUpcomingLessons(Student student)
+    public Collection<Lesson> getUpcomingLessons( Student student )
     {
         return lessonRepository.findUpcomingByStudent( student );
     }
@@ -340,7 +340,8 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the upcoming lessons
      */
-    public Collection<Lesson> getUpcomingLessons() {
+    public Collection<Lesson> getUpcomingLessons()
+    {
         return lessonRepository.findUpcoming();
     }
 
