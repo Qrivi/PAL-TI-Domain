@@ -59,7 +59,7 @@ public class Student extends JPAEntity<Integer>
     private Tutor tutor;
 
     @Valid
-    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "student_subscriptions",
             joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
