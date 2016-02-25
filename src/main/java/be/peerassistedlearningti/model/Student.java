@@ -61,6 +61,13 @@ public class Student extends JPAEntity<Integer>
     @Valid
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
+            name = "student_reviews",
+            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
+            inverseJoinColumns = @JoinColumn( name = "review_id", referencedColumnName = "id" ) )
+    private Set<Review> reviews;
+
+    @ManyToMany( fetch = FetchType.EAGER )
+    @JoinTable(
             name = "student_subscriptions",
             joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
             inverseJoinColumns = @JoinColumn( name = "subscription_id", referencedColumnName = "id" ) )
@@ -312,6 +319,15 @@ public class Student extends JPAEntity<Integer>
     public void setSubscriptions( Set<Course> subscriptions )
     {
         this.subscriptions = subscriptions;
+    }
+
+    /**
+     * Sets the reviews set of the student
+     *
+     * @return reviews made by the student
+     */
+    public Set<Review> getReviews() {
+        return reviews;
     }
 
     /**
