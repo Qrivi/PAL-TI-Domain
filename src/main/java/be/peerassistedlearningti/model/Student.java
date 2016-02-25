@@ -66,7 +66,7 @@ public class Student extends JPAEntity<Integer>
             inverseJoinColumns = @JoinColumn( name = "subscription_id", referencedColumnName = "id" ) )
     private Set<Course> subscriptions;
 
-    @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
     private Set<Lesson> bookings;
 
     @Column( name = "reset_token", unique = true )
@@ -145,7 +145,6 @@ public class Student extends JPAEntity<Integer>
      */
     public String issuePasswordReset()
     {
-
         resetTokenExpiration = new Date( new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ) );
         resetSalt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
 
@@ -179,28 +178,6 @@ public class Student extends JPAEntity<Integer>
             return valid;
         }
         return false;
-    }
-
-    /**
-     * Adds a given booking to a student
-     *
-     * @param lesson The given lesson to add to the set of bookings of this student
-     * @return true if this student's bookings set did not already contain the specified lesson
-     */
-    public boolean addBooking( Lesson lesson )
-    {
-        return bookings.add( lesson );
-    }
-
-    /**
-     * Removes a given booking of a student
-     *
-     * @param lesson The given lesson to be removed from this student's set of bookings
-     * @return true if this student's bookings set contained the specified lesson
-     */
-    public boolean removeBooking( Lesson lesson )
-    {
-        return bookings.remove( lesson );
     }
 
     /**

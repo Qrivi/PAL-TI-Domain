@@ -44,29 +44,29 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.course}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "course_id" )
     private Course course;
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.tutor}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "tutor_id" )
     private Tutor tutor;
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.room}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "room_id" )
     private Room room;
 
     @Valid
     @NotNull( message = "{NotNull.Lesson.backupRoom}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "backup_room_id" )
     private Room backupRoom;
 
-    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "lesson_booking",
             joinColumns = @JoinColumn( name = "lesson_id", referencedColumnName = "id" ),

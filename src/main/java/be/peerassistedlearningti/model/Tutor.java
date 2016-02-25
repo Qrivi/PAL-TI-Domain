@@ -1,8 +1,6 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -34,7 +32,7 @@ public class Tutor extends JPAEntity<Integer>
     private Set<Course> courses;
 
     @Valid
-    @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER )
     private Set<Lesson> lessons;
 
     /**

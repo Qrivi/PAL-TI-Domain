@@ -31,7 +31,7 @@ public class Course extends JPAEntity<Integer>
     private String shortName;
 
     @Valid
-    @ManyToMany( fetch = FetchType.EAGER, mappedBy = "courses", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @ManyToMany( fetch = FetchType.EAGER, mappedBy = "courses" )
     private Set<Tutor> tutors;
 
     @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
@@ -42,7 +42,7 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "year", nullable = false )
     private int year;
 
-    @ManyToMany( mappedBy = "subscriptions", fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToMany( mappedBy = "subscriptions", fetch = FetchType.EAGER )
     private Set<Student> subscribers;
 
     /**
