@@ -5,6 +5,8 @@ import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -109,6 +111,18 @@ public class Tutor extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the student information of the tutor
+     *
+     * @param student The student information
+     * @see Student
+     */
+
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    /**
      * Gets the courses that the tutor may tutor
      *
      * @return The set containing all the course objects
@@ -118,6 +132,18 @@ public class Tutor extends JPAEntity<Integer>
     public Set<Course> getCourses()
     {
         return courses;
+    }
+
+    /**
+     * Gets the courses that the tutor may tutor
+     *
+     * @param courses The set containing all the course objects
+     * @see Course
+     * @see Set
+     */
+    public void setCourses(Set<Course> courses)
+    {
+        this.courses = courses;
     }
 
     /**
@@ -133,31 +159,6 @@ public class Tutor extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the student information of the tutor
-     *
-     * @param student The student information
-     * @see Student
-     */
-
-
-    public void setStudent( Student student )
-    {
-        this.student = student;
-    }
-
-    /**
-     * Gets the courses that the tutor may tutor
-     *
-     * @param courses The set containing all the course objects
-     * @see Course
-     * @see Set
-     */
-    public void setCourses( Set<Course> courses )
-    {
-        this.courses = courses;
-    }
-
-    /**
      * Sets the set of lessons of the tutor
      *
      * @param lessons The set of lessons
@@ -167,5 +168,33 @@ public class Tutor extends JPAEntity<Integer>
     public void setLessons( Set<Lesson> lessons )
     {
         this.lessons = lessons;
+    }
+
+    /**
+     * @return The past lessons of the tutor
+     */
+    public Set<Lesson> getPastLessons() {
+        Set<Lesson> result = new HashSet<Lesson>();
+        for (Lesson lesson : lessons) {
+            if (lesson.getDate()
+                    .before(new Date())) {
+                result.add(lesson);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @return The upcoming lessons of the tutor
+     */
+    public Set<Lesson> getUpcomingLessons() {
+        Set<Lesson> result = new HashSet<Lesson>();
+        for (Lesson lesson : lessons) {
+            if (lesson.getDate()
+                    .after(new Date())) {
+                result.add(lesson);
+            }
+        }
+        return result;
     }
 }
