@@ -58,20 +58,16 @@ public class Student extends JPAEntity<Integer>
     @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
     private Tutor tutor;
 
-    @Valid
-    @ManyToMany( fetch = FetchType.EAGER )
-    @JoinTable(
-            name = "student_reviews",
-            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
-            inverseJoinColumns = @JoinColumn( name = "review_id", referencedColumnName = "id" ) )
-    private Set<Review> reviews;
-
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "student_subscriptions",
             joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
             inverseJoinColumns = @JoinColumn( name = "subscription_id", referencedColumnName = "id" ) )
     private Set<Course> subscriptions;
+
+    @Valid
+    @OneToMany(mappedBy = "review",fetch = FetchType.EAGER )
+    private Set<Review> reviews;
 
     @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
     private Set<Lesson> bookings;

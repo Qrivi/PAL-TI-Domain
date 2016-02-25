@@ -73,6 +73,10 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
             inverseJoinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ) )
     private Set<Student> bookings;
 
+    @Valid
+    @OneToMany(mappedBy = "review",fetch = FetchType.EAGER )
+    private Set<Review> reviews;
+
     /**
      * Default constructor for Lesson
      */
@@ -314,5 +318,9 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     public Date getArchiveDate()
     {
         return date;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
     }
 }
