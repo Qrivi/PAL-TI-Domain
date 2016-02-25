@@ -66,7 +66,7 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @OneToMany(mappedBy = "review",fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER )
     private Set<Review> reviews;
 
     @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
