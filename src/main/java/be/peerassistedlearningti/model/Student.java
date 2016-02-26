@@ -14,9 +14,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * Class used to specify a Student
@@ -66,7 +66,7 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @OneToMany(mappedBy = "student",fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER )
     private Set<Review> reviews;
 
     @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
@@ -80,6 +80,9 @@ public class Student extends JPAEntity<Integer>
 
     @Column( name = "reset_expiration" )
     private Date resetTokenExpiration;
+
+    @Column( name = "security_token", unique = true, nullable = false )
+    private String securityToken;
 
     /**
      * Default empty constructor for JPA Entities
@@ -101,6 +104,7 @@ public class Student extends JPAEntity<Integer>
         this.type = type;
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
         this.password = createHash( password, salt );
+        this.securityToken = new BigInteger( 130, new SecureRandom() ).toString( 45 );
     }
 
     /**
@@ -322,7 +326,8 @@ public class Student extends JPAEntity<Integer>
      *
      * @return reviews made by the student
      */
-    public Set<Review> getReviews() {
+    public Set<Review> getReviews()
+    {
         return reviews;
     }
 
@@ -331,16 +336,10 @@ public class Student extends JPAEntity<Integer>
      */
     public Set<Lesson> getClosedBookings()
     {
-        Set<Lesson> result = new HashSet<Lesson>();
-        for ( Lesson lesson : bookings )
-        {
-            if ( lesson.getDate()
-                    .before( new Date() ) )
-            {
-                result.add( lesson );
-            }
-        }
-        return result;
+        return bookings.stream()
+                .filter( b -> b.getDate()
+                        .before( new Date() ) )
+                .collect( Collectors.toSet() );
     }
 
     /**
@@ -348,16 +347,10 @@ public class Student extends JPAEntity<Integer>
      */
     public Set<Lesson> getOpenBookings()
     {
-        Set<Lesson> result = new HashSet<Lesson>();
-        for ( Lesson lesson : bookings )
-        {
-            if ( lesson.getDate()
-                    .after( new Date() ) )
-            {
-                result.add( lesson );
-            }
-        }
-        return result;
+        return bookings.stream()
+                .filter( b -> b.getDate()
+                        .after( new Date() ) )
+                .collect( Collectors.toSet() );
     }
 
     /**
@@ -366,5 +359,13 @@ public class Student extends JPAEntity<Integer>
     public Set<Lesson> getBookings()
     {
         return bookings;
+    }
+
+    /**
+     * @return The security token of the Student
+     */
+    public String getSecurityToken()
+    {
+        return securityToken;
     }
 }

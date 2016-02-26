@@ -193,7 +193,7 @@ public interface PALService
      *
      * @return A collection containing all the tutors
      */
-    public Collection<Tutor> getAllTutors();
+    Collection<Tutor> getAllTutors();
 
     //================================================================================
     // endregion
