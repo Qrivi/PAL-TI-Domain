@@ -461,6 +461,13 @@ public interface PALService
      */
     Collection<Review> getReviewsForStudent( Student student );
 
+    /**
+     * Gets reviews filtered by student and lesson
+     *
+     * @return A collection containing the reviews of that student
+     */
+    Review getReviewsForStudentAndLesson( Student student, Lesson lesson );
+
     //================================================================================
     // endregion
     //================================================================================

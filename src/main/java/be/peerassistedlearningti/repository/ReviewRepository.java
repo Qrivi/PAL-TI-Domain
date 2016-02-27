@@ -43,4 +43,12 @@ public interface ReviewRepository extends CrudRepository<Review, Integer>
      */
     @Query( "SELECT r FROM Review r WHERE r.student = :student" )
     Collection<Review> findByStudent( @Param( "student" ) Student student );
+
+    /**
+     * Gets reviews filtered by student and lesson
+     *
+     * @return A collection containing the reviews of that student
+     */
+    @Query( "SELECT r FROM Review r WHERE r.student = :student AND r.lesson = :lesson" )
+    Review findByStudentAndLesson( @Param( "student" ) Student student, @Param( "lesson" ) Lesson lesson );
 }

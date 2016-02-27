@@ -645,6 +645,16 @@ public class PALServiceImpl implements PALService
     {
         return reviewRepository.findByStudent( student );
     }
+
+    /**
+     * Gets reviews filtered by student and lesson
+     *
+     * @return A collection containing the reviews of that student
+     */
+    public Review getReviewsForStudentAndLesson( Student student, Lesson lesson ){
+        return reviewRepository.findByStudentAndLesson(student,lesson);
+    }
+
     //================================================================================
     // endregion
     //================================================================================
