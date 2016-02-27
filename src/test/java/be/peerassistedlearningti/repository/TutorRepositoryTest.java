@@ -19,9 +19,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
@@ -44,8 +42,8 @@ public class TutorRepositoryTest implements RepositoryTest
     @Before
     public void before()
     {
-        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", UserType.ADMIN );
-        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", UserType.ADMIN );
+        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", "koen", UserType.ADMIN );
+        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", "jan", UserType.ADMIN );
 
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
         c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3", "TI", 3 );

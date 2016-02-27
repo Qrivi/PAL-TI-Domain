@@ -81,9 +81,11 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "reset_expiration" )
     private Date resetTokenExpiration;
 
+    @NotEmpty( message = "{NotEmpty.Student.securityToken}" )
     @Column( name = "security_token", unique = true, nullable = false )
     private String securityToken;
 
+    @NotEmpty( message = "{NotEmpty.Student.profileIdentifier}" )
     @Column( name = "profile_identifier", unique = true, nullable = false )
     private String profileIdentifier;
 

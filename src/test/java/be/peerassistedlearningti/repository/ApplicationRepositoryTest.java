@@ -41,7 +41,7 @@ public class ApplicationRepositoryTest implements RepositoryTest
 
         assertNotNull( c1.getId() );
 
-        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", UserType.ADMIN );
+        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", "koen", UserType.ADMIN );
         s1 = studentRepository.save( s1 );
 
         assertNotNull( s1.getId() );

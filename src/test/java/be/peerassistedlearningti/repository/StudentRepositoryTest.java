@@ -14,9 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
@@ -29,7 +27,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testAdd()
     {
-        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", "david", UserType.ADMIN );
 
         repository.save( s );
 
@@ -40,7 +38,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testUpdate()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", "david", UserType.ADMIN );
 
         repository.save( s1 );
 
@@ -57,7 +55,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testRemove()
     {
-        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", "david", UserType.ADMIN );
 
         repository.save( s );
         repository.delete( s );
@@ -71,7 +69,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetById()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", "david", UserType.ADMIN );
 
         repository.save( s1 );
 
@@ -85,8 +83,8 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetAll()
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
-        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", "david", UserType.ADMIN );
+        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", "cedric", UserType.ADMIN );
 
         repository.save( s1 );
         repository.save( s2 );
@@ -101,7 +99,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetByEmail() throws Exception
     {
-        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", "david", UserType.ADMIN );
 
         repository.save( s1 );
 
