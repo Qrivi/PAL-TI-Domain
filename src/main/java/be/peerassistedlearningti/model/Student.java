@@ -84,6 +84,9 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "security_token", unique = true, nullable = false )
     private String securityToken;
 
+    @Column( name = "profile_identifier", unique = true, nullable = false )
+    private String profileIdentifier;
+
     /**
      * Default empty constructor for JPA Entities
      */
@@ -92,19 +95,21 @@ public class Student extends JPAEntity<Integer>
     /**
      * Constructor for a student entity
      *
-     * @param name     The name of the student
-     * @param password The password of the student
-     * @param email    The email of the student
-     * @param type     The user type of the student
+     * @param name              The name of the student
+     * @param password          The password of the student
+     * @param email             The email of the student
+     * @param profileIdentifier The profile identifier of the student
+     * @param type              The user type of the student
      */
-    public Student( String name, String password, String email, UserType type )
+    public Student( String name, String password, String email, String profileIdentifier, UserType type )
     {
         this.email = email;
         this.name = name;
+        this.profileIdentifier = profileIdentifier;
         this.type = type;
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
         this.password = createHash( password, salt );
-        this.securityToken = new BigInteger( 130, new SecureRandom() ).toString( 45 );
+        this.securityToken = new BigInteger( 130, new SecureRandom() ).toString( 20 );
     }
 
     /**
@@ -168,7 +173,6 @@ public class Student extends JPAEntity<Integer>
         return plainTextToken;
     }
 
-
     /**
      * Check if the given reset token is valid and did not pass expiration
      *
@@ -188,6 +192,14 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Changes the security token to a new random string
+     */
+    public void changeSecurityToken()
+    {
+        this.securityToken = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+    }
+
+    /**
      * @return The name of the student
      */
     public String getName()
@@ -203,6 +215,16 @@ public class Student extends JPAEntity<Integer>
     public void setName( String name )
     {
         this.name = name;
+    }
+
+    /**
+     * Sets the profile identifier of the Student
+     *
+     * @param profileIdentifier the profile identifier of the Student
+     */
+    public void setProfileIdentifier( String profileIdentifier )
+    {
+        this.profileIdentifier = profileIdentifier;
     }
 
     /**
@@ -367,5 +389,13 @@ public class Student extends JPAEntity<Integer>
     public String getSecurityToken()
     {
         return securityToken;
+    }
+
+    /**
+     * @return The profile identifier of the Student
+     */
+    public String getProfileIdentifier()
+    {
+        return profileIdentifier;
     }
 }

@@ -164,6 +164,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the student with the specified profile identifier
+     *
+     * @param profileIdentifier The profile identifier of the student
+     * @return The student with the specified profile identifier
+     */
+    public Student getStudentByProfileIdentifier( String profileIdentifier )
+    {
+        return studentRepository.findByProfileIdentifier( profileIdentifier );
+    }
+
+    /**
      * Gets all the students
      *
      * @return A collection containing all the students
@@ -651,8 +662,9 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing the reviews of that student
      */
-    public Review getReviewsForStudentAndLesson( Student student, Lesson lesson ){
-        return reviewRepository.findByStudentAndLesson(student,lesson);
+    public Review getReviewsForStudentAndLesson( Student student, Lesson lesson )
+    {
+        return reviewRepository.findByStudentAndLesson( student, lesson );
     }
 
     //================================================================================

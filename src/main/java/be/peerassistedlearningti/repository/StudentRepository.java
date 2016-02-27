@@ -24,4 +24,12 @@ public interface StudentRepository extends CrudRepository<Student, Integer>
     @Query( "SELECT s FROM Student s WHERE s.email = :email" )
     Student findByEmail( @Param( "email" ) String email );
 
+    /**
+     * Gets a Student with the specified profile identifier
+     *
+     * @param profileIdentifier The profile identifier of the student
+     * @return The student with the specified profile identifier
+     */
+    @Query( "SELECT s FROM Student s WHERE s.profileIdentifier = :profileIdentifier" )
+    Student findByProfileIdentifier( @Param( "profileIdentifier" ) String profileIdentifier );
 }

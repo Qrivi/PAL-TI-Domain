@@ -106,6 +106,14 @@ public interface PALService
     Student getStudentByEmail( String email );
 
     /**
+     * Gets the student with the specified profile identifier
+     *
+     * @param profileIdentifier The profile identifier of the student
+     * @return The student with the specified profile identifier
+     */
+    Student getStudentByProfileIdentifier( String profileIdentifier );
+
+    /**
      * Gets all the students
      *
      * @return A collection containing all the students
@@ -134,7 +142,7 @@ public interface PALService
      * @param student The student to get the lessons from
      * @return the lessons in the future of that student
      */
-    Collection<Lesson> getUpcomingLessons(Student student);
+    Collection<Lesson> getUpcomingLessons( Student student );
 
     /**
      * Gets upcoming lessons filtered by course
