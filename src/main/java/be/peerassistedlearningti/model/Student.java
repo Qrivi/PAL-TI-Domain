@@ -69,8 +69,13 @@ public class Student extends JPAEntity<Integer>
     @OneToMany( mappedBy = "student", fetch = FetchType.EAGER )
     private Set<Review> reviews;
 
+    @Valid
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    private Set<Request> requests;
+
     @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
     private Set<Lesson> bookings;
+
 
     @Column( name = "reset_token", unique = true )
     private String resetToken;
@@ -88,11 +93,6 @@ public class Student extends JPAEntity<Integer>
     @NotEmpty( message = "{NotEmpty.Student.profileIdentifier}" )
     @Column( name = "profile_identifier", unique = true, nullable = false )
     private String profileIdentifier;
-
-    @Valid
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
-    private Set<Request> requests;
-
 
     /**
      * Default empty constructor for JPA Entities
