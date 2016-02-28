@@ -47,7 +47,7 @@ public class RequestTest extends ValidationTest
     @Test
     public void testCreationDateIsNull()
     {
-        Request request = new Request(0,null,null,null);
+        Request request = new Request(0,null,null,null,null);
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty(request, "creationDate");
         Assert.assertEquals(1,constraintViolations.size());
         Assert.assertEquals("Request creation date cannot be empty!", constraintViolations.iterator().next().getMessage());
