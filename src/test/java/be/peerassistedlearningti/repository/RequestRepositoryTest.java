@@ -7,6 +7,7 @@ import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.util.Utils;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -48,6 +49,7 @@ public class RequestRepositoryTest implements RepositoryTest{
 
     }
 
+    @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testAdd() {
@@ -56,6 +58,7 @@ public class RequestRepositoryTest implements RepositoryTest{
         assertNotNull( request.getId() );
     }
 
+    @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testUpdate() {
@@ -68,6 +71,7 @@ public class RequestRepositoryTest implements RepositoryTest{
         assertEquals( 20,request.getUpvotes() );
     }
 
+    @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testRemove() {
@@ -79,6 +83,7 @@ public class RequestRepositoryTest implements RepositoryTest{
 
     }
 
+    @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetById() {
@@ -88,6 +93,7 @@ public class RequestRepositoryTest implements RepositoryTest{
 
     }
 
+    @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetAll() {
