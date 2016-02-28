@@ -45,6 +45,10 @@ public class Course extends JPAEntity<Integer>
     @ManyToMany( mappedBy = "subscriptions", fetch = FetchType.EAGER )
     private Set<Student> subscribers;
 
+    @Valid
+    @OneToMany(mappedBy="course", fetch = FetchType.EAGER)
+    private Set<Request> requests;
+
     /**
      * Default constructor for Course
      */
@@ -174,6 +178,13 @@ public class Course extends JPAEntity<Integer>
     public Set<Student> getSubscribers()
     {
         return subscribers;
+    }
+
+    /**
+     * @return the set of requests for this course
+     */
+    public Set<Request> getRequests() {
+        return requests;
     }
 
     /**

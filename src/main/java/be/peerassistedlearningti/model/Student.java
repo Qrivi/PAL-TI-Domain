@@ -89,6 +89,11 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "profile_identifier", unique = true, nullable = false )
     private String profileIdentifier;
 
+    @Valid
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    private Set<Request> requests;
+
+
     /**
      * Default empty constructor for JPA Entities
      */
@@ -399,5 +404,12 @@ public class Student extends JPAEntity<Integer>
     public String getProfileIdentifier()
     {
         return profileIdentifier;
+    }
+
+    /**
+     * @return  The set of requests from this student
+     */
+    public Set<Request> getRequests() {
+        return requests;
     }
 }
