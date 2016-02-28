@@ -39,6 +39,9 @@ public class PALServiceImpl implements PALService
     @Autowired
     ApplicationRepository applicationRepository;
 
+    @Autowired
+    RequestRepository requestRepository;
+
     //================================================================================
     // region Course
     //================================================================================
@@ -691,6 +694,56 @@ public class PALServiceImpl implements PALService
     {
         return reviewRepository.findByStudentAndLesson( student, lesson );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Request
+    //================================================================================
+
+    /**
+     * Gets the request with the specified id
+     *
+     * @param id The id of the request
+     * @return The request with the specified id
+     */
+    public Request getRequestById( int id )
+    {
+        return requestRepository.findOne( id );
+    }
+
+    /**
+     * Adds a request to the database
+     *
+     * @param request The request to be added to the database
+     */
+    public void addRequest( Request request )
+    {
+        requestRepository.save( request );
+    }
+
+    /**
+     * Removes the specified request from the database
+     *
+     * @param request The request to be removed from the database
+     */
+    public void removeRequest( Request request )
+    {
+        requestRepository.delete( request );
+    }
+
+    /**
+     * Gets all the request
+     *
+     * @return A collection containing all the request
+     */
+    public Collection<Request> getAllRequest()
+    {
+        return Utils.makeCollection( requestRepository.findAll() );
+    }
+
 
     //================================================================================
     // endregion
