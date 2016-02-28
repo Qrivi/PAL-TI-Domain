@@ -2,7 +2,6 @@ package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.archivable.Archivable;
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -22,7 +21,7 @@ import java.util.Date;
 public class Review extends JPAEntity<Integer> implements Archivable
 {
 
-    @NotEmpty( message = "{NotEmpty.Review.text}" )
+    @NotNull( message = "{NotNull.Review.text}" )
     @Column( name = "text", nullable = false )
     @Size( min = 10, max = 140, message = "{Size.Review.text}" )
     private String text;

@@ -15,49 +15,52 @@ import java.util.Date;
  * @see JPAEntity
  */
 @Entity
-@Table( name = "request")
-public class Request extends JPAEntity<Integer> {
+@Table( name = "request" )
+public class Request extends JPAEntity<Integer>
+{
 
-    @Min(value = 0, message = "{Min.Request.upvotes}")
-    @Column(name="upvotes")
+    @Min( value = 0, message = "{Min.Request.upvotes}" )
+    @Column( name = "upvotes" )
     private int upvotes;
 
-    @NotNull(message = "{NotNull.Request.description}")
+    @NotNull( message = "{NotNull.Request.description}" )
     @Size( min = 10, max = 300, message = "{Size.Request.text}" )
-    @Column(name = "description")
+    @Column( name = "description" )
     private String description;
 
     @Valid
-    @NotNull(message = "{NotNull.Request.course}")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE })
-    @JoinColumn(name = "course_id")
+    @NotNull( message = "{NotNull.Request.course}" )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinColumn( name = "course_id" )
     private Course course;
 
     @Valid
-    @NotNull(message = "{NotNull.Request.student}")
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE })
-    @JoinColumn(name = "student_id")
+    @NotNull( message = "{NotNull.Request.student}" )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @JoinColumn( name = "student_id" )
     private Student student;
 
-    @NotNull(message = "{NotNull.Request.creationDate}")
-    @Column(name="creation_date")
+    @NotNull( message = "{NotNull.Request.creationDate}" )
+    @Column( name = "creation_date" )
     private Date creationDate;
 
     /**
      * Default constructor for Request
      */
-    public Request() {
+    public Request()
+    {
     }
 
     /**
      * Constructor for Request
      *
-     * @param upvotes       The amount of upvotes of the request
-     * @param description   The description of the request
-     * @param course        The course of the request
-     * @param student       The student of the request
+     * @param upvotes     The amount of upvotes of the request
+     * @param description The description of the request
+     * @param course      The course of the request
+     * @param student     The student of the request
      */
-    public Request(int upvotes, String description, Course course, Student student) {
+    public Request( int upvotes, String description, Course course, Student student )
+    {
         this.upvotes = upvotes;
         this.description = description;
         this.course = course;
@@ -68,94 +71,105 @@ public class Request extends JPAEntity<Integer> {
     /**
      * Constructor for Request
      *
-     * @param upvotes       The amount of upvotes of the request
-     * @param description   The description of the request
-     * @param course        The course of the request
-     * @param student       The student of the request
-     * @param creationDate  The creation date of the request
+     * @param upvotes      The amount of upvotes of the request
+     * @param description  The description of the request
+     * @param course       The course of the request
+     * @param student      The student of the request
+     * @param creationDate The creation date of the request
      */
-    public Request(int upvotes, String description, Course course, Student student, Date creationDate) {
-        this(upvotes,description,course,student);
+    public Request( int upvotes, String description, Course course, Student student, Date creationDate )
+    {
+        this( upvotes, description, course, student );
         this.creationDate = creationDate;
     }
 
     /**
      * @return the upvotes of the request
      */
-    public int getUpvotes() {
+    public int getUpvotes()
+    {
         return upvotes;
     }
 
     /**
      * Sets the upvotes of the request
      *
-     * @param upvotes   the new amount of upvotes
+     * @param upvotes the new amount of upvotes
      */
-    public void setUpvotes(int upvotes) {
+    public void setUpvotes( int upvotes )
+    {
         this.upvotes = upvotes;
     }
 
     /**
      * @return the description of the request
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
     /**
      * Sets the description of the request
      *
-     * @param description   the new description of the request
+     * @param description the new description of the request
      */
-    public void setDescription(String description) {
+    public void setDescription( String description )
+    {
         this.description = description;
     }
 
     /**
-     * @return  the course of the request
+     * @return the course of the request
      */
-    public Course getCourse() {
+    public Course getCourse()
+    {
         return course;
     }
 
     /**
      * Sets the course of the request
      *
-     * @param course    the new course of the request
+     * @param course the new course of the request
      */
-    public void setCourse(Course course) {
+    public void setCourse( Course course )
+    {
         this.course = course;
     }
 
     /**
-     * @return  the student of the request
+     * @return the student of the request
      */
-    public Student getStudent() {
+    public Student getStudent()
+    {
         return student;
     }
 
     /**
      * Sets the student of the request
      *
-     * @param student   the new student of the request
+     * @param student the new student of the request
      */
-    public void setStudent(Student student) {
+    public void setStudent( Student student )
+    {
         this.student = student;
     }
 
     /**
-     * @return  the creation date of the request
+     * @return the creation date of the request
      */
-    public Date getCreationDate() {
+    public Date getCreationDate()
+    {
         return creationDate;
     }
 
     /**
      * Sets the creation date of the request
      *
-     * @param creationDate  the new creation date of the request
+     * @param creationDate the new creation date of the request
      */
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate( Date creationDate )
+    {
         this.creationDate = creationDate;
     }
 }
