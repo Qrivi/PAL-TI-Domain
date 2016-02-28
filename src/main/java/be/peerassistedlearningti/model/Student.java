@@ -55,7 +55,7 @@ public class Student extends JPAEntity<Integer>
     private UserType type;
 
     @Valid
-    @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = { CascadeType.REFRESH , CascadeType.MERGE , CascadeType.REMOVE } )
+    @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.REMOVE )
     private Tutor tutor;
 
     @ManyToMany( fetch = FetchType.EAGER )
@@ -66,16 +66,20 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER, orphanRemoval = true )
     private Set<Review> reviews;
 
     @Valid
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER, orphanRemoval = true )
     private Set<Request> requests;
 
+    @Valid
+    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER, orphanRemoval = true )
+    private Set<Application> applications;
+
+    @Valid
     @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
     private Set<Lesson> bookings;
-
 
     @Column( name = "reset_token", unique = true )
     private String resetToken;
@@ -171,8 +175,7 @@ public class Student extends JPAEntity<Integer>
 
         try
         {
-            plainTextToken = Base64.getUrlEncoder()
-                    .encodeToString( plainTextToken.getBytes( "utf-8" ) );
+            plainTextToken = Base64.getUrlEncoder().encodeToString( plainTextToken.getBytes( "utf-8" ) );
         } catch ( UnsupportedEncodingException e ) {}
 
         resetToken = createHash( plainTextToken, resetSalt );
@@ -365,10 +368,7 @@ public class Student extends JPAEntity<Integer>
      */
     public Set<Lesson> getClosedBookings()
     {
-        return bookings.stream()
-                .filter( b -> b.getDate()
-                        .before( new Date() ) )
-                .collect( Collectors.toSet() );
+        return bookings.stream().filter( b -> b.getDate().before( new Date() ) ).collect( Collectors.toSet() );
     }
 
     /**
@@ -376,10 +376,7 @@ public class Student extends JPAEntity<Integer>
      */
     public Set<Lesson> getOpenBookings()
     {
-        return bookings.stream()
-                .filter( b -> b.getDate()
-                        .after( new Date() ) )
-                .collect( Collectors.toSet() );
+        return bookings.stream().filter( b -> b.getDate().after( new Date() ) ).collect( Collectors.toSet() );
     }
 
     /**
@@ -407,9 +404,18 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return  The set of requests from this student
+     * @return The set of requests from this student
      */
-    public Set<Request> getRequests() {
+    public Set<Request> getRequests()
+    {
         return requests;
+    }
+
+    /**
+     * @return The set of applications from this student
+     */
+    public Set<Application> getApplications()
+    {
+        return applications;
     }
 }

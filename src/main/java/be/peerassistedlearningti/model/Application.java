@@ -19,13 +19,13 @@ public class Application extends JPAEntity<Integer>
 {
     @Valid
     @NotNull( message = "{NotNull.Application.student}" )
-    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "student_id" )
     private Student student;
 
     @Valid
     @NotNull( message = "{NotNull.Application.course}" )
-    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
     @JoinColumn( name = "course_id" )
     private Course course;
 

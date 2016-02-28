@@ -74,7 +74,7 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     private Set<Student> bookings;
 
     @Valid
-    @OneToMany(mappedBy = "lesson",fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE )
     private Set<Review> reviews;
 
     /**
@@ -320,7 +320,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
         return date;
     }
 
-    public Set<Review> getReviews() {
+    public Set<Review> getReviews()
+    {
         return reviews;
     }
 }

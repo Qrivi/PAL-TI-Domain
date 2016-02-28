@@ -21,20 +21,20 @@ public class Tutor extends JPAEntity<Integer>
 
     @Valid
     @NotNull( message = "{NotNull.Tutor.student}" )
-    @OneToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @OneToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "student_id" )
     private Student student;
 
     @Valid
     @NotNull( message = "{NotNull.Tutor.course}" )
-    @ManyToMany( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable( name = "tutor_course",
             joinColumns = { @JoinColumn( name = "tutor_id", referencedColumnName = "id" ) },
             inverseJoinColumns = { @JoinColumn( name = "course_id", referencedColumnName = "id" ) } )
     private Set<Course> courses;
 
     @Valid
-    @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE )
     private Set<Lesson> lessons;
 
     /**
@@ -118,7 +118,8 @@ public class Tutor extends JPAEntity<Integer>
      */
 
 
-    public void setStudent(Student student) {
+    public void setStudent( Student student )
+    {
         this.student = student;
     }
 
@@ -141,7 +142,7 @@ public class Tutor extends JPAEntity<Integer>
      * @see Course
      * @see Set
      */
-    public void setCourses(Set<Course> courses)
+    public void setCourses( Set<Course> courses )
     {
         this.courses = courses;
     }
@@ -173,12 +174,14 @@ public class Tutor extends JPAEntity<Integer>
     /**
      * @return The past lessons of the tutor
      */
-    public Set<Lesson> getPastLessons() {
+    public Set<Lesson> getPastLessons()
+    {
         Set<Lesson> result = new HashSet<Lesson>();
-        for (Lesson lesson : lessons) {
-            if (lesson.getDate()
-                    .before(new Date())) {
-                result.add(lesson);
+        for ( Lesson lesson : lessons )
+        {
+            if ( lesson.getDate().before( new Date() ) )
+            {
+                result.add( lesson );
             }
         }
         return result;
@@ -187,12 +190,14 @@ public class Tutor extends JPAEntity<Integer>
     /**
      * @return The upcoming lessons of the tutor
      */
-    public Set<Lesson> getUpcomingLessons() {
+    public Set<Lesson> getUpcomingLessons()
+    {
         Set<Lesson> result = new HashSet<Lesson>();
-        for (Lesson lesson : lessons) {
-            if (lesson.getDate()
-                    .after(new Date())) {
-                result.add(lesson);
+        for ( Lesson lesson : lessons )
+        {
+            if ( lesson.getDate().after( new Date() ) )
+            {
+                result.add( lesson );
             }
         }
         return result;

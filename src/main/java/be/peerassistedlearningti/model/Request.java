@@ -47,9 +47,7 @@ public class Request extends JPAEntity<Integer>
     /**
      * Default constructor for Request
      */
-    public Request()
-    {
-    }
+    public Request() {}
 
     /**
      * Constructor for Request
