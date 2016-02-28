@@ -27,14 +27,12 @@ public class Request extends JPAEntity<Integer> {
 
     @Valid
     @NotNull(message = "{NotNull.Request.course}")
-    @Column(name="course")
     @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE })
     @JoinColumn(name = "course_id")
     private Course course;
 
     @Valid
     @NotNull(message = "{NotNull.Request.student}")
-    @Column(name = "student")
     @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE })
     @JoinColumn(name = "student_id")
     private Student student;
