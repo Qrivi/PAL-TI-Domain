@@ -4,6 +4,8 @@ import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.repository.*;
 import be.peerassistedlearningti.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,9 +38,6 @@ public class PALServiceImpl implements PALService
 
     @Autowired
     ApplicationRepository applicationRepository;
-
-    @Autowired
-    RequestRepository requestRepository;
 
     //================================================================================
     // region Course
@@ -104,6 +103,17 @@ public class PALServiceImpl implements PALService
     public Collection<Course> getAllCourses()
     {
         return Utils.makeCollection( courseRepository.findAll() );
+    }
+
+    /**
+     * Gets the top subscribed courses (limited by the specified limit)
+     *
+     * @return A collection containing the top subscribed courses
+     */
+    public Collection<Course> getTopSubscribedCourses( int limit )
+    {
+        Pageable page = new PageRequest( 0, limit );
+        return courseRepository.findTopSubscribed( page );
     }
 
     //================================================================================
@@ -578,6 +588,18 @@ public class PALServiceImpl implements PALService
      */
     public Collection<Application> getAllApprovedApplications( Student student ) {return applicationRepository.findAll( student, ApplicationState.APPROVED );}
 
+    /**
+     * Gets the last applications from a student with the specified limit
+     *
+     * @param student The student to get the applications from
+     * @return A collection containing the last applications from the student
+     */
+    public Collection<Application> getLastApplications( Student student, int limit )
+    {
+        Pageable page = new PageRequest( 0, limit );
+        return applicationRepository.findLastByStudent( student, page );
+    }
+
     //================================================================================
     // endregion
     //================================================================================
@@ -673,51 +695,4 @@ public class PALServiceImpl implements PALService
     //================================================================================
     // endregion
     //================================================================================
-
-    //================================================================================
-    // region Request
-    //================================================================================
-
-    /**
-     * Gets the request with the specified id
-     *
-     * @param id The id of the request
-     * @return The request with the specified id
-     */
-    public Request getRequestById( int id ){
-        return requestRepository.findOne(id);
-    }
-
-    /**
-     * Adds a request to the database
-     *
-     * @param request The request to be added to the database
-     */
-    public void addRequest( Request request ){
-        requestRepository.save(request);
-    }
-
-    /**
-     * Removes the specified request from the database
-     *
-     * @param request The request to be removed from the database
-     */
-    public void removeRequest( Request request ){
-        requestRepository.delete(request);
-    }
-
-    /**
-     * Gets all the request
-     *
-     * @return A collection containing all the request
-     */
-    public Collection<Request> getAllRequest(){
-        return Utils.makeCollection(requestRepository.findAll());
-    }
-
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
 }

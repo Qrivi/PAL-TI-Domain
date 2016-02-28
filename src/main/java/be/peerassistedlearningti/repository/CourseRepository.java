@@ -1,10 +1,13 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Course;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Interface for Course specific database operations
@@ -41,4 +44,12 @@ public interface CourseRepository extends CrudRepository<Course, Integer>
      */
     @Query( "SELECT c FROM Course c WHERE c.shortName = :shortName" )
     Course findByShortName( @Param( "shortName" ) String shortName );
+
+    /**
+     * Gets the top subscribed courses
+     *
+     * @return The top subscribed courses
+     */
+    @Query( "SELECT c FROM Course c ORDER BY c.subscribers.size" )
+    List<Course> findTopSubscribed( Pageable pageable );
 }
