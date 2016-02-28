@@ -479,4 +479,43 @@ public interface PALService
     //================================================================================
     // endregion
     //================================================================================
+
+    //================================================================================
+    // region Request
+    //================================================================================
+
+    /**
+     * Gets the request with the specified id
+     *
+     * @param id The id of the request
+     * @return The request with the specified id
+     */
+    Request getRequestById( int id );
+
+    /**
+     * Adds a request to the database
+     *
+     * @param request The request to be added to the database
+     */
+    void addRequest( Request request );
+
+    /**
+     * Removes the specified request from the database
+     *
+     * @param request The request to be removed from the database
+     */
+    void removeRequest( Request request );
+
+    /**
+     * Gets all the request
+     *
+     * @return A collection containing all the request
+     */
+    Collection<Request> getAllRequest();
+
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
 }
