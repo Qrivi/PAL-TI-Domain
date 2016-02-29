@@ -26,7 +26,7 @@ public class Request extends JPAEntity<Integer>
     private int upvotes;
 
     @NotNull(message = "{NotNull.Request.title}")
-    @Size( min = 3, max = 50, message = "{Size.Request.text}" )
+    @Size( min = 3, max = 50, message = "{Size.Request.title}" )
     @Column( name = "title" )
     private String title;
 
