@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Service
-@Transactional( readOnly = true )
+@Transactional
 public class PALServiceImpl implements PALService
 {
 

@@ -66,15 +66,15 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER, orphanRemoval = true )
+    @OneToMany( mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true )
     private Set<Review> reviews;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER, orphanRemoval = true )
+    @OneToMany( mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true )
     private Set<Request> requests;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.EAGER, orphanRemoval = true )
+    @OneToMany( mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true )
     private Set<Application> applications;
 
     @Valid
