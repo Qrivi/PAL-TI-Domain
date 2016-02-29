@@ -74,7 +74,7 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     private Set<Student> bookings;
 
     @Valid
-    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE )
+    @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, orphanRemoval = true )
     private Set<Review> reviews;
 
     /**

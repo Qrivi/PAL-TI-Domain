@@ -171,6 +171,14 @@ public interface PALService
      */
     Collection<Tutor> getAllTutors();
 
+    /**
+     * Gets all the tutors from the specified course
+     *
+     * @param course The course to get the tutors from
+     * @return A collection containing all the tutors from the specified course
+     */
+    Collection<Tutor> getAllTutors( Course course );
+
     //================================================================================
     // endregion
     //================================================================================

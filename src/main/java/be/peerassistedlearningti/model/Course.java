@@ -30,10 +30,6 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
-    @Valid
-    @ManyToMany( fetch = FetchType.EAGER, mappedBy = "courses" )
-    private Set<Tutor> tutors;
-
     @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
     @Column( name = "curriculum", nullable = false )
     private String curriculum;
@@ -42,11 +38,16 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "year", nullable = false )
     private int year;
 
+    @Valid
+    @ManyToMany( mappedBy = "courses", fetch = FetchType.LAZY )
+    private Set<Tutor> tutors;
+
+    @Valid
     @ManyToMany( mappedBy = "subscriptions", fetch = FetchType.EAGER )
     private Set<Student> subscribers;
 
     @Valid
-    @OneToMany(mappedBy="course", fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "course", fetch = FetchType.LAZY, orphanRemoval = true )
     private Set<Request> requests;
 
     /**
@@ -125,16 +126,6 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the available tutors for a course
-     *
-     * @return The set with available tutors or null if none
-     */
-    public Set<Tutor> getTutors()
-    {
-        return tutors;
-    }
-
-    /**
      * @return The curriculum of the course
      */
     public String getCurriculum()
@@ -178,46 +169,6 @@ public class Course extends JPAEntity<Integer>
     public Set<Student> getSubscribers()
     {
         return subscribers;
-    }
-
-    /**
-     * @return the set of requests for this course
-     */
-    public Set<Request> getRequests() {
-        return requests;
-    }
-
-    /**
-     * Add a student to the subscription list of the course
-     *
-     * @param student The student to add
-     * @return true if this set did not already contain the specified booking
-     */
-    public boolean subscribe( Student student )
-    {
-        return subscribers.add( student );
-    }
-
-    /**
-     * Removes a student from the subscription list of the course
-     *
-     * @param student The student to remove
-     * @return true if this set contained the specified booking
-     */
-    public boolean unsubscribe( Student student )
-    {
-        return subscribers.remove( student );
-    }
-
-    /**
-     * Returns if the student is subscribed to the course
-     *
-     * @param student
-     * @return if the student is subscribed
-     */
-    public boolean isSubscribed( Student student )
-    {
-        return subscribers.contains( student );
     }
 
     /**

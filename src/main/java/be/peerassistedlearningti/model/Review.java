@@ -28,13 +28,13 @@ public class Review extends JPAEntity<Integer> implements Archivable
 
     @Valid
     @NotNull( message = "{NotNull.Review.student}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "student_id" )
     private Student student;
 
     @Valid
     @NotNull( message = "{NotNull.Review.lesson}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER )
     @JoinColumn( name = "lesson_id" )
     private Lesson lesson;
 

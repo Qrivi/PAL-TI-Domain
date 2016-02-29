@@ -259,6 +259,17 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( tutorRepository.findAll() );
     }
 
+    /**
+     * Gets all the tutors from the specified course
+     *
+     * @param course The course to get the tutors from
+     * @return A collection containing all the tutors from the specified course
+     */
+    public Collection<Tutor> getAllTutors( Course course )
+    {
+        return tutorRepository.findAll( course );
+    }
+
     //================================================================================
     // endregion
     //================================================================================
@@ -789,6 +800,16 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( requestRepository.findAll() );
     }
 
+    /**
+     * Gets all the requests from the specified course
+     *
+     * @param course The course to get the requests from
+     * @return A collection containing all the requests from the specified course
+     */
+    public Collection<Request> getAllRequest( Course course )
+    {
+        return requestRepository.findAll( course );
+    }
 
     //================================================================================
     // endregion
