@@ -330,6 +330,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets lessons from the specified tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons of that tutor
+     */
+    public Collection<Lesson> getLessons( Tutor tutor )
+    {
+        return lessonRepository.findByTutor( tutor );
+    }
+
+    /**
      * Gets upcoming lessons filtered by course
      *
      * @param course to be filtered on
@@ -338,6 +349,28 @@ public class PALServiceImpl implements PALService
     public Collection<Lesson> getUpcomingLessons( Course course )
     {
         return lessonRepository.findUpcomingByCourse( course );
+    }
+
+    /**
+     * Gets upcoming lessons from the specified tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons in the future of that tutor
+     */
+    public Collection<Lesson> getUpcomingLessons( Tutor tutor )
+    {
+        return lessonRepository.findUpcomingByTutor( tutor );
+    }
+
+    /**
+     * Gets past lessons from the specified tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons in the past of that tutor
+     */
+    public Collection<Lesson> getPastLessons( Tutor tutor )
+    {
+        return lessonRepository.findPastByTutor( tutor );
     }
 
     /**

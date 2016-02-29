@@ -3,6 +3,7 @@ package be.peerassistedlearningti.repository;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.Tutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,6 +27,14 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      */
     @Query( "SELECT l FROM Lesson l WHERE l.course = :course" )
     Collection<Lesson> findByCourse( @Param( "course" ) Course course );
+
+    /**
+     * Gets lessons from a tutor
+     *
+     * @return A collection containing the lessons from that tutor
+     */
+    @Query( "SELECT l FROM Lesson l WHERE l.tutor = :tutor" )
+    Collection<Lesson> findByTutor( @Param( "tutor" ) Tutor tutor );
 
     /**
      * Gets the upcoming lessons from a course
@@ -53,6 +62,24 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      */
     @Query( "SELECT l FROM Lesson l WHERE :student MEMBER OF l.bookings AND l.date > current_timestamp " )
     Collection<Lesson> findUpcomingByStudent( @Param( "student" ) Student student );
+
+    /**
+     * Gets the past lessons for a given tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return The list with the past lessons
+     */
+    @Query( "SELECT l FROM Lesson l WHERE :tutor = l.tutor AND l.date < current_timestamp " )
+    Collection<Lesson> findPastByTutor( @Param( "tutor" ) Tutor tutor );
+
+    /**
+     * Gets the future lessons for a given tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return The list with the future lessons
+     */
+    @Query( "SELECT l FROM Lesson l WHERE :tutor = l.tutor AND l.date > current_timestamp " )
+    Collection<Lesson> findUpcomingByTutor( @Param( "tutor" ) Tutor tutor );
 
     /**
      * Gets all the upcoming lessons
