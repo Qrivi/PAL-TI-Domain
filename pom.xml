@@ -21,9 +21,16 @@
         <javax-el-impl.version>2.2</javax-el-impl.version>
         <spring-data.version>1.9.2.RELEASE</spring-data.version>
         <spring-test.version>4.1.7.RELEASE</spring-test.version>
+        <mpkorstanje.version>4.1.0</mpkorstanje.version>
     </properties>
 
     <dependencies>
+        <!-- mpkorstanje -->
+        <dependency>
+            <groupId>com.github.mpkorstanje</groupId>
+            <artifactId>simmetrics-core</artifactId>
+            <version>${mpkorstanje.version}</version>
+        </dependency>
         <!-- Commons beanutils -->
         <dependency>
             <groupId>commons-beanutils</groupId>
