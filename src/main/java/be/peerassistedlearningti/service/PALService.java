@@ -127,45 +127,6 @@ public interface PALService
      */
     Collection<Student> getAllStudents();
 
-    /**
-     * Gets lessons filtered by course
-     *
-     * @param course to be filtered on
-     * @return the lessons of that course
-     */
-    Collection<Lesson> getLessons( Course course );
-
-    /**
-     * Gets the past lessons for the student
-     *
-     * @param student The student to get the lessons from
-     * @return The past lessons of the student
-     */
-    Collection<Lesson> getPastLessons( Student student );
-
-    /**
-     * Gets upcoming lessons filtered by student
-     *
-     * @param student The student to get the lessons from
-     * @return the lessons in the future of that student
-     */
-    Collection<Lesson> getUpcomingLessons( Student student );
-
-    /**
-     * Gets upcoming lessons filtered by course
-     *
-     * @param course to be filterd on
-     * @return the lessons in the future of that course
-     */
-    Collection<Lesson> getUpcomingLessons( Course course );
-
-    /**
-     * Gets all the upcoming lessons
-     *
-     * @return A collection containing the upcoming lessons
-     */
-    Collection<Lesson> getUpcomingLessons();
-
     //================================================================================
     // endregion
     //================================================================================
@@ -253,6 +214,61 @@ public interface PALService
      * @return A collection containing all the lessons
      */
     Collection<Lesson> getAllLessons();
+
+    /**
+     * Gets lessons filtered by course
+     *
+     * @param course to be filtered on
+     * @return the lessons of that course
+     */
+    Collection<Lesson> getLessons( Course course );
+
+    /**
+     * Gets the past bookings for the student
+     *
+     * @param student The student to get the bookings from
+     * @return The past bookings of the student
+     */
+    Collection<Lesson> getPastBookings( Student student );
+
+    /**
+     * Gets upcoming bookings filtered by student
+     *
+     * @param student The student to get the bookings from
+     * @return the bookings in the future of that student
+     */
+    Collection<Lesson> getUpcomingBookings( Student student );
+
+    /**
+     * Gets upcoming bookings filtered by student
+     *
+     * @param student The student to get the bookings from
+     * @return the bookings in the future of that student
+     */
+
+    /**
+     * Checks if the specified student has the specified booking
+     *
+     * @param student The student to check if it has the booking
+     * @param lesson  The booking to check if it has the student
+     * @return If the student has the booking
+     */
+    boolean hasBooking( Student student, Lesson lesson );
+
+    /**
+     * Gets upcoming lessons filtered by course
+     *
+     * @param course to be filtered on
+     * @return the lessons in the future of that course
+     */
+    Collection<Lesson> getUpcomingLessons( Course course );
+
+    /**
+     * Gets all the upcoming lessons
+     *
+     * @return A collection containing the upcoming lessons
+     */
+    Collection<Lesson> getUpcomingLessons();
 
     //================================================================================
     // endregion

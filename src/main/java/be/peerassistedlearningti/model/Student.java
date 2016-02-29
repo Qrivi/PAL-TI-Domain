@@ -16,7 +16,6 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * Class used to specify a Student
@@ -78,7 +77,7 @@ public class Student extends JPAEntity<Integer>
     private Set<Application> applications;
 
     @Valid
-    @ManyToMany( mappedBy = "bookings", fetch = FetchType.EAGER )
+    @ManyToMany( mappedBy = "bookings", fetch = FetchType.LAZY )
     private Set<Lesson> bookings;
 
     @Column( name = "reset_token", unique = true )
@@ -364,30 +363,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The current closed bookings of the student
-     */
-    public Set<Lesson> getClosedBookings()
-    {
-        return bookings.stream().filter( b -> b.getDate().before( new Date() ) ).collect( Collectors.toSet() );
-    }
-
-    /**
-     * @return The current open bookings of the student
-     */
-    public Set<Lesson> getOpenBookings()
-    {
-        return bookings.stream().filter( b -> b.getDate().after( new Date() ) ).collect( Collectors.toSet() );
-    }
-
-    /**
-     * @return The bookings of the student
-     */
-    public Set<Lesson> getBookings()
-    {
-        return bookings;
-    }
-
-    /**
      * @return The security token of the Student
      */
     public String getSecurityToken()
@@ -401,21 +376,5 @@ public class Student extends JPAEntity<Integer>
     public String getProfileIdentifier()
     {
         return profileIdentifier;
-    }
-
-    /**
-     * @return The set of requests from this student
-     */
-    public Set<Request> getRequests()
-    {
-        return requests;
-    }
-
-    /**
-     * @return The set of applications from this student
-     */
-    public Set<Application> getApplications()
-    {
-        return applications;
     }
 }
