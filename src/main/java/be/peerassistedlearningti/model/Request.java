@@ -23,6 +23,11 @@ public class Request extends JPAEntity<Integer>
     @Column( name = "upvotes" )
     private int upvotes;
 
+    @NotNull(message = "{NotNull.Request.title}")
+    @Size( min = 3, max = 50, message = "{Size.Request.text}" )
+    @Column( name = "title" )
+    private String title;
+
     @NotNull( message = "{NotNull.Request.description}" )
     @Size( min = 10, max = 300, message = "{Size.Request.text}" )
     @Column( name = "description" )
@@ -53,13 +58,15 @@ public class Request extends JPAEntity<Integer>
      * Constructor for Request
      *
      * @param upvotes     The amount of upvotes of the request
+     * @param title       The title of the request
      * @param description The description of the request
      * @param course      The course of the request
      * @param student     The student of the request
      */
-    public Request( int upvotes, String description, Course course, Student student )
+    public Request( int upvotes, String title, String description, Course course, Student student )
     {
         this.upvotes = upvotes;
+        this.title = title;
         this.description = description;
         this.course = course;
         this.student = student;
@@ -70,14 +77,15 @@ public class Request extends JPAEntity<Integer>
      * Constructor for Request
      *
      * @param upvotes      The amount of upvotes of the request
+     * @param title       The title of the request
      * @param description  The description of the request
      * @param course       The course of the request
      * @param student      The student of the request
      * @param creationDate The creation date of the request
      */
-    public Request( int upvotes, String description, Course course, Student student, Date creationDate )
+    public Request( int upvotes, String title, String description, Course course, Student student, Date creationDate )
     {
-        this( upvotes, description, course, student );
+        this( upvotes, title, description, course, student );
         this.creationDate = creationDate;
     }
 
@@ -97,6 +105,22 @@ public class Request extends JPAEntity<Integer>
     public void setUpvotes( int upvotes )
     {
         this.upvotes = upvotes;
+    }
+
+    /**
+     * @return the title of the request
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * Sets the title of the request
+     *
+     * @param title the new title
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
