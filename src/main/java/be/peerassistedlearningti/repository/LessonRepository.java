@@ -59,6 +59,14 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      *
      * @return A collection containing the upcoming lessons
      */
-    @Query("SELECT l FROM Lesson l WHERE l.date > current_timestamp ")
+    @Query( "SELECT l FROM Lesson l WHERE l.date > current_timestamp " )
     Collection<Lesson> findUpcoming();
+
+    /**
+     * Checks if the specified lesson has the specified student
+     *
+     * @return The lesson if it has the students else null
+     */
+    @Query( "SELECT l FROM Lesson l WHERE l = :lesson AND :student MEMBER OF l.bookings " )
+    Lesson hasBooking( @Param( "student" ) Student student, @Param( "lesson" ) Lesson lesson );
 }

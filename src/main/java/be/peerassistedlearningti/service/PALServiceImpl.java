@@ -332,7 +332,7 @@ public class PALServiceImpl implements PALService
     /**
      * Gets upcoming lessons filtered by course
      *
-     * @param course to be filterd on
+     * @param course to be filtered on
      * @return the lessons in the future of that course
      */
     public Collection<Lesson> getUpcomingLessons( Course course )
@@ -346,7 +346,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the lessons from
      * @return The past lessons of the student
      */
-    public Collection<Lesson> getPastLessons( Student student )
+    public Collection<Lesson> getPastBookings( Student student )
     {
         return lessonRepository.findPastByStudent( student );
     }
@@ -357,9 +357,21 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the lessons from
      * @return the lessons in the future of that student
      */
-    public Collection<Lesson> getUpcomingLessons( Student student )
+    public Collection<Lesson> getUpcomingBookings( Student student )
     {
         return lessonRepository.findUpcomingByStudent( student );
+    }
+
+    /**
+     * Checks if the specified student has the specified booking
+     *
+     * @param student The student to check if it has the booking
+     * @param lesson  The booking to check if it has the student
+     * @return If the student has the booking
+     */
+    public boolean hasBooking( Student student, Lesson lesson )
+    {
+        return lessonRepository.hasBooking( student, lesson ) != null;
     }
 
     /**
