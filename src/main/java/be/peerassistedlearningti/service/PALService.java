@@ -224,6 +224,14 @@ public interface PALService
     Collection<Lesson> getLessons( Course course );
 
     /**
+     * Gets lessons from the specified tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons of that tutor
+     */
+    Collection<Lesson> getLessons( Tutor tutor );
+
+    /**
      * Gets the past bookings for the student
      *
      * @param student The student to get the bookings from
@@ -238,13 +246,6 @@ public interface PALService
      * @return the bookings in the future of that student
      */
     Collection<Lesson> getUpcomingBookings( Student student );
-
-    /**
-     * Gets upcoming bookings filtered by student
-     *
-     * @param student The student to get the bookings from
-     * @return the bookings in the future of that student
-     */
 
     /**
      * Checks if the specified student has the specified booking
@@ -262,6 +263,22 @@ public interface PALService
      * @return the lessons in the future of that course
      */
     Collection<Lesson> getUpcomingLessons( Course course );
+
+    /**
+     * Gets upcoming lessons from the specified tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons in the future of that tutor
+     */
+    Collection<Lesson> getUpcomingLessons( Tutor tutor );
+
+    /**
+     * Gets past lessons from the specified tutor
+     *
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons in the past of that tutor
+     */
+    Collection<Lesson> getPastLessons( Tutor tutor );
 
     /**
      * Gets all the upcoming lessons

@@ -5,8 +5,6 @@ import be.peerassistedlearningti.common.model.jpa.JPAEntity;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -34,7 +32,7 @@ public class Tutor extends JPAEntity<Integer>
     private Set<Course> courses;
 
     @Valid
-    @OneToMany( mappedBy = "tutor", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE )
+    @OneToMany( mappedBy = "tutor", fetch = FetchType.LAZY, orphanRemoval = true )
     private Set<Lesson> lessons;
 
     /**
@@ -98,7 +96,6 @@ public class Tutor extends JPAEntity<Integer>
         return lessons.remove( lesson );
     }
 
-
     /**
      * Gets the student information of the tutor
      *
@@ -116,8 +113,6 @@ public class Tutor extends JPAEntity<Integer>
      * @param student The student information
      * @see Student
      */
-
-
     public void setStudent( Student student )
     {
         this.student = student;
@@ -147,59 +142,4 @@ public class Tutor extends JPAEntity<Integer>
         this.courses = courses;
     }
 
-    /**
-     * Gets the set of lessons of the tutor
-     *
-     * @return The set of lessons
-     * @see Lesson
-     * @see Set
-     */
-    public Set<Lesson> getLessons()
-    {
-        return lessons;
-    }
-
-    /**
-     * Sets the set of lessons of the tutor
-     *
-     * @param lessons The set of lessons
-     * @see Lesson
-     * @see Set
-     */
-    public void setLessons( Set<Lesson> lessons )
-    {
-        this.lessons = lessons;
-    }
-
-    /**
-     * @return The past lessons of the tutor
-     */
-    public Set<Lesson> getPastLessons()
-    {
-        Set<Lesson> result = new HashSet<Lesson>();
-        for ( Lesson lesson : lessons )
-        {
-            if ( lesson.getDate().before( new Date() ) )
-            {
-                result.add( lesson );
-            }
-        }
-        return result;
-    }
-
-    /**
-     * @return The upcoming lessons of the tutor
-     */
-    public Set<Lesson> getUpcomingLessons()
-    {
-        Set<Lesson> result = new HashSet<Lesson>();
-        for ( Lesson lesson : lessons )
-        {
-            if ( lesson.getDate().after( new Date() ) )
-            {
-                result.add( lesson );
-            }
-        }
-        return result;
-    }
 }
