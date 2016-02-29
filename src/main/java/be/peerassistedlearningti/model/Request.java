@@ -1,6 +1,8 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import org.simmetrics.StringMetric;
+import org.simmetrics.metrics.StringMetrics;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -193,5 +195,17 @@ public class Request extends JPAEntity<Integer>
     public void setCreationDate( Date creationDate )
     {
         this.creationDate = creationDate;
+    }
+
+    /**
+     * Gets the similarity between this and another request, based on their titles
+     *
+     * @param other The other request to be compared with
+     * @return  a Float indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
+     * @see StringMetric
+     */
+    public float getSimilarity(Request other){
+        StringMetric metric = StringMetrics.cosineSimilarity();
+        return metric.compare(this.title, other.title);
     }
 }
