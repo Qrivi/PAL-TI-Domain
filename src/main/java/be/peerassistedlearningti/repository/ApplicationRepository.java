@@ -2,6 +2,7 @@ package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.model.ApplicationState;
+import be.peerassistedlearningti.model.Image;
 import be.peerassistedlearningti.model.Student;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -48,4 +49,13 @@ public interface ApplicationRepository extends CrudRepository<Application, Integ
      */
     @Query( "SELECT a FROM Application a WHERE a.student = :student ORDER BY a.beginDate" )
     List<Application> findLastByStudent( @Param( "student" ) Student student, Pageable pageable );
+
+    /**
+     * Gets the application screenshot
+     *
+     * @param application The application of the screenshot
+     * @return The application screenshot
+     */
+    @Query( "SELECT a.screenshot FROM Application a WHERE :application = a" )
+    Image findScreenshotByApplication( @Param( "application" ) Application application );
 }

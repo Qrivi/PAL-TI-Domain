@@ -704,6 +704,17 @@ public class PALServiceImpl implements PALService
         return applicationRepository.findLastByStudent( student, page );
     }
 
+    /**
+     * Gets the application screenshot
+     *
+     * @param application The application of the screenshot
+     * @return The application screenshot
+     */
+    public Image getScreenshotByApplication( Application application )
+    {
+        return applicationRepository.findScreenshotByApplication( application );
+    }
+
     //================================================================================
     // endregion
     //================================================================================

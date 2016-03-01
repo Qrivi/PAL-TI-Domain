@@ -497,6 +497,14 @@ public interface PALService
      */
     Collection<Application> getLastApplications( Student student, int last );
 
+    /**
+     * Gets the application screenshot
+     *
+     * @param application The application of the screenshot
+     * @return The application screenshot
+     */
+    Image getScreenshotByApplication( Application application );
+
     //================================================================================
     // endregion
     //================================================================================
@@ -608,7 +616,7 @@ public interface PALService
      * @param course The course to filter the requests
      * @return A collection containing all the request
      */
-    Collection<Request> getAllRequest(Course course);
+    Collection<Request> getAllRequest( Course course );
 
 
     //================================================================================

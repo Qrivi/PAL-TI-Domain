@@ -1,7 +1,8 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -29,10 +30,10 @@ public class Application extends JPAEntity<Integer>
     @JoinColumn( name = "course_id" )
     private Course course;
 
-    @Lob
-    @NotEmpty( message = "{NotEmpty.Application.screenshot}" )
-    @Column( name = "screenshot", nullable = false )
-    private byte[] screenshot;
+    @NotNull( message = "{NotNull.Application.screenshot}" )
+    @OneToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @LazyToOne( value = LazyToOneOption.NO_PROXY )
+    private Image screenshot;
 
     @Enumerated( EnumType.STRING )
     @NotNull( message = "{NotNull.Application.state}" )
@@ -67,7 +68,7 @@ public class Application extends JPAEntity<Integer>
     {
         this.student = student;
         this.course = course;
-        this.screenshot = screenshot;
+        this.screenshot = ( screenshot != null ) ? new Image( screenshot, beginDate ) : null;
         this.state = state;
         this.beginDate = beginDate;
         this.endDate = endDate;
@@ -84,8 +85,8 @@ public class Application extends JPAEntity<Integer>
     {
         this.student = student;
         this.course = course;
-        this.screenshot = screenshot;
         this.beginDate = new Date();
+        this.screenshot = ( screenshot != null ) ? new Image( screenshot, beginDate ) : null;
         this.state = ApplicationState.PENDING;
     }
 
@@ -132,7 +133,7 @@ public class Application extends JPAEntity<Integer>
      *
      * @param screenshot The screenshot of the application
      */
-    public void setScreenshot( byte[] screenshot )
+    public void setScreenshot( Image screenshot )
     {
         this.screenshot = screenshot;
     }
@@ -186,7 +187,7 @@ public class Application extends JPAEntity<Integer>
     /**
      * @return The screenshot of the application
      */
-    public byte[] getScreenshot()
+    public Image getScreenshot()
     {
         return screenshot;
     }
