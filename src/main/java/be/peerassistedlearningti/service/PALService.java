@@ -598,4 +598,26 @@ public interface PALService
     //================================================================================
     // endregion
     //================================================================================
+
+    //================================================================================
+    // region Curriculum
+    //================================================================================
+
+    /**
+     * @return A collection containing all the curriculum's
+     */
+    Collection<Curriculum> getCurriculums();
+
+    /**
+     * Gets the curriculum with the specified name
+     *
+     * @param name The string name of the curriculum
+     * @return The Curriculum object with the specified name
+     */
+    Curriculum getCurriculumByName( String name );
+
+
+    //================================================================================
+    // endregion
+    //================================================================================
 }

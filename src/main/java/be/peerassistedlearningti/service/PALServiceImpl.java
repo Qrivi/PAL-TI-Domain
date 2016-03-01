@@ -848,4 +848,32 @@ public class PALServiceImpl implements PALService
     //================================================================================
     // endregion
     //================================================================================
+
+    //================================================================================
+    // region Curriculum
+    //================================================================================
+
+    /**
+     * @return A collection containing all the curriculum's
+     */
+    public Collection<Curriculum> getCurriculums()
+    {
+        return Arrays.asList( Curriculum.values() );
+    }
+
+    /**
+     * Gets the curriculum with the specified name
+     *
+     * @param name The string name of the curriculum
+     * @return The Curriculum object with the specified name
+     */
+    public Curriculum getCurriculumByName( String name )
+    {
+        return Curriculum.getByName( name );
+    }
+
+
+    //================================================================================
+    // endregion
+    //================================================================================
 }
