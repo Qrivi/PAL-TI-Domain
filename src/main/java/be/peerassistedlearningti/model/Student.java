@@ -54,7 +54,7 @@ public class Student extends JPAEntity<Integer>
     private UserType type;
 
     @Valid
-    @OneToOne( mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE )
+    @OneToOne( mappedBy = "student", cascade = CascadeType.REMOVE )
     private Tutor tutor;
 
     @Valid
@@ -66,19 +66,19 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true )
+    @OneToMany( mappedBy = "student", orphanRemoval = true )
     private Set<Review> reviews;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true )
+    @OneToMany( mappedBy = "student", orphanRemoval = true )
     private Set<Request> requests;
 
     @Valid
-    @OneToMany( mappedBy = "student", fetch = FetchType.LAZY, orphanRemoval = true )
+    @OneToMany( mappedBy = "student", orphanRemoval = true )
     private Set<Application> applications;
 
     @Valid
-    @ManyToMany( mappedBy = "bookings", fetch = FetchType.LAZY )
+    @ManyToMany( mappedBy = "bookings" )
     private Set<Lesson> bookings;
 
     @Column( name = "reset_token", unique = true )
@@ -214,11 +214,18 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The name of the student
+     * Removed the student object from the lesson
      */
-    public String getName()
+    @PreRemove
+    private void removeBookings()
     {
-        return name;
+        if ( bookings != null )
+        {
+            for ( Lesson l : bookings )
+            {
+                l.getBookings().remove( this );
+            }
+        }
     }
 
     /**
@@ -242,14 +249,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return the avatar of the Student
-     */
-    public byte[] getAvatar()
-    {
-        return avatar;
-    }
-
-    /**
      * Sets the avatar of the Student
      *
      * @param avatar The avatar of the Student
@@ -257,14 +256,6 @@ public class Student extends JPAEntity<Integer>
     public void setAvatar( byte[] avatar )
     {
         this.avatar = avatar;
-    }
-
-    /**
-     * @return The password of the student
-     */
-    public String getPassword()
-    {
-        return password;
     }
 
     /**
@@ -280,14 +271,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The email of the student
-     */
-    public String getEmail()
-    {
-        return email;
-    }
-
-    /**
      * Sets the email of the student
      *
      * @param email The email of the student
@@ -298,14 +281,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The user type of the student
-     */
-    public UserType getType()
-    {
-        return type;
-    }
-
-    /**
      * Sets the user type of the student
      *
      * @param type The user type of the student
@@ -313,6 +288,66 @@ public class Student extends JPAEntity<Integer>
     public void setType( UserType type )
     {
         this.type = type;
+    }
+
+    /**
+     * Sets the subscription set of the student
+     *
+     * @param subscriptions The Set containing the student's subscriptions
+     */
+    public void setSubscriptions( Set<Course> subscriptions )
+    {
+        this.subscriptions = subscriptions;
+    }
+
+    /**
+     * Sets the date the student is last updated
+     *
+     * @param lastUpdated The date the student is last updated
+     */
+    public void setLastUpdated( Date lastUpdated )
+    {
+        this.lastUpdated = lastUpdated;
+    }
+
+    /**
+     * @return The name of the student
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return the avatar of the Student
+     */
+    public byte[] getAvatar()
+    {
+        return avatar;
+    }
+
+    /**
+     * @return The password of the student
+     */
+    public String getPassword()
+    {
+        return password;
+    }
+
+    /**
+     * @return The email of the student
+     */
+    public String getEmail()
+    {
+        return email;
+    }
+
+    /**
+     * @return The user type of the student
+     */
+    public UserType getType()
+    {
+        return type;
     }
 
     /**
@@ -340,17 +375,7 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the subscription set of the student
-     *
-     * @param subscriptions The Set containing the student's subscriptions
-     */
-    public void setSubscriptions( Set<Course> subscriptions )
-    {
-        this.subscriptions = subscriptions;
-    }
-
-    /**
-     * @return The security token of the Student
+     * @return The security token of the student
      */
     public String getSecurityToken()
     {
@@ -358,21 +383,11 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The profile identifier of the Student
+     * @return The profile identifier of the student
      */
     public String getProfileIdentifier()
     {
         return profileIdentifier;
-    }
-
-    /**
-     * Sets the date the student is last updated
-     *
-     * @param lastUpdated The date the student is last updated
-     */
-    public void setLastUpdated( Date lastUpdated )
-    {
-        this.lastUpdated = lastUpdated;
     }
 
     /**
@@ -384,17 +399,42 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Removed the student object from the lesson
+     * @return The tutor object of the student
      */
-    @PreRemove
-    private void removeBookings()
+    public Tutor getTutor()
     {
-        if ( bookings != null )
-        {
-            for ( Lesson l : bookings )
-            {
-                l.getBookings().remove( this );
-            }
-        }
+        return tutor;
+    }
+
+    /**
+     * @return The reviews of the student
+     */
+    public Set<Review> getReviews()
+    {
+        return reviews;
+    }
+
+    /**
+     * @return The requests of the student
+     */
+    public Set<Request> getRequests()
+    {
+        return requests;
+    }
+
+    /**
+     * @return The applications of the student
+     */
+    public Set<Application> getApplications()
+    {
+        return applications;
+    }
+
+    /**
+     * @return The bookings of the student
+     */
+    public Set<Lesson> getBookings()
+    {
+        return bookings;
     }
 }

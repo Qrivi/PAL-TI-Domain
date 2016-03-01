@@ -39,7 +39,7 @@ public class Course extends JPAEntity<Integer>
     private int year;
 
     @Valid
-    @ManyToMany( mappedBy = "courses", fetch = FetchType.LAZY )
+    @ManyToMany( mappedBy = "courses" )
     private Set<Tutor> tutors;
 
     @Valid
@@ -47,7 +47,7 @@ public class Course extends JPAEntity<Integer>
     private Set<Student> subscribers;
 
     @Valid
-    @OneToMany( mappedBy = "course", fetch = FetchType.LAZY, orphanRemoval = true )
+    @OneToMany( mappedBy = "course", orphanRemoval = true )
     private Set<Request> requests;
 
     /**
@@ -72,14 +72,6 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * @return The code of the course
-     */
-    public String getCode()
-    {
-        return code;
-    }
-
-    /**
      * Sets the code of the course
      *
      * @param code The new code of the course
@@ -87,14 +79,6 @@ public class Course extends JPAEntity<Integer>
     public void setCode( String code )
     {
         this.code = code;
-    }
-
-    /**
-     * @return The full name of the course
-     */
-    public String getName()
-    {
-        return name;
     }
 
     /**
@@ -108,14 +92,6 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * @return The short name of the course
-     */
-    public String getShortName()
-    {
-        return shortName;
-    }
-
-    /**
      * Sets the short name of the course
      *
      * @param shortName The new short name of the course
@@ -123,14 +99,6 @@ public class Course extends JPAEntity<Integer>
     public void setShortName( String shortName )
     {
         this.shortName = shortName;
-    }
-
-    /**
-     * @return The curriculum of the course
-     */
-    public String getCurriculum()
-    {
-        return curriculum;
     }
 
     /**
@@ -144,14 +112,6 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * @return The year of the course
-     */
-    public int getYear()
-    {
-        return year;
-    }
-
-    /**
      * Sets the year of the course
      *
      * @param year The new year of the course
@@ -162,9 +122,63 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the subscribed students for a course
-     *
-     * @return The set with student who subscribed to this course
+     * @return The code of the course
+     */
+    public String getCode()
+    {
+        return code;
+    }
+
+    /**
+     * @return The full name of the course
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return The short name of the course
+     */
+    public String getShortName()
+    {
+        return shortName;
+    }
+
+    /**
+     * @return The curriculum of the course
+     */
+    public String getCurriculum()
+    {
+        return curriculum;
+    }
+
+    /**
+     * @return The year of the course
+     */
+    public int getYear()
+    {
+        return year;
+    }
+
+    /**
+     * @return The tutors for the course
+     */
+    public Set<Tutor> getTutors()
+    {
+        return tutors;
+    }
+
+    /**
+     * @return The requests for the course
+     */
+    public Set<Request> getRequests()
+    {
+        return requests;
+    }
+
+    /**
+     * @return The subscribed students for this course
      */
     public Set<Student> getSubscribers()
     {
