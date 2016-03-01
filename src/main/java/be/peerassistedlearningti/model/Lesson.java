@@ -66,6 +66,7 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     @JoinColumn( name = "backup_room_id" )
     private Room backupRoom;
 
+    @Valid
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "lesson_booking",
