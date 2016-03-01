@@ -122,6 +122,14 @@ public interface PALService
     Student getStudentByProfileIdentifier( String profileIdentifier );
 
     /**
+     * Gets the students avatar
+     *
+     * @param student The student of the avatar
+     * @return The students avatar
+     */
+    Image getAvatarByStudent( Student student );
+
+    /**
      * Gets all the students
      *
      * @return A collection containing all the students

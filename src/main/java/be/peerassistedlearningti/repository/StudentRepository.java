@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Image;
 import be.peerassistedlearningti.model.Student;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -44,4 +45,13 @@ public interface StudentRepository extends CrudRepository<Student, Integer>
      */
     @Query( "SELECT s FROM Student s WHERE :course MEMBER OF s.subscriptions" )
     Collection<Student> findSubscribersByCourse( @Param( "course" ) Course course );
+
+    /**
+     * Gets the students avatar
+     *
+     * @param student The student of the avatar
+     * @return The students avatar
+     */
+    @Query( "SELECT s.avatar FROM Student s WHERE :student = s" )
+    Image findAvatarByStudent( @Param( "student" ) Student student );
 }

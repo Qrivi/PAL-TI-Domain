@@ -192,6 +192,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the students avatar
+     *
+     * @param student The student of the avatar
+     * @return The students avatar
+     */
+    public Image getAvatarByStudent( Student student )
+    {
+        return studentRepository.findAvatarByStudent( student );
+    }
+
+    /**
      * Gets all the students
      *
      * @return A collection containing all the students

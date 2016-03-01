@@ -1,6 +1,8 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -35,9 +37,9 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "password", nullable = false )
     private String password;
 
-    @Lob
-    @Column( name = "avatar", nullable = true )
-    private byte[] avatar;
+    @OneToOne( cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+    @LazyToOne( value = LazyToOneOption.NO_PROXY )
+    private Image avatar;
 
     @NotEmpty( message = "{NotEmpty.Student.salt}" )
     @Column( name = "salt", nullable = false )
@@ -255,11 +257,11 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the avatar of the Student
+     * Sets the image of the Student
      *
-     * @param avatar The avatar of the Student
+     * @param avatar The image of the Student
      */
-    public void setAvatar( byte[] avatar )
+    public void setAvatar( Image avatar )
     {
         this.avatar = avatar;
     }
@@ -335,9 +337,9 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return the avatar of the Student
+     * @return the image of the Student
      */
-    public byte[] getAvatar()
+    public Image getAvatar()
     {
         return avatar;
     }
