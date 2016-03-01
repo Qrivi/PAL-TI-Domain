@@ -13,6 +13,7 @@
         <class>be.peerassistedlearningti.model.Application</class>
         <class>be.peerassistedlearningti.model.Review</class>
         <class>be.peerassistedlearningti.model.Request</class>
+        <class>be.peerassistedlearningti.model.Image</class>
         <properties>
             <!-- HIBERNATE PROPERTIES -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
