@@ -1,10 +1,7 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.config.ApplicationConfig;
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.Tutor;
-import be.peerassistedlearningti.model.UserType;
+import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.util.Utils;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,11 +39,11 @@ public class TutorRepositoryTest implements RepositoryTest
     @Before
     public void before()
     {
-        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", "koen", UserType.ADMIN );
-        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", "jan", UserType.ADMIN );
+        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
+        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", Curriculum.TI, "jan", UserType.ADMIN );
 
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
-        c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
+        c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3", Curriculum.TI, 3 );
 
         s1 = studentRepository.save( s1 );
         s2 = studentRepository.save( s2 );

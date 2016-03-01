@@ -16,9 +16,7 @@ public enum RoomType
         {
             String s = t.toString();
             if ( s.equalsIgnoreCase( type ) )
-            {
                 return t;
-            }
         }
         return null;
     }

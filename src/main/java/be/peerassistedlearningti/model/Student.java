@@ -53,6 +53,11 @@ public class Student extends JPAEntity<Integer>
     @Column( name = "type", nullable = false )
     private UserType type;
 
+    @Enumerated( EnumType.STRING )
+    @NotNull( message = "{NotNull.Student.curriculum}" )
+    @Column( name = "curriculum", nullable = false )
+    private Curriculum curriculum;
+
     @Valid
     @OneToOne( mappedBy = "student", cascade = CascadeType.REMOVE )
     private Tutor tutor;
@@ -116,10 +121,11 @@ public class Student extends JPAEntity<Integer>
      * @param profileIdentifier The profile identifier of the student
      * @param type              The user type of the student
      */
-    public Student( String name, String password, String email, String profileIdentifier, UserType type )
+    public Student( String name, String password, String email, Curriculum curriculum, String profileIdentifier, UserType type )
     {
         this.email = email;
         this.name = name;
+        this.curriculum = curriculum;
         this.profileIdentifier = profileIdentifier;
         this.type = type;
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
@@ -281,6 +287,16 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the curriculum of the student
+     *
+     * @param curriculum The curriculum of the student
+     */
+    public void setCurriculum( Curriculum curriculum )
+    {
+        this.curriculum = curriculum;
+    }
+
+    /**
      * Sets the user type of the student
      *
      * @param type The user type of the student
@@ -340,6 +356,14 @@ public class Student extends JPAEntity<Integer>
     public String getEmail()
     {
         return email;
+    }
+
+    /**
+     * @return The curriculum of the student
+     */
+    public Curriculum getCurriculum()
+    {
+        return curriculum;
     }
 
     /**
