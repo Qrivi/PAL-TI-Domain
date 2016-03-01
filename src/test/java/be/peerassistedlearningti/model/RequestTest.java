@@ -8,19 +8,11 @@ import java.util.Set;
 
 public class RequestTest extends ValidationTest
 {
-    @Test
-    public void testUpvotesIsNegative()
-    {
-        Request request = new Request( -1, null, null, null, null );
-        Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "upvotes" );
-        Assert.assertEquals( 1, constraintViolations.size() );
-        Assert.assertEquals( "Upvotes should not be less than 0!", constraintViolations.iterator().next().getMessage() );
-    }
 
     @Test
     public void testTitleIsNull()
     {
-        Request request = new Request( 0, null, null, null, null );
+        Request request = new Request(null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "title" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request title should not be empty!", constraintViolations.iterator().next().getMessage() );
@@ -29,10 +21,10 @@ public class RequestTest extends ValidationTest
     @Test
     public void testTitleSizeIsTooSmall()
     {
-        Request request = new Request( 0, "", null, null, null, null );
+        Request request = new Request("", null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "title" );
         Assert.assertEquals( 1, constraintViolations.size() );
-        Assert.assertEquals( "Request title should be between 10 and 300 characters!", constraintViolations.iterator().next().getMessage() );
+        Assert.assertEquals( "Request title should be between 3 and 50 characters!", constraintViolations.iterator().next().getMessage() );
     }
 
     @Test
@@ -40,16 +32,16 @@ public class RequestTest extends ValidationTest
     {
         String title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu maximus metus, vel imperdiet nunc. Cras commodo vestibulum laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin ultrices magna ut nisl venenatis, quis pretium urna fermentum. In aliquam velit id enim porta convallis. Vestibulum vel efficitur dui. Curabitur vitae neque nullam.";
 
-        Request request = new Request( 0, title, null, null, null, null );
+        Request request = new Request( title, null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "title" );
         Assert.assertEquals( 1, constraintViolations.size() );
-        Assert.assertEquals( "Request title should be between 10 and 300 characters!", constraintViolations.iterator().next().getMessage() );
+        Assert.assertEquals( "Request title should be between 3 and 50 characters!", constraintViolations.iterator().next().getMessage() );
     }
 
     @Test
     public void testDescriptionIsNull()
     {
-        Request request = new Request( 0, null, null, null, null );
+        Request request = new Request( null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "description" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request description should not be empty!", constraintViolations.iterator().next().getMessage() );
@@ -58,7 +50,7 @@ public class RequestTest extends ValidationTest
     @Test
     public void testDescriptionSizeIsTooSmall()
     {
-        Request request = new Request( 0, null, "abc", null, null, null );
+        Request request = new Request( null, "abc", null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "description" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request description should be between 10 and 300 characters!", constraintViolations.iterator().next().getMessage() );
@@ -69,7 +61,7 @@ public class RequestTest extends ValidationTest
     {
         String desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu maximus metus, vel imperdiet nunc. Cras commodo vestibulum laoreet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin ultrices magna ut nisl venenatis, quis pretium urna fermentum. In aliquam velit id enim porta convallis. Vestibulum vel efficitur dui. Curabitur vitae neque nullam.";
 
-        Request request = new Request( 0, null, desc, null, null, null );
+        Request request = new Request( null, desc, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "description" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request description should be between 10 and 300 characters!", constraintViolations.iterator().next().getMessage() );
@@ -78,7 +70,7 @@ public class RequestTest extends ValidationTest
     @Test
     public void testCourseIsNull()
     {
-        Request request = new Request( 0, null, null, null, null );
+        Request request = new Request( null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "course" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request course should not be empty!", constraintViolations.iterator().next().getMessage() );
@@ -87,7 +79,7 @@ public class RequestTest extends ValidationTest
     @Test
     public void testStudentIsNull()
     {
-        Request request = new Request( 0, null, null, null, null );
+        Request request = new Request( null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "student" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request student should not be empty!", constraintViolations.iterator().next().getMessage() );
@@ -96,7 +88,7 @@ public class RequestTest extends ValidationTest
     @Test
     public void testCreationDateIsNull()
     {
-        Request request = new Request( 0, null, null, null, null, null );
+        Request request = new Request( null, null, null, null, null );
         Set<ConstraintViolation<Request>> constraintViolations = validator.validateProperty( request, "creationDate" );
         Assert.assertEquals( 1, constraintViolations.size() );
         Assert.assertEquals( "Request creation date should not be empty!", constraintViolations.iterator().next().getMessage() );

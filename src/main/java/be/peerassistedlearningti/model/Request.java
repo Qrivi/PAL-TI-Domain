@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Class used to specify a Request
@@ -19,10 +20,8 @@ import java.util.Date;
 @Table( name = "request" )
 public class Request extends JPAEntity<Integer>
 {
-
-    @Min( value = 0, message = "{Min.Request.upvotes}" )
-    @Column( name = "upvotes" )
-    private int upvotes;
+    @ManyToMany( fetch = FetchType.EAGER )
+    private Set<Student> upvotes;
 
     @NotNull(message = "{NotNull.Request.title}")
     @Size( min = 3, max = 50, message = "{Size.Request.title}" )
@@ -58,15 +57,13 @@ public class Request extends JPAEntity<Integer>
     /**
      * Constructor for Request
      *
-     * @param upvotes     The amount of upvotes of the request
      * @param title       The title of the request
      * @param description The description of the request
      * @param course      The course of the request
      * @param student     The student of the request
      */
-    public Request( int upvotes, String title, String description, Course course, Student student )
+    public Request(String title, String description, Course course, Student student )
     {
-        this.upvotes = upvotes;
         this.title = title;
         this.description = description;
         this.course = course;
@@ -77,36 +74,26 @@ public class Request extends JPAEntity<Integer>
     /**
      * Constructor for Request
      *
-     * @param upvotes      The amount of upvotes of the request
      * @param title       The title of the request
      * @param description  The description of the request
      * @param course       The course of the request
      * @param student      The student of the request
      * @param creationDate The creation date of the request
      */
-    public Request( int upvotes, String title, String description, Course course, Student student, Date creationDate )
+    public Request(String title, String description, Course course, Student student, Date creationDate )
     {
-        this( upvotes, title, description, course, student );
+        this( title, description, course, student );
         this.creationDate = creationDate;
     }
 
     /**
      * @return the upvotes of the request
      */
-    public int getUpvotes()
+    public Set<Student> getUpvotes()
     {
         return upvotes;
     }
 
-    /**
-     * Sets the upvotes of the request
-     *
-     * @param upvotes the new amount of upvotes
-     */
-    public void setUpvotes( int upvotes )
-    {
-        this.upvotes = upvotes;
-    }
 
     /**
      * @return the title of the request
