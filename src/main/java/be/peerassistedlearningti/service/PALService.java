@@ -157,6 +157,14 @@ public interface PALService
     void removeTutor( Tutor tutor );
 
     /**
+     * Gets the tutor with the specified student
+     *
+     * @param student The student of the tutor
+     * @return The tutor with the specified student
+     */
+    Tutor getTutorByStudent( Student student );
+
+    /**
      * Gets the tutor with the specified id
      *
      * @param id The id of the tutor

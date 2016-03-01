@@ -170,34 +170,4 @@ public class Course extends JPAEntity<Integer>
     {
         return subscribers;
     }
-
-    /**
-     * Equals functionality for a course
-     *
-     * @param o The object to check if it is equal
-     * @return if the object equals the course, courses are equals when there code is equal
-     */
-    @Override
-    public boolean equals( Object o )
-    {
-        if ( this == o )
-            return true;
-        if ( o == null || getClass() != o.getClass() )
-            return false;
-
-        Course course = (Course) o;
-
-        return code.equals( course.code );
-    }
-
-    /**
-     * Hashcode functionality for a course
-     *
-     * @return the hashcode of the code
-     */
-    @Override
-    public int hashCode()
-    {
-        return ( code != null ? code.hashCode() : 0 );
-    }
 }

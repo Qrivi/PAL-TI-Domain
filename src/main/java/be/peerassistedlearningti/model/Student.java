@@ -54,9 +54,10 @@ public class Student extends JPAEntity<Integer>
     private UserType type;
 
     @Valid
-    @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.REMOVE )
+    @OneToOne( mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE )
     private Tutor tutor;
 
+    @Valid
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "student_subscriptions",
@@ -96,6 +97,10 @@ public class Student extends JPAEntity<Integer>
     @NotEmpty( message = "{NotEmpty.Student.profileIdentifier}" )
     @Column( name = "profile_identifier", unique = true, nullable = false )
     private String profileIdentifier;
+
+    @Temporal( TemporalType.TIMESTAMP )
+    @Column( name = "last_updated" )
+    private Date lastUpdated;
 
     /**
      * Default empty constructor for JPA Entities
@@ -311,14 +316,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * @return The tutor object of the student, if he isn't a tutor null is returned
-     */
-    public Tutor getTutor()
-    {
-        return tutor;
-    }
-
-    /**
      * @return The reset token of the student used to reset the password
      */
     public String getResetToken()
@@ -353,16 +350,6 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the reviews set of the student
-     *
-     * @return reviews made by the student
-     */
-    public Set<Review> getReviews()
-    {
-        return reviews;
-    }
-
-    /**
      * @return The security token of the Student
      */
     public String getSecurityToken()
@@ -376,5 +363,38 @@ public class Student extends JPAEntity<Integer>
     public String getProfileIdentifier()
     {
         return profileIdentifier;
+    }
+
+    /**
+     * Sets the date the student is last updated
+     *
+     * @param lastUpdated The date the student is last updated
+     */
+    public void setLastUpdated( Date lastUpdated )
+    {
+        this.lastUpdated = lastUpdated;
+    }
+
+    /**
+     * @return The date the student is last updated
+     */
+    public Date getLastUpdated()
+    {
+        return lastUpdated;
+    }
+
+    /**
+     * Removed the student object from the lesson
+     */
+    @PreRemove
+    private void removeBookings()
+    {
+        if ( bookings != null )
+        {
+            for ( Lesson l : bookings )
+            {
+                l.getBookings().remove( this );
+            }
+        }
     }
 }
