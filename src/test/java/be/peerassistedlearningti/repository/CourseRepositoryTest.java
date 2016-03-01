@@ -2,6 +2,7 @@ package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.config.ApplicationConfig;
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Curriculum;
 import be.peerassistedlearningti.util.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
@@ -28,7 +27,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testAdd()
     {
-        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c );
 
@@ -39,7 +38,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testUpdate()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c1 );
 
@@ -56,7 +55,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testRemove()
     {
-        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c );
 
@@ -71,7 +70,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetById()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c1 );
 
@@ -85,8 +84,8 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetAll()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
-        Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
+        Course c2 = new Course( "MBI62a", "3D Computer Graphics", "3D", Curriculum.TI, 3 );
 
         repository.save( c1 );
         repository.save( c2 );
@@ -101,7 +100,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetByCode()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c1 );
 
@@ -115,7 +114,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetByName()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c1 );
 
@@ -129,7 +128,7 @@ public class CourseRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetByShortName()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
 
         repository.save( c1 );
 

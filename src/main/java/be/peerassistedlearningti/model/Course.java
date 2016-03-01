@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -30,9 +31,10 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
-    @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
+    @Enumerated( EnumType.STRING )
+    @NotNull( message = "{NotNull.Course.curriculum}" )
     @Column( name = "curriculum", nullable = false )
-    private String curriculum;
+    private Curriculum curriculum;
 
     @Min( value = 1, message = "{Min.Course.year}" )
     @Column( name = "year", nullable = false )
@@ -58,11 +60,13 @@ public class Course extends JPAEntity<Integer>
     /**
      * Constructor for Course
      *
-     * @param code      The code of the course
-     * @param name      The full name of the course
-     * @param shortName The short name of the course
+     * @param code       The code of the course
+     * @param name       The full name of the course
+     * @param shortName  The short name of the course
+     * @param curriculum The curriculum of the course
+     * @param year       The year of the course
      */
-    public Course( String code, String name, String shortName, String curriculum, int year )
+    public Course( String code, String name, String shortName, Curriculum curriculum, int year )
     {
         this.code = code;
         this.name = name;
@@ -106,7 +110,7 @@ public class Course extends JPAEntity<Integer>
      *
      * @param curriculum The new curriculum of the course
      */
-    public void setCurriculum( String curriculum )
+    public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
     }
@@ -148,7 +152,7 @@ public class Course extends JPAEntity<Integer>
     /**
      * @return The curriculum of the course
      */
-    public String getCurriculum()
+    public Curriculum getCurriculum()
     {
         return curriculum;
     }
