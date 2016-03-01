@@ -239,6 +239,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets the tutor with the specified student
+     *
+     * @param student The student of the tutor
+     * @return The tutor with the specified student
+     */
+    public Tutor getTutorByStudent( Student student )
+    {
+        return tutorRepository.findByStudent( student );
+    }
+
+    /**
      * Gets the tutor with the specified id
      *
      * @param id The id of the tutor

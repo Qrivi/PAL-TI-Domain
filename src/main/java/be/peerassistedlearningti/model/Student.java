@@ -54,7 +54,7 @@ public class Student extends JPAEntity<Integer>
     private UserType type;
 
     @Valid
-    @OneToOne( fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.REMOVE )
+    @OneToOne( mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE )
     private Tutor tutor;
 
     @Valid
@@ -313,14 +313,6 @@ public class Student extends JPAEntity<Integer>
     public void setType( UserType type )
     {
         this.type = type;
-    }
-
-    /**
-     * @return The tutor object of the student, if he isn't a tutor null is returned
-     */
-    public Tutor getTutor()
-    {
-        return tutor;
     }
 
     /**

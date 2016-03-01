@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,4 +27,13 @@ public interface TutorRepository extends CrudRepository<Tutor, Integer>
      */
     @Query( "SELECT t FROM Tutor t WHERE :course MEMBER OF t.courses" )
     Collection<Tutor> findAll( @Param( "course" ) Course course );
+
+    /**
+     * Gets the tutor with the specified student
+     *
+     * @param student The student of the tutor
+     * @return The tutor with the specified student
+     */
+    @Query( "SELECT t FROM Tutor t WHERE t.student = :student" )
+    Tutor findByStudent( @Param( "student" ) Student student );
 }
