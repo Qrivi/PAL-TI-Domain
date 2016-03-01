@@ -1,8 +1,7 @@
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
-import org.simmetrics.StringMetric;
-import org.simmetrics.metrics.StringMetrics;
+import info.debatty.java.stringsimilarity.NormalizedLevenshtein;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -201,11 +200,11 @@ public class Request extends JPAEntity<Integer>
      * Gets the similarity between this and another request, based on their titles
      *
      * @param other The other request to be compared with
-     * @return  a Float indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
-     * @see StringMetric
+     * @return a double indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
+     * @see NormalizedLevenshtein
      */
-    public float getSimilarity(Request other){
-        StringMetric metric = StringMetrics.cosineSimilarity();
-        return metric.compare(this.title, other.title);
+    public double getSimilarity(Request other) {
+        NormalizedLevenshtein l = new NormalizedLevenshtein();
+        return l.similarity(title, other.title);
     }
 }

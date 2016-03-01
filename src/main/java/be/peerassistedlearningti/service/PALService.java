@@ -602,6 +602,14 @@ public interface PALService
      */
     Collection<Request> getAllRequest();
 
+    /**
+     * Gets all the request for given course.
+     *
+     * @param course The course to filter the requests
+     * @return A collection containing all the request
+     */
+    Collection<Request> getAllRequest(Course course);
+
 
     //================================================================================
     // endregion
