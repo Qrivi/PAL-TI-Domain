@@ -68,7 +68,7 @@ public class RequestRepositoryTest implements RepositoryTest
 
         request.setTitle( "some other title" );
         requestRepository.save( request );
-        assertEquals( "some other title", request.getUpvotes() );
+        assertEquals( "some other title", request.getTitle() );
     }
 
     @Test
