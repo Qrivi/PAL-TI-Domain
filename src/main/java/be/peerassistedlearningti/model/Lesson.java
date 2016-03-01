@@ -134,14 +134,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     }
 
     /**
-     * @return The date and time of the lesson
-     */
-    public Date getDate()
-    {
-        return date;
-    }
-
-    /**
      * Sets the date and time of the lesson
      *
      * @param date The date of the lesson
@@ -149,14 +141,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     public void setDate( Date date )
     {
         this.date = date;
-    }
-
-    /**
-     * @return The name of the lesson
-     */
-    public String getName()
-    {
-        return name;
     }
 
     /**
@@ -170,14 +154,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     }
 
     /**
-     * @return The description of the lesson
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
      * Sets the description of the lesson
      *
      * @param description The description of the lesson
@@ -185,14 +161,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     public void setDescription( String description )
     {
         this.description = description;
-    }
-
-    /**
-     * @return The duration of the lesson
-     */
-    public long getDuration()
-    {
-        return duration;
     }
 
     /**
@@ -206,14 +174,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     }
 
     /**
-     * @return The course of the lesson
-     */
-    public Course getCourse()
-    {
-        return course;
-    }
-
-    /**
      * Sets the course of the lesson
      *
      * @param course The course of the lesson
@@ -221,14 +181,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     public void setCourse( Course course )
     {
         this.course = course;
-    }
-
-    /**
-     * @return The maximum number of participants of the lesson
-     */
-    public int getMaxParticipants()
-    {
-        return maxParticipants;
     }
 
     /**
@@ -242,14 +194,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     }
 
     /**
-     * @return The tutor and time of the lesson
-     */
-    public Tutor getTutor()
-    {
-        return tutor;
-    }
-
-    /**
      * Sets the tutor of the lesson
      *
      * @param tutor The tutor of the lesson
@@ -257,14 +201,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     public void setTutor( Tutor tutor )
     {
         this.tutor = tutor;
-    }
-
-    /**
-     * @return The set of bookings
-     */
-    public Set<Student> getBookings()
-    {
-        return bookings;
     }
 
     /**
@@ -278,14 +214,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     }
 
     /**
-     * @return The room of the lesson
-     */
-    public Room getRoom()
-    {
-        return room;
-    }
-
-    /**
      * Sets the room of the lesson
      *
      * @param room
@@ -296,14 +224,6 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     }
 
     /**
-     * @return The backup room of the lesson
-     */
-    public Room getBackupRoom()
-    {
-        return backupRoom;
-    }
-
-    /**
      * Sets the backup room (when the room is occupied) of the lesson
      *
      * @param backupRoom The backup room of the lesson
@@ -311,6 +231,86 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     public void setBackupRoom( Room backupRoom )
     {
         this.backupRoom = backupRoom;
+    }
+
+    /**
+     * @return The date and time of the lesson
+     */
+    public Date getDate()
+    {
+        return date;
+    }
+
+    /**
+     * @return The name of the lesson
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return The description of the lesson
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * @return The duration of the lesson
+     */
+    public long getDuration()
+    {
+        return duration;
+    }
+
+    /**
+     * @return The course of the lesson
+     */
+    public Course getCourse()
+    {
+        return course;
+    }
+
+    /**
+     * @return The maximum number of participants of the lesson
+     */
+    public int getMaxParticipants()
+    {
+        return maxParticipants;
+    }
+
+    /**
+     * @return The tutor and time of the lesson
+     */
+    public Tutor getTutor()
+    {
+        return tutor;
+    }
+
+    /**
+     * @return The set of bookings
+     */
+    public Set<Student> getBookings()
+    {
+        return bookings;
+    }
+
+    /**
+     * @return The room of the lesson
+     */
+    public Room getRoom()
+    {
+        return room;
+    }
+
+    /**
+     * @return The backup room of the lesson
+     */
+    public Room getBackupRoom()
+    {
+        return backupRoom;
     }
 
     /**

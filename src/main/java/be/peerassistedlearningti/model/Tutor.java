@@ -32,7 +32,7 @@ public class Tutor extends JPAEntity<Integer>
     private Set<Course> courses;
 
     @Valid
-    @OneToMany( mappedBy = "tutor", fetch = FetchType.LAZY, orphanRemoval = true )
+    @OneToMany( mappedBy = "tutor", orphanRemoval = true )
     private Set<Lesson> lessons;
 
     /**
@@ -75,25 +75,26 @@ public class Tutor extends JPAEntity<Integer>
     }
 
     /**
-     * Adds a given lesson to a tutor
+     * Sets the student information of the tutor
      *
-     * @param lesson The given lesson to be added
-     * @return true if this set did not already contain the specified lesson
+     * @param student The student information
+     * @see Student
      */
-    public boolean addLesson( Lesson lesson )
+    public void setStudent( Student student )
     {
-        return lessons.add( lesson );
+        this.student = student;
     }
 
     /**
-     * Removes a given lesson of a tutor
+     * Gets the courses that the tutor may tutor
      *
-     * @param lesson The given lesson to be removed
-     * @return true if this set contained the specified lesson
+     * @param courses The set containing all the course objects
+     * @see Course
+     * @see Set
      */
-    public boolean removeLesson( Lesson lesson )
+    public void setCourses( Set<Course> courses )
     {
-        return lessons.remove( lesson );
+        this.courses = courses;
     }
 
     /**
@@ -105,17 +106,6 @@ public class Tutor extends JPAEntity<Integer>
     public Student getStudent()
     {
         return student;
-    }
-
-    /**
-     * Sets the student information of the tutor
-     *
-     * @param student The student information
-     * @see Student
-     */
-    public void setStudent( Student student )
-    {
-        this.student = student;
     }
 
     /**
@@ -131,15 +121,14 @@ public class Tutor extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the courses that the tutor may tutor
+     * Gets the lessons of the tutor
      *
-     * @param courses The set containing all the course objects
-     * @see Course
+     * @return The set containing all the lesson objects
+     * @see Lesson
      * @see Set
      */
-    public void setCourses( Set<Course> courses )
+    public Set<Lesson> getLessons()
     {
-        this.courses = courses;
+        return lessons;
     }
-
 }

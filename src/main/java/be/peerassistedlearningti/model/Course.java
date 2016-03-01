@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
@@ -30,16 +31,17 @@ public class Course extends JPAEntity<Integer>
     @Column( name = "short_name", unique = true, nullable = false )
     private String shortName;
 
-    @NotEmpty( message = "{NotEmpty.Course.curriculum}" )
+    @Enumerated( EnumType.STRING )
+    @NotNull( message = "{NotNull.Course.curriculum}" )
     @Column( name = "curriculum", nullable = false )
-    private String curriculum;
+    private Curriculum curriculum;
 
     @Min( value = 1, message = "{Min.Course.year}" )
     @Column( name = "year", nullable = false )
     private int year;
 
     @Valid
-    @ManyToMany( mappedBy = "courses", fetch = FetchType.LAZY )
+    @ManyToMany( mappedBy = "courses" )
     private Set<Tutor> tutors;
 
     @Valid
@@ -47,7 +49,7 @@ public class Course extends JPAEntity<Integer>
     private Set<Student> subscribers;
 
     @Valid
-    @OneToMany( mappedBy = "course", fetch = FetchType.LAZY, orphanRemoval = true )
+    @OneToMany( mappedBy = "course", orphanRemoval = true )
     private Set<Request> requests;
 
     /**
@@ -58,25 +60,19 @@ public class Course extends JPAEntity<Integer>
     /**
      * Constructor for Course
      *
-     * @param code      The code of the course
-     * @param name      The full name of the course
-     * @param shortName The short name of the course
+     * @param code       The code of the course
+     * @param name       The full name of the course
+     * @param shortName  The short name of the course
+     * @param curriculum The curriculum of the course
+     * @param year       The year of the course
      */
-    public Course( String code, String name, String shortName, String curriculum, int year )
+    public Course( String code, String name, String shortName, Curriculum curriculum, int year )
     {
         this.code = code;
         this.name = name;
         this.shortName = shortName;
         this.curriculum = curriculum;
         this.year = year;
-    }
-
-    /**
-     * @return The code of the course
-     */
-    public String getCode()
-    {
-        return code;
     }
 
     /**
@@ -90,14 +86,6 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * @return The full name of the course
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
      * Sets the full name of the course
      *
      * @param name The new full name of the course
@@ -105,14 +93,6 @@ public class Course extends JPAEntity<Integer>
     public void setName( String name )
     {
         this.name = name;
-    }
-
-    /**
-     * @return The short name of the course
-     */
-    public String getShortName()
-    {
-        return shortName;
     }
 
     /**
@@ -126,29 +106,13 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * @return The curriculum of the course
-     */
-    public String getCurriculum()
-    {
-        return curriculum;
-    }
-
-    /**
      * Sets the curriculum of the course
      *
      * @param curriculum The new curriculum of the course
      */
-    public void setCurriculum( String curriculum )
+    public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
-    }
-
-    /**
-     * @return The year of the course
-     */
-    public int getYear()
-    {
-        return year;
     }
 
     /**
@@ -162,9 +126,63 @@ public class Course extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the subscribed students for a course
-     *
-     * @return The set with student who subscribed to this course
+     * @return The code of the course
+     */
+    public String getCode()
+    {
+        return code;
+    }
+
+    /**
+     * @return The full name of the course
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return The short name of the course
+     */
+    public String getShortName()
+    {
+        return shortName;
+    }
+
+    /**
+     * @return The curriculum of the course
+     */
+    public Curriculum getCurriculum()
+    {
+        return curriculum;
+    }
+
+    /**
+     * @return The year of the course
+     */
+    public int getYear()
+    {
+        return year;
+    }
+
+    /**
+     * @return The tutors for the course
+     */
+    public Set<Tutor> getTutors()
+    {
+        return tutors;
+    }
+
+    /**
+     * @return The requests for the course
+     */
+    public Set<Request> getRequests()
+    {
+        return requests;
+    }
+
+    /**
+     * @return The subscribed students for this course
      */
     public Set<Student> getSubscribers()
     {

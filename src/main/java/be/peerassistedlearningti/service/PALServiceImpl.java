@@ -109,13 +109,14 @@ public class PALServiceImpl implements PALService
     }
 
     /**
-     * Gets the top subscribed courses (limited by the specified limit)
+     * Gets the top subscribed courses with the specified limit
      *
+     * @param top The amount of top courses returned
      * @return A collection containing the top subscribed courses
      */
-    public Collection<Course> getTopSubscribedCourses( int limit )
+    public Collection<Course> getTopSubscribedCourses( int top )
     {
-        Pageable page = new PageRequest( 0, limit );
+        Pageable page = new PageRequest( 0, top );
         return courseRepository.findTopSubscribed( page );
     }
 
@@ -198,6 +199,27 @@ public class PALServiceImpl implements PALService
     public Collection<Student> getAllStudents()
     {
         return Utils.makeCollection( studentRepository.findAll() );
+    }
+
+    /**
+     * Gets all the student types
+     *
+     * @return A collection containing all the student types
+     */
+    public Collection<UserType> getStudentTypes()
+    {
+        return Arrays.asList( UserType.values() );
+    }
+
+    /**
+     * Gets the student type with the specified type
+     *
+     * @param type The type of the user type
+     * @return The user type with the specified type
+     */
+    public UserType getStudentTypeByType( String type )
+    {
+        return UserType.getByValue( type );
     }
 
     //================================================================================
@@ -662,11 +684,12 @@ public class PALServiceImpl implements PALService
      * Gets the last applications from a student with the specified limit
      *
      * @param student The student to get the applications from
+     * @param last    The amount of last applications returned
      * @return A collection containing the last applications from the student
      */
-    public Collection<Application> getLastApplications( Student student, int limit )
+    public Collection<Application> getLastApplications( Student student, int last )
     {
-        Pageable page = new PageRequest( 0, limit );
+        Pageable page = new PageRequest( 0, last );
         return applicationRepository.findLastByStudent( student, page );
     }
 
@@ -747,7 +770,7 @@ public class PALServiceImpl implements PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    public Collection<Review> getReviewsForStudent( Student student )
+    public Collection<Review> getReviewsByStudent( Student student )
     {
         return reviewRepository.findByStudent( student );
     }
@@ -757,7 +780,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing the reviews of that student
      */
-    public Review getReviewsForStudentAndLesson( Student student, Lesson lesson )
+    public Review getReviewsByStudentAndLesson( Student student, Lesson lesson )
     {
         return reviewRepository.findByStudentAndLesson( student, lesson );
     }
@@ -821,6 +844,34 @@ public class PALServiceImpl implements PALService
     {
         return requestRepository.findAll( course );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Curriculum
+    //================================================================================
+
+    /**
+     * @return A collection containing all the curriculum's
+     */
+    public Collection<Curriculum> getCurriculums()
+    {
+        return Arrays.asList( Curriculum.values() );
+    }
+
+    /**
+     * Gets the curriculum with the specified name
+     *
+     * @param name The string name of the curriculum
+     * @return The Curriculum object with the specified name
+     */
+    public Curriculum getCurriculumByName( String name )
+    {
+        return Curriculum.getByName( name );
+    }
+
 
     //================================================================================
     // endregion

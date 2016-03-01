@@ -44,7 +44,7 @@ public class LessonRepositoryTest implements RepositoryTest
     @Before
     public void before()
     {
-        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
         c1 = courseRepository.save( c1 );
 
         assertNotNull( c1 );
@@ -52,7 +52,7 @@ public class LessonRepositoryTest implements RepositoryTest
         Set<Course> courses = new HashSet<Course>();
         courses.add( c1 );
 
-        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", "koen", UserType.ADMIN );
+        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
         s1 = studentRepository.save( s1 );
 
         assertNotNull( s1.getId() );

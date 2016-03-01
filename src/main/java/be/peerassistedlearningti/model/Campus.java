@@ -6,14 +6,14 @@ package be.peerassistedlearningti.model;
 public enum Campus
 {
 
-    PROXIMUS;
+    PROXIMUS,
+    HERTOGSTRAAT;
 
-    public static Campus getByValue(String campus){
-        for(Campus c :values()){
-            if(c.toString().equalsIgnoreCase(campus)){
+    public static Campus getByValue( String campus )
+    {
+        for ( Campus c : values() )
+            if ( c.toString().equalsIgnoreCase( campus ) )
                 return c;
-            }
-        }
         return null;
     }
 }

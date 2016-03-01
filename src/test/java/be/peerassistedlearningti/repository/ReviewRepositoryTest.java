@@ -52,9 +52,9 @@ public class ReviewRepositoryTest implements RepositoryTest
     @Before
     public void before()
     {
-        s1 = new Student( "Koen", "password", "koen1992@hotmail.com", "koen", UserType.NORMAL );
-        s2 = new Student( "Matthias", "password", "matthias@hotmail.com", "matthias", UserType.NORMAL );
-        Student s3 = new Student( "David", "password", "davidopdebeeck@hotmail.com", "david", UserType.NORMAL );
+        s1 = new Student( "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
+        s2 = new Student( "Matthias", "password", "matthias@hotmail.com", Curriculum.TI, "matthias", UserType.NORMAL );
+        Student s3 = new Student( "David", "password", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.NORMAL );
 
         s1 = studentRepository.save( s1 );
         s2 = studentRepository.save( s2 );
@@ -64,7 +64,7 @@ public class ReviewRepositoryTest implements RepositoryTest
         assertNotNull( s2.getId() );
         assertNotNull( s3.getId() );
 
-        Course course = new Course( "MBI80x", ".NET Programmeren", ".NET", "TI", 3 );
+        Course course = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
         course = courseRepository.save( course );
 
         assertNotNull( course.getId() );
