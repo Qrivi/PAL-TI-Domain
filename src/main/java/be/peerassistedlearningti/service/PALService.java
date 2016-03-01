@@ -63,9 +63,10 @@ public interface PALService
     /**
      * Gets the top subscribed courses with the specified limit
      *
+     * @param top The amount of top courses returned
      * @return A collection containing the top subscribed courses
      */
-    Collection<Course> getTopSubscribedCourses( int limit );
+    Collection<Course> getTopSubscribedCourses( int top );
 
     //================================================================================
     // endregion
@@ -157,14 +158,6 @@ public interface PALService
     void removeTutor( Tutor tutor );
 
     /**
-     * Gets the tutor with the specified student
-     *
-     * @param student The student of the tutor
-     * @return The tutor with the specified student
-     */
-    Tutor getTutorByStudent( Student student );
-
-    /**
      * Gets the tutor with the specified id
      *
      * @param id The id of the tutor
@@ -186,6 +179,14 @@ public interface PALService
      * @return A collection containing all the tutors from the specified course
      */
     Collection<Tutor> getAllTutors( Course course );
+
+    /**
+     * Gets the tutor with the specified student
+     *
+     * @param student The student of the tutor
+     * @return The tutor with the specified student
+     */
+    Tutor getTutorByStudent( Student student );
 
     //================================================================================
     // endregion
@@ -468,9 +469,10 @@ public interface PALService
      * Gets the last applications from a student with the specified limit
      *
      * @param student The student to get the applications from
+     * @param last    The amount of last applications returned
      * @return A collection containing the last applications from the student
      */
-    Collection<Application> getLastApplications( Student student, int limit );
+    Collection<Application> getLastApplications( Student student, int last );
 
     //================================================================================
     // endregion
@@ -531,14 +533,14 @@ public interface PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    Collection<Review> getReviewsForStudent( Student student );
+    Collection<Review> getReviewsByStudent( Student student );
 
     /**
      * Gets reviews filtered by student and lesson
      *
      * @return A collection containing the reviews of that student
      */
-    Review getReviewsForStudentAndLesson( Student student, Lesson lesson );
+    Review getReviewsByStudentAndLesson( Student student, Lesson lesson );
 
     //================================================================================
     // endregion

@@ -46,6 +46,6 @@ public interface ApplicationRepository extends CrudRepository<Application, Integ
      * @param student The student of the application
      * @return The last applications with the specified student
      */
-    @Query( "SELECT a FROM Application a WHERE a.student = :student" )
+    @Query( "SELECT a FROM Application a WHERE a.student = :student ORDER BY a.beginDate" )
     List<Application> findLastByStudent( @Param( "student" ) Student student, Pageable pageable );
 }
