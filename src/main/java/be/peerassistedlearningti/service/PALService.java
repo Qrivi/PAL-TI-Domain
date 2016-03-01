@@ -133,7 +133,15 @@ public interface PALService
      *
      * @return A collection containing all the student types
      */
-    Collection<UserType> getAllStudentTypes();
+    Collection<UserType> getStudentTypes();
+
+    /**
+     * Gets all the student types
+     *
+     * @param type The type of the user type
+     * @return A collection containing all the student types
+     */
+    UserType getStudentTypeByType( String type );
 
     //================================================================================
     // endregion

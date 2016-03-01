@@ -206,9 +206,20 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the student types
      */
-    public Collection<UserType> getAllStudentTypes()
+    public Collection<UserType> getStudentTypes()
     {
         return Arrays.asList( UserType.values() );
+    }
+
+    /**
+     * Gets the student type with the specified type
+     *
+     * @param type The type of the user type
+     * @return The user type with the specified type
+     */
+    public UserType getStudentTypeByType( String type )
+    {
+        return UserType.getByValue( type );
     }
 
     //================================================================================
