@@ -73,6 +73,14 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
+    @ManyToMany( fetch = FetchType.EAGER )
+    @JoinTable(
+            name = "student_upvotes",
+            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
+            inverseJoinColumns = @JoinColumn( name = "request_id", referencedColumnName = "id" ) )
+    private Set<Request> upvotes;
+
+    @Valid
     @OneToMany( mappedBy = "student", orphanRemoval = true )
     private Set<Review> reviews;
 
