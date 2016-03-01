@@ -128,6 +128,13 @@ public interface PALService
      */
     Collection<Student> getAllStudents();
 
+    /**
+     * Gets all the student types
+     *
+     * @return A collection containing all the student types
+     */
+    Collection<UserType> getAllStudentTypes();
+
     //================================================================================
     // endregion
     //================================================================================

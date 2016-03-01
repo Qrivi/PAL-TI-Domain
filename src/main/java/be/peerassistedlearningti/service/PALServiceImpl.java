@@ -201,6 +201,16 @@ public class PALServiceImpl implements PALService
         return Utils.makeCollection( studentRepository.findAll() );
     }
 
+    /**
+     * Gets all the student types
+     *
+     * @return A collection containing all the student types
+     */
+    public Collection<UserType> getAllStudentTypes()
+    {
+        return Arrays.asList( UserType.values() );
+    }
+
     //================================================================================
     // endregion
     //================================================================================
