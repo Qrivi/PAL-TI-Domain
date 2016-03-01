@@ -198,14 +198,14 @@ public class Request extends JPAEntity<Integer>
     }
 
     /**
-     * Gets the similarity between this and another request, based on their titles
+     * Gets the similarity between this request and given title
      *
-     * @param other The other request to be compared with
+     * @param title The other title to be compared with
      * @return  a Float indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
      * @see StringMetric
      */
-    public float getSimilarity(Request other){
+    public float getSimilarity( String title ){
         StringMetric metric = StringMetrics.cosineSimilarity();
-        return metric.compare(this.title, other.title);
+        return metric.compare(this.title, title);
     }
 }
