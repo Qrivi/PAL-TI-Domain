@@ -641,6 +641,13 @@ public interface PALService
      */
     Collection<Request> getRequests( Course course );
 
+    /**
+     * Gets all the request for given student.
+     *
+     * @param student The student to filter the requests
+     * @return A collection containing all the request
+     */
+    Collection<Request> getRequests( Student student );
 
     //================================================================================
     // endregion

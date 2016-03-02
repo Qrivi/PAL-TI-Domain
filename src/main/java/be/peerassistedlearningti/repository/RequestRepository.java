@@ -2,6 +2,7 @@ package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Request;
+import be.peerassistedlearningti.model.Student;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -26,4 +27,14 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      */
     @Query( "SELECT r FROM Request r WHERE :course= r.course" )
     Collection<Request> findAll( @Param( "course" ) Course course );
+
+    /**
+     * Gets all the requests from the specified student
+     *
+     * @param student The student to get the requests from
+     * @return A collection containing all the requests from the specified student
+     */
+    @Query( "SELECT r FROM Request r WHERE :student MEMBER OF r.upvotes")
+    Collection<Request> findAll( @Param("student") Student student);
+
 }

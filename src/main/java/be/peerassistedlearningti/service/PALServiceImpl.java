@@ -898,6 +898,17 @@ public class PALServiceImpl implements PALService
         return requestRepository.findAll( course );
     }
 
+    /**
+     * Gets all the requests from the specified student
+     *
+     * @param student The student to get the requests from
+     * @return A collection containing all the requests from the specified student
+     */
+    public Collection<Request> getRequests( Student student )
+    {
+        return requestRepository.findAll( student );
+    }
+
     //================================================================================
     // endregion
     //================================================================================
