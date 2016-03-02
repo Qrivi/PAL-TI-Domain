@@ -1,9 +1,6 @@
 package be.peerassistedlearningti.repository;
 
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.Tutor;
+import be.peerassistedlearningti.model.*;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -35,6 +32,14 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      */
     @Query( "SELECT l FROM Lesson l WHERE l.tutor = :tutor" )
     Collection<Lesson> findByTutor( @Param( "tutor" ) Tutor tutor );
+
+    /**
+     * Gets lessons from a tutor
+     *
+     * @return A collection containing the lessons from that tutor
+     */
+    @Query( "SELECT l FROM Lesson l WHERE l.course.curriculum = :curriculum" )
+    Collection<Lesson> findUpcomingByCurriculum( @Param( "curriculum" ) Curriculum curriculum );
 
     /**
      * Gets the upcoming lessons from a course

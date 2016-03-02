@@ -258,8 +258,8 @@ public interface PALService
     /**
      * Gets lessons filtered by course
      *
-     * @param course to be filtered on
-     * @return the lessons of that course
+     * @param course To be filtered on
+     * @return The lessons of that course
      */
     Collection<Lesson> getLessons( Course course );
 
@@ -267,7 +267,7 @@ public interface PALService
      * Gets lessons from the specified tutor
      *
      * @param tutor The tutor to get the lessons from
-     * @return the lessons of that tutor
+     * @return The lessons of that tutor
      */
     Collection<Lesson> getLessons( Tutor tutor );
 
@@ -311,6 +311,14 @@ public interface PALService
      * @return the lessons in the future of that tutor
      */
     Collection<Lesson> getUpcomingLessons( Tutor tutor );
+
+    /**
+     * Gets upcoming lessons available for the student
+     *
+     * @param student To get the available lessons from
+     * @return The lessons available for the student
+     */
+    Collection<Lesson> getUpcomingLessons( Student student );
 
     /**
      * Gets past lessons from the specified tutor
