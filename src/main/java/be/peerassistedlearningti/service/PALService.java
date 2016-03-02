@@ -605,6 +605,13 @@ public interface PALService
     void addRequest( Request request );
 
     /**
+     * Updates a request to the database
+     *
+     * @param request The request to be updated in the database
+     */
+    void updateRequest(Request request);
+
+    /**
      * Removes the specified request from the database
      *
      * @param request The request to be removed from the database

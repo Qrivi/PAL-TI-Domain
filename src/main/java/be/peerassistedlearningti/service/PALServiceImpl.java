@@ -848,6 +848,15 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Updates a request to the database
+     *
+     * @param request The request to be updated in the database
+     */
+    public void updateRequest(Request request) {
+        requestRepository.save(request);
+    }
+
+    /**
      * Removes the specified request from the database
      *
      * @param request The request to be removed from the database
