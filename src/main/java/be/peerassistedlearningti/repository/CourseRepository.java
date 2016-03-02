@@ -49,9 +49,10 @@ public interface CourseRepository extends CrudRepository<Course, Integer>
     /**
      * Gets the top subscribed courses
      *
+     * @param pageable The page to select from
      * @return The top subscribed courses
      */
-    @Query( "SELECT c FROM Course c ORDER BY c.subscribers.size" )
+    @Query( "SELECT c FROM Course c ORDER BY c.subscribers.size DESC" )
     List<Course> findTopSubscribed( Pageable pageable );
 
     /**
