@@ -631,7 +631,7 @@ public interface PALService
      *
      * @return A collection containing all the request
      */
-    Collection<Request> getAllRequest();
+    Collection<Request> getAllRequests();
 
     /**
      * Gets all the request for given course.
@@ -639,7 +639,7 @@ public interface PALService
      * @param course The course to filter the requests
      * @return A collection containing all the request
      */
-    Collection<Request> getAllRequests( Course course );
+    Collection<Request> getRequests( Course course );
 
 
     //================================================================================
