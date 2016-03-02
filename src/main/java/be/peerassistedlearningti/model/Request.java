@@ -5,7 +5,6 @@ import info.debatty.java.stringsimilarity.NormalizedLevenshtein;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -21,6 +20,10 @@ import java.util.Set;
 public class Request extends JPAEntity<Integer>
 {
     @ManyToMany( fetch = FetchType.EAGER )
+    @JoinTable(
+            name = "request_upvotes",
+            joinColumns = @JoinColumn(name = "request_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
     private Set<Student> upvotes;
 
     @NotNull(message = "{NotNull.Request.title}")
@@ -84,6 +87,27 @@ public class Request extends JPAEntity<Integer>
     {
         this( title, description, course, student );
         this.creationDate = creationDate;
+    }
+
+    /**
+     * Adds the given student to this request's set of up-votes
+     *
+     * @param student The new student who up-voted this request
+     * @return true if this set did not already contain the specified student
+     * @see Set
+     */
+    public boolean upvote(Student student) {
+        return upvotes.add(student);
+    }
+
+    /**
+     * Removes the given student from this request's set of up-votes
+     *
+     * @param student The student to be remove from this request's up-votes set
+     * @return true if this set contained the specified student
+     */
+    public boolean removeUpvote(Student student) {
+        return upvotes.remove(student);
     }
 
     /**
