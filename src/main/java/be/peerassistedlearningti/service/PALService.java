@@ -61,6 +61,14 @@ public interface PALService
     Collection<Course> getAllCourses();
 
     /**
+     * Gets all the courses available for the specified student
+     *
+     * @param student The student to get the available courses from
+     * @return A collection containing all the courses available for the specified student
+     */
+    Collection<Course> getAllCoursesByStudent( Student student );
+
+    /**
      * Gets the top subscribed courses with the specified limit
      *
      * @param top The amount of top courses returned

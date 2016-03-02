@@ -34,9 +34,9 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
     Collection<Lesson> findByTutor( @Param( "tutor" ) Tutor tutor );
 
     /**
-     * Gets lessons from a tutor
+     * Gets lessons from a curriculum
      *
-     * @return A collection containing the lessons from that tutor
+     * @return A collection containing the lessons from that curriculum
      */
     @Query( "SELECT l FROM Lesson l WHERE l.course.curriculum = :curriculum" )
     Collection<Lesson> findUpcomingByCurriculum( @Param( "curriculum" ) Curriculum curriculum );

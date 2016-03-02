@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Curriculum;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -52,4 +53,12 @@ public interface CourseRepository extends CrudRepository<Course, Integer>
      */
     @Query( "SELECT c FROM Course c ORDER BY c.subscribers.size" )
     List<Course> findTopSubscribed( Pageable pageable );
+
+    /**
+     * Gets courses from a curriculum
+     *
+     * @return A collection containing the courses from that curriculum
+     */
+    @Query( "SELECT c FROM Course c WHERE c.curriculum = :curriculum" )
+    List<Course> findByCurriculum( @Param( "curriculum" ) Curriculum curriculum );
 }
