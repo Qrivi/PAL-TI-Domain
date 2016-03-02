@@ -893,7 +893,7 @@ public class PALServiceImpl implements PALService
      * @param course The course to get the requests from
      * @return A collection containing all the requests from the specified course
      */
-    public Collection<Request> getAllRequest( Course course )
+    public Collection<Request> getAllRequests( Course course )
     {
         return requestRepository.findAll( course );
     }
