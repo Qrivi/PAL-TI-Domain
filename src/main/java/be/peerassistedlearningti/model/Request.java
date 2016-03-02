@@ -216,6 +216,6 @@ public class Request extends JPAEntity<Integer>
      */
     public double getSimilarity(Request other) {
         NormalizedLevenshtein l = new NormalizedLevenshtein();
-        return l.similarity(title, other.title);
+        return l.similarity(title.toLowerCase(), other.title.toLowerCase());
     }
 }
