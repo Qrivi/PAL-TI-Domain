@@ -73,11 +73,7 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @ManyToMany( fetch = FetchType.EAGER )
-    @JoinTable(
-            name = "student_upvotes",
-            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ),
-            inverseJoinColumns = @JoinColumn( name = "request_id", referencedColumnName = "id" ) )
+    @ManyToMany(mappedBy = "upvotes", cascade = CascadeType.REMOVE)
     private Set<Request> upvotes;
 
     @Valid
@@ -245,24 +241,10 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Adds the given request to this student's set of up-voted requests
-     *
-     * @param request The new request to be upvoted by the student
-     * @return true if this set did not already contain the specified element
-     * @see Set
+     * @return The name of the student
      */
-    public boolean upvote(Request request){
-        return upvotes.add(request);
-    }
-
-    /**
-     * Removes the given request from the student's set of up-voted requests
-     *
-     * @param request The request to be remove from the student's up-voted set
-     * @return true if this set contained the specified element
-     */
-    public boolean removeUpvote(Request request){
-        return upvotes.remove(request);
+    public String getName() {
+        return name;
     }
 
     /**
@@ -276,13 +258,11 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the profile identifier of the Student
-     *
-     * @param profileIdentifier the profile identifier of the Student
+     * @return the image of the Student
      */
-    public void setProfileIdentifier( String profileIdentifier )
+    public Image getAvatar()
     {
-        this.profileIdentifier = profileIdentifier;
+        return avatar;
     }
 
     /**
@@ -296,89 +276,23 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
-     * Sets the password of the Student
-     *
-     * @param password The password of the student
-     */
-    public void setPassword( String password )
-    {
-        if ( salt == null )
-            this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
-        this.password = createHash( password, salt );
-    }
-
-    /**
-     * Sets the email of the student
-     *
-     * @param email The email of the student
-     */
-    public void setEmail( String email )
-    {
-        this.email = email;
-    }
-
-    /**
-     * Sets the curriculum of the student
-     *
-     * @param curriculum The curriculum of the student
-     */
-    public void setCurriculum( Curriculum curriculum )
-    {
-        this.curriculum = curriculum;
-    }
-
-    /**
-     * Sets the user type of the student
-     *
-     * @param type The user type of the student
-     */
-    public void setType( UserType type )
-    {
-        this.type = type;
-    }
-
-    /**
-     * Sets the subscription set of the student
-     *
-     * @param subscriptions The Set containing the student's subscriptions
-     */
-    public void setSubscriptions( Set<Course> subscriptions )
-    {
-        this.subscriptions = subscriptions;
-    }
-
-    /**
-     * Sets the date the student is last updated
-     *
-     * @param lastUpdated The date the student is last updated
-     */
-    public void setLastUpdated( Date lastUpdated )
-    {
-        this.lastUpdated = lastUpdated;
-    }
-
-    /**
-     * @return The name of the student
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @return the image of the Student
-     */
-    public Image getAvatar()
-    {
-        return avatar;
-    }
-
-    /**
      * @return The password of the student
      */
     public String getPassword()
     {
         return password;
+    }
+
+    /**
+     * Sets the password of the Student
+     *
+     * @param password The password of the student
+     */
+    public void setPassword(String password)
+    {
+        if (salt == null)
+            this.salt = new BigInteger(130, new SecureRandom()).toString(20);
+        this.password = createHash(password, salt);
     }
 
     /**
@@ -390,6 +304,16 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the email of the student
+     *
+     * @param email The email of the student
+     */
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    /**
      * @return The curriculum of the student
      */
     public Curriculum getCurriculum()
@@ -398,11 +322,31 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the curriculum of the student
+     *
+     * @param curriculum The curriculum of the student
+     */
+    public void setCurriculum(Curriculum curriculum)
+    {
+        this.curriculum = curriculum;
+    }
+
+    /**
      * @return The user type of the student
      */
     public UserType getType()
     {
         return type;
+    }
+
+    /**
+     * Sets the user type of the student
+     *
+     * @param type The user type of the student
+     */
+    public void setType(UserType type)
+    {
+        this.type = type;
     }
 
     /**
@@ -430,6 +374,16 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the subscription set of the student
+     *
+     * @param subscriptions The Set containing the student's subscriptions
+     */
+    public void setSubscriptions(Set<Course> subscriptions)
+    {
+        this.subscriptions = subscriptions;
+    }
+
+    /**
      * @return The security token of the student
      */
     public String getSecurityToken()
@@ -446,11 +400,31 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Sets the profile identifier of the Student
+     *
+     * @param profileIdentifier the profile identifier of the Student
+     */
+    public void setProfileIdentifier(String profileIdentifier)
+    {
+        this.profileIdentifier = profileIdentifier;
+    }
+
+    /**
      * @return The date the student is last updated
      */
     public Date getLastUpdated()
     {
         return lastUpdated;
+    }
+
+    /**
+     * Sets the date the student is last updated
+     *
+     * @param lastUpdated The date the student is last updated
+     */
+    public void setLastUpdated(Date lastUpdated)
+    {
+        this.lastUpdated = lastUpdated;
     }
 
     /**
