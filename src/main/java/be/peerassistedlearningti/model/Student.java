@@ -245,6 +245,27 @@ public class Student extends JPAEntity<Integer>
     }
 
     /**
+     * Adds the given request to this student's set of up-voted requests
+     *
+     * @param request The new request to be upvoted by the student
+     * @return true if this set did not already contain the specified element
+     * @see Set
+     */
+    public boolean upvote(Request request){
+        return upvotes.add(request);
+    }
+
+    /**
+     * Removes the given request from the student's set of up-voted requests
+     *
+     * @param request The request to be remove from the student's up-voted set
+     * @return true if this set contained the specified element
+     */
+    public boolean removeUpvote(Request request){
+        return upvotes.remove(request);
+    }
+
+    /**
      * Sets the name of the Student
      *
      * @param name The name of the Student
