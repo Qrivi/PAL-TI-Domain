@@ -31,7 +31,7 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     private String name;
 
     @NotEmpty( message = "{NotEmpty.Lesson.description}" )
-    @Column( name = "description", nullable = false )
+    @Column( name = "description", nullable = false, columnDefinition = "TEXT" )
     private String description;
 
     @Min( value = 1, message = "{Min.Lesson.duration}" )
