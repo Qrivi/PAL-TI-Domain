@@ -53,7 +53,7 @@ public interface ReviewRepository extends CrudRepository<Review, Integer>
      *
      * @return A collection containing the reviews of that student
      */
-    @Query( "SELECT r FROM Review r WHERE r.student = :student ORDER BY r.date DESC" )
+    @Query( "SELECT r FROM Review r WHERE r.student = :student AND r.anonymous = false ORDER BY r.date DESC" )
     Collection<Review> findByStudent( @Param( "student" ) Student student );
 
     /**
@@ -63,7 +63,7 @@ public interface ReviewRepository extends CrudRepository<Review, Integer>
      * @param pageable The page to select from
      * @return A collection containing the reviews of that student from the offset with the limit as size
      */
-    @Query( "SELECT r FROM Review r WHERE r.student = :student ORDER BY r.date DESC" )
+    @Query( "SELECT r FROM Review r WHERE r.student = :student AND r.anonymous = false ORDER BY r.date DESC" )
     List<Review> findByStudent( @Param( "student" ) Student student, Pageable pageable );
 
     /**
