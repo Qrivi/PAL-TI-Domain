@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -965,6 +966,15 @@ public class PALServiceImpl implements PALService
     public Collection<Review> getAllReviews()
     {
         return Utils.makeCollection( reviewRepository.findAll() );
+    }
+
+    /**
+     * Gets all the requests filtered by given set of courses
+     *
+     * @return A collection containing all the requests
+     */
+    public Collection<Request> getAllRequests(Set<Course> courses) {
+        return requestRepository.findAllRequests(courses);
     }
 
     //================================================================================

@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Interface for Request specific database operations
@@ -37,4 +38,12 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
     @Query( "SELECT r FROM Request r WHERE :student MEMBER OF r.upvotes")
     Collection<Request> findAll( @Param("student") Student student);
 
+    /**
+     * Gets all the requests filtered by given set of courses
+     *
+     * @param courses The set of courses to filter the requests on
+     * @return A collection containing all the requests filtered by given courses
+     */
+    @Query("SELECT r FROM Request r WHERE r.course IN :courses")
+    Collection<Request> findAllRequests(@Param("courses") Set<Course> courses);
 }

@@ -3,6 +3,7 @@ package be.peerassistedlearningti.service;
 import be.peerassistedlearningti.model.*;
 
 import java.util.Collection;
+import java.util.Set;
 
 /**
  * Interface used to determine the backend functionalities
@@ -616,6 +617,13 @@ public interface PALService
      * @return A collection containing all the reviews
      */
     Collection<Review> getAllReviews();
+
+    /**
+     * Gets all the requests filtered by given set of courses
+     *
+     * @return A collection containing all the requests
+     */
+    Collection<Request> getAllRequests(Set<Course> courses);
 
     //================================================================================
     // endregion
