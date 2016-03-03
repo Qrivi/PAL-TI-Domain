@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -22,11 +23,11 @@ public class Request extends JPAEntity<Integer>
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "request_upvotes",
-            joinColumns = @JoinColumn(name = "request_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn( name = "request_id", referencedColumnName = "id" ),
+            inverseJoinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id" ) )
     private Set<Student> upvotes;
 
-    @NotNull(message = "{NotNull.Request.title}")
+    @NotNull( message = "{NotNull.Request.title}" )
     @Size( min = 3, max = 50, message = "{Size.Request.title}" )
     @Column( name = "title" )
     private String title;
@@ -53,7 +54,7 @@ public class Request extends JPAEntity<Integer>
     private Date creationDate;
 
     @Valid
-    @OneToOne(mappedBy = "request")
+    @OneToOne( mappedBy = "request" )
     private Lesson lesson;
 
     /**
@@ -69,7 +70,7 @@ public class Request extends JPAEntity<Integer>
      * @param course      The course of the request
      * @param student     The student of the request
      */
-    public Request(String title, String description, Course course, Student student )
+    public Request( String title, String description, Course course, Student student )
     {
         this.title = title;
         this.description = description;
@@ -81,13 +82,13 @@ public class Request extends JPAEntity<Integer>
     /**
      * Constructor for Request
      *
-     * @param title       The title of the request
+     * @param title        The title of the request
      * @param description  The description of the request
      * @param course       The course of the request
      * @param student      The student of the request
      * @param creationDate The creation date of the request
      */
-    public Request(String title, String description, Course course, Student student, Date creationDate )
+    public Request( String title, String description, Course course, Student student, Date creationDate )
     {
         this( title, description, course, student );
         this.creationDate = creationDate;
@@ -100,8 +101,11 @@ public class Request extends JPAEntity<Integer>
      * @return true if this set did not already contain the specified student
      * @see Set
      */
-    public boolean upvote(Student student) {
-        return upvotes.add(student);
+    public boolean upvote( Student student )
+    {
+        if ( upvotes == null )
+            upvotes = new HashSet<>();
+        return upvotes.add( student );
     }
 
     /**
@@ -110,27 +114,27 @@ public class Request extends JPAEntity<Integer>
      * @param student The student to be remove from this request's up-votes set
      * @return true if this set contained the specified student
      */
-    public boolean removeUpvote(Student student) {
-        return upvotes.remove(student);
-    }
-
-    /**
-     * @return the upvotes of the request
-     */
-    public Set<Student> getUpvotes()
+    public boolean removeUpvote( Student student )
     {
-        return upvotes;
-    }
-
-    public void setUpvotes(Set<Student> upvotes) {
-        this.upvotes = upvotes;
+        return upvotes.remove( student );
     }
 
     /**
-     * @return the title of the request
+     * Gets the similarity between this and another request, based on their titles
+     *
+     * @param other The other request to be compared with
+     * @return a double indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
+     * @see NormalizedLevenshtein
      */
-    public String getTitle() {
-        return title;
+    public double getSimilarity( Request other )
+    {
+        NormalizedLevenshtein l = new NormalizedLevenshtein();
+        return l.similarity( title.toLowerCase(), other.title.toLowerCase() );
+    }
+
+    public void setUpvotes( Set<Student> upvotes )
+    {
+        this.upvotes = upvotes;
     }
 
     /**
@@ -138,16 +142,9 @@ public class Request extends JPAEntity<Integer>
      *
      * @param title the new title
      */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-     * @return the description of the request
-     */
-    public String getDescription()
+    public void setTitle( String title )
     {
-        return description;
+        this.title = title;
     }
 
     /**
@@ -161,14 +158,6 @@ public class Request extends JPAEntity<Integer>
     }
 
     /**
-     * @return the course of the request
-     */
-    public Course getCourse()
-    {
-        return course;
-    }
-
-    /**
      * Sets the course of the request
      *
      * @param course the new course of the request
@@ -176,14 +165,6 @@ public class Request extends JPAEntity<Integer>
     public void setCourse( Course course )
     {
         this.course = course;
-    }
-
-    /**
-     * @return the student of the request
-     */
-    public Student getStudent()
-    {
-        return student;
     }
 
     /**
@@ -197,14 +178,6 @@ public class Request extends JPAEntity<Integer>
     }
 
     /**
-     * @return the creation date of the request
-     */
-    public Date getCreationDate()
-    {
-        return creationDate;
-    }
-
-    /**
      * Sets the creation date of the request
      *
      * @param creationDate the new creation date of the request
@@ -215,21 +188,58 @@ public class Request extends JPAEntity<Integer>
     }
 
     /**
-     * @return The lesson bound to this request
+     * @return the upvotes of the request
      */
-    public Lesson getLesson() {
-        return lesson;
+    public Set<Student> getUpvotes()
+    {
+        return upvotes;
     }
 
     /**
-     * Gets the similarity between this and another request, based on their titles
-     *
-     * @param other The other request to be compared with
-     * @return a double indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
-     * @see NormalizedLevenshtein
+     * @return the title of the request
      */
-    public double getSimilarity(Request other) {
-        NormalizedLevenshtein l = new NormalizedLevenshtein();
-        return l.similarity(title.toLowerCase(), other.title.toLowerCase());
+    public String getTitle()
+    {
+        return title;
+    }
+
+    /**
+     * @return the description of the request
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+
+    /**
+     * @return the course of the request
+     */
+    public Course getCourse()
+    {
+        return course;
+    }
+
+    /**
+     * @return the student of the request
+     */
+    public Student getStudent()
+    {
+        return student;
+    }
+
+    /**
+     * @return the creation date of the request
+     */
+    public Date getCreationDate()
+    {
+        return creationDate;
+    }
+
+    /**
+     * @return The lesson bound to this request
+     */
+    public Lesson getLesson()
+    {
+        return lesson;
     }
 }
