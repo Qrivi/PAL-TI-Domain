@@ -78,6 +78,16 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets all the courses
+     *
+     * @return A collection containing all the courses
+     */
+    public Collection<Course> getAllCourses()
+    {
+        return Utils.makeCollection( courseRepository.findAll() );
+    }
+
+    /**
      * Gets the course with the specified id
      *
      * @param id The id of the course
@@ -105,7 +115,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the available courses from
      * @return A collection containing all the courses available for the specified student
      */
-    public Collection<Course> getAllCoursesByStudent( Student student )
+    public Collection<Course> getCourses( Student student )
     {
         return courseRepository.findByCurriculum( student.getCurriculum() );
     }
@@ -122,6 +132,14 @@ public class PALServiceImpl implements PALService
         return courseRepository.findTopSubscribed( page );
     }
 
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Student
+    //================================================================================
+
     /**
      * Adds a student to the database
      *
@@ -131,14 +149,6 @@ public class PALServiceImpl implements PALService
     {
         studentRepository.save( student );
     }
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Student
-    //================================================================================
 
     /**
      * Updates a student in the database
@@ -183,6 +193,16 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets all the students
+     *
+     * @return A collection containing all the students
+     */
+    public Collection<Student> getAllStudents()
+    {
+        return Utils.makeCollection( studentRepository.findAll() );
+    }
+
+    /**
      * Gets the student with the specified profile identifier
      *
      * @param profileIdentifier The profile identifier of the student
@@ -194,12 +214,22 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets all the student types
+     *
+     * @return A collection containing all the student types
+     */
+    public Collection<UserType> getStudentTypes()
+    {
+        return Arrays.asList( UserType.values() );
+    }
+
+    /**
      * Gets the students avatar
      *
      * @param student The student of the avatar
      * @return The students avatar
      */
-    public Image getAvatarByStudent( Student student )
+    public Image getAvatar( Student student )
     {
         return studentRepository.findAvatarByStudent( student );
     }
@@ -210,10 +240,18 @@ public class PALServiceImpl implements PALService
      * @param type The type of the user type
      * @return The user type with the specified type
      */
-    public UserType getStudentTypeByType( String type )
+    public UserType getStudentTypeByString( String type )
     {
         return UserType.getByValue( type );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Tutor
+    //================================================================================
 
     /**
      * Adds a tutor to the database
@@ -245,13 +283,26 @@ public class PALServiceImpl implements PALService
         tutorRepository.delete( tutor );
     }
 
-    //================================================================================
-    // endregion
-    //================================================================================
+    /**
+     * Gets the tutor with the specified id
+     *
+     * @param id The id of the tutor
+     * @return The tutor with the specified id
+     */
+    public Tutor getTutorById( int id )
+    {
+        return tutorRepository.findOne( id );
+    }
 
-    //================================================================================
-    // region Tutor
-    //================================================================================
+    /**
+     * Gets all the tutors
+     *
+     * @return A collection containing all the tutors
+     */
+    public Collection<Tutor> getAllTutors()
+    {
+        return Utils.makeCollection( tutorRepository.findAll() );
+    }
 
     /**
      * Gets the tutor with the specified student
@@ -265,26 +316,23 @@ public class PALServiceImpl implements PALService
     }
 
     /**
-     * Gets the tutor with the specified id
-     *
-     * @param id The id of the tutor
-     * @return The tutor with the specified id
-     */
-    public Tutor getTutorById( int id )
-    {
-        return tutorRepository.findOne( id );
-    }
-
-    /**
      * Gets all the tutors from the specified course
      *
      * @param course The course to get the tutors from
      * @return A collection containing all the tutors from the specified course
      */
-    public Collection<Tutor> getAllTutors( Course course )
+    public Collection<Tutor> getTutors( Course course )
     {
         return tutorRepository.findAll( course );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Lesson
+    //================================================================================
 
     /**
      * Adds a lesson to the database
@@ -327,13 +375,15 @@ public class PALServiceImpl implements PALService
         return lessonRepository.findOne( id );
     }
 
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Lesson
-    //================================================================================
+    /**
+     * Gets all the lessons
+     *
+     * @return A collection containing all the lessons
+     */
+    public Collection<Lesson> getAllLessons()
+    {
+        return Utils.makeCollection( lessonRepository.findAll() );
+    }
 
     /**
      * Gets lessons filtered by course
@@ -355,6 +405,16 @@ public class PALServiceImpl implements PALService
     public Collection<Lesson> getLessons( Tutor tutor )
     {
         return lessonRepository.findByTutor( tutor );
+    }
+
+    /**
+     * Gets all the upcoming lessons
+     *
+     * @return A collection containing all the upcoming lessons
+     */
+    public Collection<Lesson> getUpcomingLessons()
+    {
+        return lessonRepository.findUpcoming();
     }
 
     /**
@@ -463,6 +523,14 @@ public class PALServiceImpl implements PALService
         return lessonRepository.hasBooking( student, lesson ) != null;
     }
 
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Room
+    //================================================================================
+
     /**
      * Adds a room to the database
      *
@@ -506,12 +574,22 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets all the rooms
+     *
+     * @return A collection containing all the rooms
+     */
+    public Collection<Room> getAllRooms()
+    {
+        return Utils.makeCollection( roomRepository.findAll() );
+    }
+
+    /**
      * Gets the rooms with the specified campus
      *
      * @param campus The campus of the room
      * @return The rooms with the specified campus
      */
-    public Collection<Room> getRoomsFromCampus( Campus campus )
+    public Collection<Room> getRooms( Campus campus )
     {
         return roomRepository.findByCampus( campus );
     }
@@ -522,9 +600,17 @@ public class PALServiceImpl implements PALService
      * @param type The string type of the room type
      * @return The room type object
      */
-    public RoomType getRoomTypeByType( String type )
+    public RoomType getRoomTypeByString( String type )
     {
         return RoomType.getByValue( type );
+    }
+
+    /**
+     * @return A collection containing all the room types
+     */
+    public Collection<RoomType> getRoomTypes()
+    {
+        return Arrays.asList( RoomType.values() );
     }
 
     //================================================================================
@@ -532,8 +618,16 @@ public class PALServiceImpl implements PALService
     //================================================================================
 
     //================================================================================
-    // region Room
+    // region Campus
     //================================================================================
+
+    /**
+     * @return A collection containing all the campuses
+     */
+    public Collection<Campus> getCampuses()
+    {
+        return Arrays.asList( Campus.values() );
+    }
 
     /**
      * Gets the campus with the specified name
@@ -545,6 +639,14 @@ public class PALServiceImpl implements PALService
     {
         return Campus.getByValue( name );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Application
+    //================================================================================
 
     /**
      * Gets the application with the specified id
@@ -588,12 +690,22 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets all the applications
+     *
+     * @return A collection containing all the applications
+     */
+    public Collection<Application> getAllApplications()
+    {
+        return Utils.makeCollection( applicationRepository.findAll() );
+    }
+
+    /**
      * Gets all the pending applications from a student
      *
      * @param student The student to get the pending applications from
      * @return A collection containing all the pending applications from a student
      */
-    public Collection<Application> getAllPendingApplications( Student student )
+    public Collection<Application> getPendingApplications( Student student )
     {
         return applicationRepository.findAll( student, ApplicationState.PENDING );
     }
@@ -604,7 +716,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the approved applications from
      * @return A collection containing all the approved applications from a student
      */
-    public Collection<Application> getAllApprovedApplications( Student student ) {return applicationRepository.findAll( student, ApplicationState.APPROVED );}
+    public Collection<Application> getApprovedApplications( Student student ) {return applicationRepository.findAll( student, ApplicationState.APPROVED );}
 
     /**
      * Gets the last applications from a student with the specified limit
@@ -619,13 +731,29 @@ public class PALServiceImpl implements PALService
         return applicationRepository.findLastByStudent( student, page );
     }
 
-    //================================================================================
-    // endregion
-    //================================================================================
+    /**
+     * Gets all the pending applications
+     *
+     * @return A collection containing all the pending applications
+     */
+    public Collection<Application> getAllPendingApplications()
+    {
+        return applicationRepository.findAll( ApplicationState.PENDING );
+    }
 
-    //================================================================================
-    // region Campus
-    //================================================================================
+    /**
+     * Gets all the done applications
+     *
+     * @return A collection containing all the done applications
+     */
+    public Collection<Application> getAllDoneApplications()
+    {
+        return new ArrayList<Application>()
+        {{
+            addAll( applicationRepository.findAll( ApplicationState.APPROVED ) );
+            addAll( applicationRepository.findAll( ApplicationState.REJECTED ) );
+        }};
+    }
 
     /**
      * Gets the application screenshot
@@ -633,10 +761,18 @@ public class PALServiceImpl implements PALService
      * @param application The application of the screenshot
      * @return The application screenshot
      */
-    public Image getScreenshotByApplication( Application application )
+    public Image getScreenshot( Application application )
     {
         return applicationRepository.findScreenshotByApplication( application );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Review
+    //================================================================================
 
     /**
      * Gets the review with the specified id
@@ -648,14 +784,6 @@ public class PALServiceImpl implements PALService
     {
         return reviewRepository.findOne( id );
     }
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Application
-    //================================================================================
 
     /**
      * Adds a review to the database
@@ -675,6 +803,16 @@ public class PALServiceImpl implements PALService
     public void removeReview( Review review )
     {
         reviewRepository.delete( review );
+    }
+
+    /**
+     * Gets all the reviews
+     *
+     * @return A collection containing all the reviews
+     */
+    public Collection<Review> getAllReviews()
+    {
+        return Utils.makeCollection( reviewRepository.findAll() );
     }
 
     /**
@@ -719,7 +857,7 @@ public class PALServiceImpl implements PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    public Collection<Review> getReviewsByStudent( Student student )
+    public Collection<Review> getReviews( Student student )
     {
         return reviewRepository.findByStudent( student );
     }
@@ -732,7 +870,7 @@ public class PALServiceImpl implements PALService
      * @param limit   The maximum size of the list
      * @return A collection containing the reviews of that student from the offset with the limit as size
      */
-    public Collection<Review> getReviewsByStudent( Student student, int offset, int limit )
+    public Collection<Review> getReviews( Student student, int offset, int limit )
     {
         Pageable page = new PageRequest( offset, limit );
         return reviewRepository.findByStudent( student, page );
@@ -743,10 +881,18 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing the reviews of that student
      */
-    public Review getReviewsByStudentAndLesson( Student student, Lesson lesson )
+    public Review getReviews( Student student, Lesson lesson )
     {
         return reviewRepository.findByStudentAndLesson( student, lesson );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Request
+    //================================================================================
 
     /**
      * Gets the request with the specified id
@@ -779,14 +925,6 @@ public class PALServiceImpl implements PALService
         requestRepository.save( request );
     }
 
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Review
-    //================================================================================
-
     /**
      * Removes the specified request from the database
      *
@@ -795,6 +933,16 @@ public class PALServiceImpl implements PALService
     public void removeRequest( Request request )
     {
         requestRepository.delete( request );
+    }
+
+    /**
+     * Gets all the request
+     *
+     * @return A collection containing all the request
+     */
+    public Collection<Request> getAllRequests()
+    {
+        return Utils.makeCollection( requestRepository.findAll() );
     }
 
     /**
@@ -820,160 +968,11 @@ public class PALServiceImpl implements PALService
     }
 
     /**
-     * Gets the curriculum with the specified name
-     *
-     * @param name The string name of the curriculum
-     * @return The Curriculum object with the specified name
-     */
-    public Curriculum getCurriculumByName( String name )
-    {
-        return Curriculum.getByName( name );
-    }
-
-    /**
-     * Gets all the courses
-     *
-     * @return A collection containing all the courses
-     */
-    public Collection<Course> getAllCourses()
-    {
-        return Utils.makeCollection( courseRepository.findAll() );
-    }
-
-    /**
-     * Gets all the students
-     *
-     * @return A collection containing all the students
-     */
-    public Collection<Student> getAllStudents()
-    {
-        return Utils.makeCollection( studentRepository.findAll() );
-    }
-
-    /**
-     * Gets all the student types
-     *
-     * @return A collection containing all the student types
-     */
-    public Collection<UserType> getStudentTypes()
-    {
-        return Arrays.asList( UserType.values() );
-    }
-
-    /**
-     * Gets all the tutors
-     *
-     * @return A collection containing all the tutors
-     */
-    public Collection<Tutor> getAllTutors()
-    {
-        return Utils.makeCollection( tutorRepository.findAll() );
-    }
-
-    /**
-     * Gets all the lessons
-     *
-     * @return A collection containing all the lessons
-     */
-    public Collection<Lesson> getAllLessons()
-    {
-        return Utils.makeCollection( lessonRepository.findAll() );
-    }
-
-    /**
-     * Gets all the upcoming lessons
-     *
-     * @return A collection containing all the upcoming lessons
-     */
-    public Collection<Lesson> getUpcomingLessons()
-    {
-        return lessonRepository.findUpcoming();
-    }
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Request
-    //================================================================================
-
-    /**
-     * @return A collection containing all the room types
-     */
-    public Collection<RoomType> getRoomTypes()
-    {
-        return Arrays.asList( RoomType.values() );
-    }
-
-    /**
-     * Gets all the rooms
-     *
-     * @return A collection containing all the rooms
-     */
-    public Collection<Room> getAllRooms()
-    {
-        return Utils.makeCollection( roomRepository.findAll() );
-    }
-
-    /**
-     * @return A collection containing all the campuses
-     */
-    public Collection<Campus> getCampuses()
-    {
-        return Arrays.asList( Campus.values() );
-    }
-
-    /**
-     * Gets all the applications
-     *
-     * @return A collection containing all the applications
-     */
-    public Collection<Application> getAllApplications()
-    {
-        return Utils.makeCollection( applicationRepository.findAll() );
-    }
-
-    /**
-     * Gets all the pending applications
-     *
-     * @return A collection containing all the pending applications
-     */
-    public Collection<Application> getAllPendingApplications()
-    {
-        return applicationRepository.findAll( ApplicationState.PENDING );
-    }
-
-    /**
-     * Gets all the done applications
-     *
-     * @return A collection containing all the done applications
-     */
-    public Collection<Application> getAllDoneApplications()
-    {
-        return new ArrayList<Application>()
-        {{
-                addAll( applicationRepository.findAll( ApplicationState.APPROVED ) );
-                addAll( applicationRepository.findAll( ApplicationState.REJECTED ) );
-            }};
-    }
-
-    /**
-     * Gets all the reviews
-     *
-     * @return A collection containing all the reviews
-     */
-    public Collection<Review> getAllReviews()
-    {
-        return Utils.makeCollection( reviewRepository.findAll() );
-    }
-
-    /**
      * Gets all the requests filtered by given set of courses
      *
      * @return A collection containing all the requests
      */
-    public Collection<Request> getAllRequests(Set<Course> courses) {
+    public Collection<Request> getRequests(Set<Course> courses) {
         return requestRepository.findAllRequests(courses);
     }
 
@@ -986,16 +985,6 @@ public class PALServiceImpl implements PALService
     //================================================================================
 
     /**
-     * Gets all the request
-     *
-     * @return A collection containing all the request
-     */
-    public Collection<Request> getAllRequests()
-    {
-        return Utils.makeCollection( requestRepository.findAll() );
-    }
-
-    /**
      * @return A collection containing all the curriculum's
      */
     public Collection<Curriculum> getCurriculums()
@@ -1003,6 +992,16 @@ public class PALServiceImpl implements PALService
         return Arrays.asList( Curriculum.values() );
     }
 
+    /**
+     * Gets the curriculum with the specified name
+     *
+     * @param name The string name of the curriculum
+     * @return The Curriculum object with the specified name
+     */
+    public Curriculum getCurriculumByName( String name )
+    {
+        return Curriculum.getByName( name );
+    }
 
     //================================================================================
     // endregion

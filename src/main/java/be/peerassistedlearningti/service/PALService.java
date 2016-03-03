@@ -372,10 +372,6 @@ public interface PALService
      */
     Collection<Room> getAllRooms();
     /**
-     * @return A collection containing all the campuses
-     */
-    Collection<Campus> getCampuses();
-    /**
      * Gets the rooms with the specified campus
      *
      * @param campus The campus of the room
@@ -397,6 +393,10 @@ public interface PALService
     //================================================================================
     // region Campus
     //================================================================================
+    /**
+     * @return A collection containing all the campuses
+     */
+    Collection<Campus> getCampuses();
     /**
      * Gets the campus with the specified name
      *
