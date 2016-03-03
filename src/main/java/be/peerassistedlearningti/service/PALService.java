@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 Matthias Hannes Koen Demonie David Op de Beeck
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package be.peerassistedlearningti.service;
 
 import be.peerassistedlearningti.model.*;
@@ -559,6 +583,8 @@ public interface PALService
     /**
      * Gets reviews filtered by student and lesson
      *
+     * @param student The student that gave the review
+     * @param lesson  The lesson of the review
      * @return A collection containing the reviews of that student
      */
     Review getReviews( Student student, Lesson lesson );
@@ -598,7 +624,7 @@ public interface PALService
     /**
      * Gets all the request for given course.
      *
-     * @param course The course to filter the requests
+     * @param course The course to get the requests from
      * @return A collection containing all the request
      */
     Collection<Request> getRequests( Course course );
@@ -612,9 +638,10 @@ public interface PALService
     /**
      * Gets all the requests filtered by given set of courses
      *
+     * @param courses The course to filter the requests from
      * @return A collection containing all the requests
      */
-    Collection<Request> getRequests(Set<Course> courses);
+    Collection<Request> getRequests( Set<Course> courses );
     /**
      * Gets all the request
      *

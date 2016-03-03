@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 Matthias Hannes Koen Demonie David Op de Beeck
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package be.peerassistedlearningti.repository;
 
 import be.peerassistedlearningti.model.*;
@@ -20,25 +44,28 @@ import java.util.List;
 public interface LessonRepository extends CrudRepository<Lesson, Integer>
 {
     /**
-     * Gets lessons from a course
+     * Gets lessons filtered by course
      *
-     * @return A collection containing the lessons from that course
+     * @param course to be filtered on
+     * @return the lessons of that course
      */
     @Query( "SELECT l FROM Lesson l WHERE l.course = :course ORDER BY l.date DESC" )
     Collection<Lesson> findByCourse( @Param( "course" ) Course course );
 
     /**
-     * Gets lessons from a tutor
+     * Gets lessons from the specified tutor
      *
-     * @return A collection containing the lessons from that tutor
+     * @param tutor The tutor to get the lessons from
+     * @return the lessons of that tutor
      */
     @Query( "SELECT l FROM Lesson l WHERE l.tutor = :tutor ORDER BY l.date DESC" )
     Collection<Lesson> findByTutor( @Param( "tutor" ) Tutor tutor );
 
     /**
-     * Gets lessons from a curriculum
+     * Gets upcoming lessons available for the student
      *
-     * @return A collection containing the lessons from that curriculum
+     * @param curriculum The curriculum to get the available lessons from
+     * @return The lessons available for the student
      */
     @Query( "SELECT l FROM Lesson l WHERE l.course.curriculum = :curriculum ORDER BY l.date DESC" )
     Collection<Lesson> findUpcomingByCurriculum( @Param( "curriculum" ) Curriculum curriculum );
@@ -117,9 +144,11 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
     Collection<Lesson> findUpcoming();
 
     /**
-     * Checks if the specified lesson has the specified student
+     * Checks if the specified student has the specified booking
      *
-     * @return The lesson if it has the students else null
+     * @param student The student to check if it has the booking
+     * @param lesson  The booking to check if it has the student
+     * @return If the student has the booking
      */
     @Query( "SELECT l FROM Lesson l WHERE l = :lesson AND :student MEMBER OF l.bookings" )
     Lesson hasBooking( @Param( "student" ) Student student, @Param( "lesson" ) Lesson lesson );

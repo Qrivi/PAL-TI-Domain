@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 Matthias Hannes Koen Demonie David Op de Beeck
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.jpa.JPAEntity;
@@ -73,7 +97,7 @@ public class Student extends JPAEntity<Integer>
     private Set<Course> subscriptions;
 
     @Valid
-    @ManyToMany(mappedBy = "upvotes", cascade = CascadeType.REMOVE)
+    @ManyToMany( mappedBy = "upvotes", cascade = CascadeType.REMOVE )
     private Set<Request> upvotes;
 
     @Valid
@@ -124,6 +148,7 @@ public class Student extends JPAEntity<Integer>
      * @param name              The name of the student
      * @param password          The password of the student
      * @param email             The email of the student
+     * @param curriculum        The curriculum of the student
      * @param profileIdentifier The profile identifier of the student
      * @param type              The user type of the student
      */
@@ -243,7 +268,8 @@ public class Student extends JPAEntity<Integer>
     /**
      * @return The name of the student
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -288,11 +314,11 @@ public class Student extends JPAEntity<Integer>
      *
      * @param password The password of the student
      */
-    public void setPassword(String password)
+    public void setPassword( String password )
     {
-        if (salt == null)
-            this.salt = new BigInteger(130, new SecureRandom()).toString(20);
-        this.password = createHash(password, salt);
+        if ( salt == null )
+            this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        this.password = createHash( password, salt );
     }
 
     /**
@@ -308,7 +334,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param email The email of the student
      */
-    public void setEmail(String email)
+    public void setEmail( String email )
     {
         this.email = email;
     }
@@ -326,7 +352,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param curriculum The curriculum of the student
      */
-    public void setCurriculum(Curriculum curriculum)
+    public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
     }
@@ -344,7 +370,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param type The user type of the student
      */
-    public void setType(UserType type)
+    public void setType( UserType type )
     {
         this.type = type;
     }
@@ -378,7 +404,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param subscriptions The Set containing the student's subscriptions
      */
-    public void setSubscriptions(Set<Course> subscriptions)
+    public void setSubscriptions( Set<Course> subscriptions )
     {
         this.subscriptions = subscriptions;
     }
@@ -404,7 +430,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param profileIdentifier the profile identifier of the Student
      */
-    public void setProfileIdentifier(String profileIdentifier)
+    public void setProfileIdentifier( String profileIdentifier )
     {
         this.profileIdentifier = profileIdentifier;
     }
@@ -422,7 +448,7 @@ public class Student extends JPAEntity<Integer>
      *
      * @param lastUpdated The date the student is last updated
      */
-    public void setLastUpdated(Date lastUpdated)
+    public void setLastUpdated( Date lastUpdated )
     {
         this.lastUpdated = lastUpdated;
     }

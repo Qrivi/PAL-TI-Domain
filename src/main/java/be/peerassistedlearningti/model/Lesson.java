@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 Matthias Hannes Koen Demonie David Op de Beeck
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package be.peerassistedlearningti.model;
 
 import be.peerassistedlearningti.common.model.archivable.Archivable;
@@ -78,8 +102,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     @OneToMany( mappedBy = "lesson", fetch = FetchType.EAGER, orphanRemoval = true )
     private Set<Review> reviews;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "request_id")
+    @OneToOne( fetch = FetchType.EAGER )
+    @JoinColumn( name = "request_id" )
     private Request request;
 
     /**
@@ -127,8 +151,9 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      * @param backupRoom      The backup room for the lesson
      * @param request         The request bound to this lesson
      */
-    public Lesson(Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom, Request request) {
-        this(date, name, description, duration, course, maxParticipants, tutor, room, room);
+    public Lesson( Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom, Request request )
+    {
+        this( date, name, description, duration, course, maxParticipants, tutor, room, room );
         this.request = request;
     }
 
@@ -159,7 +184,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     /**
      * @return The request bound to this lesson
      */
-    public Request getRequest() {
+    public Request getRequest()
+    {
         return request;
     }
 
@@ -168,14 +194,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param request The given request for this lesson
      */
-    public void setRequest(Request request) {
+    public void setRequest( Request request )
+    {
         this.request = request;
     }
 
     /**
      * @return The date and time of the lesson
      */
-    public Date getDate() {
+    public Date getDate()
+    {
         return date;
     }
 
@@ -192,7 +220,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     /**
      * @return The name of the lesson
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -201,14 +230,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param name The name of the lesson
      */
-    public void setName(String name) {
+    public void setName( String name )
+    {
         this.name = name;
     }
 
     /**
      * @return The description of the lesson
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -217,14 +248,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param description The description of the lesson
      */
-    public void setDescription(String description) {
+    public void setDescription( String description )
+    {
         this.description = description;
     }
 
     /**
      * @return The duration of the lesson
      */
-    public long getDuration() {
+    public long getDuration()
+    {
         return duration;
     }
 
@@ -233,14 +266,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param duration The duration of the lesson
      */
-    public void setDuration(long duration) {
+    public void setDuration( long duration )
+    {
         this.duration = duration;
     }
 
     /**
      * @return The course of the lesson
      */
-    public Course getCourse() {
+    public Course getCourse()
+    {
         return course;
     }
 
@@ -249,14 +284,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param course The course of the lesson
      */
-    public void setCourse(Course course) {
+    public void setCourse( Course course )
+    {
         this.course = course;
     }
 
     /**
      * @return The maximum number of participants of the lesson
      */
-    public int getMaxParticipants() {
+    public int getMaxParticipants()
+    {
         return maxParticipants;
     }
 
@@ -265,14 +302,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param maxParticipants The maximum number of participants of the lesson
      */
-    public void setMaxParticipants(int maxParticipants) {
+    public void setMaxParticipants( int maxParticipants )
+    {
         this.maxParticipants = maxParticipants;
     }
 
     /**
      * @return The tutor and time of the lesson
      */
-    public Tutor getTutor() {
+    public Tutor getTutor()
+    {
         return tutor;
     }
 
@@ -281,14 +320,16 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param tutor The tutor of the lesson
      */
-    public void setTutor(Tutor tutor) {
+    public void setTutor( Tutor tutor )
+    {
         this.tutor = tutor;
     }
 
     /**
      * @return The set of bookings
      */
-    public Set<Student> getBookings() {
+    public Set<Student> getBookings()
+    {
         return bookings;
     }
 
@@ -297,30 +338,34 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param bookings The Set of students enrolled for the lesson
      */
-    public void setBookings(Set<Student> bookings) {
+    public void setBookings( Set<Student> bookings )
+    {
         this.bookings = bookings;
     }
 
     /**
      * @return The room of the lesson
      */
-    public Room getRoom() {
+    public Room getRoom()
+    {
         return room;
     }
 
     /**
      * Sets the room of the lesson
      *
-     * @param room
+     * @param room The room of the lesson
      */
-    public void setRoom(Room room) {
+    public void setRoom( Room room )
+    {
         this.room = room;
     }
 
     /**
      * @return The backup room of the lesson
      */
-    public Room getBackupRoom() {
+    public Room getBackupRoom()
+    {
         return backupRoom;
     }
 
@@ -329,7 +374,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param backupRoom The backup room of the lesson
      */
-    public void setBackupRoom(Room backupRoom) {
+    public void setBackupRoom( Room backupRoom )
+    {
         this.backupRoom = backupRoom;
     }
 
