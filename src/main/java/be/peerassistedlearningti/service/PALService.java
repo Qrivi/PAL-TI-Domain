@@ -54,12 +54,18 @@ public interface PALService
      */
     Course getCourseByCode( String code );
     /**
+     * Gets all the courses
+     *
+     * @return A collection containing all the courses
+     */
+    Collection<Course> getAllCourses();
+    /**
      * Gets all the courses available for the specified student
      *
      * @param student The student to get the available courses from
      * @return A collection containing all the courses available for the specified student
      */
-    Collection<Course> getAllCoursesByStudent( Student student );
+    Collection<Course> getCourses( Student student );
     /**
      * Gets the top subscribed courses with the specified limit
      *
@@ -67,12 +73,6 @@ public interface PALService
      * @return A collection containing the top subscribed courses
      */
     Collection<Course> getTopSubscribedCourses( int top );
-    /**
-     * Adds a student to the database
-     *
-     * @param student The student to be added to the database
-     */
-    void addStudent( Student student );
 
     //================================================================================
     // endregion
@@ -81,6 +81,12 @@ public interface PALService
     //================================================================================
     // region Student
     //================================================================================
+    /**
+     * Adds a student to the database
+     *
+     * @param student The student to be added to the database
+     */
+    void addStudent( Student student );
     /**
      * Updates a student in the database
      *
@@ -101,6 +107,18 @@ public interface PALService
      */
     Student getStudentById( int id );
     /**
+     * Gets all the students
+     *
+     * @return A collection containing all the students
+     */
+    Collection<Student> getAllStudents();
+    /**
+     * Gets all the student types
+     *
+     * @return A collection containing all the student types
+     */
+    Collection<UserType> getStudentTypes();
+    /**
      * Gets the student with the specified email
      *
      * @param email The email of the student
@@ -120,14 +138,22 @@ public interface PALService
      * @param student The student of the avatar
      * @return The students avatar
      */
-    Image getAvatarByStudent( Student student );
+    Image getAvatar( Student student );
     /**
      * Gets all the student types
      *
      * @param type The type of the user type
      * @return A collection containing all the student types
      */
-    UserType getStudentTypeByType( String type );
+    UserType getStudentTypeByString( String type );
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Tutor
+    //================================================================================
     /**
      * Adds a tutor to the database
      *
@@ -146,14 +172,6 @@ public interface PALService
      * @param tutor The tutor to be removed from the database
      */
     void removeTutor( Tutor tutor );
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Tutor
-    //================================================================================
     /**
      * Gets the tutor with the specified id
      *
@@ -162,12 +180,18 @@ public interface PALService
      */
     Tutor getTutorById( int id );
     /**
+     * Gets all the tutors
+     *
+     * @return A collection containing all the tutors
+     */
+    Collection<Tutor> getAllTutors();
+    /**
      * Gets all the tutors from the specified course
      *
      * @param course The course to get the tutors from
      * @return A collection containing all the tutors from the specified course
      */
-    Collection<Tutor> getAllTutors( Course course );
+    Collection<Tutor> getTutors( Course course );
     /**
      * Gets the tutor with the specified student
      *
@@ -180,6 +204,14 @@ public interface PALService
      *
      * @param lesson The lesson to be added to the database
      */
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Lesson
+    //================================================================================
     void addLesson( Lesson lesson );
     /**
      * Updates a lesson in the database
@@ -200,14 +232,18 @@ public interface PALService
      * @return The lesson with the specified id
      */
     Lesson getLessonById( int id );
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Lesson
-    //================================================================================
+    /**
+     * Gets all the lessons
+     *
+     * @return A collection containing all the lessons
+     */
+    Collection<Lesson> getAllLessons();
+    /**
+     * Gets all the upcoming lessons
+     *
+     * @return A collection containing the upcoming lessons
+     */
+    Collection<Lesson> getUpcomingLessons();
     /**
      * Gets lessons filtered by course
      *
@@ -292,6 +328,14 @@ public interface PALService
      * @return the lessons in the past of that tutor from the offset with the limit as size
      */
     Collection<Lesson> getPastLessons( Tutor tutor, int offset, int limit );
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Room
+    //================================================================================
     /**
      * Adds a room to the database
      *
@@ -318,26 +362,40 @@ public interface PALService
      */
     Room getRoomById( int id );
     /**
+     * @return A collection containing all the room types
+     */
+    Collection<RoomType> getRoomTypes();
+    /**
+     * Gets all the rooms
+     *
+     * @return A collection containing all the rooms
+     */
+    Collection<Room> getAllRooms();
+    /**
+     * @return A collection containing all the campuses
+     */
+    Collection<Campus> getCampuses();
+    /**
      * Gets the rooms with the specified campus
      *
      * @param campus The campus of the room
      * @return The rooms with the specified campus
      */
-    Collection<Room> getRoomsFromCampus( Campus campus );
+    Collection<Room> getRooms( Campus campus );
     /**
      * Gets the room type with the specified type
      *
      * @param type The string type of the room type
      * @return The room type object
      */
-    RoomType getRoomTypeByType( String type );
+    RoomType getRoomTypeByString( String type );
 
     //================================================================================
     // endregion
     //================================================================================
 
     //================================================================================
-    // region Room
+    // region Campus
     //================================================================================
     /**
      * Gets the campus with the specified name
@@ -346,6 +404,14 @@ public interface PALService
      * @return The Campus object
      */
     Campus getCampusByName( String name );
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Application
+    //================================================================================
     /**
      * Gets the application with the specified id
      *
@@ -372,19 +438,31 @@ public interface PALService
      */
     void removeApplication( Application application );
     /**
+     * Gets all the applications
+     *
+     * @return A collection containing all the applications
+     */
+    Collection<Application> getAllApplications();
+    /**
+     * Gets all the pending applications
+     *
+     * @return A collection containing all the pending applications
+     */
+    Collection<Application> getAllPendingApplications();
+    /**
      * Gets all the pending applications from a student
      *
      * @param student The student to get the pending applications from
      * @return A collection containing all the pending applications from a student
      */
-    Collection<Application> getAllPendingApplications( Student student );
+    Collection<Application> getPendingApplications( Student student );
     /**
      * Gets all the approved applications from a student
      *
      * @param student The student to get the approved applications from
      * @return A collection containing all the approved applications from a student
      */
-    Collection<Application> getAllApprovedApplications( Student student );
+    Collection<Application> getApprovedApplications( Student student );
     /**
      * Gets the last applications from a student with the specified limit
      *
@@ -393,21 +471,27 @@ public interface PALService
      * @return A collection containing the last applications from the student
      */
     Collection<Application> getLastApplications( Student student, int last );
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Campus
-    //================================================================================
     /**
      * Gets the application screenshot
      *
      * @param application The application of the screenshot
      * @return The application screenshot
      */
-    Image getScreenshotByApplication( Application application );
+    Image getScreenshot( Application application );
+    /**
+     * Gets all the done applications
+     *
+     * @return A collection containing all the done applications
+     */
+    Collection<Application> getAllDoneApplications();
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Review
+    //================================================================================
     /**
      * Gets the review with the specified id
      *
@@ -415,15 +499,6 @@ public interface PALService
      * @return The review with the specified id
      */
     Review getReviewById( int id );
-
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Application
-    //================================================================================
     /**
      * Adds a review to the database
      *
@@ -436,6 +511,12 @@ public interface PALService
      * @param review The review to be removed from the database
      */
     void removeReview( Review review );
+    /**
+     * Gets all the reviews
+     *
+     * @return A collection containing all the reviews
+     */
+    Collection<Review> getAllReviews();
     /**
      * Gets reviews filtered by tutor
      *
@@ -465,7 +546,7 @@ public interface PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    Collection<Review> getReviewsByStudent( Student student );
+    Collection<Review> getReviews( Student student );
     /**
      * Gets the reviews made by the given student from the offset with the limit as size
      *
@@ -474,13 +555,21 @@ public interface PALService
      * @param limit   The maximum size of the list
      * @return A collection containing the reviews of that student from the offset with the limit as size
      */
-    Collection<Review> getReviewsByStudent( Student student, int offset, int limit );
+    Collection<Review> getReviews( Student student, int offset, int limit );
     /**
      * Gets reviews filtered by student and lesson
      *
      * @return A collection containing the reviews of that student
      */
-    Review getReviewsByStudentAndLesson( Student student, Lesson lesson );
+    Review getReviews( Student student, Lesson lesson );
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Request
+    //================================================================================
     /**
      * Gets the request with the specified id
      *
@@ -513,14 +602,6 @@ public interface PALService
      * @return A collection containing all the request
      */
     Collection<Request> getRequests( Course course );
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Review
-    //================================================================================
     /**
      * Gets all the request for given student.
      *
@@ -529,101 +610,17 @@ public interface PALService
      */
     Collection<Request> getRequests( Student student );
     /**
-     * Gets the curriculum with the specified name
-     *
-     * @param name The string name of the curriculum
-     * @return The Curriculum object with the specified name
-     */
-    Curriculum getCurriculumByName( String name );
-    /**
-     * Gets all the courses
-     *
-     * @return A collection containing all the courses
-     */
-    Collection<Course> getAllCourses();
-    /**
-     * Gets all the students
-     *
-     * @return A collection containing all the students
-     */
-    Collection<Student> getAllStudents();
-    /**
-     * Gets all the student types
-     *
-     * @return A collection containing all the student types
-     */
-    Collection<UserType> getStudentTypes();
-    /**
-     * Gets all the tutors
-     *
-     * @return A collection containing all the tutors
-     */
-    Collection<Tutor> getAllTutors();
-    /**
-     * Gets all the lessons
-     *
-     * @return A collection containing all the lessons
-     */
-    Collection<Lesson> getAllLessons();
-    /**
-     * Gets all the upcoming lessons
-     *
-     * @return A collection containing the upcoming lessons
-     */
-    Collection<Lesson> getUpcomingLessons();
-
-    //================================================================================
-    // endregion
-    //================================================================================
-
-    //================================================================================
-    // region Request
-    //================================================================================
-    /**
-     * @return A collection containing all the room types
-     */
-    Collection<RoomType> getRoomTypes();
-    /**
-     * Gets all the rooms
-     *
-     * @return A collection containing all the rooms
-     */
-    Collection<Room> getAllRooms();
-    /**
-     * @return A collection containing all the campuses
-     */
-    Collection<Campus> getCampuses();
-    /**
-     * Gets all the applications
-     *
-     * @return A collection containing all the applications
-     */
-    Collection<Application> getAllApplications();
-    /**
-     * Gets all the pending applications
-     *
-     * @return A collection containing all the pending applications
-     */
-    Collection<Application> getAllPendingApplications();
-    /**
-     * Gets all the done applications
-     *
-     * @return A collection containing all the done applications
-     */
-    Collection<Application> getAllDoneApplications();
-    /**
-     * Gets all the reviews
-     *
-     * @return A collection containing all the reviews
-     */
-    Collection<Review> getAllReviews();
-
-    /**
      * Gets all the requests filtered by given set of courses
      *
      * @return A collection containing all the requests
      */
-    Collection<Request> getAllRequests(Set<Course> courses);
+    Collection<Request> getRequests(Set<Course> courses);
+    /**
+     * Gets all the request
+     *
+     * @return A collection containing all the request
+     */
+    Collection<Request> getAllRequests();
 
     //================================================================================
     // endregion
@@ -633,16 +630,16 @@ public interface PALService
     // region Curriculum
     //================================================================================
     /**
-     * Gets all the request
-     *
-     * @return A collection containing all the request
-     */
-    Collection<Request> getAllRequests();
-    /**
      * @return A collection containing all the curriculum's
      */
     Collection<Curriculum> getCurriculums();
-
+    /**
+     * Gets the curriculum with the specified name
+     *
+     * @param name The string name of the curriculum
+     * @return The Curriculum object with the specified name
+     */
+    Curriculum getCurriculumByName( String name );
 
     //================================================================================
     // endregion
