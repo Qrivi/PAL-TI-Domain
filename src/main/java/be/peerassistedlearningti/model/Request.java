@@ -52,6 +52,10 @@ public class Request extends JPAEntity<Integer>
     @Column( name = "creation_date" )
     private Date creationDate;
 
+    @Valid
+    @OneToOne(mappedBy = "request")
+    private Lesson lesson;
+
     /**
      * Default constructor for Request
      */
@@ -118,6 +122,9 @@ public class Request extends JPAEntity<Integer>
         return upvotes;
     }
 
+    public void setUpvotes(Set<Student> upvotes) {
+        this.upvotes = upvotes;
+    }
 
     /**
      * @return the title of the request
@@ -205,6 +212,13 @@ public class Request extends JPAEntity<Integer>
     public void setCreationDate( Date creationDate )
     {
         this.creationDate = creationDate;
+    }
+
+    /**
+     * @return The lesson bound to this request
+     */
+    public Lesson getLesson() {
+        return lesson;
     }
 
     /**
