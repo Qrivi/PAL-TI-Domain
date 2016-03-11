@@ -45,6 +45,14 @@ import java.util.Set;
 public interface RequestRepository extends CrudRepository<Request, Integer>
 {
     /**
+     * Gets all the requests that aren't associated with a lesson
+     *
+     * @return A collection containing all the requests
+     */
+    @Query("SELECT r FROM Request r WHERE r.lesson=null")
+    Collection<Request> findAllWithoutLesson();
+
+    /**
      * Gets all the requests from the specified course
      *
      * @param course The course to get the requests from
