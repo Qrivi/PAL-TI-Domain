@@ -400,6 +400,17 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets a lesson from a student
+     *
+     * @param id      The id of the lesson
+     * @param student The student to get the lessons from
+     * @return the lessons of that student
+     */
+    public Lesson getLessonByIdForStudent(int id, Student student) {
+        return lessonRepository.findByIdForStudent(id, student);
+    }
+
+    /**
      * Gets all the lessons
      *
      * @return A collection containing all the lessons

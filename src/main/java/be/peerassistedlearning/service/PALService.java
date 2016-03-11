@@ -256,6 +256,15 @@ public interface PALService
      * @return The lesson with the specified id
      */
     Lesson getLessonById( int id );
+
+    /**
+     * Gets a lesson from a student
+     *
+     * @param id      The id of the lesson
+     * @param student The student to get the lessons from
+     * @return the lessons of that student
+     */
+    Lesson getLessonByIdForStudent(int id, Student student);
     /**
      * Gets all the lessons
      *
