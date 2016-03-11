@@ -49,7 +49,7 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      *
      * @return A collection containing all the requests
      */
-    @Query("SELECT r FROM Request r WHERE r.lesson=null")
+    @Query("SELECT r FROM Request r WHERE r.lesson IS null ")
     Collection<Request> findAllWithoutLesson();
 
     /**
@@ -67,7 +67,7 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      * @param course The course to get the requests from
      * @return A collection containing all the requests from the specified course
      */
-    @Query("SELECT r FROM Request r WHERE :course= r.course AND r.lesson=null")
+    @Query("SELECT r FROM Request r WHERE :course= r.course AND r.lesson IS null")
     Collection<Request> findAllWithoutLesson(@Param("course") Course course);
 
     /**
