@@ -49,7 +49,7 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      *
      * @return A collection containing all the requests
      */
-    @Query("SELECT r FROM Request r WHERE  r.lesson is null ")
+    @Query( "SELECT r FROM Request r LEFT JOIN r.lesson" )
     Collection<Request> findAllWithoutLesson();
 
     /**
@@ -58,7 +58,7 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      * @param course The course to get the requests from
      * @return A collection containing all the requests from the specified course
      */
-    @Query( "SELECT r FROM Request r WHERE :course= r.course" )
+    @Query( "SELECT r FROM Request r WHERE :course = r.course" )
     Collection<Request> findAll( @Param( "course" ) Course course );
 
     /**
@@ -67,8 +67,8 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      * @param course The course to get the requests from
      * @return A collection containing all the requests from the specified course
      */
-    @Query("SELECT r FROM Request r WHERE :course= r.course AND r.lesson IS null")
-    Collection<Request> findAllWithoutLesson(@Param("course") Course course);
+    @Query( "SELECT r FROM Request r LEFT JOIN r.lesson WHERE :course = r.course" )
+    Collection<Request> findAllWithoutLesson( @Param( "course" ) Course course );
 
     /**
      * Gets all the requests from the specified student
@@ -76,8 +76,8 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      * @param student The student to get the requests from
      * @return A collection containing all the requests from the specified student
      */
-    @Query( "SELECT r FROM Request r WHERE :student MEMBER OF r.upvotes")
-    Collection<Request> findAll( @Param("student") Student student);
+    @Query( "SELECT r FROM Request r WHERE :student MEMBER OF r.upvotes" )
+    Collection<Request> findAll( @Param( "student" ) Student student );
 
     /**
      * Gets all the requests filtered by given set of courses
@@ -85,6 +85,6 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      * @param courses The set of courses to filter the requests on
      * @return A collection containing all the requests filtered by given courses
      */
-    @Query("SELECT r FROM Request r WHERE r.course IN :courses")
-    Collection<Request> findAllRequests(@Param("courses") Set<Course> courses);
+    @Query( "SELECT r FROM Request r WHERE r.course IN :courses" )
+    Collection<Request> findAllRequests( @Param( "courses" ) Set<Course> courses );
 }
