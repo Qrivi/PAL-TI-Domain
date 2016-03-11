@@ -628,6 +628,14 @@ public interface PALService
      * @return A collection containing all the request
      */
     Collection<Request> getRequests( Course course );
+
+    /**
+     * Gets all the request for given course who don't already have a lesson associated.
+     *
+     * @param course The course to get the requests from
+     * @return A collection containing all the request
+     */
+    Collection<Request> getRequestsWithoutLesson(Course course);
     /**
      * Gets all the request for given student.
      *

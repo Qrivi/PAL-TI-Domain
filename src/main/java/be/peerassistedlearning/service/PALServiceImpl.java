@@ -983,6 +983,16 @@ public class PALServiceImpl implements PALService
     }
 
     /**
+     * Gets all the request for given course who don't already have a lesson associated.
+     *
+     * @param course The course to get the requests from
+     * @return A collection containing all the request
+     */
+    public Collection<Request> getRequestsWithoutLesson(Course course) {
+        return requestRepository.findAllWithoutLesson(course);
+    }
+
+    /**
      * Gets all the requests from the specified student
      *
      * @param student The student to get the requests from

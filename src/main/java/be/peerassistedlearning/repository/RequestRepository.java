@@ -54,6 +54,15 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
     Collection<Request> findAll( @Param( "course" ) Course course );
 
     /**
+     * Gets all the requests from the specified course who don't have a lesson
+     *
+     * @param course The course to get the requests from
+     * @return A collection containing all the requests from the specified course
+     */
+    @Query("SELECT r FROM Request r WHERE :course= r.course AND r.lesson=null")
+    Collection<Request> findAllWithoutLesson(@Param("course") Course course);
+
+    /**
      * Gets all the requests from the specified student
      *
      * @param student The student to get the requests from
