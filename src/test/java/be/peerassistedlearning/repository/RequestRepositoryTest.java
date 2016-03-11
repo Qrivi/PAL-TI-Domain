@@ -79,6 +79,7 @@ public class RequestRepositoryTest implements RepositoryTest
         Request request = new Request("some title", "some description", c1, s1 );
         requestRepository.save( request );
         assertNotNull( request.getId() );
+        requestRepository.findAllWithoutLesson();
     }
 
     @Test

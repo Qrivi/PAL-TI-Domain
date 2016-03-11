@@ -49,7 +49,7 @@ public interface RequestRepository extends CrudRepository<Request, Integer>
      *
      * @return A collection containing all the requests
      */
-    @Query("SELECT r FROM Request r WHERE r.lesson IS null ")
+    @Query("SELECT r FROM Request r WHERE  r.lesson is null ")
     Collection<Request> findAllWithoutLesson();
 
     /**
