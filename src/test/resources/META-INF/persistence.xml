@@ -17,7 +17,7 @@
         <properties>
             <!-- HIBERNATE PROPERTIES -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:mysql://185.3.210.249:3306/PAL-TEST?autoReconnectForPools=true"/>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/PAL-TEST?autoReconnectForPools=true"/>
             <property name="hibernate.connection.username" value="PAL-TI"/>
             <property name="hibernate.connection.password" value="DjKdwfrmquJ9SL55"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
