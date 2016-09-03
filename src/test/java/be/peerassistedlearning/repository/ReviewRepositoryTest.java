@@ -76,9 +76,9 @@ public class ReviewRepositoryTest implements RepositoryTest
     @Before
     public void before()
     {
-        s1 = new Student( "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
-        s2 = new Student( "Matthias", "password", "matthias@hotmail.com", Curriculum.TI, "matthias", UserType.NORMAL );
-        Student s3 = new Student( "David", "password", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.NORMAL );
+        s1 = new Student( "r9876543", "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
+        s2 = new Student( "r3456789", "Matthias", "password", "matthias@hotmail.com", Curriculum.TI, "matthias", UserType.NORMAL );
+        Student s3 = new Student( "r0123456", "David", "password", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.NORMAL );
 
         s1 = studentRepository.save( s1 );
         s2 = studentRepository.save( s2 );

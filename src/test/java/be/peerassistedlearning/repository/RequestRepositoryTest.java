@@ -61,7 +61,7 @@ public class RequestRepositoryTest implements RepositoryTest
     public void before()
     {
         //make student object
-        s1 = new Student( "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
+        s1 = new Student( "r9876543", "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
         studentRepository.save( s1 );
         assertNotNull( s1.getId() );
 

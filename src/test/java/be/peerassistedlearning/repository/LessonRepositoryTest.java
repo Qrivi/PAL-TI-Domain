@@ -76,7 +76,7 @@ public class LessonRepositoryTest implements RepositoryTest
         Set<Course> courses = new HashSet<Course>();
         courses.add( c1 );
 
-        Student s1 = new Student( "Koen", "paswoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
+        Student s1 = new Student( "r9876543", "Koen", "paswoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
         s1 = studentRepository.save( s1 );
 
         assertNotNull( s1.getId() );
