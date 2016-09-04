@@ -63,8 +63,8 @@ public class TutorRepositoryTest implements RepositoryTest
     @Before
     public void before()
     {
-        s1 = new Student( "r9876543", "Koen", "passwoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
-        s2 = new Student( "r6942069", "Jan", "secret", "jan2016@hotmail.com", Curriculum.TI, "jan", UserType.ADMIN );
+        s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
+        s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", Curriculum.TI, "jan", UserType.ADMIN );
 
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
         c2 = new Course( "MBI81x", "Communicatie in het Frans Deel 3", "Frans 3", Curriculum.TI, 3 );

@@ -36,7 +36,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testNameIsNull()
     {
-        Student s = new Student( "r0123456", null, "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
+        Student s = new Student( null, "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "name" );
 
@@ -47,7 +47,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testPasswordIsNull()
     {
-        Student s = new Student( "r0123456", "David", null, "davidopdebeeck@hotmail.com", Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
+        Student s = new Student( "David", null, "davidopdebeeck@hotmail.com", Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "password" );
 
@@ -69,7 +69,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testEmailIsNull()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", null, Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", null, Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "email" );
 
@@ -80,7 +80,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testEmailIsNotValid()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", "davidopdebeeckhotmailcom", Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeckhotmailcom", Curriculum.TI, "david.op.de.beeck", UserType.ADMIN );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "email" );
 
@@ -91,7 +91,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testUserTypeIsNull()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david.op.de.beeck", null );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david.op.de.beeck", null );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "type" );
 
@@ -113,7 +113,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testCurriculumIsNull()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", null, "david.op.de.beeck", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", null, "david.op.de.beeck", UserType.ADMIN );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "curriculum" );
 
@@ -124,7 +124,7 @@ public class StudentTest extends ValidationTest
     @Test
     public void testProfileIdentifierIsNull()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, null, UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, null, UserType.ADMIN );
 
         Set<ConstraintViolation<Student>> constraintViolations = validator.validateProperty( s, "profileIdentifier" );
 

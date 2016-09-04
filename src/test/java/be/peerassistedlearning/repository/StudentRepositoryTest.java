@@ -52,7 +52,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testAdd()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s );
 
@@ -63,7 +63,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testUpdate()
     {
-        Student s1 = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s1 );
 
@@ -80,7 +80,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testRemove()
     {
-        Student s = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
+        Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s );
         repository.delete( s );
@@ -94,7 +94,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetById()
     {
-        Student s1 = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s1 );
 
@@ -108,8 +108,8 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetAll()
     {
-        Student s1 = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
-        Student s2 = new Student( "r654321", "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", Curriculum.TI, "cedric", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
+        Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", Curriculum.TI, "cedric", UserType.ADMIN );
 
         repository.save( s1 );
         repository.save( s2 );
@@ -124,7 +124,7 @@ public class StudentRepositoryTest implements RepositoryTest
     @Transactional( propagation = Propagation.REQUIRES_NEW )
     public void testGetByEmail() throws Exception
     {
-        Student s1 = new Student( "r0123456", "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
+        Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s1 );
 

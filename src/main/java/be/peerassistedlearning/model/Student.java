@@ -52,8 +52,6 @@ import java.util.concurrent.TimeUnit;
 @Table( name = "student" )
 public class Student extends JPAEntity<Integer>
 {
-    @NotEmpty( message = "{NotEmpty.Student.studentId}" )
-    private String studentId;
 
     @NotEmpty( message = "{NotEmpty.Student.name}" )
     @Column( name = "name", nullable = false )
@@ -147,7 +145,6 @@ public class Student extends JPAEntity<Integer>
     /**
      * Constructor for a student entity
      *
-     * @param studentId         The student id of the student
      * @param name              The name of the student
      * @param password          The password of the student
      * @param email             The email of the student
@@ -155,9 +152,8 @@ public class Student extends JPAEntity<Integer>
      * @param profileIdentifier The profile identifier of the student
      * @param type              The user type of the student
      */
-    public Student( String studentId, String name, String password, String email, Curriculum curriculum, String profileIdentifier, UserType type )
+    public Student( String name, String password, String email, Curriculum curriculum, String profileIdentifier, UserType type )
     {
-        this.studentId = studentId;
         this.email = email;
         this.name = name;
         this.curriculum = curriculum;
@@ -267,22 +263,6 @@ public class Student extends JPAEntity<Integer>
                 l.getBookings().remove( this );
             }
         }
-    }
-
-    /**
-     * @return The student id of the student
-     */
-    public String getStudentId(){
-        return studentId;
-    }
-
-    /**
-     * Sets the student id of the Student
-     *
-     * @param studentId The name of the Student
-     */
-    public void setStudentId( String studentId ){
-        this.studentId = studentId;
     }
 
     /**
