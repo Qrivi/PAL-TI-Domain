@@ -691,6 +691,13 @@ public interface PALService
      * @return The Curriculum object with the specified name
      */
     Curriculum getCurriculumByName( String name );
+    /**
+     * Gets the curriculum that corresponds to the specified programme
+     *
+     * @param programme The string name of the programme
+     * @return The Curriculum object with the specified name
+     */
+    Curriculum getCurriculumFromProgramme( String programme );
 
     //================================================================================
     // endregion

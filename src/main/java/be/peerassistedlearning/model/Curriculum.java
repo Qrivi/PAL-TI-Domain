@@ -31,7 +31,8 @@ public enum Curriculum
 {
 
     TI( "Toegepaste Informatica" ),
-    MANAGEMENT( "Management" );
+    B_MGMT( "Bedrijfsmanagement" ),
+    O_MGMT( "Office Management" );
 
     private final String name;
 
@@ -51,6 +52,20 @@ public enum Curriculum
         {
             String s = c.toString();
             if ( s.equalsIgnoreCase( name ) )
+                return c;
+        }
+        return null;
+    }
+
+    public static Curriculum getFromProgramme( String programme )
+    {
+        if(programme == null)
+            return null;
+
+        for ( Curriculum c : values() )
+        {
+            String s = c.toString().toLowerCase();
+            if ( programme.toLowerCase().contains( s ) )
                 return c;
         }
         return null;

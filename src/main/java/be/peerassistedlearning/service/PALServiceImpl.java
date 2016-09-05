@@ -1060,6 +1060,14 @@ public class PALServiceImpl implements PALService
         return Curriculum.getByName( name );
     }
 
+    /**
+     * Gets the curriculum that corresponds to the programme
+     *
+     * @param programme The string name of the programme
+     * @return The Curriculum object with the specified name
+     */
+    public Curriculum getCurriculumFromProgramme( String programme ){ return Curriculum.getFromProgramme( programme ); }
+
     //================================================================================
     // endregion
     //================================================================================
