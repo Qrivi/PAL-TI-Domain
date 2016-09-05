@@ -27,8 +27,7 @@ package be.peerassistedlearning.model;
 /**
  * Class that specifies the curriculums
  */
-public enum Curriculum
-{
+public enum Curriculum{
 
     TI( "Toegepaste Informatica" ),
     B_MGMT( "Bedrijfsmanagement" ),
@@ -36,36 +35,30 @@ public enum Curriculum
 
     private final String name;
 
-    Curriculum( String name )
-    {
+    Curriculum( String name ){
         this.name = name;
     }
 
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
-    public static Curriculum getByName( String name )
-    {
-        for ( Curriculum c : values() )
-        {
+    public static Curriculum getByName( String name ){
+        for( Curriculum c : values() ){
             String s = c.toString();
-            if ( s.equalsIgnoreCase( name ) )
+            if( s.equalsIgnoreCase( name ) )
                 return c;
         }
         return null;
     }
 
-    public static Curriculum getFromProgramme( String programme )
-    {
-        if(programme == null)
+    public static Curriculum getFromProgramme( String programme ){
+        if( programme == null )
             return null;
 
-        for ( Curriculum c : values() )
-        {
-            String s = c.toString().toLowerCase();
-            if ( programme.toLowerCase().contains( s ) )
+        for( Curriculum c : values() ){
+            String s = c.getName().toLowerCase();
+            if( programme.toLowerCase().contains( s ) )
                 return c;
         }
         return null;
