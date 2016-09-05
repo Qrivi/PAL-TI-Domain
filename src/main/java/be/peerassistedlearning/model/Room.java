@@ -32,8 +32,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "room" )
-public class Room extends JPAEntity<Integer>
-{
+public class Room extends JPAEntity<Integer>{
 
     @NotEmpty( message = "{NotEmpty.Room.name}" )
     @Column( name = "name", nullable = false )
@@ -52,7 +51,8 @@ public class Room extends JPAEntity<Integer>
     /**
      * Default constructor for Room
      */
-    public Room() {}
+    public Room(){
+    }
 
     /**
      * Constructor for Room
@@ -61,11 +61,17 @@ public class Room extends JPAEntity<Integer>
      * @param campus The campus of a room
      * @param type   The type of the room
      */
-    public Room( String name, Campus campus, RoomType type )
-    {
+    public Room( String name, Campus campus, RoomType type ){
         this.name = name;
         this.campus = campus;
         this.type = type;
+    }
+
+    /**
+     * @return The name of the room
+     */
+    public String getName(){
+        return name;
     }
 
     /**
@@ -73,9 +79,15 @@ public class Room extends JPAEntity<Integer>
      *
      * @param name The new name of the room
      */
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
+    }
+
+    /**
+     * @return The campus of the room
+     */
+    public Campus getCampus(){
+        return campus;
     }
 
     /**
@@ -83,9 +95,15 @@ public class Room extends JPAEntity<Integer>
      *
      * @param campus The new campus of the room
      */
-    public void setCampus( Campus campus )
-    {
+    public void setCampus( Campus campus ){
         this.campus = campus;
+    }
+
+    /**
+     * @return The type of the room
+     */
+    public RoomType getType(){
+        return type;
     }
 
     /**
@@ -93,32 +111,7 @@ public class Room extends JPAEntity<Integer>
      *
      * @param type The new type of the room
      */
-    public void setType( RoomType type )
-    {
+    public void setType( RoomType type ){
         this.type = type;
-    }
-
-    /**
-     * @return The name of the room
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @return The campus of the room
-     */
-    public Campus getCampus()
-    {
-        return campus;
-    }
-
-    /**
-     * @return The type of the room
-     */
-    public RoomType getType()
-    {
-        return type;
     }
 }

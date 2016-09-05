@@ -42,8 +42,7 @@ import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class RequestRepositoryTest implements RepositoryTest
-{
+public class RequestRepositoryTest implements RepositoryTest{
 
     private Student s1;
     private Course c1;
@@ -58,8 +57,7 @@ public class RequestRepositoryTest implements RepositoryTest
     private CourseRepository courseRepository;
 
     @Before
-    public void before()
-    {
+    public void before(){
         //make student object
         s1 = new Student( "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
         studentRepository.save( s1 );
@@ -74,9 +72,8 @@ public class RequestRepositoryTest implements RepositoryTest
     @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
-        Request request = new Request("some title", "some description", c1, s1 );
+    public void testAdd(){
+        Request request = new Request( "some title", "some description", c1, s1 );
         requestRepository.save( request );
         assertNotNull( request.getId() );
         requestRepository.findAllWithoutLesson();
@@ -85,8 +82,7 @@ public class RequestRepositoryTest implements RepositoryTest
     @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         Request request = new Request( "some title", "some description", c1, s1 );
         requestRepository.save( request );
         assertNotNull( request.getId() );
@@ -99,8 +95,7 @@ public class RequestRepositoryTest implements RepositoryTest
     @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         Request request = new Request( "some title", "some description", c1, s1 );
         requestRepository.save( request );
         assertNotNull( request.getId() );
@@ -112,8 +107,7 @@ public class RequestRepositoryTest implements RepositoryTest
     @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         Request request = new Request( "some title", "some description", c1, s1 );
         requestRepository.save( request );
         assertEquals( request, requestRepository.findOne( request.getId() ) );
@@ -123,8 +117,7 @@ public class RequestRepositoryTest implements RepositoryTest
     @Test
     @Override
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         Request request = new Request( "some title", "some description", c1, s1 );
         Request otherRequest = new Request( "some other title", "some different description", c1, s1 );
         requestRepository.save( request );

@@ -48,13 +48,10 @@ import static org.junit.Assert.assertNull;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class ReviewRepositoryTest implements RepositoryTest
-{
+public class ReviewRepositoryTest implements RepositoryTest{
+    private final String text = "The l was great, I learned alot!";
     private Student s1, s2;
     private Lesson l;
-
-    private final String text = "The l was great, I learned alot!";
-
     @Autowired
     private TutorRepository tutorRepository;
 
@@ -74,8 +71,7 @@ public class ReviewRepositoryTest implements RepositoryTest
     private ReviewRepository reviewRepository;
 
     @Before
-    public void before()
-    {
+    public void before(){
         s1 = new Student( "Koen", "password", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.NORMAL );
         s2 = new Student( "Matthias", "password", "matthias@hotmail.com", Curriculum.TI, "matthias", UserType.NORMAL );
         Student s3 = new Student( "David", "password", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.NORMAL );
@@ -118,8 +114,7 @@ public class ReviewRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
+    public void testAdd(){
         Review review = new Review( text, s1, l, 5, 5, 5, 5, false );
 
         reviewRepository.save( review );
@@ -129,8 +124,7 @@ public class ReviewRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         Review review = new Review( text, s1, l, 5, 5, 5, 5, false );
 
         reviewRepository.save( review );
@@ -146,8 +140,7 @@ public class ReviewRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         Review review = new Review( text, s1, l, 5, 5, 5, 5, false );
 
         reviewRepository.save( review );
@@ -158,8 +151,7 @@ public class ReviewRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         Review review = new Review( text, s1, l, 5, 5, 5, 5, false );
 
         reviewRepository.save( review );
@@ -169,8 +161,7 @@ public class ReviewRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         Review review = new Review( text, s1, l, 5, 7, 6, 4, false );
         Review review1 = new Review( text, s2, l, 5, 4, 8, 6, true );
 

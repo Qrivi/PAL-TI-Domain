@@ -50,8 +50,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Entity
 @Table( name = "student" )
-public class Student extends JPAEntity<Integer>
-{
+public class Student extends JPAEntity<Integer>{
 
     @NotEmpty( message = "{NotEmpty.Student.name}" )
     @Column( name = "name", nullable = false )
@@ -140,7 +139,8 @@ public class Student extends JPAEntity<Integer>
     /**
      * Default empty constructor for JPA Entities
      */
-    public Student() {}
+    public Student(){
+    }
 
     /**
      * Constructor for a student entity
@@ -152,8 +152,7 @@ public class Student extends JPAEntity<Integer>
      * @param profileIdentifier The profile identifier of the student
      * @param type              The user type of the student
      */
-    public Student( String name, String password, String email, Curriculum curriculum, String profileIdentifier, UserType type )
-    {
+    public Student( String name, String password, String email, Curriculum curriculum, String profileIdentifier, UserType type ){
         this.email = email;
         this.name = name;
         this.curriculum = curriculum;
@@ -171,22 +170,21 @@ public class Student extends JPAEntity<Integer>
      * @param plainTextPassword The password that will be hashed
      * @return The password in hashed form.
      */
-    private String createHash( String plainTextPassword, String salt )
-    {
-        if ( plainTextPassword == null )
+    private String createHash( String plainTextPassword, String salt ){
+        if( plainTextPassword == null )
             return null;
 
         MessageDigest digest = null;
 
-        try
-        {
+        try{
             digest = MessageDigest.getInstance( "SHA-512" );
             digest.reset();
-        } catch ( NoSuchAlgorithmException e ) { }
+        }catch( NoSuchAlgorithmException e ){
+        }
 
         digest.update( plainTextPassword.getBytes() );
 
-        if ( salt != null )
+        if( salt != null )
             digest.update( salt.getBytes() );
 
         return ( new BigInteger( 1, digest.digest() ).toString( 40 ) );
@@ -198,8 +196,7 @@ public class Student extends JPAEntity<Integer>
      * @param plainTextPassword The plaintext password
      * @return True if the plaintext password matches the saved password
      */
-    public boolean isPasswordValid( String plainTextPassword )
-    {
+    public boolean isPasswordValid( String plainTextPassword ){
         return createHash( plainTextPassword, salt ).equals( password );
     }
 
@@ -208,17 +205,16 @@ public class Student extends JPAEntity<Integer>
      *
      * @return The plaintext token
      */
-    public String issuePasswordReset()
-    {
+    public String issuePasswordReset(){
         resetTokenExpiration = new Date( new Date().getTime() + TimeUnit.HOURS.toMillis( 1 ) );
         resetSalt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
 
         String plainTextToken = email + new BigInteger( 130, new SecureRandom() ).toString( 20 );
 
-        try
-        {
+        try{
             plainTextToken = Base64.getUrlEncoder().encodeToString( plainTextToken.getBytes( "utf-8" ) );
-        } catch ( UnsupportedEncodingException e ) {}
+        }catch( UnsupportedEncodingException e ){
+        }
 
         resetToken = createHash( plainTextToken, resetSalt );
 
@@ -231,11 +227,9 @@ public class Student extends JPAEntity<Integer>
      * @param plainTextToken The  plaintext reset token to verify
      * @return True if the plaintext token was correct and did not pass expiration
      */
-    public boolean validatePasswordReset( String plainTextToken )
-    {
-        if ( resetToken != null && plainTextToken != null &&
-                resetTokenExpiration.getTime() - new Date().getTime() > 0 )
-        {
+    public boolean validatePasswordReset( String plainTextToken ){
+        if( resetToken != null && plainTextToken != null &&
+                resetTokenExpiration.getTime() - new Date().getTime() > 0 ){
             boolean valid = createHash( plainTextToken, resetSalt ).equals( resetToken );
             resetToken = valid ? null : resetToken;
             return valid;
@@ -246,8 +240,7 @@ public class Student extends JPAEntity<Integer>
     /**
      * Changes the security token to a new random string
      */
-    public void changeSecurityToken()
-    {
+    public void changeSecurityToken(){
         this.securityToken = new BigInteger( 130, new SecureRandom() ).toString( 20 );
     }
 
@@ -255,12 +248,9 @@ public class Student extends JPAEntity<Integer>
      * Removed the student object from the lesson
      */
     @PreRemove
-    private void removeBookings()
-    {
-        if ( bookings != null )
-        {
-            for ( Lesson l : bookings )
-            {
+    private void removeBookings(){
+        if( bookings != null ){
+            for( Lesson l : bookings ){
                 l.getBookings().remove( this );
             }
         }
@@ -269,8 +259,7 @@ public class Student extends JPAEntity<Integer>
     /**
      * @return The name of the student
      */
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
@@ -279,16 +268,14 @@ public class Student extends JPAEntity<Integer>
      *
      * @param name The name of the Student
      */
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
     }
 
     /**
      * @return the image of the Student
      */
-    public Image getAvatar()
-    {
+    public Image getAvatar(){
         return avatar;
     }
 
@@ -297,16 +284,14 @@ public class Student extends JPAEntity<Integer>
      *
      * @param avatar The image of the Student
      */
-    public void setAvatar( Image avatar )
-    {
+    public void setAvatar( Image avatar ){
         this.avatar = avatar;
     }
 
     /**
      * @return The password of the student
      */
-    public String getPassword()
-    {
+    public String getPassword(){
         return password;
     }
 
@@ -315,9 +300,8 @@ public class Student extends JPAEntity<Integer>
      *
      * @param password The password of the student
      */
-    public void setPassword( String password )
-    {
-        if ( salt == null )
+    public void setPassword( String password ){
+        if( salt == null )
             this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
         this.password = createHash( password, salt );
     }
@@ -325,8 +309,7 @@ public class Student extends JPAEntity<Integer>
     /**
      * @return The email of the student
      */
-    public String getEmail()
-    {
+    public String getEmail(){
         return email;
     }
 
@@ -335,16 +318,14 @@ public class Student extends JPAEntity<Integer>
      *
      * @param email The email of the student
      */
-    public void setEmail( String email )
-    {
+    public void setEmail( String email ){
         this.email = email;
     }
 
     /**
      * @return The curriculum of the student
      */
-    public Curriculum getCurriculum()
-    {
+    public Curriculum getCurriculum(){
         return curriculum;
     }
 
@@ -353,16 +334,14 @@ public class Student extends JPAEntity<Integer>
      *
      * @param curriculum The curriculum of the student
      */
-    public void setCurriculum( Curriculum curriculum )
-    {
+    public void setCurriculum( Curriculum curriculum ){
         this.curriculum = curriculum;
     }
 
     /**
      * @return The user type of the student
      */
-    public UserType getType()
-    {
+    public UserType getType(){
         return type;
     }
 
@@ -371,32 +350,28 @@ public class Student extends JPAEntity<Integer>
      *
      * @param type The user type of the student
      */
-    public void setType( UserType type )
-    {
+    public void setType( UserType type ){
         this.type = type;
     }
 
     /**
      * @return The reset token of the student used to reset the password
      */
-    public String getResetToken()
-    {
+    public String getResetToken(){
         return resetToken;
     }
 
     /**
      * @return The expiration date of the reset token
      */
-    public Date getResetTokenExpiration()
-    {
+    public Date getResetTokenExpiration(){
         return resetTokenExpiration;
     }
 
     /**
      * @return The subscriptions from the student
      */
-    public Set<Course> getSubscriptions()
-    {
+    public Set<Course> getSubscriptions(){
         return subscriptions;
     }
 
@@ -405,24 +380,21 @@ public class Student extends JPAEntity<Integer>
      *
      * @param subscriptions The Set containing the student's subscriptions
      */
-    public void setSubscriptions( Set<Course> subscriptions )
-    {
+    public void setSubscriptions( Set<Course> subscriptions ){
         this.subscriptions = subscriptions;
     }
 
     /**
      * @return The security token of the student
      */
-    public String getSecurityToken()
-    {
+    public String getSecurityToken(){
         return securityToken;
     }
 
     /**
      * @return The profile identifier of the student
      */
-    public String getProfileIdentifier()
-    {
+    public String getProfileIdentifier(){
         return profileIdentifier;
     }
 
@@ -431,16 +403,14 @@ public class Student extends JPAEntity<Integer>
      *
      * @param profileIdentifier the profile identifier of the Student
      */
-    public void setProfileIdentifier( String profileIdentifier )
-    {
+    public void setProfileIdentifier( String profileIdentifier ){
         this.profileIdentifier = profileIdentifier;
     }
 
     /**
      * @return The date the student is last updated
      */
-    public Date getLastUpdated()
-    {
+    public Date getLastUpdated(){
         return lastUpdated;
     }
 
@@ -449,48 +419,42 @@ public class Student extends JPAEntity<Integer>
      *
      * @param lastUpdated The date the student is last updated
      */
-    public void setLastUpdated( Date lastUpdated )
-    {
+    public void setLastUpdated( Date lastUpdated ){
         this.lastUpdated = lastUpdated;
     }
 
     /**
      * @return The tutor object of the student
      */
-    public Tutor getTutor()
-    {
+    public Tutor getTutor(){
         return tutor;
     }
 
     /**
      * @return The reviews of the student
      */
-    public Set<Review> getReviews()
-    {
+    public Set<Review> getReviews(){
         return reviews;
     }
 
     /**
      * @return The requests of the student
      */
-    public Set<Request> getRequests()
-    {
+    public Set<Request> getRequests(){
         return requests;
     }
 
     /**
      * @return The applications of the student
      */
-    public Set<Application> getApplications()
-    {
+    public Set<Application> getApplications(){
         return applications;
     }
 
     /**
      * @return The bookings of the student
      */
-    public Set<Lesson> getBookings()
-    {
+    public Set<Lesson> getBookings(){
         return bookings;
     }
 }

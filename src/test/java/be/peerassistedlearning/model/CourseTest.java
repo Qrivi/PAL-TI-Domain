@@ -30,12 +30,10 @@ import org.junit.Test;
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 
-public class CourseTest extends ValidationTest
-{
+public class CourseTest extends ValidationTest{
 
     @Test
-    public void testCodeIsNull()
-    {
+    public void testCodeIsNull(){
         Course c = new Course( null, ".NET Programmeren", ".NET", Curriculum.TI, 1 );
 
         Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty( c, "code" );
@@ -47,8 +45,7 @@ public class CourseTest extends ValidationTest
     }
 
     @Test
-    public void testNameIsNull()
-    {
+    public void testNameIsNull(){
         Course c = new Course( "MX2506", null, ".NET", Curriculum.TI, 1 );
 
         Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty( c, "name" );
@@ -60,8 +57,7 @@ public class CourseTest extends ValidationTest
     }
 
     @Test
-    public void testShortNameIsNull()
-    {
+    public void testShortNameIsNull(){
         Course c = new Course( "MX2506", ".NET Programmeren", null, Curriculum.TI, 1 );
 
         Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty( c, "shortName" );
@@ -73,8 +69,7 @@ public class CourseTest extends ValidationTest
     }
 
     @Test
-    public void testCurriculumIsNull()
-    {
+    public void testCurriculumIsNull(){
         Course c = new Course( "MX2506", ".NET Programmeren", ".NET", null, 1 );
 
         Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty( c, "curriculum" );
@@ -86,14 +81,14 @@ public class CourseTest extends ValidationTest
     }
 
     @Test
-    public void testYearIsTooLow() {
+    public void testYearIsTooLow(){
         Course c = new Course( "MX2506", ".NET Programmeren", ".NET", Curriculum.TI, 0 );
 
-        Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty(c, "year");
+        Set<ConstraintViolation<Course>> constraintViolations = validator.validateProperty( c, "year" );
 
-        Assert.assertEquals(1, constraintViolations.size());
-        Assert.assertEquals("The course year should be higher than zero!", constraintViolations.iterator()
+        Assert.assertEquals( 1, constraintViolations.size() );
+        Assert.assertEquals( "The course year should be higher than zero!", constraintViolations.iterator()
                 .next()
-                .getMessage());
+                .getMessage() );
     }
 }

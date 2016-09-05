@@ -41,8 +41,7 @@ import java.util.List;
  * @see CrudRepository
  */
 @Repository
-public interface CourseRepository extends CrudRepository<Course, Integer>
-{
+public interface CourseRepository extends CrudRepository<Course, Integer>{
     /**
      * Gets a course with the specified code
      *

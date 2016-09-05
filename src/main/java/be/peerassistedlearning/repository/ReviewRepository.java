@@ -44,8 +44,7 @@ import java.util.List;
  * @see CrudRepository
  */
 @Repository
-public interface ReviewRepository extends CrudRepository<Review, Integer>
-{
+public interface ReviewRepository extends CrudRepository<Review, Integer>{
     /**
      * Gets reviews filtered by tutor
      *

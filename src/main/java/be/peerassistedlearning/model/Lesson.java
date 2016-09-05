@@ -43,8 +43,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "lesson" )
-public class Lesson extends JPAEntity<Integer> implements Archivable
-{
+public class Lesson extends JPAEntity<Integer> implements Archivable{
     @NotNull( message = "{NotNull.Lesson.date}" )
     @Temporal( TemporalType.TIMESTAMP )
     @Column( name = "date", nullable = false )
@@ -109,7 +108,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
     /**
      * Default constructor for Lesson
      */
-    public Lesson() {}
+    public Lesson(){
+    }
 
     /**
      * Constructor for Lesson
@@ -124,8 +124,7 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      * @param room            The room for the lesson
      * @param backupRoom      The backup room for the lesson
      */
-    public Lesson( Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom )
-    {
+    public Lesson( Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom ){
         this.date = date;
         this.name = name;
         this.description = description;
@@ -151,8 +150,7 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      * @param backupRoom      The backup room for the lesson
      * @param request         The request bound to this lesson
      */
-    public Lesson( Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom, Request request )
-    {
+    public Lesson( Date date, String name, String description, long duration, Course course, int maxParticipants, Tutor tutor, Room room, Room backupRoom, Request request ){
         this( date, name, description, duration, course, maxParticipants, tutor, room, room );
         this.request = request;
     }
@@ -163,9 +161,8 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      * @param student The given student to add to the set of bookings for this lesson
      * @return true if this lesson's bookings set did not already contain the specified student
      */
-    public boolean addBooking( Student student )
-    {
-        if ( bookings == null )
+    public boolean addBooking( Student student ){
+        if( bookings == null )
             bookings = new HashSet<Student>();
         return bookings.add( student );
     }
@@ -176,16 +173,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      * @param student The given student to be removed from this lesson's set of bookings
      * @return true if this lesson's bookings set contained the specified student
      */
-    public boolean removeBooking( Student student )
-    {
+    public boolean removeBooking( Student student ){
         return bookings.remove( student );
     }
 
     /**
      * @return The request bound to this lesson
      */
-    public Request getRequest()
-    {
+    public Request getRequest(){
         return request;
     }
 
@@ -194,16 +189,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param request The given request for this lesson
      */
-    public void setRequest( Request request )
-    {
+    public void setRequest( Request request ){
         this.request = request;
     }
 
     /**
      * @return The date and time of the lesson
      */
-    public Date getDate()
-    {
+    public Date getDate(){
         return date;
     }
 
@@ -212,16 +205,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param date The date of the lesson
      */
-    public void setDate( Date date )
-    {
+    public void setDate( Date date ){
         this.date = date;
     }
 
     /**
      * @return The name of the lesson
      */
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
@@ -230,16 +221,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param name The name of the lesson
      */
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
     }
 
     /**
      * @return The description of the lesson
      */
-    public String getDescription()
-    {
+    public String getDescription(){
         return description;
     }
 
@@ -248,16 +237,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param description The description of the lesson
      */
-    public void setDescription( String description )
-    {
+    public void setDescription( String description ){
         this.description = description;
     }
 
     /**
      * @return The duration of the lesson
      */
-    public long getDuration()
-    {
+    public long getDuration(){
         return duration;
     }
 
@@ -266,16 +253,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param duration The duration of the lesson
      */
-    public void setDuration( long duration )
-    {
+    public void setDuration( long duration ){
         this.duration = duration;
     }
 
     /**
      * @return The course of the lesson
      */
-    public Course getCourse()
-    {
+    public Course getCourse(){
         return course;
     }
 
@@ -284,16 +269,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param course The course of the lesson
      */
-    public void setCourse( Course course )
-    {
+    public void setCourse( Course course ){
         this.course = course;
     }
 
     /**
      * @return The maximum number of participants of the lesson
      */
-    public int getMaxParticipants()
-    {
+    public int getMaxParticipants(){
         return maxParticipants;
     }
 
@@ -302,16 +285,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param maxParticipants The maximum number of participants of the lesson
      */
-    public void setMaxParticipants( int maxParticipants )
-    {
+    public void setMaxParticipants( int maxParticipants ){
         this.maxParticipants = maxParticipants;
     }
 
     /**
      * @return The tutor and time of the lesson
      */
-    public Tutor getTutor()
-    {
+    public Tutor getTutor(){
         return tutor;
     }
 
@@ -320,16 +301,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param tutor The tutor of the lesson
      */
-    public void setTutor( Tutor tutor )
-    {
+    public void setTutor( Tutor tutor ){
         this.tutor = tutor;
     }
 
     /**
      * @return The set of bookings
      */
-    public Set<Student> getBookings()
-    {
+    public Set<Student> getBookings(){
         return bookings;
     }
 
@@ -338,16 +317,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param bookings The Set of students enrolled for the lesson
      */
-    public void setBookings( Set<Student> bookings )
-    {
+    public void setBookings( Set<Student> bookings ){
         this.bookings = bookings;
     }
 
     /**
      * @return The room of the lesson
      */
-    public Room getRoom()
-    {
+    public Room getRoom(){
         return room;
     }
 
@@ -356,16 +333,14 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param room The room of the lesson
      */
-    public void setRoom( Room room )
-    {
+    public void setRoom( Room room ){
         this.room = room;
     }
 
     /**
      * @return The backup room of the lesson
      */
-    public Room getBackupRoom()
-    {
+    public Room getBackupRoom(){
         return backupRoom;
     }
 
@@ -374,21 +349,18 @@ public class Lesson extends JPAEntity<Integer> implements Archivable
      *
      * @param backupRoom The backup room of the lesson
      */
-    public void setBackupRoom( Room backupRoom )
-    {
+    public void setBackupRoom( Room backupRoom ){
         this.backupRoom = backupRoom;
     }
 
     /**
      * @return The date to be used by the timeline
      */
-    public Date getArchiveDate()
-    {
+    public Date getArchiveDate(){
         return date;
     }
 
-    public Set<Review> getReviews()
-    {
+    public Set<Review> getReviews(){
         return reviews;
     }
 }

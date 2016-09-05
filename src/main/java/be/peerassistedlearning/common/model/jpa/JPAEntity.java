@@ -34,8 +34,7 @@ import java.util.Objects;
  * Class used to add JPA functionalities to an object
  */
 @MappedSuperclass
-public class JPAEntity <T extends Object> implements Identifiable<T>, Serializable
-{
+public class JPAEntity<T extends Object> implements Identifiable<T>, Serializable{
 
     /**
      * Adds JPA functionalities to the id field
@@ -47,23 +46,21 @@ public class JPAEntity <T extends Object> implements Identifiable<T>, Serializab
     protected T id;
 
     /**
-     * Sets the id of the JPAEntity
-     *
-     * @param id The id of the JPAEntity
-     */
-    public void setId( T id )
-    {
-        this.id = id;
-    }
-
-    /**
      * Gets the id of the JPAEntity
      *
      * @return The id
      */
-    public T getId()
-    {
+    public T getId(){
         return id;
+    }
+
+    /**
+     * Sets the id of the JPAEntity
+     *
+     * @param id The id of the JPAEntity
+     */
+    public void setId( T id ){
+        this.id = id;
     }
 
     /**
@@ -73,15 +70,13 @@ public class JPAEntity <T extends Object> implements Identifiable<T>, Serializab
      * @return False if the ids are not equal or are null
      */
     @Override
-    public boolean equals( Object obj )
-    {
-        if ( obj == null || id == null )
+    public boolean equals( Object obj ){
+        if( obj == null || id == null )
             return false;
-        if ( obj instanceof JPAEntity )
-        {
-            if ( ( (JPAEntity) obj ).getId() == null )
+        if( obj instanceof JPAEntity ){
+            if( ( (JPAEntity)obj ).getId() == null )
                 return false;
-            return ( (JPAEntity) obj ).getId()
+            return ( (JPAEntity)obj ).getId()
                     .equals( this.id );
         }
         return false;
@@ -93,8 +88,7 @@ public class JPAEntity <T extends Object> implements Identifiable<T>, Serializab
      * @return The hashcode of the object
      */
     @Override
-    public int hashCode()
-    {
+    public int hashCode(){
         int hash = 7;
         hash = 17 * hash + Objects.hashCode( this.id );
         return hash;
@@ -106,8 +100,7 @@ public class JPAEntity <T extends Object> implements Identifiable<T>, Serializab
      * @return The string representation of the entity
      */
     @Override
-    public String toString()
-    {
+    public String toString(){
         return "JPAEntity{id=" + id + "}";
     }
 

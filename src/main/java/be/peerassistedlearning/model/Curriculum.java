@@ -39,10 +39,6 @@ public enum Curriculum{
         this.name = name;
     }
 
-    public String getName(){
-        return name;
-    }
-
     public static Curriculum getByName( String name ){
         for( Curriculum c : values() ){
             String s = c.toString();
@@ -62,5 +58,9 @@ public enum Curriculum{
                 return c;
         }
         return null;
+    }
+
+    public String getName(){
+        return name;
     }
 }

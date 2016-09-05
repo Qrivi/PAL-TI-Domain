@@ -30,12 +30,10 @@ import org.junit.Test;
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 
-public class RoomTest extends ValidationTest
-{
+public class RoomTest extends ValidationTest{
 
     @Test
-    public void testNameIsNull()
-    {
+    public void testNameIsNull(){
         Room r = new Room( null, Campus.PROXIMUS, RoomType.PLAIN );
 
         Set<ConstraintViolation<Room>> constraintViolations = validator.validateProperty( r, "name" );
@@ -47,8 +45,7 @@ public class RoomTest extends ValidationTest
     }
 
     @Test
-    public void testCampusIsNull()
-    {
+    public void testCampusIsNull(){
         Room r = new Room( "", null, RoomType.PLAIN );
 
         Set<ConstraintViolation<Room>> constraintViolations = validator.validateProperty( r, "campus" );
@@ -60,8 +57,7 @@ public class RoomTest extends ValidationTest
     }
 
     @Test
-    public void testRoomTypeIsNull()
-    {
+    public void testRoomTypeIsNull(){
         Room r = new Room( "", Campus.PROXIMUS, null );
 
         Set<ConstraintViolation<Room>> constraintViolations = validator.validateProperty( r, "type" );

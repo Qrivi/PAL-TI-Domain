@@ -42,8 +42,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "request" )
-public class Request extends JPAEntity<Integer>
-{
+public class Request extends JPAEntity<Integer>{
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable(
             name = "request_upvotes",
@@ -63,13 +62,13 @@ public class Request extends JPAEntity<Integer>
 
     @Valid
     @NotNull( message = "{NotNull.Request.course}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE} )
     @JoinColumn( name = "course_id" )
     private Course course;
 
     @Valid
     @NotNull( message = "{NotNull.Request.student}" )
-    @ManyToOne( fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH , CascadeType.MERGE } )
+    @ManyToOne( fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE} )
     @JoinColumn( name = "student_id" )
     private Student student;
 
@@ -84,7 +83,8 @@ public class Request extends JPAEntity<Integer>
     /**
      * Default constructor for Request
      */
-    public Request() {}
+    public Request(){
+    }
 
     /**
      * Constructor for Request
@@ -94,8 +94,7 @@ public class Request extends JPAEntity<Integer>
      * @param course      The course of the request
      * @param student     The student of the request
      */
-    public Request( String title, String description, Course course, Student student )
-    {
+    public Request( String title, String description, Course course, Student student ){
         this.title = title;
         this.description = description;
         this.course = course;
@@ -112,8 +111,7 @@ public class Request extends JPAEntity<Integer>
      * @param student      The student of the request
      * @param creationDate The creation date of the request
      */
-    public Request( String title, String description, Course course, Student student, Date creationDate )
-    {
+    public Request( String title, String description, Course course, Student student, Date creationDate ){
         this( title, description, course, student );
         this.creationDate = creationDate;
     }
@@ -125,9 +123,8 @@ public class Request extends JPAEntity<Integer>
      * @return true if this set did not already contain the specified student
      * @see Set
      */
-    public boolean upvote( Student student )
-    {
-        if ( upvotes == null )
+    public boolean upvote( Student student ){
+        if( upvotes == null )
             upvotes = new HashSet<>();
         return upvotes.add( student );
     }
@@ -138,8 +135,7 @@ public class Request extends JPAEntity<Integer>
      * @param student The student to be remove from this request's up-votes set
      * @return true if this set contained the specified student
      */
-    public boolean removeUpvote( Student student )
-    {
+    public boolean removeUpvote( Student student ){
         return upvotes.remove( student );
     }
 
@@ -150,15 +146,27 @@ public class Request extends JPAEntity<Integer>
      * @return a double indicating the similarity. 0 = 0 % similarity, 1 =  100% similarity
      * @see NormalizedLevenshtein
      */
-    public double getSimilarity( Request other )
-    {
+    public double getSimilarity( Request other ){
         NormalizedLevenshtein l = new NormalizedLevenshtein();
         return l.similarity( title.toLowerCase(), other.title.toLowerCase() );
     }
 
-    public void setUpvotes( Set<Student> upvotes )
-    {
+    /**
+     * @return the upvotes of the request
+     */
+    public Set<Student> getUpvotes(){
+        return upvotes;
+    }
+
+    public void setUpvotes( Set<Student> upvotes ){
         this.upvotes = upvotes;
+    }
+
+    /**
+     * @return the title of the request
+     */
+    public String getTitle(){
+        return title;
     }
 
     /**
@@ -166,9 +174,15 @@ public class Request extends JPAEntity<Integer>
      *
      * @param title the new title
      */
-    public void setTitle( String title )
-    {
+    public void setTitle( String title ){
         this.title = title;
+    }
+
+    /**
+     * @return the description of the request
+     */
+    public String getDescription(){
+        return description;
     }
 
     /**
@@ -176,9 +190,15 @@ public class Request extends JPAEntity<Integer>
      *
      * @param description the new description of the request
      */
-    public void setDescription( String description )
-    {
+    public void setDescription( String description ){
         this.description = description;
+    }
+
+    /**
+     * @return the course of the request
+     */
+    public Course getCourse(){
+        return course;
     }
 
     /**
@@ -186,9 +206,15 @@ public class Request extends JPAEntity<Integer>
      *
      * @param course the new course of the request
      */
-    public void setCourse( Course course )
-    {
+    public void setCourse( Course course ){
         this.course = course;
+    }
+
+    /**
+     * @return the student of the request
+     */
+    public Student getStudent(){
+        return student;
     }
 
     /**
@@ -196,9 +222,15 @@ public class Request extends JPAEntity<Integer>
      *
      * @param student the new student of the request
      */
-    public void setStudent( Student student )
-    {
+    public void setStudent( Student student ){
         this.student = student;
+    }
+
+    /**
+     * @return the creation date of the request
+     */
+    public Date getCreationDate(){
+        return creationDate;
     }
 
     /**
@@ -206,64 +238,14 @@ public class Request extends JPAEntity<Integer>
      *
      * @param creationDate the new creation date of the request
      */
-    public void setCreationDate( Date creationDate )
-    {
+    public void setCreationDate( Date creationDate ){
         this.creationDate = creationDate;
-    }
-
-    /**
-     * @return the upvotes of the request
-     */
-    public Set<Student> getUpvotes()
-    {
-        return upvotes;
-    }
-
-    /**
-     * @return the title of the request
-     */
-    public String getTitle()
-    {
-        return title;
-    }
-
-    /**
-     * @return the description of the request
-     */
-    public String getDescription()
-    {
-        return description;
-    }
-
-    /**
-     * @return the course of the request
-     */
-    public Course getCourse()
-    {
-        return course;
-    }
-
-    /**
-     * @return the student of the request
-     */
-    public Student getStudent()
-    {
-        return student;
-    }
-
-    /**
-     * @return the creation date of the request
-     */
-    public Date getCreationDate()
-    {
-        return creationDate;
     }
 
     /**
      * @return The lesson bound to this request
      */
-    public Lesson getLesson()
-    {
+    public Lesson getLesson(){
         return lesson;
     }
 }

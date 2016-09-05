@@ -30,16 +30,14 @@ import org.junit.Test;
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 
-public class ReviewTest extends ValidationTest
-{
+public class ReviewTest extends ValidationTest{
 
     private final String shortText = "Good";
     private final String normalText = "The lesson was great, I learned a lot!";
     private final String longText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet tortor maximus, scelerisque ex eu, bibendum purus. Aenean lectus sed.";
 
     @Test
-    public void testTextSizeIsTooSmall()
-    {
+    public void testTextSizeIsTooSmall(){
         Review r = new Review( shortText, null, new Lesson(), 5, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "text" );
@@ -49,8 +47,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testTextSizeIsTooBig()
-    {
+    public void testTextSizeIsTooBig(){
         Review r = new Review( longText, null, new Lesson(), 5, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "text" );
@@ -60,8 +57,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testStudentIsNull()
-    {
+    public void testStudentIsNull(){
         Review r = new Review( normalText, null, new Lesson(), 5, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "student" );
@@ -71,8 +67,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testLessonIsNull()
-    {
+    public void testLessonIsNull(){
         Review r = new Review( normalText, new Student(), null, 5, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "lesson" );
@@ -82,8 +77,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testDateIsNull()
-    {
+    public void testDateIsNull(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 5, 5, 5, false, null );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "date" );
@@ -93,8 +87,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testContentScoreTooLow()
-    {
+    public void testContentScoreTooLow(){
         Review r = new Review( normalText, new Student(), new Lesson(), 0, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "contentScore" );
@@ -104,8 +97,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testContentScoreTooHigh()
-    {
+    public void testContentScoreTooHigh(){
         Review r = new Review( normalText, new Student(), new Lesson(), 11, 5, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "contentScore" );
@@ -115,8 +107,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testAtmosphereScoreTooLow()
-    {
+    public void testAtmosphereScoreTooLow(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 5, 5, 0, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "atmosphereScore" );
@@ -126,8 +117,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testAtmosphereScoreTooHigh()
-    {
+    public void testAtmosphereScoreTooHigh(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 5, 5, 11, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "atmosphereScore" );
@@ -137,8 +127,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testTutorScoreTooLow()
-    {
+    public void testTutorScoreTooLow(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 0, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "tutorScore" );
@@ -148,8 +137,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testTutorScoreTooHigh()
-    {
+    public void testTutorScoreTooHigh(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 11, 5, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "tutorScore" );
@@ -159,8 +147,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testEngagementScoreTooLow()
-    {
+    public void testEngagementScoreTooLow(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 5, 0, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "engagementScore" );
@@ -170,8 +157,7 @@ public class ReviewTest extends ValidationTest
     }
 
     @Test
-    public void testEngagementScoreTooHigh()
-    {
+    public void testEngagementScoreTooHigh(){
         Review r = new Review( normalText, new Student(), new Lesson(), 5, 5, 11, 5, false );
 
         Set<ConstraintViolation<Review>> constraintViolations = validator.validateProperty( r, "engagementScore" );

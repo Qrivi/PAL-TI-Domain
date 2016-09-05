@@ -44,8 +44,7 @@ import java.util.List;
  * @see CrudRepository
  */
 @Repository
-public interface ApplicationRepository extends CrudRepository<Application, Integer>
-{
+public interface ApplicationRepository extends CrudRepository<Application, Integer>{
     /**
      * Gets all the applications with the specified state
      *

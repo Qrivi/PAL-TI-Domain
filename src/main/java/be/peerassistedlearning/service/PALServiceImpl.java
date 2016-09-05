@@ -40,8 +40,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class PALServiceImpl implements PALService
-{
+public class PALServiceImpl implements PALService{
 
     @Autowired
     CourseRepository courseRepository;
@@ -76,8 +75,7 @@ public class PALServiceImpl implements PALService
      *
      * @param course The course to be added to the database
      */
-    public void addCourse( Course course )
-    {
+    public void addCourse( Course course ){
         courseRepository.save( course );
     }
 
@@ -86,8 +84,7 @@ public class PALServiceImpl implements PALService
      *
      * @param course The course to be updated to the database
      */
-    public void updateCourse( Course course )
-    {
+    public void updateCourse( Course course ){
         courseRepository.save( course );
     }
 
@@ -96,8 +93,7 @@ public class PALServiceImpl implements PALService
      *
      * @param course The course to be removed from the database
      */
-    public void removeCourse( Course course )
-    {
+    public void removeCourse( Course course ){
         courseRepository.delete( course );
     }
 
@@ -106,8 +102,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the courses
      */
-    public Collection<Course> getAllCourses()
-    {
+    public Collection<Course> getAllCourses(){
         return Utils.makeCollection( courseRepository.findAll() );
     }
 
@@ -117,8 +112,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the course
      * @return The course with the specified id
      */
-    public Course getCourseById( int id )
-    {
+    public Course getCourseById( int id ){
         return courseRepository.findOne( id );
     }
 
@@ -128,8 +122,7 @@ public class PALServiceImpl implements PALService
      * @param code The code of the course
      * @return The course with the specified code
      */
-    public Course getCourseByCode( String code )
-    {
+    public Course getCourseByCode( String code ){
         return courseRepository.findByCode( code );
     }
 
@@ -139,8 +132,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the available courses from
      * @return A collection containing all the courses available for the specified student
      */
-    public Collection<Course> getCourses( Student student )
-    {
+    public Collection<Course> getCourses( Student student ){
         return courseRepository.findByCurriculum( student.getCurriculum() );
     }
 
@@ -150,8 +142,7 @@ public class PALServiceImpl implements PALService
      * @param top The amount of top courses returned
      * @return A collection containing the top subscribed courses
      */
-    public Collection<Course> getTopSubscribedCourses( int top )
-    {
+    public Collection<Course> getTopSubscribedCourses( int top ){
         Pageable page = new PageRequest( 0, top );
         return courseRepository.findTopSubscribed( page );
     }
@@ -169,8 +160,7 @@ public class PALServiceImpl implements PALService
      *
      * @param student The student to be added to the database
      */
-    public void addStudent( Student student )
-    {
+    public void addStudent( Student student ){
         studentRepository.save( student );
     }
 
@@ -179,8 +169,7 @@ public class PALServiceImpl implements PALService
      *
      * @param student The student to be updated in the database
      */
-    public void updateStudent( Student student )
-    {
+    public void updateStudent( Student student ){
         studentRepository.save( student );
     }
 
@@ -189,8 +178,7 @@ public class PALServiceImpl implements PALService
      *
      * @param student The student to be removed from the database
      */
-    public void removeStudent( Student student )
-    {
+    public void removeStudent( Student student ){
         studentRepository.delete( student );
     }
 
@@ -200,8 +188,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the student
      * @return The student with the specified id
      */
-    public Student getStudentById( int id )
-    {
+    public Student getStudentById( int id ){
         return studentRepository.findOne( id );
     }
 
@@ -211,8 +198,7 @@ public class PALServiceImpl implements PALService
      * @param email The email of the student
      * @return The student with the specified email
      */
-    public Student getStudentByEmail( String email )
-    {
+    public Student getStudentByEmail( String email ){
         return studentRepository.findByEmail( email );
     }
 
@@ -221,8 +207,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the students
      */
-    public Collection<Student> getAllStudents()
-    {
+    public Collection<Student> getAllStudents(){
         return Utils.makeCollection( studentRepository.findAll() );
     }
 
@@ -232,8 +217,7 @@ public class PALServiceImpl implements PALService
      * @param profileIdentifier The profile identifier of the student
      * @return The student with the specified profile identifier
      */
-    public Student getStudentByProfileIdentifier( String profileIdentifier )
-    {
+    public Student getStudentByProfileIdentifier( String profileIdentifier ){
         return studentRepository.findByProfileIdentifier( profileIdentifier );
     }
 
@@ -242,8 +226,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the student types
      */
-    public Collection<UserType> getStudentTypes()
-    {
+    public Collection<UserType> getStudentTypes(){
         return Arrays.asList( UserType.values() );
     }
 
@@ -253,8 +236,7 @@ public class PALServiceImpl implements PALService
      * @param student The student of the avatar
      * @return The students avatar
      */
-    public Image getAvatar( Student student )
-    {
+    public Image getAvatar( Student student ){
         return studentRepository.findAvatarByStudent( student );
     }
 
@@ -264,8 +246,7 @@ public class PALServiceImpl implements PALService
      * @param type The type of the user type
      * @return The user type with the specified type
      */
-    public UserType getStudentTypeByString( String type )
-    {
+    public UserType getStudentTypeByString( String type ){
         return UserType.getByValue( type );
     }
 
@@ -282,8 +263,7 @@ public class PALServiceImpl implements PALService
      *
      * @param tutor The tutor to be added to the database
      */
-    public void addTutor( Tutor tutor )
-    {
+    public void addTutor( Tutor tutor ){
         tutorRepository.save( tutor );
     }
 
@@ -292,8 +272,7 @@ public class PALServiceImpl implements PALService
      *
      * @param tutor The tutor to be updated to the database
      */
-    public void updateTutor( Tutor tutor )
-    {
+    public void updateTutor( Tutor tutor ){
         tutorRepository.save( tutor );
     }
 
@@ -302,8 +281,7 @@ public class PALServiceImpl implements PALService
      *
      * @param tutor The tutor to be removed from the database
      */
-    public void removeTutor( Tutor tutor )
-    {
+    public void removeTutor( Tutor tutor ){
         tutorRepository.delete( tutor );
     }
 
@@ -313,8 +291,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the tutor
      * @return The tutor with the specified id
      */
-    public Tutor getTutorById( int id )
-    {
+    public Tutor getTutorById( int id ){
         return tutorRepository.findOne( id );
     }
 
@@ -323,8 +300,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the tutors
      */
-    public Collection<Tutor> getAllTutors()
-    {
+    public Collection<Tutor> getAllTutors(){
         return Utils.makeCollection( tutorRepository.findAll() );
     }
 
@@ -334,8 +310,7 @@ public class PALServiceImpl implements PALService
      * @param student The student of the tutor
      * @return The tutor with the specified student
      */
-    public Tutor getTutorByStudent( Student student )
-    {
+    public Tutor getTutorByStudent( Student student ){
         return tutorRepository.findByStudent( student );
     }
 
@@ -345,8 +320,7 @@ public class PALServiceImpl implements PALService
      * @param course The course to get the tutors from
      * @return A collection containing all the tutors from the specified course
      */
-    public Collection<Tutor> getTutors( Course course )
-    {
+    public Collection<Tutor> getTutors( Course course ){
         return tutorRepository.findAll( course );
     }
 
@@ -363,8 +337,7 @@ public class PALServiceImpl implements PALService
      *
      * @param lesson The lesson to be added to the database
      */
-    public void addLesson( Lesson lesson )
-    {
+    public void addLesson( Lesson lesson ){
         lessonRepository.save( lesson );
     }
 
@@ -373,8 +346,7 @@ public class PALServiceImpl implements PALService
      *
      * @param lesson The lesson to be updated in the database
      */
-    public void updateLesson( Lesson lesson )
-    {
+    public void updateLesson( Lesson lesson ){
         lessonRepository.save( lesson );
     }
 
@@ -383,8 +355,7 @@ public class PALServiceImpl implements PALService
      *
      * @param lesson The lesson to be removed from the database
      */
-    public void removeLesson( Lesson lesson )
-    {
+    public void removeLesson( Lesson lesson ){
         lessonRepository.delete( lesson );
     }
 
@@ -394,8 +365,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the lesson
      * @return The lesson with the specified id
      */
-    public Lesson getLessonById( int id )
-    {
+    public Lesson getLessonById( int id ){
         return lessonRepository.findOne( id );
     }
 
@@ -406,8 +376,8 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the lessons from
      * @return the lessons of that student
      */
-    public Lesson getLessonByIdForStudent(int id, Student student) {
-        return lessonRepository.findByIdForStudent(id, student);
+    public Lesson getLessonByIdForStudent( int id, Student student ){
+        return lessonRepository.findByIdForStudent( id, student );
     }
 
     /**
@@ -415,8 +385,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the lessons
      */
-    public Collection<Lesson> getAllLessons()
-    {
+    public Collection<Lesson> getAllLessons(){
         return Utils.makeCollection( lessonRepository.findAll() );
     }
 
@@ -426,8 +395,7 @@ public class PALServiceImpl implements PALService
      * @param course to be filtered on
      * @return the lessons of that course
      */
-    public Collection<Lesson> getLessons( Course course )
-    {
+    public Collection<Lesson> getLessons( Course course ){
         return lessonRepository.findByCourse( course );
     }
 
@@ -437,8 +405,7 @@ public class PALServiceImpl implements PALService
      * @param tutor The tutor to get the lessons from
      * @return the lessons of that tutor
      */
-    public Collection<Lesson> getLessons( Tutor tutor )
-    {
+    public Collection<Lesson> getLessons( Tutor tutor ){
         return lessonRepository.findByTutor( tutor );
     }
 
@@ -447,8 +414,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the upcoming lessons
      */
-    public Collection<Lesson> getUpcomingLessons()
-    {
+    public Collection<Lesson> getUpcomingLessons(){
         return lessonRepository.findUpcoming();
     }
 
@@ -458,8 +424,7 @@ public class PALServiceImpl implements PALService
      * @param course to be filtered on
      * @return the lessons in the future of that course
      */
-    public Collection<Lesson> getUpcomingLessons( Course course )
-    {
+    public Collection<Lesson> getUpcomingLessons( Course course ){
         return lessonRepository.findUpcomingByCourse( course );
     }
 
@@ -469,8 +434,7 @@ public class PALServiceImpl implements PALService
      * @param tutor The tutor to get the lessons from
      * @return the lessons in the future of that tutor
      */
-    public Collection<Lesson> getUpcomingLessons( Tutor tutor )
-    {
+    public Collection<Lesson> getUpcomingLessons( Tutor tutor ){
         return lessonRepository.findUpcomingByTutor( tutor );
     }
 
@@ -480,8 +444,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the available lessons from
      * @return The lessons available for the student
      */
-    public Collection<Lesson> getUpcomingLessons( Student student )
-    {
+    public Collection<Lesson> getUpcomingLessons( Student student ){
         return lessonRepository.findUpcomingByCurriculum( student.getCurriculum() );
     }
 
@@ -491,8 +454,7 @@ public class PALServiceImpl implements PALService
      * @param tutor The tutor to get the lessons from
      * @return the lessons in the past of that tutor
      */
-    public Collection<Lesson> getPastLessons( Tutor tutor )
-    {
+    public Collection<Lesson> getPastLessons( Tutor tutor ){
         return lessonRepository.findPastByTutor( tutor );
     }
 
@@ -504,8 +466,7 @@ public class PALServiceImpl implements PALService
      * @param limit  The maximum size of the list
      * @return the lessons in the past of that tutor from the offset with the limit as size
      */
-    public Collection<Lesson> getPastLessons( Tutor tutor, int offset, int limit )
-    {
+    public Collection<Lesson> getPastLessons( Tutor tutor, int offset, int limit ){
         Pageable page = new PageRequest( offset, limit );
         return lessonRepository.findPastByTutor( tutor, page );
     }
@@ -516,8 +477,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the lessons from
      * @return The past lessons of the student
      */
-    public Collection<Lesson> getPastBookings( Student student )
-    {
+    public Collection<Lesson> getPastBookings( Student student ){
         return lessonRepository.findPastByStudent( student );
     }
 
@@ -529,8 +489,7 @@ public class PALServiceImpl implements PALService
      * @param limit   The maximum size of the list
      * @return The past bookings of the student from the offset with size limit
      */
-    public Collection<Lesson> getPastBookings( Student student, int offset, int limit )
-    {
+    public Collection<Lesson> getPastBookings( Student student, int offset, int limit ){
         Pageable page = new PageRequest( offset, limit );
         return lessonRepository.findPastByStudent( student, page );
     }
@@ -541,8 +500,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the lessons from
      * @return the lessons in the future of that student
      */
-    public Collection<Lesson> getUpcomingBookings( Student student )
-    {
+    public Collection<Lesson> getUpcomingBookings( Student student ){
         return lessonRepository.findUpcomingByStudent( student );
     }
 
@@ -553,8 +511,7 @@ public class PALServiceImpl implements PALService
      * @param lesson  The booking to check if it has the student
      * @return If the student has the booking
      */
-    public boolean hasBooking( Student student, Lesson lesson )
-    {
+    public boolean hasBooking( Student student, Lesson lesson ){
         return lessonRepository.hasBooking( student, lesson ) != null;
     }
 
@@ -571,8 +528,7 @@ public class PALServiceImpl implements PALService
      *
      * @param room The room to be added to the database
      */
-    public void addRoom( Room room )
-    {
+    public void addRoom( Room room ){
         roomRepository.save( room );
     }
 
@@ -592,8 +548,7 @@ public class PALServiceImpl implements PALService
      *
      * @param room The room to be removed from the database
      */
-    public void removeRoom( Room room )
-    {
+    public void removeRoom( Room room ){
         roomRepository.delete( room );
     }
 
@@ -603,8 +558,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the room
      * @return The room with the specified id
      */
-    public Room getRoomById( int id )
-    {
+    public Room getRoomById( int id ){
         return roomRepository.findOne( id );
     }
 
@@ -613,8 +567,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the rooms
      */
-    public Collection<Room> getAllRooms()
-    {
+    public Collection<Room> getAllRooms(){
         return Utils.makeCollection( roomRepository.findAll() );
     }
 
@@ -624,8 +577,7 @@ public class PALServiceImpl implements PALService
      * @param campus The campus of the room
      * @return The rooms with the specified campus
      */
-    public Collection<Room> getRooms( Campus campus )
-    {
+    public Collection<Room> getRooms( Campus campus ){
         return roomRepository.findByCampus( campus );
     }
 
@@ -635,16 +587,14 @@ public class PALServiceImpl implements PALService
      * @param type The string type of the room type
      * @return The room type object
      */
-    public RoomType getRoomTypeByString( String type )
-    {
+    public RoomType getRoomTypeByString( String type ){
         return RoomType.getByValue( type );
     }
 
     /**
      * @return A collection containing all the room types
      */
-    public Collection<RoomType> getRoomTypes()
-    {
+    public Collection<RoomType> getRoomTypes(){
         return Arrays.asList( RoomType.values() );
     }
 
@@ -659,8 +609,7 @@ public class PALServiceImpl implements PALService
     /**
      * @return A collection containing all the campuses
      */
-    public Collection<Campus> getCampuses()
-    {
+    public Collection<Campus> getCampuses(){
         return Arrays.asList( Campus.values() );
     }
 
@@ -670,8 +619,7 @@ public class PALServiceImpl implements PALService
      * @param name The string name of the campus
      * @return The Campus object
      */
-    public Campus getCampusByName( String name )
-    {
+    public Campus getCampusByName( String name ){
         return Campus.getByValue( name );
     }
 
@@ -689,8 +637,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the application
      * @return The application with the specified id
      */
-    public Application getApplicationById( int id )
-    {
+    public Application getApplicationById( int id ){
         return applicationRepository.findOne( id );
     }
 
@@ -699,8 +646,7 @@ public class PALServiceImpl implements PALService
      *
      * @param application The application to be added to the database
      */
-    public void addApplication( Application application )
-    {
+    public void addApplication( Application application ){
         applicationRepository.save( application );
     }
 
@@ -709,8 +655,7 @@ public class PALServiceImpl implements PALService
      *
      * @param application The application to be updated in the database
      */
-    public void updateApplication( Application application )
-    {
+    public void updateApplication( Application application ){
         applicationRepository.save( application );
     }
 
@@ -719,8 +664,7 @@ public class PALServiceImpl implements PALService
      *
      * @param application The application to be removed from the database
      */
-    public void removeApplication( Application application )
-    {
+    public void removeApplication( Application application ){
         applicationRepository.delete( application );
     }
 
@@ -729,8 +673,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the applications
      */
-    public Collection<Application> getAllApplications()
-    {
+    public Collection<Application> getAllApplications(){
         return Utils.makeCollection( applicationRepository.findAll() );
     }
 
@@ -740,8 +683,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the pending applications from
      * @return A collection containing all the pending applications from a student
      */
-    public Collection<Application> getPendingApplications( Student student )
-    {
+    public Collection<Application> getPendingApplications( Student student ){
         return applicationRepository.findAll( student, ApplicationState.PENDING );
     }
 
@@ -751,7 +693,9 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the approved applications from
      * @return A collection containing all the approved applications from a student
      */
-    public Collection<Application> getApprovedApplications( Student student ) {return applicationRepository.findAll( student, ApplicationState.APPROVED );}
+    public Collection<Application> getApprovedApplications( Student student ){
+        return applicationRepository.findAll( student, ApplicationState.APPROVED );
+    }
 
     /**
      * Gets the last applications from a student with the specified limit
@@ -760,8 +704,7 @@ public class PALServiceImpl implements PALService
      * @param last    The amount of last applications returned
      * @return A collection containing the last applications from the student
      */
-    public Collection<Application> getLastApplications( Student student, int last )
-    {
+    public Collection<Application> getLastApplications( Student student, int last ){
         Pageable page = new PageRequest( 0, last );
         return applicationRepository.findLastByStudent( student, page );
     }
@@ -771,8 +714,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the pending applications
      */
-    public Collection<Application> getAllPendingApplications()
-    {
+    public Collection<Application> getAllPendingApplications(){
         return applicationRepository.findAll( ApplicationState.PENDING );
     }
 
@@ -781,13 +723,11 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the done applications
      */
-    public Collection<Application> getAllDoneApplications()
-    {
-        return new ArrayList<Application>()
-        {{
-                addAll( applicationRepository.findAll( ApplicationState.APPROVED ) );
-                addAll( applicationRepository.findAll( ApplicationState.REJECTED ) );
-            }};
+    public Collection<Application> getAllDoneApplications(){
+        return new ArrayList<Application>(){{
+            addAll( applicationRepository.findAll( ApplicationState.APPROVED ) );
+            addAll( applicationRepository.findAll( ApplicationState.REJECTED ) );
+        }};
     }
 
     /**
@@ -796,8 +736,7 @@ public class PALServiceImpl implements PALService
      * @param application The application of the screenshot
      * @return The application screenshot
      */
-    public Image getScreenshot( Application application )
-    {
+    public Image getScreenshot( Application application ){
         return applicationRepository.findScreenshotByApplication( application );
     }
 
@@ -815,8 +754,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the review
      * @return The review with the specified id
      */
-    public Review getReviewById( int id )
-    {
+    public Review getReviewById( int id ){
         return reviewRepository.findOne( id );
     }
 
@@ -825,8 +763,7 @@ public class PALServiceImpl implements PALService
      *
      * @param review The review to be added to the database
      */
-    public void addReview( Review review )
-    {
+    public void addReview( Review review ){
         reviewRepository.save( review );
     }
 
@@ -835,8 +772,7 @@ public class PALServiceImpl implements PALService
      *
      * @param review The review to be removed from the database
      */
-    public void removeReview( Review review )
-    {
+    public void removeReview( Review review ){
         reviewRepository.delete( review );
     }
 
@@ -845,8 +781,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the reviews
      */
-    public Collection<Review> getAllReviews()
-    {
+    public Collection<Review> getAllReviews(){
         return Utils.makeCollection( reviewRepository.findAll() );
     }
 
@@ -856,8 +791,7 @@ public class PALServiceImpl implements PALService
      * @param tutor to be filtered on
      * @return A collection containing the reviews for that tutor
      */
-    public Collection<Review> getReviews( Tutor tutor )
-    {
+    public Collection<Review> getReviews( Tutor tutor ){
         return reviewRepository.findByTutor( tutor );
     }
 
@@ -869,8 +803,7 @@ public class PALServiceImpl implements PALService
      * @param limit  The maximum size of the list
      * @return A collection containing the reviews for that tutor from the offset with the limit as size
      */
-    public Collection<Review> getReviews( Tutor tutor, int offset, int limit )
-    {
+    public Collection<Review> getReviews( Tutor tutor, int offset, int limit ){
         Pageable page = new PageRequest( offset, limit );
         return reviewRepository.findByTutor( tutor, page );
     }
@@ -881,8 +814,7 @@ public class PALServiceImpl implements PALService
      * @param lesson to be filterd on
      * @return A collection containing the reviews of that lesson
      */
-    public Collection<Review> getReviews( Lesson lesson )
-    {
+    public Collection<Review> getReviews( Lesson lesson ){
         return reviewRepository.findByLesson( lesson );
     }
 
@@ -892,8 +824,7 @@ public class PALServiceImpl implements PALService
      * @param student The given student
      * @return A collection containing the reviews of that student
      */
-    public Collection<Review> getReviews( Student student )
-    {
+    public Collection<Review> getReviews( Student student ){
         return reviewRepository.findByStudent( student );
     }
 
@@ -905,8 +836,7 @@ public class PALServiceImpl implements PALService
      * @param limit   The maximum size of the list
      * @return A collection containing the reviews of that student from the offset with the limit as size
      */
-    public Collection<Review> getReviews( Student student, int offset, int limit )
-    {
+    public Collection<Review> getReviews( Student student, int offset, int limit ){
         Pageable page = new PageRequest( offset, limit );
         return reviewRepository.findByStudent( student, page );
     }
@@ -918,8 +848,7 @@ public class PALServiceImpl implements PALService
      * @param lesson  The lesson of the review
      * @return A collection containing the reviews of that student
      */
-    public Review getReviews( Student student, Lesson lesson )
-    {
+    public Review getReviews( Student student, Lesson lesson ){
         return reviewRepository.findByStudentAndLesson( student, lesson );
     }
 
@@ -937,8 +866,7 @@ public class PALServiceImpl implements PALService
      * @param id The id of the request
      * @return The request with the specified id
      */
-    public Request getRequestById( int id )
-    {
+    public Request getRequestById( int id ){
         return requestRepository.findOne( id );
     }
 
@@ -947,8 +875,7 @@ public class PALServiceImpl implements PALService
      *
      * @param request The request to be added to the database
      */
-    public void addRequest( Request request )
-    {
+    public void addRequest( Request request ){
         requestRepository.save( request );
     }
 
@@ -957,8 +884,7 @@ public class PALServiceImpl implements PALService
      *
      * @param request The request to be updated in the database
      */
-    public void updateRequest( Request request )
-    {
+    public void updateRequest( Request request ){
         requestRepository.save( request );
     }
 
@@ -967,8 +893,7 @@ public class PALServiceImpl implements PALService
      *
      * @param request The request to be removed from the database
      */
-    public void removeRequest( Request request )
-    {
+    public void removeRequest( Request request ){
         requestRepository.delete( request );
     }
 
@@ -977,7 +902,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the requests
      */
-    public Collection<Request> getAllRequestsWithoutLesson() {
+    public Collection<Request> getAllRequestsWithoutLesson(){
         return requestRepository.findAllWithoutLesson();
     }
 
@@ -986,8 +911,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the request
      */
-    public Collection<Request> getAllRequests()
-    {
+    public Collection<Request> getAllRequests(){
         return Utils.makeCollection( requestRepository.findAll() );
     }
 
@@ -997,8 +921,7 @@ public class PALServiceImpl implements PALService
      * @param course The course to get the requests from
      * @return A collection containing all the requests from the specified course
      */
-    public Collection<Request> getRequests( Course course )
-    {
+    public Collection<Request> getRequests( Course course ){
         return requestRepository.findAll( course );
     }
 
@@ -1008,8 +931,8 @@ public class PALServiceImpl implements PALService
      * @param course The course to get the requests from
      * @return A collection containing all the request
      */
-    public Collection<Request> getRequestsWithoutLesson(Course course) {
-        return requestRepository.findAllWithoutLesson(course);
+    public Collection<Request> getRequestsWithoutLesson( Course course ){
+        return requestRepository.findAllWithoutLesson( course );
     }
 
     /**
@@ -1018,8 +941,7 @@ public class PALServiceImpl implements PALService
      * @param student The student to get the requests from
      * @return A collection containing all the requests from the specified student
      */
-    public Collection<Request> getRequests( Student student )
-    {
+    public Collection<Request> getRequests( Student student ){
         return requestRepository.findAll( student );
     }
 
@@ -1028,8 +950,7 @@ public class PALServiceImpl implements PALService
      *
      * @return A collection containing all the requests
      */
-    public Collection<Request> getRequests( Set<Course> courses )
-    {
+    public Collection<Request> getRequests( Set<Course> courses ){
         return requestRepository.findAllRequests( courses );
     }
 
@@ -1044,8 +965,7 @@ public class PALServiceImpl implements PALService
     /**
      * @return A collection containing all the curriculum's
      */
-    public Collection<Curriculum> getCurriculums()
-    {
+    public Collection<Curriculum> getCurriculums(){
         return Arrays.asList( Curriculum.values() );
     }
 
@@ -1055,8 +975,7 @@ public class PALServiceImpl implements PALService
      * @param name The string name of the curriculum
      * @return The Curriculum object with the specified name
      */
-    public Curriculum getCurriculumByName( String name )
-    {
+    public Curriculum getCurriculumByName( String name ){
         return Curriculum.getByName( name );
     }
 
@@ -1066,7 +985,9 @@ public class PALServiceImpl implements PALService
      * @param programme The string name of the programme
      * @return The Curriculum object with the specified name
      */
-    public Curriculum getCurriculumFromProgramme( String programme ){ return Curriculum.getFromProgramme( programme ); }
+    public Curriculum getCurriculumFromProgramme( String programme ){
+        return Curriculum.getFromProgramme( programme );
+    }
 
     //================================================================================
     // endregion

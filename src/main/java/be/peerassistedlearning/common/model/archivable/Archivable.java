@@ -30,8 +30,7 @@ import java.util.Date;
 /**
  * Interface used to list all timeline Objects
  */
-public interface Archivable
-{
+public interface Archivable{
 
     /**
      * @return The date to be used by the timeline

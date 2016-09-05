@@ -40,8 +40,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "course" )
-public class Course extends JPAEntity<Integer>
-{
+public class Course extends JPAEntity<Integer>{
 
     @NotEmpty( message = "{NotEmpty.Course.code}" )
     @Column( name = "code", unique = true, nullable = false )
@@ -79,7 +78,8 @@ public class Course extends JPAEntity<Integer>
     /**
      * Default constructor for Course
      */
-    public Course() {}
+    public Course(){
+    }
 
     /**
      * Constructor for Course
@@ -90,13 +90,19 @@ public class Course extends JPAEntity<Integer>
      * @param curriculum The curriculum of the course
      * @param year       The year of the course
      */
-    public Course( String code, String name, String shortName, Curriculum curriculum, int year )
-    {
+    public Course( String code, String name, String shortName, Curriculum curriculum, int year ){
         this.code = code;
         this.name = name;
         this.shortName = shortName;
         this.curriculum = curriculum;
         this.year = year;
+    }
+
+    /**
+     * @return The code of the course
+     */
+    public String getCode(){
+        return code;
     }
 
     /**
@@ -104,9 +110,15 @@ public class Course extends JPAEntity<Integer>
      *
      * @param code The new code of the course
      */
-    public void setCode( String code )
-    {
+    public void setCode( String code ){
         this.code = code;
+    }
+
+    /**
+     * @return The full name of the course
+     */
+    public String getName(){
+        return name;
     }
 
     /**
@@ -114,9 +126,15 @@ public class Course extends JPAEntity<Integer>
      *
      * @param name The new full name of the course
      */
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
+    }
+
+    /**
+     * @return The short name of the course
+     */
+    public String getShortName(){
+        return shortName;
     }
 
     /**
@@ -124,9 +142,15 @@ public class Course extends JPAEntity<Integer>
      *
      * @param shortName The new short name of the course
      */
-    public void setShortName( String shortName )
-    {
+    public void setShortName( String shortName ){
         this.shortName = shortName;
+    }
+
+    /**
+     * @return The curriculum of the course
+     */
+    public Curriculum getCurriculum(){
+        return curriculum;
     }
 
     /**
@@ -134,9 +158,15 @@ public class Course extends JPAEntity<Integer>
      *
      * @param curriculum The new curriculum of the course
      */
-    public void setCurriculum( Curriculum curriculum )
-    {
+    public void setCurriculum( Curriculum curriculum ){
         this.curriculum = curriculum;
+    }
+
+    /**
+     * @return The year of the course
+     */
+    public int getYear(){
+        return year;
     }
 
     /**
@@ -144,72 +174,28 @@ public class Course extends JPAEntity<Integer>
      *
      * @param year The new year of the course
      */
-    public void setYear( int year )
-    {
+    public void setYear( int year ){
         this.year = year;
-    }
-
-    /**
-     * @return The code of the course
-     */
-    public String getCode()
-    {
-        return code;
-    }
-
-    /**
-     * @return The full name of the course
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @return The short name of the course
-     */
-    public String getShortName()
-    {
-        return shortName;
-    }
-
-    /**
-     * @return The curriculum of the course
-     */
-    public Curriculum getCurriculum()
-    {
-        return curriculum;
-    }
-
-    /**
-     * @return The year of the course
-     */
-    public int getYear()
-    {
-        return year;
     }
 
     /**
      * @return The tutors for the course
      */
-    public Set<Tutor> getTutors()
-    {
+    public Set<Tutor> getTutors(){
         return tutors;
     }
 
     /**
      * @return The requests for the course
      */
-    public Set<Request> getRequests()
-    {
+    public Set<Request> getRequests(){
         return requests;
     }
 
     /**
      * @return The subscribed students for this course
      */
-    public Set<Student> getSubscribers()
-    {
+    public Set<Student> getSubscribers(){
         return subscribers;
     }
 }

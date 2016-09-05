@@ -24,8 +24,7 @@
 
 package be.peerassistedlearning.repository;
 
-public interface RepositoryTest
-{
+public interface RepositoryTest{
     /**
      * Test the add functionality of the DAO
      */

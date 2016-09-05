@@ -35,26 +35,22 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 @EnableJpaRepositories( "be.peerassistedlearning" )
-public class ApplicationConfig
-{
+public class ApplicationConfig{
 
     @Bean
-    public JpaTransactionManager transactionManager()
-    {
+    public JpaTransactionManager transactionManager(){
         return new JpaTransactionManager( entityManagerFactory().getObject() );
     }
 
     @Bean
-    public JpaVendorAdapter jpaVendorAdapter()
-    {
+    public JpaVendorAdapter jpaVendorAdapter(){
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase( Database.MYSQL );
         return jpaVendorAdapter;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory()
-    {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setJpaVendorAdapter( jpaVendorAdapter() );
         factoryBean.setPackagesToScan( "be.peerassistedlearning" );

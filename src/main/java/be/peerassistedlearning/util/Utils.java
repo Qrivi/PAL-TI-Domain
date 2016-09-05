@@ -30,8 +30,7 @@ import java.util.Collection;
 /**
  * Class used for utility purposes
  */
-public class Utils
-{
+public class Utils{
     /**
      * Converts an Iterable to a Collection
      *
@@ -39,11 +38,9 @@ public class Utils
      * @param <E>  The type of objects that the Iterable contains
      * @return A new collection with the objects of the Iterable
      */
-    public static <E> Collection<E> makeCollection( Iterable<E> iter )
-    {
+    public static <E> Collection<E> makeCollection( Iterable<E> iter ){
         Collection<E> list = new ArrayList<E>();
-        for ( E item : iter )
-        {
+        for( E item : iter ){
             list.add( item );
         }
         return list;

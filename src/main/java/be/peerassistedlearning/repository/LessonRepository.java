@@ -41,8 +41,7 @@ import java.util.List;
  * @see CrudRepository
  */
 @Repository
-public interface LessonRepository extends CrudRepository<Lesson, Integer>
-{
+public interface LessonRepository extends CrudRepository<Lesson, Integer>{
     /**
      * Gets a lesson from a student
      *
@@ -50,8 +49,8 @@ public interface LessonRepository extends CrudRepository<Lesson, Integer>
      * @param student The student to get the lessons from
      * @return the lessons of that student
      */
-    @Query("SELECT l FROM Lesson l WHERE l.id = :id AND :student MEMBER OF l.bookings")
-    Lesson findByIdForStudent(@Param("id") Integer id, @Param("student") Student student);
+    @Query( "SELECT l FROM Lesson l WHERE l.id = :id AND :student MEMBER OF l.bookings" )
+    Lesson findByIdForStudent( @Param( "id" ) Integer id, @Param( "student" ) Student student );
 
     /**
      * Gets lessons filtered by course

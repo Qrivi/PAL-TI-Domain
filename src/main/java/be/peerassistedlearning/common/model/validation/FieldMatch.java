@@ -37,12 +37,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Annotation used to validate if two strings are equal
  */
-@Target({TYPE, ANNOTATION_TYPE})
-@Retention(RUNTIME)
-@Constraint(validatedBy = FieldMatchValidator.class)
+@Target( {TYPE, ANNOTATION_TYPE} )
+@Retention( RUNTIME )
+@Constraint( validatedBy = FieldMatchValidator.class )
 @Documented
-public @interface FieldMatch
-{
+public @interface FieldMatch{
 
     Class<?>[] groups() default {};
 
@@ -51,7 +50,6 @@ public @interface FieldMatch
     /**
      * Sets the error message
      *
-     * @return If the message is not set it returns the default message
      * @return If the message is set it returns the message
      */
     String message() default "{constraints.fieldmatch}";
@@ -73,11 +71,10 @@ public @interface FieldMatch
     /**
      * Multiple FieldMatches are allowed by using the List interface
      */
-    @Target({TYPE, ANNOTATION_TYPE})
-    @Retention(RUNTIME)
+    @Target( {TYPE, ANNOTATION_TYPE} )
+    @Retention( RUNTIME )
     @Documented
-    @interface List
-    {
+    @interface List{
         FieldMatch[] value();
     }
 

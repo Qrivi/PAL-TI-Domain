@@ -38,8 +38,7 @@ import java.util.Set;
  */
 @Entity
 @Table( name = "tutor" )
-public class Tutor extends JPAEntity<Integer>
-{
+public class Tutor extends JPAEntity<Integer>{
 
     @Valid
     @NotNull( message = "{NotNull.Tutor.student}" )
@@ -51,8 +50,8 @@ public class Tutor extends JPAEntity<Integer>
     @NotNull( message = "{NotNull.Tutor.course}" )
     @ManyToMany( fetch = FetchType.EAGER )
     @JoinTable( name = "tutor_course",
-            joinColumns = { @JoinColumn( name = "tutor_id", referencedColumnName = "id" ) },
-            inverseJoinColumns = { @JoinColumn( name = "course_id", referencedColumnName = "id" ) } )
+            joinColumns = {@JoinColumn( name = "tutor_id", referencedColumnName = "id" )},
+            inverseJoinColumns = {@JoinColumn( name = "course_id", referencedColumnName = "id" )} )
     private Set<Course> courses;
 
     @Valid
@@ -62,7 +61,8 @@ public class Tutor extends JPAEntity<Integer>
     /**
      * Default empty constructor for a tutor entity
      */
-    public Tutor() {}
+    public Tutor(){
+    }
 
     /**
      * Constructor for a tutor entity
@@ -70,8 +70,7 @@ public class Tutor extends JPAEntity<Integer>
      * @param student The student information of the tutor
      * @param courses The set of courses the tutor may tutor
      */
-    public Tutor( Student student, Set<Course> courses )
-    {
+    public Tutor( Student student, Set<Course> courses ){
         this.student = student;
         this.courses = courses;
     }
@@ -82,8 +81,7 @@ public class Tutor extends JPAEntity<Integer>
      * @param course The given course to be added to the set
      * @return true if this set did not already contain the specified course
      */
-    public boolean addCourse( Course course )
-    {
+    public boolean addCourse( Course course ){
         return courses.add( course );
     }
 
@@ -93,32 +91,8 @@ public class Tutor extends JPAEntity<Integer>
      * @param course The given course to be removed
      * @return true if this set contained the specified course
      */
-    public boolean removeCourse( Course course )
-    {
+    public boolean removeCourse( Course course ){
         return courses.remove( course );
-    }
-
-    /**
-     * Sets the student information of the tutor
-     *
-     * @param student The student information
-     * @see Student
-     */
-    public void setStudent( Student student )
-    {
-        this.student = student;
-    }
-
-    /**
-     * Gets the courses that the tutor may tutor
-     *
-     * @param courses The set containing all the course objects
-     * @see Course
-     * @see Set
-     */
-    public void setCourses( Set<Course> courses )
-    {
-        this.courses = courses;
     }
 
     /**
@@ -127,9 +101,18 @@ public class Tutor extends JPAEntity<Integer>
      * @return The student object
      * @see Student
      */
-    public Student getStudent()
-    {
+    public Student getStudent(){
         return student;
+    }
+
+    /**
+     * Sets the student information of the tutor
+     *
+     * @param student The student information
+     * @see Student
+     */
+    public void setStudent( Student student ){
+        this.student = student;
     }
 
     /**
@@ -139,9 +122,19 @@ public class Tutor extends JPAEntity<Integer>
      * @see Course
      * @see Set
      */
-    public Set<Course> getCourses()
-    {
+    public Set<Course> getCourses(){
         return courses;
+    }
+
+    /**
+     * Gets the courses that the tutor may tutor
+     *
+     * @param courses The set containing all the course objects
+     * @see Course
+     * @see Set
+     */
+    public void setCourses( Set<Course> courses ){
+        this.courses = courses;
     }
 
     /**
@@ -151,8 +144,7 @@ public class Tutor extends JPAEntity<Integer>
      * @see Lesson
      * @see Set
      */
-    public Set<Lesson> getLessons()
-    {
+    public Set<Lesson> getLessons(){
         return lessons;
     }
 }

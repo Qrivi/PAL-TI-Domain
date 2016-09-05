@@ -43,8 +43,7 @@ import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class ApplicationRepositoryTest implements RepositoryTest
-{
+public class ApplicationRepositoryTest implements RepositoryTest{
 
     private Application a1, a2;
 
@@ -58,8 +57,7 @@ public class ApplicationRepositoryTest implements RepositoryTest
     private ApplicationRepository applicationRepository;
 
     @Before
-    public void before()
-    {
+    public void before(){
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
         c1 = courseRepository.save( c1 );
 
@@ -70,23 +68,21 @@ public class ApplicationRepositoryTest implements RepositoryTest
 
         assertNotNull( s1.getId() );
 
-        a1 = new Application( s1, c1, new byte[ 2 ] );
-        a2 = new Application( s1, c1, new byte[ 2 ], ApplicationState.PENDING, new Date(), new Date() );
+        a1 = new Application( s1, c1, new byte[2] );
+        a2 = new Application( s1, c1, new byte[2], ApplicationState.PENDING, new Date(), new Date() );
     }
 
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
+    public void testAdd(){
         applicationRepository.save( a1 );
         assertNotNull( a1.getId() );
     }
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         applicationRepository.save( a1 );
 
         assertNotNull( a1.getId() );
@@ -103,8 +99,7 @@ public class ApplicationRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         applicationRepository.save( a1 );
         applicationRepository.delete( a1 );
         assertNull( applicationRepository.findOne( a1.getId() ) );
@@ -112,8 +107,7 @@ public class ApplicationRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         applicationRepository.save( a1 );
         assertNotNull( a1.getId() );
         assertNotNull( applicationRepository.findOne( a1.getId() ) );
@@ -121,8 +115,7 @@ public class ApplicationRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         applicationRepository.save( a1 );
         applicationRepository.save( a2 );
 

@@ -31,12 +31,10 @@ import javax.validation.ConstraintViolation;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TutorTest extends ValidationTest
-{
+public class TutorTest extends ValidationTest{
 
     @Test
-    public void testStudentIsNull()
-    {
+    public void testStudentIsNull(){
         Tutor t = new Tutor( null, new HashSet<Course>() );
 
         Set<ConstraintViolation<Tutor>> constraintViolations = validator.validateProperty( t, "student" );
@@ -48,8 +46,7 @@ public class TutorTest extends ValidationTest
     }
 
     @Test
-    public void testCoursesIsNull()
-    {
+    public void testCoursesIsNull(){
         Tutor t = new Tutor( new Student(), null );
 
         Set<ConstraintViolation<Tutor>> constraintViolations = validator.validateProperty( t, "courses" );

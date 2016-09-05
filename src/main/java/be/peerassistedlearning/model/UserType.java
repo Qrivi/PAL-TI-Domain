@@ -27,19 +27,15 @@ package be.peerassistedlearning.model;
 /**
  * Class that specifies the type of a user
  */
-public enum UserType
-{
+public enum UserType{
 
     NORMAL,
     ADMIN;
 
-    public static UserType getByValue( String type )
-    {
-        for ( UserType u : values() )
-        {
-            if ( u.toString()
-                    .equalsIgnoreCase( type ) )
-            {
+    public static UserType getByValue( String type ){
+        for( UserType u : values() ){
+            if( u.toString()
+                    .equalsIgnoreCase( type ) ){
                 return u;
             }
         }

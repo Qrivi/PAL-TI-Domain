@@ -45,8 +45,7 @@ import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class LessonRepositoryTest implements RepositoryTest
-{
+public class LessonRepositoryTest implements RepositoryTest{
 
     private Lesson l1, l2;
 
@@ -66,8 +65,7 @@ public class LessonRepositoryTest implements RepositoryTest
     private LessonRepository lessonRepository;
 
     @Before
-    public void before()
-    {
+    public void before(){
         Course c1 = new Course( "MBI80x", ".NET Programmeren", ".NET", Curriculum.TI, 3 );
         c1 = courseRepository.save( c1 );
 
@@ -101,16 +99,14 @@ public class LessonRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
+    public void testAdd(){
         lessonRepository.save( l1 );
         assertNotNull( l1.getId() );
     }
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         lessonRepository.save( l1 );
 
         assertNotNull( l1.getId() );
@@ -124,8 +120,7 @@ public class LessonRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         lessonRepository.save( l1 );
         lessonRepository.delete( l1 );
         assertNull( lessonRepository.findOne( l1.getId() ) );
@@ -133,8 +128,7 @@ public class LessonRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         lessonRepository.save( l1 );
 
         assertNotNull( l1.getId() );
@@ -143,8 +137,7 @@ public class LessonRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         lessonRepository.save( l1 );
         lessonRepository.save( l2 );
 

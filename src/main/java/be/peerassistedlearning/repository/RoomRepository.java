@@ -40,8 +40,7 @@ import java.util.Collection;
  * @see CrudRepository
  */
 @Repository
-public interface RoomRepository extends CrudRepository<Room, Integer>
-{
+public interface RoomRepository extends CrudRepository<Room, Integer>{
     /**
      * Gets all the rooms from the specified campus
      *

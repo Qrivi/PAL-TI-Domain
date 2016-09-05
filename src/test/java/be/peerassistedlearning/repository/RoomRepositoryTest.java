@@ -43,15 +43,13 @@ import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class RoomRepositoryTest implements RepositoryTest
-{
+public class RoomRepositoryTest implements RepositoryTest{
     @Autowired
     RoomRepository repository;
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
+    public void testAdd(){
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         repository.save( r );
@@ -61,8 +59,7 @@ public class RoomRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         repository.save( r1 );
@@ -78,8 +75,7 @@ public class RoomRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         Room r = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         repository.save( r );
@@ -92,8 +88,7 @@ public class RoomRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
 
         repository.save( r1 );
@@ -106,8 +101,7 @@ public class RoomRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.PLAIN );
 
@@ -122,8 +116,7 @@ public class RoomRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetFromCampus()
-    {
+    public void testGetFromCampus(){
         Room r1 = new Room( "2.25", Campus.PROXIMUS, RoomType.COMPUTER );
         Room r2 = new Room( "2.26", Campus.PROXIMUS, RoomType.COMPUTER );
 

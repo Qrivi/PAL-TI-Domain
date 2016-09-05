@@ -41,8 +41,7 @@ import java.util.Collection;
  * @see CrudRepository
  */
 @Repository
-public interface TutorRepository extends CrudRepository<Tutor, Integer>
-{
+public interface TutorRepository extends CrudRepository<Tutor, Integer>{
     /**
      * Gets all the tutors from the specified course
      *

@@ -40,8 +40,7 @@ import java.util.Date;
  */
 @Entity
 @Table( name = "application" )
-public class Application extends JPAEntity<Integer>
-{
+public class Application extends JPAEntity<Integer>{
     @Valid
     @NotNull( message = "{NotNull.Application.student}" )
     @ManyToOne( fetch = FetchType.EAGER )
@@ -76,7 +75,8 @@ public class Application extends JPAEntity<Integer>
     /**
      * Default constructor
      */
-    public Application() {}
+    public Application(){
+    }
 
     /**
      * All-parameter constructor for Application
@@ -88,8 +88,7 @@ public class Application extends JPAEntity<Integer>
      * @param beginDate  The begin date of the application
      * @param endDate    The end date of the application
      */
-    public Application( Student student, Course course, byte[] screenshot, ApplicationState state, Date beginDate, Date endDate )
-    {
+    public Application( Student student, Course course, byte[] screenshot, ApplicationState state, Date beginDate, Date endDate ){
         this.student = student;
         this.course = course;
         this.screenshot = ( screenshot != null ) ? new Image( screenshot, beginDate ) : null;
@@ -105,8 +104,7 @@ public class Application extends JPAEntity<Integer>
      * @param course     The course of the application
      * @param screenshot The screenshot of the application
      */
-    public Application( Student student, Course course, byte[] screenshot )
-    {
+    public Application( Student student, Course course, byte[] screenshot ){
         this.student = student;
         this.course = course;
         this.beginDate = new Date();
@@ -117,8 +115,7 @@ public class Application extends JPAEntity<Integer>
     /**
      * Accepts the application
      */
-    public void approve()
-    {
+    public void approve(){
         this.state = ApplicationState.APPROVED;
         this.endDate = new Date();
     }
@@ -126,10 +123,16 @@ public class Application extends JPAEntity<Integer>
     /**
      * Declines the application
      */
-    public void reject()
-    {
+    public void reject(){
         this.state = ApplicationState.REJECTED;
         this.endDate = new Date();
+    }
+
+    /**
+     * @return The student of the application
+     */
+    public Student getStudent(){
+        return student;
     }
 
     /**
@@ -137,9 +140,15 @@ public class Application extends JPAEntity<Integer>
      *
      * @param student The student of the application
      */
-    public void setStudent( Student student )
-    {
+    public void setStudent( Student student ){
         this.student = student;
+    }
+
+    /**
+     * @return The course of the application
+     */
+    public Course getCourse(){
+        return course;
     }
 
     /**
@@ -147,9 +156,15 @@ public class Application extends JPAEntity<Integer>
      *
      * @param course The course of the application
      */
-    public void setCourse( Course course )
-    {
+    public void setCourse( Course course ){
         this.course = course;
+    }
+
+    /**
+     * @return The screenshot of the application
+     */
+    public Image getScreenshot(){
+        return screenshot;
     }
 
     /**
@@ -157,9 +172,15 @@ public class Application extends JPAEntity<Integer>
      *
      * @param screenshot The screenshot of the application
      */
-    public void setScreenshot( Image screenshot )
-    {
+    public void setScreenshot( Image screenshot ){
         this.screenshot = screenshot;
+    }
+
+    /**
+     * @return The state of the application
+     */
+    public ApplicationState getState(){
+        return state;
     }
 
     /**
@@ -167,9 +188,15 @@ public class Application extends JPAEntity<Integer>
      *
      * @param state The state of the application
      */
-    public void setState( ApplicationState state )
-    {
+    public void setState( ApplicationState state ){
         this.state = state;
+    }
+
+    /**
+     * @return The begin date of the application
+     */
+    public Date getBeginDate(){
+        return beginDate;
     }
 
     /**
@@ -177,9 +204,15 @@ public class Application extends JPAEntity<Integer>
      *
      * @param beginDate The begin date of the application
      */
-    public void setBeginDate( Date beginDate )
-    {
+    public void setBeginDate( Date beginDate ){
         this.beginDate = beginDate;
+    }
+
+    /**
+     * @return The end date of the application
+     */
+    public Date getEndDate(){
+        return endDate;
     }
 
     /**
@@ -187,56 +220,7 @@ public class Application extends JPAEntity<Integer>
      *
      * @param endDate The end date of the application
      */
-    public void setEndDate( Date endDate )
-    {
+    public void setEndDate( Date endDate ){
         this.endDate = endDate;
-    }
-
-    /**
-     * @return The student of the application
-     */
-    public Student getStudent()
-    {
-        return student;
-    }
-
-    /**
-     * @return The course of the application
-     */
-    public Course getCourse()
-    {
-        return course;
-    }
-
-    /**
-     * @return The screenshot of the application
-     */
-    public Image getScreenshot()
-    {
-        return screenshot;
-    }
-
-    /**
-     * @return The state of the application
-     */
-    public ApplicationState getState()
-    {
-        return state;
-    }
-
-    /**
-     * @return The begin date of the application
-     */
-    public Date getBeginDate()
-    {
-        return beginDate;
-    }
-
-    /**
-     * @return The end date of the application
-     */
-    public Date getEndDate()
-    {
-        return endDate;
     }
 }

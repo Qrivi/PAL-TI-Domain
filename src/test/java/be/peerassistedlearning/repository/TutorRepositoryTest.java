@@ -44,8 +44,7 @@ import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class TutorRepositoryTest implements RepositoryTest
-{
+public class TutorRepositoryTest implements RepositoryTest{
 
     private Student s1, s2;
     private Course c2;
@@ -61,8 +60,7 @@ public class TutorRepositoryTest implements RepositoryTest
     private CourseRepository courseRepository;
 
     @Before
-    public void before()
-    {
+    public void before(){
         s1 = new Student( "Koen", "passwoord", "koen1992@hotmail.com", Curriculum.TI, "koen", UserType.ADMIN );
         s2 = new Student( "Jan", "secret", "jan2016@hotmail.com", Curriculum.TI, "jan", UserType.ADMIN );
 
@@ -87,8 +85,7 @@ public class TutorRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
+    public void testAdd(){
         Tutor t = new Tutor( s1, courses );
 
         tutorRepository.save( t );
@@ -98,8 +95,7 @@ public class TutorRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         Tutor t1 = new Tutor( s1, courses );
 
         tutorRepository.save( t1 );
@@ -115,8 +111,7 @@ public class TutorRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         Tutor t = new Tutor( s1, courses );
 
         tutorRepository.save( t );
@@ -127,8 +122,7 @@ public class TutorRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         Tutor t1 = new Tutor( s1, courses );
 
         tutorRepository.save( t1 );
@@ -141,8 +135,7 @@ public class TutorRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         Tutor t1 = new Tutor( s1, courses );
         Tutor t2 = new Tutor( s2, courses );
 

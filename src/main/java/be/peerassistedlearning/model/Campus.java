@@ -27,16 +27,14 @@ package be.peerassistedlearning.model;
 /**
  * Class that specifies a campus
  */
-public enum Campus
-{
+public enum Campus{
 
     PROXIMUS,
     HERTOGSTRAAT;
 
-    public static Campus getByValue( String campus )
-    {
-        for ( Campus c : values() )
-            if ( c.toString().equalsIgnoreCase( campus ) )
+    public static Campus getByValue( String campus ){
+        for( Campus c : values() )
+            if( c.toString().equalsIgnoreCase( campus ) )
                 return c;
         return null;
     }

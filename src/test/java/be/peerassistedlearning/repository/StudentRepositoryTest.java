@@ -43,15 +43,13 @@ import static org.junit.Assert.*;
 
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = ApplicationConfig.class )
-public class StudentRepositoryTest implements RepositoryTest
-{
+public class StudentRepositoryTest implements RepositoryTest{
     @Autowired
     StudentRepository repository;
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testAdd()
-    {
+    public void testAdd(){
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s );
@@ -61,8 +59,7 @@ public class StudentRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testUpdate()
-    {
+    public void testUpdate(){
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s1 );
@@ -78,8 +75,7 @@ public class StudentRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testRemove()
-    {
+    public void testRemove(){
         Student s = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s );
@@ -92,8 +88,7 @@ public class StudentRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetById()
-    {
+    public void testGetById(){
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s1 );
@@ -106,8 +101,7 @@ public class StudentRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetAll()
-    {
+    public void testGetAll(){
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
         Student s2 = new Student( "Cedric", "paswoord", "cedricopdebeeck@hotmail.com", Curriculum.TI, "cedric", UserType.ADMIN );
 
@@ -122,8 +116,7 @@ public class StudentRepositoryTest implements RepositoryTest
 
     @Test
     @Transactional( propagation = Propagation.REQUIRES_NEW )
-    public void testGetByEmail() throws Exception
-    {
+    public void testGetByEmail() throws Exception{
         Student s1 = new Student( "David", "paswoord", "davidopdebeeck@hotmail.com", Curriculum.TI, "david", UserType.ADMIN );
 
         repository.save( s1 );

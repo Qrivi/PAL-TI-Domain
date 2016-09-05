@@ -31,11 +31,9 @@ import javax.validation.ConstraintViolation;
 import java.util.Date;
 import java.util.Set;
 
-public class LessonTest extends ValidationTest
-{
+public class LessonTest extends ValidationTest{
     @Test
-    public void testDateIsNull()
-    {
+    public void testDateIsNull(){
         Lesson l = new Lesson( null, "Test lesson", "Test description", 120L, new Course(), 25, new Tutor(), new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "date" );
@@ -47,8 +45,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testNameIsNull()
-    {
+    public void testNameIsNull(){
         Lesson l = new Lesson( new Date(), null, "Test description", 120L, new Course(), 25, new Tutor(), new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "name" );
@@ -60,8 +57,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testDescriptionIsNull()
-    {
+    public void testDescriptionIsNull(){
         Lesson l = new Lesson( new Date(), "Test lesson", null, 120L, new Course(), 25, new Tutor(), new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "description" );
@@ -73,8 +69,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testDurationTooLow()
-    {
+    public void testDurationTooLow(){
         Lesson l = new Lesson( new Date(), "Test lesson", "Test description", 0, new Course(), 25, new Tutor(), new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "duration" );
@@ -86,8 +81,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testMaxParticipantsTooLow()
-    {
+    public void testMaxParticipantsTooLow(){
         Lesson l = new Lesson( new Date(), "Test lesson", "Test description", 120L, new Course(), 0, new Tutor(), new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "maxParticipants" );
@@ -99,8 +93,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testCourseIsNull()
-    {
+    public void testCourseIsNull(){
         Lesson l = new Lesson( new Date(), "Test lesson", "Test description", 120L, null, 25, new Tutor(), new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "course" );
@@ -112,8 +105,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testTutorIsNull()
-    {
+    public void testTutorIsNull(){
         Lesson l = new Lesson( new Date(), "Test lesson", "Test description", 120L, new Course(), 25, null, new Room(), new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "tutor" );
@@ -125,8 +117,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testRoomIsNull()
-    {
+    public void testRoomIsNull(){
         Lesson l = new Lesson( new Date(), "Test lesson", "Test description", 120L, new Course(), 25, new Tutor(), null, new Room() );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "room" );
@@ -138,8 +129,7 @@ public class LessonTest extends ValidationTest
     }
 
     @Test
-    public void testBackupRoomIsNull()
-    {
+    public void testBackupRoomIsNull(){
         Lesson l = new Lesson( new Date(), "Test lesson", "Test description", 120L, new Course(), 25, new Tutor(), new Room(), null );
 
         Set<ConstraintViolation<Lesson>> constraintViolations = validator.validateProperty( l, "backupRoom" );

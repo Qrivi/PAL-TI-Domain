@@ -36,8 +36,7 @@ import java.util.Date;
  */
 @Entity
 @Table( name = "image" )
-public class Image extends JPAEntity<Integer>
-{
+public class Image extends JPAEntity<Integer>{
     @Lob
     @Basic( fetch = FetchType.LAZY )
     @Column( name = "image", columnDefinition = "LONGBLOB" )
@@ -50,7 +49,8 @@ public class Image extends JPAEntity<Integer>
     /**
      * Default empty constructor for JPA Entities
      */
-    public Image() {}
+    public Image(){
+    }
 
     /**
      * Constructor for a image entity
@@ -58,10 +58,16 @@ public class Image extends JPAEntity<Integer>
      * @param bytes        The bytes of the image
      * @param lastModified The date the image is last modified
      */
-    public Image( byte[] bytes, Date lastModified )
-    {
+    public Image( byte[] bytes, Date lastModified ){
         this.bytes = bytes;
         this.lastModified = lastModified;
+    }
+
+    /**
+     * @return The bytes of the image
+     */
+    public byte[] getBytes(){
+        return bytes;
     }
 
     /**
@@ -69,9 +75,15 @@ public class Image extends JPAEntity<Integer>
      *
      * @param bytes The bytes of the image
      */
-    public void setBytes( byte[] bytes )
-    {
+    public void setBytes( byte[] bytes ){
         this.bytes = bytes;
+    }
+
+    /**
+     * @return The date the image is last modified
+     */
+    public Date getLastModified(){
+        return lastModified;
     }
 
     /**
@@ -79,24 +91,7 @@ public class Image extends JPAEntity<Integer>
      *
      * @param lastModified The last modified date of the image
      */
-    public void setLastModified( Date lastModified )
-    {
+    public void setLastModified( Date lastModified ){
         this.lastModified = lastModified;
-    }
-
-    /**
-     * @return The bytes of the image
-     */
-    public byte[] getBytes()
-    {
-        return bytes;
-    }
-
-    /**
-     * @return The date the image is last modified
-     */
-    public Date getLastModified()
-    {
-        return lastModified;
     }
 }

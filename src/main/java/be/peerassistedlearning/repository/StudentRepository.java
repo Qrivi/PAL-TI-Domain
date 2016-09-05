@@ -41,8 +41,7 @@ import java.util.Collection;
  * @see CrudRepository
  */
 @Repository
-public interface StudentRepository extends CrudRepository<Student, Integer>
-{
+public interface StudentRepository extends CrudRepository<Student, Integer>{
     /**
      * Gets a Student with the specified email
      *

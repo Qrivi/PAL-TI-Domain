@@ -31,12 +31,10 @@ import javax.validation.ConstraintViolation;
 import java.util.Date;
 import java.util.Set;
 
-public class ApplicationTest extends ValidationTest
-{
+public class ApplicationTest extends ValidationTest{
     @Test
-    public void testStudentIsNull()
-    {
-        Application a = new Application( null, new Course(), new byte[ 2 ], ApplicationState.PENDING, new Date(), new Date() );
+    public void testStudentIsNull(){
+        Application a = new Application( null, new Course(), new byte[2], ApplicationState.PENDING, new Date(), new Date() );
 
         Set<ConstraintViolation<Application>> constraintViolations = validator.validateProperty( a, "student" );
 
@@ -47,9 +45,8 @@ public class ApplicationTest extends ValidationTest
     }
 
     @Test
-    public void testCourseIsNull()
-    {
-        Application a = new Application( new Student(), null, new byte[ 2 ], ApplicationState.PENDING, new Date(), new Date() );
+    public void testCourseIsNull(){
+        Application a = new Application( new Student(), null, new byte[2], ApplicationState.PENDING, new Date(), new Date() );
 
         Set<ConstraintViolation<Application>> constraintViolations = validator.validateProperty( a, "course" );
 
@@ -60,8 +57,7 @@ public class ApplicationTest extends ValidationTest
     }
 
     @Test
-    public void testScreenshotIsNull()
-    {
+    public void testScreenshotIsNull(){
         Application a = new Application( new Student(), new Course(), null, ApplicationState.PENDING, new Date(), new Date() );
 
         Set<ConstraintViolation<Application>> constraintViolations = validator.validateProperty( a, "screenshot" );
@@ -73,9 +69,8 @@ public class ApplicationTest extends ValidationTest
     }
 
     @Test
-    public void testStateIsNull()
-    {
-        Application a = new Application( new Student(), new Course(), new byte[ 2 ], null, new Date(), new Date() );
+    public void testStateIsNull(){
+        Application a = new Application( new Student(), new Course(), new byte[2], null, new Date(), new Date() );
 
         Set<ConstraintViolation<Application>> constraintViolations = validator.validateProperty( a, "state" );
 
@@ -86,9 +81,8 @@ public class ApplicationTest extends ValidationTest
     }
 
     @Test
-    public void testBeginDateIsNull()
-    {
-        Application a = new Application( new Student(), new Course(), new byte[ 2 ], ApplicationState.PENDING, null, new Date() );
+    public void testBeginDateIsNull(){
+        Application a = new Application( new Student(), new Course(), new byte[2], ApplicationState.PENDING, null, new Date() );
 
         Set<ConstraintViolation<Application>> constraintViolations = validator.validateProperty( a, "beginDate" );
 

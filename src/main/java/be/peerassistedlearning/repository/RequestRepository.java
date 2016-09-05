@@ -42,8 +42,7 @@ import java.util.Set;
  * @see CrudRepository
  */
 @Repository
-public interface RequestRepository extends CrudRepository<Request, Integer>
-{
+public interface RequestRepository extends CrudRepository<Request, Integer>{
     /**
      * Gets all the requests that aren't associated with a lesson
      *

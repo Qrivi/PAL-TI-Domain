@@ -42,8 +42,7 @@ import java.util.Date;
  */
 @Entity
 @Table( name = "review" )
-public class Review extends JPAEntity<Integer> implements Archivable
-{
+public class Review extends JPAEntity<Integer> implements Archivable{
 
     @NotNull( message = "{NotNull.Review.text}" )
     @Column( name = "text", nullable = false )
@@ -93,7 +92,8 @@ public class Review extends JPAEntity<Integer> implements Archivable
     /**
      * Default constructor for Review
      */
-    public Review() {}
+    public Review(){
+    }
 
     /**
      * Constructor for Review without date
@@ -107,8 +107,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @param atmosphereScore The score regarding the lesson's atmosphere
      * @param anonymous       Indicates if the name may be shown
      */
-    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous )
-    {
+    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous ){
         this( text, student, lesson, contentScore, tutorScore, engagementScore, atmosphereScore, anonymous, new Date() );
     }
 
@@ -125,8 +124,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @param anonymous       Indicates if the name may be shown
      * @param date            The date of the review
      */
-    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous, Date date )
-    {
+    public Review( String text, Student student, Lesson lesson, int contentScore, int tutorScore, int engagementScore, int atmosphereScore, boolean anonymous, Date date ){
         this.text = text;
         this.student = student;
         this.lesson = lesson;
@@ -143,8 +141,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The text of the review
      */
-    public String getText()
-    {
+    public String getText(){
         return text;
     }
 
@@ -153,8 +150,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param text The text of the review
      */
-    public void setText( String text )
-    {
+    public void setText( String text ){
         this.text = text;
     }
 
@@ -164,8 +160,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @return the student of the review
      * @see Student
      */
-    public Student getStudent()
-    {
+    public Student getStudent(){
         return student;
     }
 
@@ -174,8 +169,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param student The student of the review
      */
-    public void setStudent( Student student )
-    {
+    public void setStudent( Student student ){
         this.student = student;
     }
 
@@ -185,8 +179,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @return The lesson of the review
      * @see Lesson
      */
-    public Lesson getLesson()
-    {
+    public Lesson getLesson(){
         return lesson;
     }
 
@@ -196,8 +189,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @param lesson The lesson of the review
      */
 
-    public void setLesson( Lesson lesson )
-    {
+    public void setLesson( Lesson lesson ){
         this.lesson = lesson;
     }
 
@@ -207,8 +199,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      * @return The date of the review
      * @see Date
      */
-    public Date getDate()
-    {
+    public Date getDate(){
         return date;
     }
 
@@ -217,8 +208,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param date The date of the review
      */
-    public void setDate( Date date )
-    {
+    public void setDate( Date date ){
         this.date = date;
     }
 
@@ -227,8 +217,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The content score of the review
      */
-    public int getContentScore()
-    {
+    public int getContentScore(){
         return contentScore;
     }
 
@@ -237,8 +226,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param contentScore The content score @min 1, @max 10
      */
-    public void setContentScore( int contentScore )
-    {
+    public void setContentScore( int contentScore ){
         this.contentScore = contentScore;
     }
 
@@ -247,8 +235,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The tutor score of the review
      */
-    public int getTutorScore()
-    {
+    public int getTutorScore(){
         return tutorScore;
     }
 
@@ -257,8 +244,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param tutorScore The tutor score @min 1, @max 10
      */
-    public void setTutorScore( int tutorScore )
-    {
+    public void setTutorScore( int tutorScore ){
         this.tutorScore = tutorScore;
     }
 
@@ -267,8 +253,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The engagement score of the review
      */
-    public int getEngagementScore()
-    {
+    public int getEngagementScore(){
         return engagementScore;
     }
 
@@ -277,8 +262,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param engagementScore The engagement score @min 1, @max 10
      */
-    public void setEngagementScore( int engagementScore )
-    {
+    public void setEngagementScore( int engagementScore ){
         this.engagementScore = engagementScore;
     }
 
@@ -287,8 +271,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The atmosphere score of the review
      */
-    public int getAtmosphereScore()
-    {
+    public int getAtmosphereScore(){
         return atmosphereScore;
     }
 
@@ -297,8 +280,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param atmosphereScore The atmosphere score @min 1, @max 10
      */
-    public void setAtmosphereScore( int atmosphereScore )
-    {
+    public void setAtmosphereScore( int atmosphereScore ){
         this.atmosphereScore = atmosphereScore;
     }
 
@@ -307,8 +289,7 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @return The anonymous boolean of review
      */
-    public boolean isAnonymous()
-    {
+    public boolean isAnonymous(){
         return anonymous;
     }
 
@@ -317,16 +298,14 @@ public class Review extends JPAEntity<Integer> implements Archivable
      *
      * @param anonymous If the review is anonymous
      */
-    public void setAnonymous( boolean anonymous )
-    {
+    public void setAnonymous( boolean anonymous ){
         this.anonymous = anonymous;
     }
 
     /**
      * @return The date to be used by the timeline
      */
-    public Date getArchiveDate()
-    {
+    public Date getArchiveDate(){
         return date;
     }
 }

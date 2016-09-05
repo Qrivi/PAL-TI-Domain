@@ -29,8 +29,7 @@ package be.peerassistedlearning.common.model.identifiable;
  *
  * @param <T> the type of ID
  */
-public interface Identifiable <T extends Object>
-{
+public interface Identifiable<T extends Object>{
 
     /**
      * Gets the id of the object
