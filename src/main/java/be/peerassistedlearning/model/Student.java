@@ -162,6 +162,7 @@ public class Student extends JPAEntity<Integer>
         this.salt = new BigInteger( 130, new SecureRandom() ).toString( 20 );
         this.password = createHash( password, salt );
         this.securityToken = new BigInteger( 130, new SecureRandom() ).toString( 20 );
+        this.lastUpdated = new Date();
     }
 
     /**
