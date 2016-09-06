@@ -30,8 +30,8 @@ package be.peerassistedlearning.model;
 public enum Curriculum{
 
     TI( "Toegepaste Informatica" ),
-    B_MGMT( "Bedrijfsmanagement" ),
-    O_MGMT( "Office Management" );
+    BM( "Bedrijfsmanagement" ),
+    OM( "Office Management" );
 
     private final String name;
 
