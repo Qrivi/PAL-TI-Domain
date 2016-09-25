@@ -29,9 +29,12 @@ package be.peerassistedlearning.model;
  */
 public enum Curriculum{
 
-    TI( "Toegepaste Informatica" ),
-    BM( "Bedrijfsmanagement" ),
-    OM( "Office Management" );
+    AF( "Accountancy-Fiscaliteit" ),
+    FV( "Financie- en verzekeringswezen" ),
+    MK( "Marketing" ),
+    OM( "Office Management" ),
+    RP( "Rechtspraktijk" ),
+    TI( "Toegepaste Informatica" );
 
     private final String name;
 
